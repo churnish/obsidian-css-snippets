@@ -1,0 +1,37 @@
+/* Simplify empty-tab action list: rename commands, hide redundant ones */
+
+/* Rename Switcher++ to "Find" */
+.empty-state-action-list .qsp-empty-state-action-launch {
+  font-size: 0;
+}
+
+.empty-state-action-list .qsp-empty-state-action-launch::before {
+  content: "Find";
+  font-size: var(--font-ui-medium);
+}
+
+/* Hide "Go to file" */
+.empty-state-action-list .empty-state-action:nth-child(3) {
+  display: none;
+}
+
+/* Hide "See recent files" */
+.empty-state-action-list .empty-state-action:nth-child(4) {
+  display: none;
+}
+
+/* Rename "Create new note" to "Create" */
+.empty-state-action-list .empty-state-action:nth-child(1) {
+  font-size: 0;
+}
+
+.empty-state-action-list .empty-state-action:nth-child(1)::before {
+  content: "Create";
+  font-size: var(--font-ui-medium);
+}
+
+/* Remove background from all empty state action buttons */
+.empty-state-action {
+  background: none !important;
+  background-color: transparent !important;
+}

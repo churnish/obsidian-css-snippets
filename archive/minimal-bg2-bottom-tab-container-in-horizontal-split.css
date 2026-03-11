@@ -1,0 +1,9 @@
+.workspace-tab-header-container:not(.is-topmost) {
+    background-color: var(--background-primary);
+}
+
+/* Fix for element above ribbon when left sidebar is collapsed */
+.mod-left-split.is-collapsed ~ .workspace-ribbon.side-dock-ribbon.mod-left::before,
+.mod-left-split.is-collapsed ~ .workspace-ribbon.side-dock-ribbon.mod-left {
+    background-color: var(--background-primary) !important;
+}

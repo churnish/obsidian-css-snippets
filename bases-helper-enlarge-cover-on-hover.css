@@ -1,0 +1,16 @@
+/* Bases helper: lift and scale card covers on hover via CSS class */
+/* Source: https://gist.github.com/kepano/8afc4cad9c32f4fde6ef6347f66a0571 */
+
+.enlarge .bases-cards-group {
+  padding: 10px;
+}
+.enlarge .bases-cards-cover {
+  transition: transform 0.1s ease-out;
+}
+.enlarge .bases-cards-item:hover .bases-cards-cover {
+  transform: translateY(-4px) scale(1.04);
+}
+.enlarge .bases-cards-item {
+  overflow: visible;
+  contain: inherit;
+}

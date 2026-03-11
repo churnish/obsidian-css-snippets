@@ -1,0 +1,5 @@
+/* Override accent color focus border */
+
+body {
+  --background-modifier-border-focus: var(--color-base-40) !important;
+}

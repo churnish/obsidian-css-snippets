@@ -1,0 +1,68 @@
+/* Bases helper: strip all UI chrome, leaving only cell values via CSS class */
+
+/* strip-base helper class
+ * Hides all Bases UI elements except cell values
+ */
+
+.strip-base .bases-header {
+  display: none;
+}
+
+.strip-base .bases-thead {
+  display: none;
+}
+
+.strip-base .bases-table-header {
+  display: none;
+}
+
+.strip-base .bases-table-header-resizer {
+  display: none;
+}
+
+.strip-base .query-toolbar {
+  display: none;
+}
+
+/* Keep only the cell values visible */
+.strip-base .bases-tbody {
+  margin: 0;
+  padding: 0;
+}
+.strip-base .bases-table-cell.bases-rendered-value {
+  display: block;
+}
+
+.strip-base .bases-tr {
+  border: none;
+  background: transparent;
+}
+
+.strip-base .bases-td {
+  border: none;
+  padding: 0;
+}
+
+/* Remove table border */
+.strip-base .bases-view[data-view-type="table"] {
+  --bases-embed-border-width: 0px;
+}
+
+/* Remove hover background */
+.strip-base .bases-tr:hover {
+  background: transparent !important;
+}
+
+.strip-base .bases-td:hover {
+  background: transparent !important;
+}
+
+/* Hide 'Edit block' button */
+.edit-block-button {
+  display: none !important;
+}
+
+/* Remove left padding */
+.strip-base .bases-rendered-value {
+    padding: 0;
+}

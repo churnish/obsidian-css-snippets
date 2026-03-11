@@ -1,0 +1,20 @@
+/* Normal state - transparent background */
+.view-actions .clickable-icon.cmdr-page-header,
+.view-actions .clickable-icon[class*="templater-obsidian"] {
+    color: var(--icon-color) !important;
+    background-color: transparent;
+}
+
+/* Hover state */
+.view-actions .clickable-icon.cmdr-page-header:hover,
+.view-actions .clickable-icon[class*="templater-obsidian"]:hover {
+    background-color: var(--interactive-hover);
+    color: var(--text-normal) !important;
+}
+
+/* Active/pressed state */
+.view-actions .clickable-icon.cmdr-page-header:active,
+.view-actions .clickable-icon[class*="templater-obsidian"]:active {
+    background-color: var(--interactive-accent);
+    color: var(--text-on-accent) !important;
+}

@@ -1,0 +1,50 @@
+/**
+* Title: Minimal image captions with tweaks for image grids
+* Source: https://forum.obsidian.md/t/adding-caption-to-images/16431/46
+*/
+
+/* Core caption styling */
+.image-captions-figure {
+   padding: 0;
+   background-color: var(--bg-color) !important;
+   display: flex !important;
+   flex-direction: column !important;
+   gap: 16px !important;
+}
+
+.image-captions-caption {
+   margin: 0 !important;
+   padding: 0 !important;
+   background-color: var(--bg-color) !important;
+   line-height: 1.5em;
+   color: var(--text-faint);
+}
+
+/* Caption hiding options */
+.hide-captions .image-captions-caption,
+.no-cap .image-captions-caption {
+   display: none;
+}
+
+/* Grid layout adjustments */
+.img-grid .image-embed.is-loaded {
+   display: flex !important;
+   align-items: center !important;
+   height: auto !important;
+}
+
+.img-grid .markdown-preview-section div:has(> .image-embed ~ .image-embed) {
+   display: grid !important;
+   grid-auto-rows: auto !important;
+}
+
+.img-grid .markdown-preview-section div:has(> .image-embed ~ .image-embed) .image-embed img,
+.img-grid .markdown-preview-section p:has(> .image-embed ~ .image-embed) .image-embed img {
+   height: auto !important;
+   object-fit: var(--image-grid-fit) !important;
+}
+
+/* Live preview fix */
+.markdown-source-view.mod-cm6.is-live-preview:not(.cm-focused) {
+   padding-bottom: initial !important;
+}

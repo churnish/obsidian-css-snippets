@@ -1,0 +1,61 @@
+/* Define variables for background colors */
+:root {
+    --source-bg-color: hsl(220, 100%, 96%); /* Cool light blue-grey */
+    --preview-bg-color: hsl(45, 100%, 96%); /* Warm soft yellow */
+}
+
+/* Light theme styles */
+body.theme-light:not(.is-mobile),
+body:not(.is-mobile) {
+    @media (prefers-color-scheme: light) {
+        .markdown-source-view.mod-cm6:not(.is-live-preview) {
+            background-color: var(--source-bg-color);
+        }
+        .markdown-preview-view {
+            background-color: var(--preview-bg-color);
+        }
+        .workspace-tabs.mod-top [data-mode='source']:not(:has(> .view-content > .is-live-preview)) .view-header {
+            background-color: var(--source-bg-color);
+        }
+        .workspace-tabs.mod-top [data-mode='preview'] .view-header {
+            background-color: var(--preview-bg-color);
+        }
+    }
+}
+
+/* Dark theme styles */
+body.theme-dark:not(.is-mobile) {
+    --source-bg-color: hsl(0, 0%, 10%);
+    --preview-bg-color: hsl(0, 0%, 20%);
+
+    .markdown-source-view.mod-cm6:not(.is-live-preview) {
+        background-color: var(--source-bg-color);
+    }
+    .markdown-preview-view {
+        background-color: var(--preview-bg-color);
+    }
+    .workspace-tabs.mod-top [data-mode='source']:not(:has(> .view-content > .is-live-preview)) .view-header {
+        background-color: var(--source-bg-color);
+    }
+    .workspace-tabs.mod-top [data-mode='preview'] .view-header {
+        background-color: var(--preview-bg-color);
+    }
+}
+
+/* Override for system dark theme when Obsidian is set to light theme */
+@media (prefers-color-scheme: dark) {
+    body:not(.theme-dark):not(.is-mobile) {
+        .markdown-source-view.mod-cm6:not(.is-live-preview) {
+            background-color: var(--source-bg-color);
+        }
+        .markdown-preview-view {
+            background-color: var(--preview-bg-color);
+        }
+        .workspace-tabs.mod-top [data-mode='source']:not(:has(> .view-content > .is-live-preview)) .view-header {
+            background-color: var(--source-bg-color);
+        }
+        .workspace-tabs.mod-top [data-mode='preview'] .view-header {
+            background-color: var(--preview-bg-color);
+        }
+    }
+}

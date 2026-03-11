@@ -1,0 +1,5 @@
+/* Removes the divider lines between properties on mobile */
+
+body.is-mobile .metadata-container {
+    --metadata-divider-width: 0;
+}

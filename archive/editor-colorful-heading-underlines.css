@@ -1,0 +1,117 @@
+/* Add color-coded underlines beneath h2-h6 headings in both views */
+/* Source: https://forum.obsidian.md/t/colorful-heading-underlines/107381 */
+
+/* ========== SETTINGS ========== */
+
+body {
+    --underline-height: 4px;           /* Height of underline */
+    --underline-border-radius: 8px;    /* Roundness of underline corners */
+    --underline-position-read: 0em;    /* Underline position in reading view */
+    --underline-position-edit: -0.4em;    /* Underline position in editing view */
+    --highlight-padding: 0.5em;        /* Bottom padding to prevent clipping */
+    --highlight-opacity: 50%;          /* Color opacity (0-100%) */
+} 
+
+/* ========== HEADING COLORS ========== */
+
+body {
+    --h2-accent-color: var(--color-red);
+    --h3-accent-color: var(--color-yellow);
+    --h4-accent-color: var(--color-green);
+    --h5-accent-color: var(--color-blue);
+    --h6-accent-color: var(--color-purple);
+}
+
+/* ========== HIGHLIGHT STYLES ========== */
+
+/* Reading view */
+.markdown-preview-view h2,
+.markdown-preview-view h3,
+.markdown-preview-view h4,
+.markdown-preview-view h5,
+.markdown-preview-view h6 {
+    padding-bottom: var(--highlight-padding);
+    width: fit-content;
+    position: relative;
+}
+.markdown-preview-view h2::before,
+.markdown-preview-view h3::before,
+.markdown-preview-view h4::before,
+.markdown-preview-view h5::before,
+.markdown-preview-view h6::before {
+    content: '';
+    position: absolute;
+    bottom: var(--underline-position-read);
+    left: 0;
+    right: 0;
+    height: var(--underline-height);
+    border-radius: var(--underline-border-radius);
+    z-index: 0;
+}
+
+/* Editing view */
+.cm-line.HyperMD-header-2,
+.cm-line.HyperMD-header-3,
+.cm-line.HyperMD-header-4,
+.cm-line.HyperMD-header-5,
+.cm-line.HyperMD-header-6 {
+    position: relative;
+    padding-bottom: var(--highlight-padding);
+    margin-bottom: 1em !important;
+    width: fit-content;
+}
+.cm-line.HyperMD-header-2::before,
+.cm-line.HyperMD-header-3::before,
+.cm-line.HyperMD-header-4::before,
+.cm-line.HyperMD-header-5::before,
+.cm-line.HyperMD-header-6::before {
+    content: '';
+    position: absolute;
+    bottom: var(--underline-position-edit);
+    left: 0;
+    right: 0;
+    height: var(--underline-height);
+    border-radius: var(--underline-border-radius);
+    z-index: 0;
+}
+
+/* Add space to line following a heading */
+.cm-line.HyperMD-header-2 + .cm-line,
+.cm-line.HyperMD-header-3 + .cm-line,
+.cm-line.HyperMD-header-4 + .cm-line,
+.cm-line.HyperMD-header-5 + .cm-line,
+.cm-line.HyperMD-header-6 + .cm-line {
+    margin-top: 0.8em !important;
+}
+
+/* ========== HEADING-SPECIFIC COLORS ========== */
+
+/* H2 */
+.markdown-preview-view h2::before,
+.cm-line.HyperMD-header-2::before {
+    background-color: color-mix(in srgb, var(--h2-accent-color) var(--highlight-opacity), transparent);
+}
+
+/* H3 */
+.markdown-preview-view h3::before,
+.cm-line.HyperMD-header-3::before {
+    background-color: color-mix(in srgb, var(--h3-accent-color) var(--highlight-opacity), transparent);
+}
+
+/* H4 */
+.markdown-preview-view h4::before,
+.cm-line.HyperMD-header-4::before {
+    background-color: color-mix(in srgb, var(--h4-accent-color) var(--highlight-opacity), transparent);
+}
+
+/* H5 */
+.markdown-preview-view h5::before,
+.cm-line.HyperMD-header-5::before {
+    background-color: color-mix(in srgb, var(--h5-accent-color) var(--highlight-opacity), transparent);
+}
+
+/* H6 */
+.markdown-preview-view h6::before,
+.cm-line.HyperMD-header-6::before {
+    background-color: color-mix(in srgb, var(--h6-accent-color) var(--highlight-opacity), transparent);
+}

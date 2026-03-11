@@ -1,0 +1,6 @@
+/* Hides the color picker button added by the Pretty Properties plugin */
+
+body .longtext-color-button {
+    display: none !important;
+}
+

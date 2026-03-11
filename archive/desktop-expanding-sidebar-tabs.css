@@ -1,0 +1,9 @@
+.workspace-split.mod-left-split .workspace-tabs.mod-active ~ .workspace-tabs,
+.workspace-split.mod-right-split .workspace-tabs.mod-active ~ .workspace-tabs {
+    display: none !important;
+}
+
+.workspace-split.mod-left-split:has(.workspace-tabs.mod-active) > .workspace-tabs:not(.mod-active),
+.workspace-split.mod-right-split:has(.workspace-tabs.mod-active) > .workspace-tabs:not(.mod-active) {
+    display: none !important;
+}

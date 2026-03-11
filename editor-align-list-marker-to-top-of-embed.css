@@ -1,0 +1,9 @@
+/* Align list bullet markers to the top of embedded images instead of center */
+
+.markdown-preview-view li .internal-embed.media-embed.image-embed,
+.markdown-source-view.mod-cm6 .cm-line .internal-embed.media-embed,
+li .internal-embed {
+    vertical-align: top !important;
+    margin-top: 0 !important;
+    display: inline-block !important;
+}

@@ -1,0 +1,11 @@
+/* Bases helper: remove card border/shadow via CSS class */
+
+.card-no-border .bases-cards-item {
+    box-shadow: 0 0 0 0 transparent;
+}
+
+/* Uncomment to show on hover
+.card-no-border .bases-cards-item:hover {
+    box-shadow: var(--bases-cards-shadow-hover);
+}
+*/

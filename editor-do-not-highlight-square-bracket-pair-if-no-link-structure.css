@@ -1,0 +1,8 @@
+/* Prevent bare bracket text from rendering as clickable links */
+
+/* Target bare links (text inside single square brackets) */
+.cm-hmd-barelink {
+    color: inherit !important;  /* Inherit text color from surrounding content */
+    text-decoration: none !important;  /* Remove any link-style decoration */
+    pointer-events: none;  /* Disable clickability for bare links */
+}

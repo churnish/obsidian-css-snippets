@@ -1,0 +1,7 @@
+/* Override Better Search Views' center-aligned text back to top-aligned */
+
+.backlink-pane .tree-item-inner,
+.tree-item-self,
+.tree-item-inner {
+  align-items: flex-start;
+}

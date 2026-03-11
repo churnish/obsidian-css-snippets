@@ -1,0 +1,23 @@
+/* Moves the cover image above properties in Hover Editor popovers (Pretty Properties integration) */
+
+div.popover-content .metadata-container {
+    display: flex !important;
+    flex-direction: column !important;
+}
+
+div.popover-content .metadata-side-image {
+    order: -1 !important;
+    align-self: center !important;
+    margin-bottom: 12px !important;
+}
+
+div.popover-content .metadata-side-image img {
+    height: 200px !important;
+    width: auto !important;
+    margin: auto !important;
+}
+
+/* Override width auto for circular images */
+div.popover-content .metadata-side-image.circle img {
+    width: 200px !important;
+}

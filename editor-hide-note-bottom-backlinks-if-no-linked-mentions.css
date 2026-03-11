@@ -1,0 +1,5 @@
+/* Hides the backlinks section at the bottom of notes when there are no linked mentions */
+
+.embedded-backlinks:has(.backlink-pane > :nth-child(2) > .search-empty-state) {
+display:none;
+}

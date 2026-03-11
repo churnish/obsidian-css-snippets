@@ -1,0 +1,5 @@
+/* Reduces the vertical gap between property rows to a minimal 1px */
+
+.metadata-properties {
+  --metadata-gap: 1px;
+}

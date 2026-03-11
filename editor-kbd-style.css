@@ -1,0 +1,25 @@
+/* Styles <kbd> elements as keyboard key caps with a subtle border and theme-aware background */
+
+kbd {
+ align-items: center;
+ border: 1px solid #bcc2c8;
+ border-bottom-width: 2px;
+ border-radius: 3px;
+ box-sizing: border-box;
+ display: inline-flex;
+ gap: 0.5em;
+ font-size: 0.87em;
+ justify-content: center;
+ line-height: 1.4;
+ margin: 0 .15em;
+ min-width: 24px;
+ padding: .15em .6em;
+}
+
+.theme-light kbd {
+ background: #f8f9f9;
+}
+
+.theme-dark kbd {
+ background: #1c1e1f;
+}

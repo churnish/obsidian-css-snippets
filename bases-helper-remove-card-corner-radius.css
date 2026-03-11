@@ -1,0 +1,5 @@
+/* Bases helper: remove corner radius from all cards for a sharp-edged look */
+
+.bases-cards-item {
+    border-radius: 0;
+}

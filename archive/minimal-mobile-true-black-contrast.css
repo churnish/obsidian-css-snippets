@@ -1,0 +1,57 @@
+/* Force true black background on mobile devices */
+.theme-dark.is-mobile:not(.minimal-dark-black) {
+  --base-h: 0;
+  --base-s: 0%;
+  --base-l: 0%;
+  --bg1: #000000;
+  --bg2: #000000;
+  --bg3: rgba(255, 255, 255, 0.05);
+  --ui1: #1a1a1a;
+  --ui2: #2a2a2a;
+  --ui3: #3a3a3a;
+}
+
+/* Ensure other elements also use the true black background */
+.theme-dark.is-mobile .workspace-tab-header-container,
+.theme-dark.is-mobile .workspace-ribbon.mod-left:not(.is-collapsed),
+.theme-dark.is-mobile .workspace-ribbon.mod-right:not(.is-collapsed),
+.theme-dark.is-mobile .sidebar-toggle-button.mod-left,
+.theme-dark.is-mobile .sidebar-toggle-button.mod-right {
+  background-color: #000000;
+}
+
+/* Override any conflicting styles */
+.theme-dark.is-mobile .workspace-tab-header.is-active {
+  background-color: #1a1a1a;
+}
+
+.theme-dark.is-mobile .workspace-leaf.mod-active .view-header {
+  background-color: #000000;
+}
+
+/* Dimming effect when sidebar is open */
+.theme-dark.is-mobile .workspace-split.mod-left-split .workspace-tabs.mod-active,
+.theme-dark.is-mobile .workspace-split.mod-right-split .workspace-tabs.mod-active {
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.theme-dark.is-mobile .workspace-split.mod-left-split .workspace-tabs.mod-active .workspace-leaf-content,
+.theme-dark.is-mobile .workspace-split.mod-right-split .workspace-tabs.mod-active .workspace-leaf-content {
+  background-color: rgba(0, 0, 0, 0.3);
+}
+
+/* Ensure the main content area stays black */
+.theme-dark.is-mobile .workspace-split.mod-root > .workspace-leaf:not(.mod-active) {
+  background-color: #000000;
+}
+
+/* Adjust icon colors for better visibility */
+.theme-dark.is-mobile .workspace-tab-header-inner-icon,
+.theme-dark.is-mobile .workspace-tab-header-inner-title {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.theme-dark.is-mobile .workspace-tab-header.is-active .workspace-tab-header-inner-icon,
+.theme-dark.is-mobile .workspace-tab-header.is-active .workspace-tab-header-inner-title {
+  color: rgba(255, 255, 255, 0.9);
+}

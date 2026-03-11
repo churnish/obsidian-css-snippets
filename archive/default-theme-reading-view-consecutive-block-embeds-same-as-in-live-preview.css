@@ -1,0 +1,3 @@
+.markdown-preview-view .inline-embed + br {
+    display: none;
+}

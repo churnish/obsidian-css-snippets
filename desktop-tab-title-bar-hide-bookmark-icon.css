@@ -1,0 +1,5 @@
+/* Hide the bookmark icon in the tab title bar */
+
+.view-header .clickable-icon.view-action.mod-bookmark {
+    display: none;
+}

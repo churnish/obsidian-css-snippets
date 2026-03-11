@@ -1,0 +1,134 @@
+/* Enlarge Excalidraw UI on tablet */
+
+/* Top toolbar icon containers: 25 -> 32px */
+.is-tablet .excalidraw .App-toolbar .ToolIcon__icon {
+  width: 32px !important;
+  height: 32px !important;
+}
+.is-tablet .excalidraw .ToolIcon.Shape,
+.is-tablet .excalidraw .ToolIcon.Shape.fillable {
+  min-width: 32px !important;
+  min-height: 32px !important;
+}
+
+/* All SVGs uniformly: 14 -> 18px */
+.is-tablet .excalidraw .ToolIcon__icon svg,
+.is-tablet .excalidraw .sidebar-trigger svg {
+  width: 18px !important;
+  height: 18px !important;
+}
+
+/* Hamburger menu */
+.is-tablet .excalidraw .main-menu-trigger {
+  width: 32px !important;
+  height: 32px !important;
+}
+.is-tablet .excalidraw .main-menu-trigger svg {
+  width: 18px !important;
+  height: 18px !important;
+}
+
+/* Extra-tools dropdown */
+.is-tablet .excalidraw .dropdown-menu-button {
+  width: 32px !important;
+  height: 32px !important;
+}
+.is-tablet .excalidraw .dropdown-menu-button svg {
+  width: 18px !important;
+  height: 18px !important;
+}
+
+/* Toolbar divider */
+.is-tablet .excalidraw .App-toolbar__divider {
+  height: 26px !important;
+}
+
+/* Right-side Obsidian menu: 28 -> 36px */
+.is-tablet .excalidraw .ExcalidrawObsidianMenu .ToolIcon__icon {
+  width: 36px !important;
+  height: 36px !important;
+}
+
+/* Fullscreen icons (lucide-maximize / lucide-minimize via ::after) */
+.is-tablet .excalidraw .ExcalidrawObsidianMenu .ToolIcon__icon[aria-label="Goto fullscreen mode"]::after,
+.is-tablet .excalidraw .ExcalidrawObsidianMenu .ToolIcon__icon[aria-label="Exit fullscreen mode"]::after {
+  width: 18px !important;
+  height: 18px !important;
+}
+
+/* Right-side Library button */
+.is-tablet .excalidraw .sidebar-trigger__label-element {
+  width: 36px !important;
+  height: 36px !important;
+}
+.is-tablet .excalidraw .sidebar-trigger.default-sidebar-trigger {
+  width: 36px !important;
+  height: 36px !important;
+}
+
+/* Zoom buttons */
+.is-tablet .excalidraw .zoom-button {
+  height: 32px !important;
+  min-width: 32px !important;
+}
+.is-tablet .excalidraw .zoom-button .ToolIcon__icon {
+  width: 32px !important;
+  height: 32px !important;
+}
+.is-tablet .excalidraw .reset-zoom-button {
+  font-size: 15.5px !important;
+  min-width: 58px !important;
+}
+
+/* Undo/redo */
+.is-tablet .excalidraw .undo-redo-buttons {
+  height: 32px !important;
+}
+.is-tablet .excalidraw .undo-button-container,
+.is-tablet .excalidraw .redo-button-container {
+  width: 47px !important;
+  height: 32px !important;
+}
+.is-tablet .excalidraw .undo-redo-buttons .ToolIcon_type_button {
+  height: 32px !important;
+  min-width: 47px !important;
+}
+.is-tablet .excalidraw .undo-redo-buttons .ToolIcon__icon {
+  width: 32px !important;
+  height: 32px !important;
+}
+
+/* Help icon */
+.is-tablet .excalidraw .help-icon {
+  width: 32px !important;
+  height: 32px !important;
+}
+.is-tablet .excalidraw .help-icon svg {
+  width: 18px !important;
+  height: 18px !important;
+}
+
+/* Zen-mode button */
+.is-tablet .excalidraw .disable-zen-mode {
+  font-size: 13px !important;
+  height: 32px !important;
+}
+
+/* Island containers */
+.is-tablet .excalidraw .Island {
+  padding: 5px !important;
+  border-radius: 10px !important;
+}
+
+/* Hint text below toolbar: 10.5 -> 13px */
+.is-tablet .excalidraw .HintViewer {
+  font-size: 13px !important;
+}
+.is-tablet .excalidraw .HintViewer kbd {
+  font-size: 12.5px !important;
+}
+
+/* Push hamburger menu below iPadOS status bar in fullscreen */
+.is-tablet .mod-root.excalidraw-visible .excalidraw .main-menu-trigger {
+  margin-top: env(safe-area-inset-top, 20px) !important;
+}

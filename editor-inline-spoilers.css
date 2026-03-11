@@ -1,0 +1,34 @@
+/* Inline spoiler tags: hidden text revealed on click/focus */
+/* Source: https://forum.obsidian.md/t/inline-spoilers-with-css/104840 */
+
+.spoiler {
+    background-color: var(--interactive-accent);
+    color: transparent;
+    padding: 0 3px;
+    border-radius: var(--radius-s);
+    cursor: pointer;
+    outline: none;
+    transition: all 0.2s ease;
+}
+
+.spoiler:focus {
+    background-color: hsla(var(--color-accent-hsl), 0.075);
+    color: var(--text-accent);
+}
+
+/* Fix for nested elements like links */
+.spoiler > *,
+.spoiler > *:hover {
+    color: transparent !important;
+}
+
+.spoiler:focus > *,
+.spoiler:focus > *:hover {
+    color: var(--text-accent) !important;
+}
+
+/* Underline links */
+.spoiler:focus a.internal-link,
+.spoiler:focus a.external-link {
+    text-decoration: underline !important;
+}

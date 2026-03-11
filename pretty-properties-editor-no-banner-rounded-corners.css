@@ -1,0 +1,5 @@
+/* Remove border radius from banner images */
+.banner-image img {
+  border-top-left-radius: 0 !important;
+  border-top-right-radius: 0 !important;
+}

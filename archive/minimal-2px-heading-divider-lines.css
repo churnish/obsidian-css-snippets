@@ -1,0 +1,35 @@
+/* Define heading divider width variable */
+:root {
+ --heading-divider-width: 2px;
+}
+
+/* Apply to headings */
+.h1-l .markdown-reading-view h1:not(.embedded-note-title),  
+.h1-l .mod-cm6 .cm-editor .HyperMD-header-1 {
+   border-bottom: var(--heading-divider-width) solid var(--h1l);
+}
+
+.h2-l .markdown-reading-view h2,
+.h2-l .mod-cm6 .cm-editor .HyperMD-header-2 {
+   border-bottom: var(--heading-divider-width) solid var(--h2l); 
+}
+
+.h3-l .markdown-reading-view h3,
+.h3-l .mod-cm6 .cm-editor .HyperMD-header-3 {
+   border-bottom: var(--heading-divider-width) solid var(--h3l);
+}
+
+.h4-l .markdown-reading-view h4,
+.h4-l .mod-cm6 .cm-editor .HyperMD-header-4 {
+   border-bottom: var(--heading-divider-width) solid var(--h4l);
+}
+
+.h5-l .markdown-reading-view h5,
+.h5-l .mod-cm6 .cm-editor .HyperMD-header-5 {
+   border-bottom: var(--heading-divider-width) solid var(--h5l);
+}
+
+.h6-l .markdown-reading-view h6,
+.h6-l .mod-cm6 .cm-editor .HyperMD-header-6 {
+   border-bottom: var(--heading-divider-width) solid var(--h6l);
+}

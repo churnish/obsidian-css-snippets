@@ -1,0 +1,11 @@
+/* Increase text size */
+.smtcmp-markdown-rendered.markdown-rendered.smtcmp-scale-sm {
+  --render-scale: 1 !important;
+}
+
+/* Modify the 'Chat' label appearance */
+h1.smtcmp-chat-header-title {
+  color: var(--tx1);
+  font-variant: small-caps;
+  text-transform: uppercase;
+}

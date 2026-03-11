@@ -1,0 +1,12 @@
+/* Render non-foldable, content-less callout titles as normal text instead of styled headings */
+
+  /* Normal text appearance for non-foldable callouts without content */
+  .callout:not([data-callout|="chatgpt"]):not(.is-collapsible) .callout-title:not(:has(+ .callout-content)) .callout-title-inner {
+    color: var(--text-normal);
+      font-variant: normal;
+      text-transform: none;
+  }
+
+  .callout:not([data-callout|="chatgpt"]):not(.is-collapsible) .callout-title:not(:has(+ .callout-content)) .callout-title-inner {
+    font-weight: normal;
+  }

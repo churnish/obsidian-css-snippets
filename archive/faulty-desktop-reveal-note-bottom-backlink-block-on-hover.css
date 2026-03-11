@@ -1,0 +1,11 @@
+/* Hide nav-buttons-container by default */
+.nav-buttons-container {
+    opacity: 0;
+    transition: opacity 0.1s ease-out;
+}
+
+/* Show nav-buttons-container on hover */
+.nav-buttons-container:hover {
+    opacity: 0.85;
+    transition: opacity 0.1s ease-in;
+}

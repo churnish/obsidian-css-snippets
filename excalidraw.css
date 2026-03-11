@@ -1,0 +1,51 @@
+/* Excalidraw icon and button tweaks */
+
+/* Replace Excalidraw icon with `lucide-palette` */
+.svg-icon.excalidraw-icon,
+.nav-file-icon[data-path$=".excalidraw"],
+.menu-item-icon .excalidraw-icon {
+    background-color: currentColor !important;
+    -webkit-mask-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJsdWNpZGUgbHVjaWRlLXBhbGV0dGUtaWNvbiBsdWNpZGUtcGFsZXR0ZSI+PHBhdGggZD0iTTEyIDIyYTEgMSAwIDAgMSAwLTIwIDEwIDkgMCAwIDEgMTAgOSA1IDUgMCAwIDEtNSA1aC0yLjI1YTEuNzUgMS43NSAwIDAgMC0xLjQgMi44bC4zLjRhMS43NSAxLjc1IDAgMCAxLTEuNCAyLjh6Ii8+PGNpcmNsZSBjeD0iMTMuNSIgY3k9IjYuNSIgcj0iLjUiIGZpbGw9ImN1cnJlbnRDb2xvciIvPjxjaXJjbGUgY3g9IjE3LjUiIGN5PSIxMC41IiByPSIuNSIgZmlsbD0iY3VycmVudENvbG9yIi8+PGNpcmNsZSBjeD0iNi41IiBjeT0iMTIuNSIgcj0iLjUiIGZpbGw9ImN1cnJlbnRDb2xvciIvPjxjaXJjbGUgY3g9IjguNSIgY3k9IjcuNSIgcj0iLjUiIGZpbGw9ImN1cnJlbnRDb2xvciIvPjwvc3ZnPg==") !important;
+    -webkit-mask-size: 100% !important;
+    -webkit-mask-repeat: no-repeat !important;
+    -webkit-mask-position: center !important;
+}
+
+/* Replace `maximize` icon with `lucide-maximize` */
+.ExcalidrawObsidianMenu .ToolIcon__icon[aria-label="Goto fullscreen mode"] svg {
+    display: none;
+}
+
+.ExcalidrawObsidianMenu .ToolIcon__icon[aria-label="Goto fullscreen mode"]::after {
+    content: "";
+    display: block;
+    width: 14px;
+    height: 14px;
+    background-color: var(--icon-fill-color);
+    -webkit-mask-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiPjxwYXRoIGQ9Ik04IDNINWEyIDIgMCAwIDAtMiAydjMiLz48cGF0aCBkPSJNMjEgOFY1YTIgMiAwIDAgMC0yLTJoLTMiLz48cGF0aCBkPSJNMyAxNnYzYTIgMiAwIDAgMCAyIDJoMyIvPjxwYXRoIGQ9Ik0xNiAyMWgzYTIgMiAwIDAgMCAyLTJ2LTMiLz48L3N2Zz4=");
+    -webkit-mask-size: 100%;
+    -webkit-mask-repeat: no-repeat;
+    -webkit-mask-position: center;
+}
+
+/* Replace `minimize` icon with `lucide-minimize` */
+.ExcalidrawObsidianMenu .ToolIcon__icon[aria-label="Exit fullscreen mode"] svg {
+    display: none;
+}
+
+.ExcalidrawObsidianMenu .ToolIcon__icon[aria-label="Exit fullscreen mode"]::after {
+    content: "";
+    display: block;
+    width: 14px;
+    height: 14px;
+    background-color: var(--icon-fill-color);
+    -webkit-mask-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiPjxwYXRoIGQ9Ik04IDN2M2EyIDIgMCAwIDEtMiAySDMiLz48cGF0aCBkPSJNMjEgOGgtM2EyIDIgMCAwIDEtMi0yVjMiLz48cGF0aCBkPSJNMyAxNmgzYTIgMiAwIDAgMSAyIDJ2MyIvPjxwYXRoIGQ9Ik0xNiAyMXYtM2EyIDIgMCAwIDEgMi0yaDMiLz48L3N2Zz4=");
+    -webkit-mask-size: 100%;
+    -webkit-mask-repeat: no-repeat;
+    -webkit-mask-position: center;
+}
+
+/* Hide hand (panning) tool button in right-side toolbar */
+.tray-misc-tools-container > .ToolIcon.Shape {
+    display: none;
+}

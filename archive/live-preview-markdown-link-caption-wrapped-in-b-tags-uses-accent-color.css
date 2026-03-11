@@ -1,0 +1,5 @@
+/* Target bold text only in lines containing links */
+.cm-line:has(.cm-formatting-link-string) .cm-html-embed b,
+.cm-line:has(.external-link) .cm-html-embed b {
+    color: var(--text-accent) !important;
+}

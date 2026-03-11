@@ -1,0 +1,119 @@
+/* Source: https://github.com/kepano/obsidian-minimal/issues/860 */
+
+/* ----------------------------------------- */
+/* HELPER CLASS REFERENCE */
+/* ----------------------------------------- */
+
+/* 
+- .crop-to-fit: Crop images to fill grid cells (overrides global Style Settings option)
+- .full-image: Display full images without cropping (overrides global Style Settings option)
+- .no-img-grid: Disable image grid layout (overrides global Minimal Theme Settings option)
+*/
+
+/* ----------------------------------------- */
+/* FIX: Make global 'Crop to fit' Style Settings option apply to local images */
+/* ----------------------------------------- */
+
+/* Apply to all local images without custom width; respect global setting via var */
+.internal-embed.media-embed.image-embed.is-loaded:not(:has([width])) img {
+  width: 100% !important;
+  height: 100% !important;
+  min-height: 100% !important;
+  object-fit: var(--image-grid-fit, cover) !important;
+}
+
+/* ----------------------------------------- */
+/* crop-to-fit: Force crop to fit for ALL images */
+/* ----------------------------------------- */
+
+/* Override CSS variable for external image grid behavior */
+.markdown-preview-view.crop-to-fit, .crop-to-fit .markdown-preview-view,
+.markdown-source-view.crop-to-fit, .crop-to-fit .markdown-source-view {
+  --image-grid-fit: cover !important;
+}
+
+/* Apply crop with custom size check for locals */
+.markdown-preview-view.crop-to-fit .internal-embed.media-embed.image-embed:not(:has([width])) img,
+.markdown-source-view.crop-to-fit .internal-embed.media-embed.image-embed:not(:has([width])) img,
+.crop-to-fit .markdown-preview-view .internal-embed.media-embed.image-embed:not(:has([width])) img,
+.crop-to-fit .markdown-source-view .internal-embed.media-embed.image-embed:not(:has([width])) img,
+.markdown-preview-view.crop-to-fit div[data-is-embed] > p:has(br) > img:not([alt*="banner"]):not([width]),
+.markdown-source-view.crop-to-fit div[data-is-embed] > p:has(br) > img:not([alt*="banner"]):not([width]),
+.crop-to-fit div[data-is-embed] > p:has(br) > img:not([alt*="banner"]):not([width]),
+.markdown-preview-view.crop-to-fit p:has(br) > img:not([alt*="banner"]):not([width]),
+.markdown-source-view.crop-to-fit p:has(br) > img:not([alt*="banner"]):not([width]),
+.crop-to-fit p:has(br) > img:not([alt*="banner"]):not([width]) {
+  object-fit: cover !important;
+  width: 100% !important;
+  height: 100% !important;
+  min-height: 100% !important;
+}
+
+/* ----------------------------------------- */
+/* full-image: Force full image display */
+/* ----------------------------------------- */
+
+/* Override CSS variable for external image grid behavior */
+.markdown-preview-view.full-image, .full-image .markdown-preview-view,
+.markdown-source-view.full-image, .full-image .markdown-source-view {
+  --image-grid-fit: contain !important;
+}
+
+/* Apply full display with custom size check for locals */
+.markdown-preview-view.full-image .internal-embed.media-embed.image-embed:not(:has([width])) img,
+.markdown-source-view.full-image .internal-embed.media-embed.image-embed:not(:has([width])) img,
+.full-image .markdown-preview-view .internal-embed.media-embed.image-embed:not(:has([width])) img,
+.full-image .markdown-source-view .internal-embed.media-embed.image-embed:not(:has([width])) img,
+.markdown-preview-view.full-image div[data-is-embed] > p:has(br) > img:not([width]),
+.markdown-source-view.full-image div[data-is-embed] > p:has(br) > img:not([width]),
+.full-image div[data-is-embed] > p:has(br) > img:not([width]),
+.markdown-preview-view.full-image p:has(br) > img:not([alt*="banner"]):not([width]),
+.markdown-source-view.full-image p:has(br) > img:not([alt*="banner"]):not([width]),
+.full-image p:has(br) > img:not([alt*="banner"]):not([width]) {
+  object-fit: contain !important;
+  width: auto !important;
+  height: auto !important;
+  min-height: auto !important;
+  max-width: 100% !important;
+  max-height: 100% !important;
+}
+
+/* Adjust grid rows for full-image display */
+.full-image div[data-is-embed] > p:has(br),
+.full-image div[data-is-embed] > p:has(span + *),
+.full-image p:has(br):has(img) {
+  grid-auto-rows: auto !important;
+  align-items: center;
+}
+
+/* ----------------------------------------- */
+/* no-img-grid: Disable image grid layout */
+/* ----------------------------------------- */
+
+.no-img-grid div[data-is-embed] > p:has(br),
+.no-img-grid div[data-is-embed] > p:has(span + *),
+.no-img-grid p:has(br):has(img) {
+  display: block !important;
+  grid-template-columns: unset !important;
+  grid-gap: unset !important;
+  grid-auto-rows: unset !important;
+}
+
+.no-img-grid div[data-is-embed] > p:has(br) br,
+.no-img-grid div[data-is-embed] > p:has(span + *) br,
+.no-img-grid p:has(br) br {
+  display: initial !important;
+}
+
+.no-img-grid div[data-is-embed] > p:has(br) img,
+.no-img-grid div[data-is-embed] > p:has(br) span.internal-embed,
+.no-img-grid div[data-is-embed] > p:has(span + *) img,
+.no-img-grid div[data-is-embed] > p:has(span + *) span.internal-embed,
+.no-img-grid p:has(br) img,
+.no-img-grid p:has(br) span.internal-embed {
+  display: inline-block !important;
+  width: auto !important;
+  height: auto !important;
+  max-width: 100% !important;
+  object-fit: initial !important;
+}

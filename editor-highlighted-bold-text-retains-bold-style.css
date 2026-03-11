@@ -1,0 +1,14 @@
+/* Preserve bold styling and color inside highlighted text spans */
+
+/* Normal highlighted text — keep default color */
+.cm-s-obsidian span.cm-formatting-highlight,
+.cm-s-obsidian span.cm-highlight {
+    --text-normal: var(--text-normal);
+}
+
+/* Bold text within highlights */
+.cm-s-obsidian span.cm-formatting-highlight.cm-strong,
+.cm-s-obsidian span.cm-highlight.cm-strong {
+    --text-normal: var(--bold-color);
+    color: var(--bold-color);
+}

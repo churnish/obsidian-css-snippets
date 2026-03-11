@@ -1,0 +1,9 @@
+/* Hides vault statistics in the mobile sidebar drawer */
+
+.workspace-drawer-header-name {
+    padding-bottom: 15px;
+}
+
+.workspace-drawer-header-info {
+    display: none !important;
+}

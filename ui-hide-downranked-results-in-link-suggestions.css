@@ -1,0 +1,5 @@
+/* Hides downranked (low-relevance) results from the link suggestion dropdown */
+
+.suggestion-item.mod-downranked {
+    display: none !important;
+}

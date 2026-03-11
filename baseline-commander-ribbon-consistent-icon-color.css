@@ -1,0 +1,5 @@
+/* Force Commander-added ribbon icons to use the default icon color */
+
+.workspace-ribbon .clickable-icon {
+    color: var(--icon-color) !important;
+}

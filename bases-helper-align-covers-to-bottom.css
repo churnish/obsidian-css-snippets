@@ -1,0 +1,5 @@
+/* Bases helper: align card cover images to the bottom edge via CSS class */
+
+.card-align-bottom .bases-cards-cover {
+    background-position: center bottom;
+}

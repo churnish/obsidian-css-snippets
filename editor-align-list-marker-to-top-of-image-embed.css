@@ -1,0 +1,6 @@
+/* Aligns list bullet markers to the top of embedded images instead of center */
+
+.HyperMD-list-line .image-embed,
+li .image-embed {
+    vertical-align: top !important;
+}

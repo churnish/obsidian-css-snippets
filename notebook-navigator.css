@@ -1,0 +1,77 @@
+/* Calm and clean Notebook Navigator appearance */
+
+/* Font size congruent with Baseline
+body {
+  --nn-setting-nav-font-size: var(--font-ui-smaller);
+}*/
+
+/* Calm metadata text colors */
+body {
+  --nn-theme-file-date-color: var(--text-faint);
+  --nn-theme-file-parent-color: var(--text-faint);
+  --nn-theme-file-tag-color: var(--text-faint);
+}
+
+/* Remove tag background */
+.nn-file-tag {
+  background-color: transparent !important;
+}
+
+.nn-file.nn-selected .nn-file-tag {
+  background-color: transparent !important;
+}
+
+/* Calm tag border */
+body {
+	--nn-file-pill-border-color: var(--background-modifier-border);
+}
+
+/* Show indentation lines */
+/* Uses repeating-linear-gradient to support unlimited nesting depth. Avoids conflicting with the plugin's ::after hover effect. */
+.nn-navitem[data-level]:not([data-level="0"]):not([data-level="1"])::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 32px;
+    width: calc((var(--level) - 2) * 16px + 1px);
+    background: repeating-linear-gradient(
+        to right,
+        var(--nav-indentation-guide-color, var(--background-modifier-border)) 0,
+        var(--nav-indentation-guide-color, var(--background-modifier-border)) var(--nav-indentation-guide-width, 1px),
+        transparent var(--nav-indentation-guide-width, 1px),
+        transparent 16px
+    );
+    pointer-events: none;
+}
+
+/* Override folder note styling */
+.nn-navitem-name.nn-has-folder-note {
+    font-weight: normal !important;
+}
+
+/* Override pane header tranparency 
+.nn-list-pane-scroller > .nn-list-pane-overlay .nn-pane-header,
+.nn-list-pane-scroller > .nn-list-pane-overlay .nn-search-bar-container.nn-search-bar-visible,
+.nn-navigation-pane-scroller > .nn-navigation-pane-overlay .nn-pane-header {
+  background-color: var(--sidedock-background) !important;
+}*/
+
+/* Hide list pane header buttons when not hovering */
+/* Original source: https://discord.com/channels/1405458145974943846/1405889553893691464/1458086484002472047 */
+.notebook-navigator .nn-list-pane .nn-list-pane-overlay:not(:hover) .nn-header-actions .nn-header-actions {
+    opacity: 0;
+    transition: opacity 200ms;
+}
+
+.notebook-navigator .nn-list-pane .nn-list-pane-overlay:not(:hover) .nn-header-actions .nn-header-actions .nn-icon-button {
+    min-width: 0;
+    padding: 0;
+    transition: all 200ms;
+    transition-delay: 200ms;
+    margin-right: -16px;
+}
+
+.notebook-navigator .nn-list-pane .nn-list-pane-overlay:not(:hover) .nn-header-actions .nn-header-actions .nn-icon-button > span {
+    width: 16px !important;
+}

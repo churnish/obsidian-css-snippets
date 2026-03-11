@@ -1,0 +1,7 @@
+/* Hides done/cancelled/created timestamps on tasks in reading view for a cleaner look */
+
+.markdown-reading-view .task-done,
+.markdown-reading-view .task-cancelled,
+.markdown-reading-view .task-created {
+    display: none !important;
+}

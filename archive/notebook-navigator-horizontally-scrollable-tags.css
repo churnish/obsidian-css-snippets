@@ -1,0 +1,5 @@
+.nn-file-tags {
+  display: flex;
+  overflow-x: auto;
+  scrollbar-width: none;
+}

@@ -1,0 +1,16 @@
+/* Hide properties by default in hover editor */
+div.popover-content div.metadata-container .metadata-content {
+   max-height: 0;
+   overflow: hidden;
+   transition: max-height 0.2s;
+   transition-delay: 0s;
+}
+/* Show properties on hover over heading or content with delay in hover editor */
+div.popover-content div.metadata-container .metadata-properties-heading:hover ~ .metadata-content {
+   max-height: 1000px;
+   transition-delay: 0.5s;
+}
+div.popover-content div.metadata-container .metadata-content:hover {
+   max-height: 1000px;
+   transition-delay: 0s;
+}

@@ -1,0 +1,5 @@
+/* Makes unresolved links match resolved link color on hover so they don't look broken */
+
+:not(h1):not(h2):not(h3):not(h4):not(h5):not(h6) .is-unresolved:hover {
+    color: var(--link-color-hover) !important;
+}

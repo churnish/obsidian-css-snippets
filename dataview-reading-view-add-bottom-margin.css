@@ -1,0 +1,7 @@
+/* Add bottom margin to Dataview blocks in reading view to match live preview spacing */
+
+/* Spacing for reading time in reading view only */
+.markdown-reading-view .reading-time-span {
+    display: block;
+    margin-bottom: 1em;
+}

@@ -1,0 +1,28 @@
+/* Strip blockquotes down to a plain left-border style with no background or decorations */
+
+.markdown-rendered blockquote {
+    border-radius: 0;
+    border-inline-start: var(--blockquote-border-thickness) solid var(--blockquote-border-color);
+    padding-top: 0;
+    padding-bottom: 0;
+    padding-inline-start: var(--size-4-6);
+    padding-inline-end: 0;
+}
+
+.markdown-rendered blockquote::before,
+.markdown-rendered blockquote::after {
+    display: none;
+}
+
+body {
+    --blockquote-background-color: transparent;
+    --blockquote-border-color: var(--background-modifier-border);
+}
+
+.HyperMD-quote:last-child, .cm-sizer>div>div>.HyperMD-quote:has(+*:not(.HyperMD-quote)) {
+    border-bottom-width: 0px;
+}
+
+.HyperMD-quote:first-child, .cm-sizer>div>div>*:not(.HyperMD-quote)+.HyperMD-quote {
+    border-top-width: 0px;
+}

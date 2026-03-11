@@ -1,0 +1,10 @@
+/* Baseline: Do not hide sidebar content when navbar expanded */
+
+.is-mobile .workspace-drawer-tab-options::before {
+  display: none;
+}
+
+.is-mobile .workspace-drawer-tab-options-list {
+  background-color: var(--background-secondary) !important;
+  left: 16px !important;
+}

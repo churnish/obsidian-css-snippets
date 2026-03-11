@@ -1,0 +1,5 @@
+/* Hides the title header of inline search queries via the no-query-title cssclass */
+
+.no-query-title .internal-query-header {
+    display: none !important;
+}

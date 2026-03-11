@@ -1,0 +1,55 @@
+/* Hide link underlines and tag backgrounds inside headings, reveal on hover */
+/* Source: https://forum.obsidian.md/t/colorful-heading-underlines/107381 */
+
+/* Hide link underlines in headings - Reading view */
+.el-h1 a.internal-link,
+.el-h2 a.internal-link,
+.el-h3 a.internal-link,
+.el-h4 a.internal-link,
+.el-h5 a.internal-link,
+.el-h6 a.internal-link,
+.el-h1 a.external-link,
+.el-h2 a.external-link,
+.el-h3 a.external-link,
+.el-h4 a.external-link,
+.el-h5 a.external-link,
+.el-h6 a.external-link {
+    text-decoration-line: none !important;
+}
+
+/* Show underline on hover - Reading view */
+.el-h1 a.internal-link:hover,
+.el-h2 a.internal-link:hover,
+.el-h3 a.internal-link:hover,
+.el-h4 a.internal-link:hover,
+.el-h5 a.internal-link:hover,
+.el-h6 a.internal-link:hover,
+.el-h1 a.external-link:hover,
+.el-h2 a.external-link:hover,
+.el-h3 a.external-link:hover,
+.el-h4 a.external-link:hover,
+.el-h5 a.external-link:hover,
+.el-h6 a.external-link:hover {
+    text-decoration-line: underline !important;
+}
+
+/* Hide link underlines in headings - Editing view */
+.HyperMD-header a.cm-underline {
+    text-decoration-line: none !important;
+}
+
+/* Show underline on hover - Editing view */
+.HyperMD-header a.cm-underline:hover {
+    text-decoration-line: underline !important;
+}
+
+/* Remove tag background in headings */
+.el-h1 a.tag,
+.el-h2 a.tag,
+.el-h3 a.tag,
+.el-h4 a.tag,
+.el-h5 a.tag,
+.el-h6 a.tag,
+.HyperMD-header a.tag {
+    background-color: transparent !important;
+}

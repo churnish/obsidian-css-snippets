@@ -1,0 +1,34 @@
+/* Bases feed view: collapse entry lines when not editing for a compact layout */
+
+/* Hide first non-empty line when not editing
+   (non-empty AND not preceded by non-empty) */
+.bases-feed-entry-editor .markdown-source-view .cm-editor:not(.cm-focused) .cm-content > .cm-line:not(:has(> br:only-child)):not(.cm-line:not(:has(> br:only-child)) ~ .cm-line) {
+    display: none !important;
+}
+
+/* Hide all empty lines by default when not editing */
+.bases-feed-entry-editor .markdown-source-view .cm-editor:not(.cm-focused) .cm-content > .cm-line:has(> br:only-child) {
+    display: none;
+}
+
+/* Show empty lines only after the SECOND content line (not after first) */
+.bases-feed-entry-editor .markdown-source-view .cm-editor:not(.cm-focused) .cm-content > .cm-line:not(:has(> br:only-child)) ~ .cm-line:not(:has(> br:only-child)) ~ .cm-line:has(> br:only-child) {
+    display: block !important;
+}
+
+/* Hide up to 2 trailing empty lines
+   (doubled/tripled classes for specificity to override show rule above) */
+.bases-feed-entry-editor .markdown-source-view .cm-editor:not(.cm-focused) .cm-content.cm-content.cm-lineWrapping:has(> .cm-line:last-child > br:only-child) > div.cm-line.cm-line.cm-line:last-child,
+.bases-feed-entry-editor .markdown-source-view .cm-editor:not(.cm-focused) .cm-content.cm-content.cm-lineWrapping:has(> .cm-line:last-child > br:only-child):has(> .cm-line:nth-last-child(2) > br:only-child) > div.cm-line.cm-line.cm-line:nth-last-child(2) {
+    display: none !important;
+}
+
+/* Hide active line indicator in feed view unless editor is focused */
+body.active-line-block .bases-feed-entry-editor .markdown-source-view .cm-line.cm-active:not(.cm-gutterElement,.HyperMD-callout,.HyperMD-codeblock-bg,.HyperMD-quote)::after {
+    display: none !important;
+}
+
+/* Show active line indicator when editor is focused */
+body.active-line-block .bases-feed-entry-editor .cm-editor.cm-focused .cm-line.cm-active:not(.cm-gutterElement,.HyperMD-callout,.HyperMD-codeblock-bg,.HyperMD-quote)::after {
+    display: block !important;
+}

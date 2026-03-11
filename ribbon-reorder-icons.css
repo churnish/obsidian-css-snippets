@@ -1,0 +1,25 @@
+/* Enforces a custom display order for desktop ribbon icons via CSS order */
+
+.side-dock-ribbon .clickable-icon[aria-label="Create new canvas"] { order: 1 !important; }
+.side-dock-ribbon .clickable-icon[aria-label="Manage workspace layouts"] { order: 2 !important; }
+.side-dock-ribbon .clickable-icon[aria-label="Open today's daily note"] { order: 3 !important; }
+.side-dock-ribbon .clickable-icon[aria-label="Start/stop recording"] { order: 4 !important; }
+.side-dock-ribbon .clickable-icon[aria-label="Archive file"] { order: 5 !important; }
+.side-dock-ribbon .clickable-icon[aria-label="Create new drawing"] { order: 6 !important; }
+.side-dock-ribbon .clickable-icon[aria-label="Create new note from template"] { order: 7 !important; }
+.side-dock-ribbon .clickable-icon[aria-label="Delete current file"] { order: 8 !important; }
+.side-dock-ribbon .clickable-icon[aria-label="Expand sidebars"] { order: 9 !important; }
+.side-dock-ribbon .clickable-icon[aria-label="Open command list"] { order: 10 !important; }
+.side-dock-ribbon .clickable-icon[aria-label="Open local graph"] { order: 11 !important; }
+.side-dock-ribbon .clickable-icon[aria-label="Open local history"] { order: 12 !important; }
+.side-dock-ribbon .clickable-icon[aria-label="Open Quick Switcher++"] { order: 13 !important; }
+.side-dock-ribbon .clickable-icon[aria-label="Open random note"] { order: 14 !important; }
+.side-dock-ribbon .clickable-icon[aria-label="Open random file from Bases view"] { order: 15 !important; }
+.side-dock-ribbon .clickable-icon[aria-label="Open search"] { order: 16 !important; }
+.side-dock-ribbon .clickable-icon[aria-label="Open trash explorer"] { order: 17 !important; }
+.side-dock-ribbon .clickable-icon[aria-label="Shuffle Bases view"] { order: 18 !important; }
+
+/* Fallback: any unlisted icons go to the end */
+.side-dock-ribbon .clickable-icon {
+    order: 999;
+}

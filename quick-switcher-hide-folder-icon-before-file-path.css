@@ -1,0 +1,6 @@
+/* Hide the folder icon before file paths in Quick Switcher++ results */
+
+/* Hide the qsp-path-indicator span */
+span.qsp-path-indicator {
+    display: none;
+}

@@ -1,0 +1,16 @@
+/* Hides specific heading levels (h1-h6) in embeds via alt tags or cssclasses */
+
+.internal-embed[alt*="hide-h1"].markdown-embed h1,
+.internal-embed[alt*="hide-h2"].markdown-embed h2,
+.internal-embed[alt*="hide-h3"].markdown-embed h3,
+.internal-embed[alt*="hide-h4"].markdown-embed h4,
+.internal-embed[alt*="hide-h5"].markdown-embed h5,
+.internal-embed[alt*="hide-h6"].markdown-embed h6,
+.no-h1 .internal-embed .markdown-rendered h1,
+.no-h2 .internal-embed .markdown-rendered h2,
+.no-h3 .internal-embed .markdown-rendered h3,
+.no-h4 .internal-embed .markdown-rendered h4,
+.no-h5 .internal-embed .markdown-rendered h5,
+.no-h6 .internal-embed .markdown-rendered h6 {
+    display: none;
+}

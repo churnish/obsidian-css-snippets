@@ -1,0 +1,11 @@
+/* Hide YAML properties inside canvas note embeds */
+
+/* Hide Properties when a card is unfocused or selected */
+.canvas-node {
+    --metadata-display-reading: none;
+}
+
+/* Hide Properties in edit mode */
+.mod-inside-iframe {
+    --metadata-display-editing: none;
+}

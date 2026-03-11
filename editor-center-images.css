@@ -1,0 +1,7 @@
+/* Centers images and media embeds horizontally, excluding list items and card link favicons */
+
+.center-images :is(.media-embed, img):not(li *, .auto-card-link-favicon) {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}

@@ -1,0 +1,40 @@
+/* Defines colored highlight classes (.g, .b, .p, .l) and normalizes default mark styling */
+
+.markdown-source-view.mod-cm6 .cm-html-embed .cm-highlight,
+.markdown-source-view.mod-cm6 span[class*="cm-html"] mark {
+    background: rgba(var(--color-yellow-rgb), 0.4) !important;
+    color: var(--text-normal);
+    font-weight: var(--font-medium);
+}
+
+/* Baseline theme overrides */
+.markdown-reading-view mark, 
+.markdown-source-view mark, 
+.markdown-rendered mark {
+    border-radius: 0 !important;
+    padding: 0 !important;
+}
+
+.g {
+    background: rgba(var(--color-green-rgb), 0.4) !important;
+    color: var(--text-normal);
+	font-weight: var(--font-medium);
+}
+
+.b {
+    background: rgba(var(--color-blue-rgb), 0.4) !important;
+    color: var(--text-normal);
+	font-weight: var(--font-medium);
+}
+
+.p {
+    background: rgba(var(--color-pink-rgb), 0.4) !important;
+    color: var(--text-normal);
+	font-weight: var(--font-medium);
+}
+
+.l {
+    background: rgba(var(--color-purple-rgb), 0.4) !important;
+    color: var(--text-normal);
+	font-weight: var(--font-medium);
+}

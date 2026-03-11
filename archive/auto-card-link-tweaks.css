@@ -1,0 +1,28 @@
+/* Use default text color */
+.auto-card-link-card {
+  color: var(--text-normal) !important;
+}
+
+.auto-card-link-title {
+    &:hover {
+        color: var(--text-normal);
+    }
+}
+
+.auto-card-link-host {
+    &:hover {
+        color: var(--text-normal);
+    }
+}
+
+/* Remove background
+.auto-card-link-card {
+  background: none;
+}
+*/
+
+/* White background under transparent pixels
+img.auto-card-link-favicon {
+  background: #fff;
+}
+*/

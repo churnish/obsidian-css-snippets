@@ -1,0 +1,6 @@
+/* Hide H1 headings inside canvas card embeds so the card title isn't duplicated */
+
+.canvas-node-content .markdown-embed-content h1,
+.canvas-node .markdown-rendered h1 {
+    display: none !important;
+}

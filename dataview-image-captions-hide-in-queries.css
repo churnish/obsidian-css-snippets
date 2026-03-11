@@ -1,0 +1,6 @@
+/* Hide image captions in dataview queries only */
+.dataview-inline-query figcaption.image-captions-caption,
+.block-language-dataview figcaption.image-captions-caption,
+.block-language-dataviewjs figcaption.image-captions-caption {
+    display: none !important;
+}

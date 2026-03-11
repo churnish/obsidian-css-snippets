@@ -1,0 +1,7 @@
+/* Hides selected plugin indicators from the status bar (properties, pane-relief, github-issues) */
+
+.status-bar-item.plugin-properties,
+.status-bar-item.plugin-pane-relief,
+status-bar-item.plugin-github-issues {
+  display: none;
+}

@@ -1,0 +1,5 @@
+/* Removes the background color from Bases card covers for a cleaner look */
+
+.bases-cards-cover {
+    background-color: transparent;
+}

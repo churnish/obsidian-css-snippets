@@ -1,0 +1,72 @@
+/* Shows a breadcrumb path above note embeds via the show-bc alt tag or cssclass, hidden for non-markdown files */
+
+.internal-embed[alt*="show-bc"]::before,
+.show-bc .internal-embed.markdown-embed::before {
+  content: attr(src);
+  font-size: 0.8em;
+  opacity: 0.6;
+  display: inline-block;
+  margin-bottom: 8px;
+  max-width: calc(100% - 24px);
+  white-space: normal;
+  word-break: break-word;
+  line-height: 1.2em;
+}
+
+/* Hide title for non-markdown files */
+.internal-embed[alt*="show-bc"][src$=".png"]::before,
+.internal-embed[alt*="show-bc"][src$=".jpg"]::before,
+.internal-embed[alt*="show-bc"][src$=".jpeg"]::before,
+.internal-embed[alt*="show-bc"][src$=".gif"]::before,
+.internal-embed[alt*="show-bc"][src$=".bmp"]::before,
+.internal-embed[alt*="show-bc"][src$=".svg"]::before,
+.internal-embed[alt*="show-bc"][src$=".webp"]::before,
+.internal-embed[alt*="show-bc"][src$=".mp3"]::before,
+.internal-embed[alt*="show-bc"][src$=".wav"]::before,
+.internal-embed[alt*="show-bc"][src$=".m4a"]::before,
+.internal-embed[alt*="show-bc"][src$=".ogg"]::before,
+.internal-embed[alt*="show-bc"][src$=".3gp"]::before,
+.internal-embed[alt*="show-bc"][src$=".flac"]::before,
+.internal-embed[alt*="show-bc"][src$=".mp4"]::before,
+.internal-embed[alt*="show-bc"][src$=".webm"]::before,
+.internal-embed[alt*="show-bc"][src$=".ogv"]::before,
+.internal-embed[alt*="show-bc"][src$=".mov"]::before,
+.internal-embed[alt*="show-bc"][src$=".mkv"]::before,
+.internal-embed[alt*="show-bc"][src$=".pdf"]::before,
+.show-bc .internal-embed.markdown-embed[src$=".png"]::before,
+.show-bc .internal-embed.markdown-embed[src$=".jpg"]::before,
+.show-bc .internal-embed.markdown-embed[src$=".jpeg"]::before,
+.show-bc .internal-embed.markdown-embed[src$=".gif"]::before,
+.show-bc .internal-embed.markdown-embed[src$=".bmp"]::before,
+.show-bc .internal-embed.markdown-embed[src$=".svg"]::before,
+.show-bc .internal-embed.markdown-embed[src$=".webp"]::before,
+.show-bc .internal-embed.markdown-embed[src$=".mp3"]::before,
+.show-bc .internal-embed.markdown-embed[src$=".wav"]::before,
+.show-bc .internal-embed.markdown-embed[src$=".m4a"]::before,
+.show-bc .internal-embed.markdown-embed[src$=".ogg"]::before,
+.show-bc .internal-embed.markdown-embed[src$=".3gp"]::before,
+.show-bc .internal-embed.markdown-embed[src$=".flac"]::before,
+.show-bc .internal-embed.markdown-embed[src$=".mp4"]::before,
+.show-bc .internal-embed.markdown-embed[src$=".webm"]::before,
+.show-bc .internal-embed.markdown-embed[src$=".ogv"]::before,
+.show-bc .internal-embed.markdown-embed[src$=".mov"]::before,
+.show-bc .internal-embed.markdown-embed[src$=".mkv"]::before,
+.show-bc .internal-embed.markdown-embed[src$=".pdf"]::before {
+  display: none;
+}
+
+/* Hide .md extension */
+.internal-embed[alt*="show-bc"][src$=".md"]::before,
+.show-bc .internal-embed.markdown-embed[src$=".md"]::before {
+  content: attr(src slice(0, -3));
+}
+
+
+/* Ensure the "Open link" button stays on top */
+.internal-embed[alt*="show-bc"] .markdown-embed-link,
+.show-bc .internal-embed .markdown-embed-link {
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 1;
+}

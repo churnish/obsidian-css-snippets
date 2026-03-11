@@ -1,0 +1,15 @@
+/* Bases helper: clamp card titles to two lines with ellipsis overflow */
+/* Source: https://gist.github.com/kepano/8afc4cad9c32f4fde6ef6347f66a0571 */
+
+.bases-cards-property.mod-title .bases-cards-line {
+  font-size: var(--font-ui-small);
+  line-height: 1.2;
+  height: 2.8em; /* Title height */
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: normal;
+  display: -webkit-box;
+  -webkit-line-clamp: 2; /* Number of title lines */
+  -webkit-box-orient: vertical;
+}
+

@@ -1,0 +1,11 @@
+/* Dim unresolved (non-existent) links in quick switcher and link suggester */
+
+/* Quick switcher */
+.suggestion-item.mod-complex:has(.suggestion-flair > .lucide-file-plus) > .suggestion-content {
+    opacity: 0.7;
+}
+
+/* Link suggester*/
+.suggestion-item:has(.suggestion-note:empty) .suggestion-title {
+    opacity: 0.7;
+}

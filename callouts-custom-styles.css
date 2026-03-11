@@ -1,0 +1,256 @@
+/* Custom callout color and icon overrides for built-in and plugin callout types */
+
+/**/ /* Vanilla */ /**/
+
+/* Note */
+
+.callout[data-callout="note"] {
+    --callout-color: var(--color-yellow-rgb);
+    --callout-icon: pencil;
+}
+
+/* Abstract */
+
+.callout[data-callout="abstract"] {
+    --callout-color: var(--color-orange-rgb);
+}
+.callout[data-callout="summary"] {
+    --callout-color: var(--color-orange-rgb);
+}
+.callout[data-callout="tldr"] {
+    --callout-color: var(--color-orange-rgb);
+}
+
+/* Info */
+
+.callout[data-callout="info"] {
+    --callout-color: var(--color-blue-rgb);
+}
+
+/* Todo */
+
+.callout[data-callout="todo"] {
+    --callout-color: var(--callout-quote);
+    --callout-icon: check;
+}
+
+/* Tip */
+
+.callout[data-callout="tip"] {
+    --callout-color: var(--color-orange-rgb);
+}
+.callout[data-callout="hint"] {
+    --callout-color: var(--color-orange-rgb);
+}
+.callout[data-callout="important"] {
+    --callout-color: var(--color-orange-rgb);
+}
+
+/* Success */
+
+.callout[data-callout="success"] {
+    --callout-color: var(--color-green-rgb);
+    --callout-icon: check;
+}
+.callout[data-callout="check"] {
+    --callout-color: var(--color-green-rgb);
+    --callout-icon: check;
+}
+.callout[data-callout="done"] {
+    --callout-color: var(--color-green-rgb);
+    --callout-icon: check;
+}
+
+/* Question */
+
+.callout[data-callout="question"] {
+    --callout-color: var(--color-red-rgb);
+}
+.callout[data-callout="help"] {
+    --callout-color: var(--color-red-rgb);
+}
+.callout[data-callout="faq"] {
+    --callout-color: var(--color-red-rgb);
+}
+
+/* Warning */
+
+.callout[data-callout="warning"] {
+    --callout-color: var(--color-yellow-rgb);
+}
+.callout[data-callout="caution"] {
+    --callout-color: var(--color-yellow-rgb);
+}
+.callout[data-callout="attention"] {
+    --callout-color: var(--color-yellow-rgb);
+}
+
+/* Failure */
+
+.callout[data-callout="failure"] {
+    --callout-color: var(--color-red-rgb);
+    --callout-icon: x;
+}
+.callout[data-callout="fail"] {
+    --callout-color: var(--color-red-rgb);
+    --callout-icon: x;
+}
+.callout[data-callout="missing"] {
+    --callout-color: var(--color-red-rgb);
+    --callout-icon: x;
+}
+
+/* Danger */
+
+.callout[data-callout="danger"] {
+    --callout-color: var(--color-yellow-rgb);
+    --callout-icon: zap;
+}
+.callout[data-callout="error"] {
+    --callout-color: var(--color-yellow-rgb);
+    --callout-icon: zap;
+}
+
+/* Bug */
+
+.callout[data-callout="bug"] {
+    --callout-color: var(--color-green-rgb);
+}
+
+
+/* Example */
+
+.callout[data-callout="example"] {
+    --callout-color: var(--color-blue-rgb);
+}
+
+/* Quote */
+
+.callout[data-callout="quote"] {
+    --callout-color: var(--callout-quote);
+}
+
+
+/**/ /* Custom */ /**/
+
+
+/* Ai */
+
+.callout[data-callout="ai"] {
+    --callout-color: var(--color-yellow-rgb);
+    --callout-icon: wand-sparkles;
+}
+
+.callout[data-callout="ai"]:not(.is-collapsible) {
+    padding: 0px;
+}
+
+/* Embed */
+
+.callout[data-callout="embed"] {
+    --callout-color: var(--color-green-rgb);
+    --callout-icon: puzzle;
+}
+
+/* Exception */
+
+.callout[data-callout="exception"] {
+    --callout-color: var(--color-orange-rgb);
+    --callout-icon: star-list;
+}
+.callout[data-callout="except"] {
+    --callout-color: var(--color-orange-rgb);
+    --callout-icon: star-list;
+}
+.callout[data-callout="but"] {
+    --callout-color: var(--color-orange-rgb);
+    --callout-icon: star-list;
+}
+
+
+/* Rationale */
+
+.callout[data-callout="rationale"] {
+    --callout-color: var(--callout-quote);
+    --callout-icon: cloud;
+}
+.callout[data-callout="why"] {
+    --callout-color: var(--callout-quote);
+    --callout-icon: cloud;
+}
+
+/* Related */
+
+.callout[data-callout="related"] {
+    --callout-color: var(--color-yellow-rgb);
+    --callout-icon: orbit;
+}
+.callout[data-callout="see"] {
+    --callout-color: var(--color-yellow-rgb);
+    --callout-icon: orbit;
+}
+
+/* Evidence */
+
+.callout[data-callout="evidence"] {
+    --callout-color: var(--callout-quote);
+    --callout-icon: microscope;
+}
+.callout[data-callout="research"] {
+    --callout-color: var(--callout-quote);
+    --callout-icon: microscope;
+}
+.callout[data-callout="study"] {
+    --callout-color: var(--callout-quote);
+    --callout-icon: microscope;
+}
+
+/* Pro */
+
+.callout[data-callout="pro"] {
+    --callout-color: var(--color-green-rgb);
+    --callout-icon: heart;
+}
+
+/* Con */
+
+.callout[data-callout="con"] {
+    --callout-color: var(--color-red-rgb);
+    --callout-icon: heart-crack;
+}
+
+/* Neutral */
+
+.callout[data-callout="neutral"] {
+    --callout-color: var(--callout-quote);
+    --callout-icon: heart;
+}
+
+/* Alternative */
+
+.callout[data-callout="alternative"] {
+    --callout-color: var(--color-blue-rgb);
+    --callout-icon: refresh-ccw;
+}
+.callout[data-callout="aka"] {
+    --callout-color: var(--color-blue-rgb);
+    --callout-icon: refresh-ccw;
+}
+
+/* Analogy */
+
+.callout[data-callout="analogy"] {
+    --callout-color: var(--color-yellow-rgb);
+    --callout-icon: lightbulb;
+}
+.callout[data-callout="metaphor"] {
+    --callout-color: var(--color-yellow-rgb);
+    --callout-icon: lightbulb;
+}
+
+/* Disagree */
+
+.callout[data-callout="disagree"] {
+    --callout-color: var(--color-yellow-rgb);
+    --callout-icon: thumbs-down;
+}

@@ -1,0 +1,5 @@
+/* Hides the backlink count from the status bar */
+
+.status-bar-item.plugin-backlink {
+  display: none;
+}

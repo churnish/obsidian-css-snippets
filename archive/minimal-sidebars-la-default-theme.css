@@ -1,0 +1,44 @@
+/* TOGGLE: Add comment end to target left sidebar header -->
+
+
+.workspace-tab-header-container,
+.workspace-tab-header-container::before,
+.background-secondary-remover .workspace-split.mod-left-split .workspace-tabs.mod-top .workspace-tab-header-container,
+.background-secondary-remover .workspace-split.mod-left-split .workspace-tabs.mod-top .workspace-tab-header-container::before,
+.background-secondary-remover .workspace-split.mod-left-split .workspace-tabs.mod-top .workspace-tab-container-inner {
+    background-color: var(--background-primary) !important;
+}
+
+.background-secondary-remover .mod-left-split .workspace-tabs.mod-top .workspace-tab-header-container {
+    padding-left: 0;
+    padding-right: 0;
+    border-bottom: none;
+}
+
+.background-secondary-remover .workspace-tab-container-before,
+.background-secondary-remover .workspace-tab-container-after {
+    display: none !important;
+}
+
+.is-hidden-frameless:not(.minimal-dark-black):not(.colorful-frame):not(.minimal-dark-tonal):not(.minimal-light-white) .workspace-ribbon.mod-left:not(.is-collapsed) {
+    --titlebar-background: var(--background-primary) !important;
+}
+
+*/
+
+body:not(.sidebar-color) .mod-right-split {
+    --background-secondary: var(--bg2) !important;
+}
+
+body:not(.sidebar-color) .mod-right-split :not(.mod-top) .workspace-tab-header-container {
+    --tab-container-background: var(--background-secondary);
+}
+
+body:not(.sidebar-color) .workspace-split .workspace-tabs:not(.mod-top) .workspace-tab-header-container {
+    background-color: var(--background-secondary) !important;
+}
+
+body {
+    --titlebar-background: var(--background-primary) !important;
+    --titlebar-background-focused: var(--background-primary) !important;
+}

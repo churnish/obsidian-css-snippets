@@ -1,0 +1,6 @@
+/* Centers images that have captions (from the Image Captions plugin) */
+
+.image-captions-figure {
+  margin-left: auto; 
+  margin-right: auto; 
+}

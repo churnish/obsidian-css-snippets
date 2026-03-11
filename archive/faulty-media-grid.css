@@ -1,0 +1,322 @@
+/* This snippet requires Contextual Typography 2.2.1+ */
+/* https://github.com/mgmeyers/obsidian-contextual-typography */
+/* Source: https://github.com/zremboldt/obsidian-media-grid?tab=readme-ov-file */
+/* Modified to work with Minimal theme and only affect media grids */
+
+/*
+HELPER CLASSES REFERENCE:
+
+Activation:
+- media-grid: enables media grid (when activation toggle is on)
+- no-media-grid: disables media grid in specific notes
+
+Behavior:
+- crop-to-fit: forces images to crop/fill grid cells
+- full-image: shows full images with natural height
+
+Alignment (full image mode only):
+- align-top: aligns grid items to top
+- align-bottom: aligns grid items to bottom
+
+Width:
+- media-base: 45rem width
+- media-small: 45rem + 5%
+- media-medium: 45rem + 10% 
+- media-large: 45rem + 20%
+- media-wide: matches theme's wide width
+- media-max: matches theme's max width
+- media-100: 100% width
+*/
+
+:root {
+  --content-base-width: 45rem;
+}
+
+/* ----------------------------------------- */
+/* FIXED: Container-level width control */
+/* ----------------------------------------- */
+
+/* Apply default width to main container */
+.markdown-preview-view.is-readable-line-width .markdown-preview-section {
+  max-width: var(--content-max-width, var(--file-line-width, var(--line-width, 45rem)));
+}
+
+/* Width override classes - applied to container */
+.media-base .markdown-preview-view.is-readable-line-width .markdown-preview-section {
+  max-width: var(--file-line-width, var(--line-width, 45rem)) !important;
+}
+
+.media-small .markdown-preview-view.is-readable-line-width .markdown-preview-section {
+  max-width: calc(var(--content-base-width) * 1.05) !important;
+}
+
+.media-medium .markdown-preview-view.is-readable-line-width .markdown-preview-section {
+  max-width: calc(var(--content-base-width) * 1.1) !important;
+}
+
+.media-large .markdown-preview-view.is-readable-line-width .markdown-preview-section {
+  max-width: calc(var(--content-base-width) * 1.2) !important;
+}
+
+.media-wide .markdown-preview-view.is-readable-line-width .markdown-preview-section {
+  max-width: var(--line-width-wide) !important;
+}
+
+.media-max .markdown-preview-view.is-readable-line-width .markdown-preview-section {
+  max-width: var(--max-width) !important;
+}
+
+.media-100 .markdown-preview-view.is-readable-line-width .markdown-preview-section {
+  max-width: 100% !important;
+}
+
+/* ----------------------------------------- */
+/* Media grid activation */
+/* ----------------------------------------- */
+
+/* Disable media grid when explicitly excluded */
+.no-media-grid .markdown-preview-section div[data-is-embed] > p:has(br),
+.no-media-grid .markdown-preview-section div[data-is-embed] > p:has(img + *),
+.no-media-grid .markdown-preview-section div[data-is-embed] > p:has(span + *) {
+  display: block !important;
+}
+
+/* Only activate with media-grid class when toggle is enabled */
+body.media-grid-activation .markdown-preview-view:not(.media-grid) div[data-is-embed] > p:has(br),
+body.media-grid-activation .markdown-preview-view:not(.media-grid) div[data-is-embed] > p:has(img + *),
+body.media-grid-activation .markdown-preview-view:not(.media-grid) div[data-is-embed] > p:has(span + *) {
+  display: block !important;
+}
+
+/* ----------------------------------------- */
+/* Make media items display in rows */
+/* ----------------------------------------- */
+
+/* p tags wrap each row - only target paragraphs with multiple images or br tags */
+.markdown-preview-view.is-readable-line-width .markdown-preview-section div[data-is-embed] > p:has(br),
+.markdown-preview-view.is-readable-line-width .markdown-preview-section div[data-is-embed] > p:has(img + *),
+.markdown-preview-view.is-readable-line-width .markdown-preview-section div[data-is-embed] > p:has(span + *) {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(0, 1fr));
+  grid-gap: var(--media-grid-gap, 7px);
+  grid-auto-rows: 1fr;
+  align-items: center;
+  margin: 0;
+}
+
+/* Remove breaks from the document flow - only in grid contexts */
+.markdown-preview-view.is-readable-line-width .markdown-preview-section div[data-is-embed] > p:has(br) br,
+.markdown-preview-view.is-readable-line-width .markdown-preview-section div[data-is-embed] > p:has(img + *) br,
+.markdown-preview-view.is-readable-line-width .markdown-preview-section div[data-is-embed] > p:has(span + *) br {
+  display: none;
+}
+
+/* Media items sourced from your vault are wrapped in a span - only in grid contexts */
+.markdown-preview-view.is-readable-line-width .markdown-preview-section div[data-is-embed] > p:has(br) > span:has(img),
+.markdown-preview-view.is-readable-line-width .markdown-preview-section div[data-is-embed] > p:has(br) > span:has(video),
+.markdown-preview-view.is-readable-line-width .markdown-preview-section div[data-is-embed] > p:has(img + *) > span:has(img),
+.markdown-preview-view.is-readable-line-width .markdown-preview-section div[data-is-embed] > p:has(img + *) > span:has(video),
+.markdown-preview-view.is-readable-line-width .markdown-preview-section div[data-is-embed] > p:has(span + *) > span:has(img),
+.markdown-preview-view.is-readable-line-width .markdown-preview-section div[data-is-embed] > p:has(span + *) > span:has(video) {
+  display: flex;
+  align-items: center;
+  height: 100%;
+}
+
+/* Apply grid styles to all img/video tags in grid contexts only */
+.markdown-preview-view.is-readable-line-width .markdown-preview-section div[data-is-embed] > p:has(br) > img,
+.markdown-preview-view.is-readable-line-width .markdown-preview-section div[data-is-embed] > p:has(br) > video,
+.markdown-preview-view.is-readable-line-width .markdown-preview-section div[data-is-embed] > p:has(br) > span > img,
+.markdown-preview-view.is-readable-line-width .markdown-preview-section div[data-is-embed] > p:has(br) > span > video,
+.markdown-preview-view.is-readable-line-width .markdown-preview-section div[data-is-embed] > p:has(img + *) > img,
+.markdown-preview-view.is-readable-line-width .markdown-preview-section div[data-is-embed] > p:has(img + *) > video,
+.markdown-preview-view.is-readable-line-width .markdown-preview-section div[data-is-embed] > p:has(img + *) > span > img,
+.markdown-preview-view.is-readable-line-width .markdown-preview-section div[data-is-embed] > p:has(img + *) > span > video,
+.markdown-preview-view.is-readable-line-width .markdown-preview-section div[data-is-embed] > p:has(span + *) > img,
+.markdown-preview-view.is-readable-line-width .markdown-preview-section div[data-is-embed] > p:has(span + *) > video,
+.markdown-preview-view.is-readable-line-width .markdown-preview-section div[data-is-embed] > p:has(span + *) > span > img,
+.markdown-preview-view.is-readable-line-width .markdown-preview-section div[data-is-embed] > p:has(span + *) > span > video {
+  width: 100%;
+  height: 100%;
+  object-fit: var(--media-object-fit, cover);
+  border-radius: var(--media-border-radius, 4px);
+}
+
+/* Create gaps between rows - only between actual grid containers */
+.markdown-preview-view.is-readable-line-width .markdown-preview-section div[data-is-embed]:has(> p > br) + div[data-is-embed]:has(> p > br),
+.markdown-preview-view.is-readable-line-width .markdown-preview-section div[data-is-embed]:has(> p > img + *) + div[data-is-embed]:has(> p > img + *),
+.markdown-preview-view.is-readable-line-width .markdown-preview-section div[data-is-embed]:has(> p > span + *) + div[data-is-embed]:has(> p > span + *) {
+  margin-top: var(--media-grid-gap, 7px);
+}
+
+/* ----------------------------------------- */
+/* CSS class overrides - scoped to grids only */
+/* ----------------------------------------- */
+
+/* Force crop-to-fit with cssclasses: crop-to-fit */
+.crop-to-fit div[data-is-embed] > p:has(br) img,
+.crop-to-fit div[data-is-embed] > p:has(br) video,
+.crop-to-fit div[data-is-embed] > p:has(img + *) img,
+.crop-to-fit div[data-is-embed] > p:has(img + *) video,
+.crop-to-fit div[data-is-embed] > p:has(span + *) img,
+.crop-to-fit div[data-is-embed] > p:has(span + *) video {
+  object-fit: cover !important;
+  height: 100% !important;
+}
+
+/* Force full-image with cssclasses: full-image */
+.full-image div[data-is-embed] > p:has(br),
+.full-image div[data-is-embed] > p:has(img + *),
+.full-image div[data-is-embed] > p:has(span + *) {
+  grid-auto-rows: auto !important;
+  align-items: center;
+}
+
+.full-image div[data-is-embed] > p:has(br) > span,
+.full-image div[data-is-embed] > p:has(img + *) > span,
+.full-image div[data-is-embed] > p:has(span + *) > span {
+  align-items: center;
+}
+
+.full-image div[data-is-embed] > p:has(br) img,
+.full-image div[data-is-embed] > p:has(br) video,
+.full-image div[data-is-embed] > p:has(img + *) img,
+.full-image div[data-is-embed] > p:has(img + *) video,
+.full-image div[data-is-embed] > p:has(span + *) img,
+.full-image div[data-is-embed] > p:has(span + *) video {
+  height: auto !important;
+  object-fit: contain !important;
+}
+
+/* ----------------------------------------- */
+/* Alignment CSS classes - scoped to grids only */
+/* ----------------------------------------- */
+
+/* Align top with cssclasses: align-top */
+.align-top div[data-is-embed] > p:has(br),
+.align-top div[data-is-embed] > p:has(br) > span,
+.align-top div[data-is-embed] > p:has(img + *),
+.align-top div[data-is-embed] > p:has(img + *) > span,
+.align-top div[data-is-embed] > p:has(span + *),
+.align-top div[data-is-embed] > p:has(span + *) > span {
+  align-items: flex-start !important;
+}
+
+.align-top div[data-is-embed] > p:has(br) img,
+.align-top div[data-is-embed] > p:has(br) video,
+.align-top div[data-is-embed] > p:has(img + *) img,
+.align-top div[data-is-embed] > p:has(img + *) video,
+.align-top div[data-is-embed] > p:has(span + *) img,
+.align-top div[data-is-embed] > p:has(span + *) video {
+  height: auto !important;
+}
+
+/* Align bottom with cssclasses: align-bottom */
+.align-bottom div[data-is-embed] > p:has(br),
+.align-bottom div[data-is-embed] > p:has(br) > span,
+.align-bottom div[data-is-embed] > p:has(img + *),
+.align-bottom div[data-is-embed] > p:has(img + *) > span,
+.align-bottom div[data-is-embed] > p:has(span + *),
+.align-bottom div[data-is-embed] > p:has(span + *) > span {
+  align-items: flex-end !important;
+}
+
+.align-bottom div[data-is-embed] > p:has(br) img,
+.align-bottom div[data-is-embed] > p:has(br) video,
+.align-bottom div[data-is-embed] > p:has(img + *) img,
+.align-bottom div[data-is-embed] > p:has(img + *) video,
+.align-bottom div[data-is-embed] > p:has(span + *) img,
+.align-bottom div[data-is-embed] > p:has(span + *) video {
+  height: auto !important;
+}
+
+/* ----------------------------------------- */
+/* Style settings */
+/* ----------------------------------------- */
+
+/* @settings
+name: Media Grid+
+id: media-grid-snippet
+settings:
+    -
+        id: prerequisites
+        title: Prerequisites
+        type: heading
+        level: 2
+        collapsed: true
+        description: Requires Contextual Typography 2.2.1+ plugin
+    -
+        id: source
+        title: Source
+        type: heading
+        level: 2
+        collapsed: true
+        description: This snippet's source URL can be found at the top of the .css file
+    -
+        id: media-grid-activation
+        title: Media grid activation
+        description: Enable to require media-grid cssclass for activation. When enabled, media grids only work in notes with media-grid cssclass. When disabled, works in all notes except those with no-media-grid cssclass.
+        type: class-toggle
+        default: false
+        addCommand: false
+    -
+        id: content-max-width
+        title: Media grid default width
+        description: Default width for media grids when no specific width cssclass is used.
+        type: variable-select
+        allowEmpty: true
+        default: ""
+        options:
+            - 
+                label: Regular image width (theme-controlled)
+                value: var(--file-line-width, var(--line-width, 45rem))
+            - 
+                label: Small (+5%)
+                value: calc(var(--content-base-width) * 1.05)
+            - 
+                label: Medium (+10%)
+                value: calc(var(--content-base-width) * 1.1)
+            - 
+                label: Large (+20%)
+                value: calc(var(--content-base-width) * 1.2)
+            - 
+                label: Full width
+                value: 100%
+            - 
+                label: Match note max width (theme-controlled)
+                value: var(--max-width)
+    -
+        id: media-grid-gap
+        title: Grid gap
+        description: Gap size between grid items.
+        type: variable-number-slider
+        format: px
+        default: 7
+        min: 0
+        max: 80
+        step: 1
+    -
+        id: media-border-radius
+        title: Border radius
+        description: Border radius for images and videos.
+        type: variable-number-slider
+        format: px
+        default: 0
+        min: 0
+        max: 40
+        step: 1
+    -
+        id: media-object-fit
+        title: Image fitting
+        description: How images fit in grid cells. Alignment classes override crop-to-fit behavior.
+        type: variable-select
+        allowEmpty: false
+        default: cover
+        options:
+            - 
+                label: Crop to fit
+                value: cover
+            - 
+                label: Show full image
+                value: contain
+*/

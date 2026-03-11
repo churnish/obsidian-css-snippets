@@ -1,0 +1,79 @@
+.markdown-source-view:not(.no-bc) .internal-embed:not([alt*="no-bc"])::before,
+.markdown-preview-view:not(.no-bc) .internal-embed:not([alt*="no-bc"])::before {
+  content: attr(alt);
+  font-size: 0.8em;
+  opacity: 0.6;
+  display: inline-block;
+  margin-bottom: 8px;
+  max-width: calc(100% - 24px);
+  white-space: normal;
+  word-break: break-word;
+  line-height: 1.2em;
+}
+
+/* Hide title for non-markdown files */
+.markdown-source-view:not(.no-bc) .internal-embed[src$=".png"]::before,
+.markdown-source-view:not(.no-bc) .internal-embed[src$=".jpg"]::before,
+.markdown-source-view:not(.no-bc) .internal-embed[src$=".jpeg"]::before,
+.markdown-source-view:not(.no-bc) .internal-embed[src$=".gif"]::before,
+.markdown-source-view:not(.no-bc) .internal-embed[src$=".bmp"]::before,
+.markdown-source-view:not(.no-bc) .internal-embed[src$=".svg"]::before,
+.markdown-source-view:not(.no-bc) .internal-embed[src$=".webp"]::before,
+.markdown-source-view:not(.no-bc) .internal-embed[src$=".mp3"]::before,
+.markdown-source-view:not(.no-bc) .internal-embed[src$=".wav"]::before,
+.markdown-source-view:not(.no-bc) .internal-embed[src$=".m4a"]::before,
+.markdown-source-view:not(.no-bc) .internal-embed[src$=".ogg"]::before,
+.markdown-source-view:not(.no-bc) .internal-embed[src$=".3gp"]::before,
+.markdown-source-view:not(.no-bc) .internal-embed[src$=".flac"]::before,
+.markdown-source-view:not(.no-bc) .internal-embed[src$=".mp4"]::before,
+.markdown-source-view:not(.no-bc) .internal-embed[src$=".webm"]::before,
+.markdown-source-view:not(.no-bc) .internal-embed[src$=".ogv"]::before,
+.markdown-source-view:not(.no-bc) .internal-embed[src$=".mov"]::before,
+.markdown-source-view:not(.no-bc) .internal-embed[src$=".mkv"]::before,
+.markdown-source-view:not(.no-bc) .internal-embed[src$=".pdf"]::before,
+.markdown-preview-view:not(.no-bc) .internal-embed[src$=".png"]::before,
+.markdown-preview-view:not(.no-bc) .internal-embed[src$=".jpg"]::before,
+.markdown-preview-view:not(.no-bc) .internal-embed[src$=".jpeg"]::before,
+.markdown-preview-view:not(.no-bc) .internal-embed[src$=".gif"]::before,
+.markdown-preview-view:not(.no-bc) .internal-embed[src$=".bmp"]::before,
+.markdown-preview-view:not(.no-bc) .internal-embed[src$=".svg"]::before,
+.markdown-preview-view:not(.no-bc) .internal-embed[src$=".webp"]::before,
+.markdown-preview-view:not(.no-bc) .internal-embed[src$=".mp3"]::before,
+.markdown-preview-view:not(.no-bc) .internal-embed[src$=".wav"]::before,
+.markdown-preview-view:not(.no-bc) .internal-embed[src$=".m4a"]::before,
+.markdown-preview-view:not(.no-bc) .internal-embed[src$=".ogg"]::before,
+.markdown-preview-view:not(.no-bc) .internal-embed[src$=".3gp"]::before,
+.markdown-preview-view:not(.no-bc) .internal-embed[src$=".flac"]::before,
+.markdown-preview-view:not(.no-bc) .internal-embed[src$=".mp4"]::before,
+.markdown-preview-view:not(.no-bc) .internal-embed[src$=".webm"]::before,
+.markdown-preview-view:not(.no-bc) .internal-embed[src$=".ogv"]::before,
+.markdown-preview-view:not(.no-bc) .internal-embed[src$=".mov"]::before,
+.markdown-preview-view:not(.no-bc) .internal-embed[src$=".mkv"]::before,
+.markdown-preview-view:not(.no-bc) .internal-embed[src$=".pdf"]::before {
+  display: none;
+}
+
+/* Remove .md extension */
+.markdown-source-view:not(.no-bc) .internal-embed[src$=".md"][alt$=".md"]::before,
+.markdown-preview-view:not(.no-bc) .internal-embed[src$=".md"][alt$=".md"]::before {
+  content: attr(alt slice(0, -3));
+}
+
+/* Alt text support */
+.internal-embed[alt*="no-bc"] .markdown-rendered blockquote {
+    border-left: transparent;
+    padding-left: 0px;
+}
+.no-bc .internal-embed .markdown-rendered blockquote {
+    border-left: transparent;
+    padding-left: 0px;
+}
+
+/* Ensure the "open link" button stays on top */
+.markdown-source-view:not(.no-bc) .internal-embed .markdown-embed-link,
+.markdown-preview-view:not(.no-bc) .internal-embed .markdown-embed-link {
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 1;
+}

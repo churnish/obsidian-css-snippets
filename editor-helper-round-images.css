@@ -1,0 +1,27 @@
+/* Helper: crop images and Bases covers into circles via CSS class */
+
+/* Regular images */
+.round img {
+    border-radius: 50%;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+}
+
+.round .internal-embed.image-embed img {
+    border-radius: 50% !important;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+}
+
+/* Bases card covers */
+.round-cover .bases-cards-cover {
+    border-radius: 50% !important;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+}
+
+.round-cover .bases-cards-cover img {
+    border-radius: 50% !important;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+}

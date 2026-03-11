@@ -1,0 +1,4 @@
+/* Hide embedded backlinks sections only in Bases feed view */
+.bases-feed-entry-content .embedded-backlinks {
+  display: none !important;
+}

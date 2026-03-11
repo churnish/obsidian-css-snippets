@@ -1,0 +1,13 @@
+/* Adds a semi-transparent accent color overlay to Strange New Worlds header reference counters */
+
+snw-header-count-wrapper {
+  position: relative;
+}
+.snw-header-count-wrapper::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-color: var(--ax1);
+  opacity: 0.6;
+  pointer-events: none;
+}

@@ -1,0 +1,20 @@
+/* Hides specific ribbon icons on desktop to declutter the sidebar */
+
+.side-dock-ribbon-action[aria-label*="Local Images Plus"],
+.side-dock-ribbon-action[aria-label*="Add tag to current note"],
+.side-dock-ribbon-action[aria-label*="Remove tag from current note"],
+.side-dock-ribbon-action[aria-label*="Text Transporter"],
+.side-dock-ribbon-action[aria-label*="BRAT"],
+.side-dock-ribbon-action[aria-label*="Open highlights"],
+.side-dock-ribbon-action[aria-label*="Open quick switcher"],
+.side-dock-ribbon-action[aria-label*="Open command palette"],
+.side-dock-ribbon-action[aria-label*="Open virtual content in sidebar"],
+.side-dock-ribbon-action[aria-label*="Templater"],
+.side-dock-ribbon-action[aria-label*="Open trash explorer"],
+.side-dock-ribbon-action[aria-label*="New drawing"],
+.side-dock-ribbon-action[aria-label*="Open graph view"],
+.side-dock-ribbon-action[aria-label*="Notebook Navigator"],
+.side-dock-ribbon-action[aria-label*="Create new base"],
+.side-dock-ribbon-action[aria-label*="Open random note"] {
+    display: none !important;
+}

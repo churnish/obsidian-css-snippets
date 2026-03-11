@@ -1,0 +1,146 @@
+/* Credit: Border theme by Akifyss https://github.com/Akifyss/obsidian-border */
+
+:root {
+  /* Toggle switches (1 = enabled, 0 = disabled) */
+  --h1-underline-enabled: 0;
+  --h2-underline-enabled: 1;
+  --h3-underline-enabled: 1;
+  --h4-underline-enabled: 1;
+  --h5-underline-enabled: 1;
+  --h6-underline-enabled: 1;
+  
+  /* Global settings */
+  --heading-underline-opacity: 0.5;
+  --heading-underline-gradient-start: 30%;
+  --heading-underline-gradient-end: 70%;
+}
+
+/* Base positioning for all headings */
+.markdown-preview-sizer>div>h1,
+.markdown-preview-sizer>div>h2,
+.markdown-preview-sizer>div>h3,
+.markdown-preview-sizer>div>h4,
+.markdown-preview-sizer>div>h5,
+.markdown-preview-sizer>div>h6,
+.markdown-rendered>h1,
+.markdown-rendered>h2,
+.markdown-rendered>h3,
+.markdown-rendered>h4,
+.markdown-rendered>h5,
+.markdown-rendered>h6,
+.HyperMD-header-1,
+.HyperMD-header-2,
+.HyperMD-header-3,
+.HyperMD-header-4,
+.HyperMD-header-5,
+.HyperMD-header-6 {
+  position: relative;
+}
+
+/* H1 Underline */
+.markdown-preview-sizer>div>h1::after,
+.markdown-rendered>h1::after,
+.HyperMD-header-1::after {
+  content: "";
+  position: absolute;
+  height: 1px;
+  width: 100%;
+  right: 0;
+  bottom: 0;
+  opacity: calc(var(--heading-underline-opacity) * var(--h1-underline-enabled));
+  background-image: linear-gradient(
+    to left,
+    var(--color-red) var(--heading-underline-gradient-start),
+    transparent var(--heading-underline-gradient-end)
+  );
+}
+
+/* H2 Underline */
+.markdown-preview-sizer>div>h2::after,
+.markdown-rendered>h2::after,
+.HyperMD-header-2::after {
+  content: "";
+  position: absolute;
+  height: 1px;
+  width: 100%;
+  right: 0;
+  bottom: 0;
+  opacity: calc(var(--heading-underline-opacity) * var(--h2-underline-enabled));
+  background-image: linear-gradient(
+    to left,
+    var(--color-orange) var(--heading-underline-gradient-start),
+    transparent var(--heading-underline-gradient-end)
+  );
+}
+
+/* H3 Underline */
+.markdown-preview-sizer>div>h3::after,
+.markdown-rendered>h3::after,
+.HyperMD-header-3::after {
+  content: "";
+  position: absolute;
+  height: 1px;
+  width: 100%;
+  right: 0;
+  bottom: 0;
+  opacity: calc(var(--heading-underline-opacity) * var(--h3-underline-enabled));
+  background-image: linear-gradient(
+    to left,
+    var(--color-yellow) var(--heading-underline-gradient-start),
+    transparent var(--heading-underline-gradient-end)
+  );
+}
+
+/* H4 Underline */
+.markdown-preview-sizer>div>h4::after,
+.markdown-rendered>h4::after,
+.HyperMD-header-4::after {
+  content: "";
+  position: absolute;
+  height: 1px;
+  width: 100%;
+  right: 0;
+  bottom: 0;
+  opacity: calc(var(--heading-underline-opacity) * var(--h4-underline-enabled));
+  background-image: linear-gradient(
+    to left,
+    var(--color-green) var(--heading-underline-gradient-start),
+    transparent var(--heading-underline-gradient-end)
+  );
+}
+
+/* H5 Underline */
+.markdown-preview-sizer>div>h5::after,
+.markdown-rendered>h5::after,
+.HyperMD-header-5::after {
+  content: "";
+  position: absolute;
+  height: 1px;
+  width: 100%;
+  right: 0;
+  bottom: 0;
+  opacity: calc(var(--heading-underline-opacity) * var(--h5-underline-enabled));
+  background-image: linear-gradient(
+    to left,
+    var(--color-blue) var(--heading-underline-gradient-start),
+    transparent var(--heading-underline-gradient-end)
+  );
+}
+
+/* H6 Underline */
+.markdown-preview-sizer>div>h6::after,
+.markdown-rendered>h6::after,
+.HyperMD-header-6::after {
+  content: "";
+  position: absolute;
+  height: 1px;
+  width: 100%;
+  right: 0;
+  bottom: 0;
+  opacity: calc(var(--heading-underline-opacity) * var(--h6-underline-enabled));
+  background-image: linear-gradient(
+    to left,
+    var(--color-purple) var(--heading-underline-gradient-start),
+    transparent var(--heading-underline-gradient-end)
+  );
+}

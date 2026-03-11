@@ -1,0 +1,23 @@
+/* Hide Commander tab-title-bar buttons until hovering over the header */
+
+/* Hide "Commander" buttons by default */
+.view-actions .clickable-icon.cmdr-page-header,
+.view-actions .clickable-icon[class*="cmdr:"],
+.view-actions .view-action.cmdr-page-header,
+.view-actions .view-action[class*="cmdr:"] {
+    opacity: 0;
+    transition: opacity 0.1s ease-out;
+}
+
+/* Show "Commander" buttons on hover over tab title bar */
+.view-header:hover .view-actions .clickable-icon.cmdr-page-header,
+.view-header:hover .view-actions .clickable-icon[class*="cmdr:"],
+.view-header:hover .view-actions .view-action.cmdr-page-header,
+.view-header:hover .view-actions .view-action[class*="cmdr:"],
+.view-actions:hover .clickable-icon.cmdr-page-header,
+.view-actions:hover .clickable-icon[class*="cmdr:"],
+.view-actions:hover .view-action.cmdr-page-header,
+.view-actions:hover .view-action[class*="cmdr:"] {
+    opacity: 0.85;
+    transition: opacity 0.1s ease-in;
+}

@@ -1,0 +1,5 @@
+.markdown-source-view.mod-cm6 .cm-html-embed .cm-highlight,
+.markdown-source-view.mod-cm6 span[class*="cm-html"] mark {
+ background-color: #ffdc0066;
+ color: var(--text-normal);
+}

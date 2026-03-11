@@ -1,0 +1,15 @@
+/* Hide quick switcher hotkey tips and reveal them on hover */
+/* Source: https://forum.obsidian.md/t/hide-quick-switcher-hotkey-tips-and-reveal-them-on-hover/104828 */
+
+.prompt-instructions {
+    max-height: 0;
+    opacity: 0;
+    transition: all 0.2s ease;
+}
+
+.prompt-instructions:hover,
+.prompt-instructions:hover ~ .prompt-instructions,
+.prompt-instructions:has(~ .prompt-instructions:hover) {
+    max-height: 500px;
+    opacity: 1;
+}

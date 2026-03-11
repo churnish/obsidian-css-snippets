@@ -1,0 +1,16 @@
+/* Italicize alias matches in quick switcher and link suggester results */
+
+/* Quick Switcher++ */
+.prompt .qsp-suggestion-alias {
+    font-style: italic;
+}
+
+/* Vanilla Quick switcher */
+.prompt .suggestion-item.mod-complex:has([aria-label='Alias']) {
+    font-style: italic;
+}
+
+/* Link suggester */
+.suggestion-item:has(.suggestion-flair[aria-label="Alias"]) .suggestion-title {
+    font-style: italic;
+}

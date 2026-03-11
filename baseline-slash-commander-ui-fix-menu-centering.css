@@ -1,0 +1,5 @@
+/* Fix Slash Commander menu items being off-center */
+
+body.input-cupertino:not(.is-mobile) .suggestion-container .suggestion-item .cmdr-suggest-item {
+  margin-left: 0;
+}

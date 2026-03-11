@@ -1,0 +1,12 @@
+/* Uses the accent color for UI flash highlights and search result highlighting */
+
+.is-flashing {
+    transition: all 0.25s ease;
+    background-color: hsla(var(--accent-h), var(--accent-s), var(--accent-l), 0.4) !important;
+}
+.theme-dark .search-result-container {
+  --text-highlight-bg: hsla(var(--accent-h), var(--accent-s), var(--accent-l), 0.4) !important;
+}
+.theme-light .search-result-container {
+  --text-highlight-bg: hsla(var(--accent-h), var(--accent-s), var(--accent-l), 0.4) !important;
+}

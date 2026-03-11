@@ -1,0 +1,7 @@
+/* Styles the Highlights plugin search container with a centered layout and secondary background */
+
+.highlights-search-container {
+  background-color: var(--background-secondary);
+  justify-content: center;
+  }
+}

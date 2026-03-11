@@ -1,0 +1,20 @@
+/* Move sidebar nav bar and toolbar to the bottom on tablet, matching phone layout */
+
+body.is-tablet .workspace-drawer-active-tab-container > .workspace-drawer-tab-options {
+  order: 2;
+}
+
+body.is-tablet .workspace-drawer .nav-buttons-container {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 1;
+}
+
+body.is-tablet .workspace-drawer .workspace-drawer-tab-options-list {
+  padding-top: var(--size-4-2);
+  padding-bottom: var(--touch-size-l);
+  bottom: 0;
+  top: unset;
+}

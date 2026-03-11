@@ -1,0 +1,22 @@
+/* Move vault switcher back to sidebar bottom */
+
+/* Reset vault name from absolute-top to normal flow */
+.is-mobile .workspace-drawer-header-left {
+  position: static !important;
+  top: unset !important;
+  bottom: unset !important;
+  left: unset !important;
+}
+
+/* Reset nav bar from fixed-bottom to normal flow */
+.is-mobile .workspace-drawer-tab-options {
+  position: static !important;
+  top: unset !important;
+  bottom: unset !important;
+  left: unset !important;
+}
+
+/* Reclaim top padding the theme reserved for vault name */
+.is-mobile .workspace-drawer-inner {
+  padding-top: calc(91px - 26px) !important;
+}

@@ -1,0 +1,15 @@
+/* Removes gaps between consecutive note embeds in reading view so they appear as one continuous block */
+
+.markdown-rendered .markdown-embed {
+  margin: 0;
+}
+.markdown-rendered .inline-embed + br {
+  display: none;
+}
+
+
+.HyperMD-quote > .markdown-embed {
+  display: inline-block;
+  width: 99.9%;
+  vertical-align: middle;
+}

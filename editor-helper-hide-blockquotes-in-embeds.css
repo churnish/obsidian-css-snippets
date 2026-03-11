@@ -1,0 +1,11 @@
+/* Hides blockquote styling in embeds via the no-2bq alt tag or cssclass */
+
+.internal-embed[alt*=no-2bq] .markdown-rendered blockquote {
+    border-left: transparent;
+    padding-left: 0px;
+}
+
+.no-2bq .internal-embed .markdown-rendered blockquote {
+    border-left: transparent;
+    padding-left: 0px;
+}

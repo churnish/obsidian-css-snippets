@@ -1,0 +1,11 @@
+/* Hide Better Word Count's inline count badge on H1 headings */
+
+h1 .bwc-section-count,
+.cm-header-1 .bwc-section-count,
+.HyperMD-header-1 .bwc-section-count {
+    display: none;
+}
+
+.hide-count .bwc-section-count {
+    display: none;
+}

@@ -1,0 +1,5 @@
+/* Bases helper: hide property labels on cards via CSS class */
+
+.card-no-labels .bases-cards-label {
+    display: none;
+}

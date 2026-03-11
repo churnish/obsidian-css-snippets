@@ -1,0 +1,15 @@
+/* Fix Pane Relief making the background transparent. */
+
+.status-bar {
+  border-style: solid;
+  border-top-width: 1px;
+  border-right-width: 0px;
+  border-bottom-width: 0px;
+  border-left-width: 1px;
+  background-color: var(--background-primary);
+  opacity: 1;
+  width: auto !important;
+  height: auto !important;
+  border-top-left-radius: 8px;
+}
+

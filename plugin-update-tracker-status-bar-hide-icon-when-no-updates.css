@@ -1,0 +1,9 @@
+/* Hides the Plugin Update Tracker status bar icon when no updates are available or still loading */
+
+.status-bar-item.plugin-obsidian-plugin-update-tracker:has(.plugin-update-tracker-icon--no-updates-available) {
+  display: none;
+}
+
+.status-bar-item.plugin-obsidian-plugin-update-tracker:has(.plugin-update-tracker-icon--loading) {
+  display: none;
+}

@@ -1,0 +1,35 @@
+body.is-focused .titlebar,
+body.is-focused .workspace-ribbon.mod-left {
+   --titlebar-background: var(--bg2) !important;
+}
+
+/* Add styles for unfocused state */
+body:not(.is-focused) .workspace-ribbon.mod-left {
+   --titlebar-background: var(--bg2) !important;
+}
+
+/* Target the :before pseudo-element specifically */
+.workspace-ribbon.mod-left.is-collapsed:before {
+   background-color: var(--bg2) !important;
+}
+
+.sidebar-toggle-button, 
+.workspace-tabs.mod-top {
+   --tab-container-background: var(--bg2) !important;
+}
+
+.workspace-tab-header-container {
+   --titlebar-background-focused: var(--bg2) !important;
+}
+
+body.is-focused {
+   --titlebar-background-focused: var(--bg2) !important;
+}
+
+body:not(.sidebar-color) .mod-right-split {
+   --background-secondary: var(--bg2) !important;
+}
+
+body:not(.sidebar-color) .mod-right-split :not(.mod-top) .workspace-tab-header-container {
+   --tab-container-background: var(--bg2);
+}

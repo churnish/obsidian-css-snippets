@@ -1,0 +1,69 @@
+/* Minimal Theme Active Line Accent Color Override */
+/* Recolors Minimal theme's --active-line-bg variable with accent color */
+/* Works in: Source View ✓ | Live Preview ✓ | Reading View ✗ (not possible) */
+
+/* ===== OVERRIDE MINIMAL'S ACTIVE LINE VARIABLE ===== */
+
+/* Light theme - override Minimal's rgba(0,0,0,0.035) with accent color */
+.theme-light {
+    --active-line-bg: hsla(var(--accent-h), var(--accent-s), var(--accent-l), 0.12) !important;
+}
+
+/* Dark theme - override Minimal's rgba(255,255,255,0.04) with accent color */
+.theme-dark {
+    --active-line-bg: hsla(var(--accent-h), var(--accent-s), var(--accent-l), 0.18) !important;
+}
+
+/* Dark black theme - override Minimal's rgba(255,255,255,0.085) with accent color */
+.theme-dark.minimal-dark-black {
+    --active-line-bg: hsla(var(--accent-h), var(--accent-s), var(--accent-l), 0.20) !important;
+}
+
+/* ===== ENHANCED ACTIVE LINE NUMBER STYLING ===== */
+
+/* Active line number in Source View */
+.CodeMirror-activeline .CodeMirror-linenumber {
+    color: hsl(var(--accent-h), var(--accent-s), var(--accent-l)) !important;
+    font-weight: 600;
+}
+
+/* Active line number in Live Preview */
+.cm-editor .cm-lineNumbers .cm-gutterElement.cm-active {
+    color: hsl(var(--accent-h), var(--accent-s), var(--accent-l)) !important;
+    font-weight: 600;
+}
+
+/* ===== ENHANCED CURSOR VISIBILITY ===== */
+
+/* Make cursor more visible on active line with accent color */
+.CodeMirror-activeline .CodeMirror-cursor,
+.cm-active .cm-cursor {
+    border-left-color: hsl(var(--accent-h), var(--accent-s), var(--accent-l)) !important;
+    border-left-width: 2px !important;
+}
+
+/* ===== READING VIEW LIMITATION ===== */
+
+/* Reading view does not support active line highlighting because:
+ * - No cursor position tracking (static rendered view)
+ * - No line-level focus states available
+ * - Architecture prioritizes clean reading over editing features
+ *
+ * Alternative: Use Live Preview mode for cursor-aware highlighting
+ * Alternative: Reading View Enhancer plugin for block-level highlighting
+ */
+
+/* ===== FALLBACK SUPPORT ===== */
+
+/* Fallback for themes that don't define accent HSL variables */
+body:not(:has([style*="--accent-h"])) .theme-light {
+    --active-line-bg: rgba(var(--accent), 0.12) !important;
+}
+
+body:not(:has([style*="--accent-h"])) .theme-dark {
+    --active-line-bg: rgba(var(--accent), 0.18) !important;
+}
+
+body:not(:has([style*="--accent-h"])) .theme-dark.minimal-dark-black {
+    --active-line-bg: rgba(var(--accent), 0.20) !important;
+}

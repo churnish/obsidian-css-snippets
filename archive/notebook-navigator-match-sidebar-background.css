@@ -1,0 +1,16 @@
+body {
+  --nn-theme-list-bg: var(--background-secondary);
+  --nn-theme-list-header-bg: var(--background-secondary);
+}
+
+body.is-mobile.theme-light {
+  --nn-theme-mobile-nav-bg: var(--background-primary);
+  --nn-theme-list-bg: var(--background-primary);
+  --nn-theme-list-header-bg: var(--background-primary);
+}
+
+body.is-mobile.theme-dark {
+  --nn-theme-mobile-nav-bg: var(--background-secondary);
+  --nn-theme-list-bg: var(--background-secondary);
+  --nn-theme-list-header-bg: var(--background-secondary);
+}

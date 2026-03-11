@@ -1,0 +1,3 @@
+/* Removes left padding in editing view by collapsing the gutter into the content area */
+
+.markdown-source-view.mod-cm6 .cm-gutters{position:absolute!important;z-index:0;margin-left:0}

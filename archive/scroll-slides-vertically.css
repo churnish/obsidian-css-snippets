@@ -1,0 +1,78 @@
+/* Source: https://discord.com/channels/686053708261228577/1217495849639084142/1433357569145176168 */
+
+/*
+ * === Obsidian Slides Vertical Screen FIX v5.0 (Definitive) ===
+ * 1. [Fixed] Fixed forced centering of slides in portrait mode.
+ * 2. [Fixed] Fixed issue where content starts from middle, top not visible.
+ * 3. [New] Force clear JS-applied transform offset to ensure content starts from top.
+ */
+
+/* ================================================================== */
+/* SECTION 1: Core Fix - Only applies in portrait mode              */
+/* ================================================================== */
+@media (orientation: portrait) {
+    
+    /* Target: .slides 'stage' container dynamically centered by JS script */
+    body:has(.reveal) .reveal .slides {
+        
+        /* [Critical Fix] Force clear transform offset added by JS! */
+        transform: none !important;
+        
+        /* Use top positioning instead of transform for vertical positioning */
+        top: 2vh !important; /* Leave a small (2%) gap from screen top */
+
+        /* Reset other properties that may affect positioning */
+        margin: 0 auto !important; /* Vertical margin to zero, horizontal center */
+        left: 0 !important;
+        right: 0 !important;
+    }
+}
+
+/* ================================================================== */
+/* SECTION 2: Scroll Area Layout (Using most stable settings)       */
+/* ================================================================== */
+
+body:has(.reveal) .reveal .slides section {
+    /* Use absolute height to ensure stable layout */
+    height: 95vh !important; /* You can fine-tune, e.g. 94vh, 96vh */
+
+    /* Allow vertical scrolling */
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
+
+    /* Inner padding */
+    padding: 30px 50px !important;
+    box-sizing: border-box !important; /* Ensure padding doesn't expand container */
+}
+
+/* ================================================================== */
+/* SECTION 3: Styling and Beautification (Keep unchanged)           */
+/* ================================================================== */
+
+/* Font size */
+body:has(.reveal) .reveal .slides section {
+    font-size: 0.8em;
+}
+body:has(.reveal) .reveal .slides section h1 {
+    font-size: 1.8em;
+    margin-bottom: 0.5em;
+}
+body:has(.reveal) .reveal .slides section h2 {
+    font-size: 1.4em;
+    margin-bottom: 0.4em;
+}
+
+/* Beautify scrollbar */
+body:has(.reveal) .reveal .slides section::-webkit-scrollbar {
+    width: 8px;
+}
+body:has(.reveal) .reveal .slides section::-webkit-scrollbar-track {
+    background: transparent;
+}
+body:has(.reveal) .reveal .slides section::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 4px;
+}
+body:has(.reveal) .reveal .slides section::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.5);
+}

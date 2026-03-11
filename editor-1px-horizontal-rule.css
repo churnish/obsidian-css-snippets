@@ -1,0 +1,12 @@
+/* Slim horizontal rules down to a 1px line in both editing and reading views */
+
+.cm-line.hr {
+  max-height: 1px;
+  border-bottom: 1px solid var(--background-modifier-border);
+}
+
+.markdown-preview-view hr {
+  height: 1px;
+  border: none;
+  background-color: var(--background-modifier-border);
+}

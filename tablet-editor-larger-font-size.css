@@ -1,0 +1,5 @@
+/* Bumps the editor font size to 16px on tablets for better readability */
+
+.is-tablet {
+	--font-text-size: 16px !important;
+}

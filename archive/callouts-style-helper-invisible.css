@@ -1,0 +1,12 @@
+.transparent-callout .callout-icon .svg-icon {
+    color: var(--ax1) !important;
+}
+
+.transparent-callout .callout-title-inner {
+    color: var(--ax1) !important;
+}
+
+.transparent-callout .callout {
+    --callout-color: none !important;
+	border-style: none !important; /* Hide border from "Baseline" theme callouts */
+}

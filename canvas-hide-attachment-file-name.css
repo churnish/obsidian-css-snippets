@@ -1,0 +1,20 @@
+/* Hide attachment file names on canvas cards, reveal on hover */
+
+/* Shows label when hovering over it */
+.canvas-node:not(:has(.markdown-embed, .canvas-embed)) .canvas-node-label {
+ opacity: 0;
+}
+.canvas-node:not(:has(.markdown-embed, .canvas-embed)) .canvas-node-label:hover {
+ opacity: 1;
+}
+
+
+/* Show label when hovering over card
+.canvas-node:not(:has(.markdown-embed, .canvas-embed)) .canvas-node-label {
+ display: none;
+}
+.canvas-node:not(:has(.markdown-embed, .canvas-embed)):hover .canvas-node-label {
+ display: block;
+ opacity: 1;
+}
+*/

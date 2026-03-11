@@ -1,0 +1,58 @@
+/*
+ * Snippet name: GitHub-like callouts
+ * Version: 1.0
+ * Source: https://forum.obsidian.md/t/github-style-callouts/106055
+ * Last updated: 2025-09-24
+ */
+
+/* Base callout styling to match GitHub's layout */
+.callout {
+    /* Remove default background and styling */
+    background: transparent !important;
+    border: none !important;
+    border-radius: 0 !important;
+
+    /* Add GitHub-style left border - using rgb() to make it visible */
+    border-left: var(--blockquote-border-thickness) solid rgb(var(--callout-color)) !important;
+
+    /* GitHub-style padding and margins - matching GitHub's exact spacing */
+    padding: 8px 16px !important;
+    margin-bottom: 16px !important;
+}
+
+/* Remove background from callout content */
+.callout-content {
+    background: transparent !important;
+    padding: 0 !important;
+}
+
+/* Ensure first child has no top margin */
+.callout-content > :first-child {
+    margin-top: 0 !important;
+}
+
+/* Ensure last child has no bottom margin */
+.callout-content > :last-child {
+    margin-bottom: 0 !important;
+}
+
+/* GitHub-style title styling */
+.callout-title {
+    /* Keep existing icon and color but adjust layout */
+    display: flex !important;
+    align-items: center !important;
+    line-height: 1 !important;
+    margin-bottom: 8px !important;
+    /* Note: Not changing font-weight, font-size, or colors as requested */
+}
+
+/* Remove any default callout border radius and shadows */
+.callout-title-inner {
+    background: transparent !important;
+}
+
+/* Ensure nested content maintains GitHub-style spacing */
+.callout .callout {
+    margin-left: 0 !important;
+    margin-top: 8px !important;
+}
