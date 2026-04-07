@@ -1,0 +1,7 @@
+/* Hide title header of inline search queries via no-query-title cssclass */
+
+/* Source: https://github.com/churnish/obsidian-css-snippets */
+
+.no-query-title .internal-query-header {
+    display: none !important;
+}

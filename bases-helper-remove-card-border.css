@@ -1,0 +1,13 @@
+/* Bases helper: Remove card border/shadow via CSS class */
+
+/* Source: https://github.com/churnish/obsidian-css-snippets */
+
+.card-no-border .bases-cards-item {
+    box-shadow: 0 0 0 0 transparent;
+}
+
+/* Uncomment to show on hover
+.card-no-border .bases-cards-item:hover {
+    box-shadow: var(--bases-cards-shadow-hover);
+}
+*/

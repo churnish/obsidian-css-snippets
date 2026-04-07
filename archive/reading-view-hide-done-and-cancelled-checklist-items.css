@@ -1,0 +1,4 @@
+.no-checked .task-list-item[data-task="x"],
+.no-checked .task-list-item[data-task="-"] {
+  display: none;
+}

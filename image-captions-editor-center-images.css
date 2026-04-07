@@ -1,0 +1,8 @@
+/* "Image Captions": Center images that have captions (from "Image Captions" plugin) */
+
+/* Source: https://github.com/churnish/obsidian-css-snippets */
+
+.image-captions-figure {
+  margin-left: auto; 
+  margin-right: auto; 
+}

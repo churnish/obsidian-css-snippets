@@ -1,0 +1,14 @@
+/* Slim horizontal rules down to 1px line in both editing and Reading views */
+
+/* Source: https://github.com/churnish/obsidian-css-snippets */
+
+.cm-line.hr {
+  max-height: 1px;
+  border-bottom: 1px solid var(--background-modifier-border);
+}
+
+.markdown-preview-view hr {
+  height: 1px;
+  border: none;
+  background-color: var(--background-modifier-border);
+}

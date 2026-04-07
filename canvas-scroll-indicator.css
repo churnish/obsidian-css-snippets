@@ -1,0 +1,39 @@
+/* Scroll indicator gradient for canvas cards with overflowing content */
+
+/* Source: https://github.com/churnish/obsidian-css-snippets */
+
+.canvas-node-content .markdown-preview-view {
+  --gradient-size: 60px;
+
+  animation: scroll-mask linear;
+  animation-timeline: scroll(self);
+}
+
+@keyframes scroll-mask {
+  0% {
+    mask-image: linear-gradient(
+      to bottom,
+      black calc(100% - var(--gradient-size)),
+      transparent 100%
+    );
+  }
+
+  1%, 99% {
+    mask-image: linear-gradient(
+      to bottom,
+      transparent 0%,
+      black var(--gradient-size),
+      black calc(100% - var(--gradient-size)),
+      transparent 100%
+    );
+  }
+
+  100% {
+    mask-image: linear-gradient(
+      to bottom,
+      transparent 0%,
+      black var(--gradient-size),
+      black 100%
+    );
+  }
+}

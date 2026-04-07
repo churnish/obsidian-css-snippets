@@ -1,0 +1,7 @@
+/* Changes tab squish behavior from the chrome-like default (where they squish down really tiny) to firefox's (where they have a minimum size and then scroll).
+
+Courtesy of @.bast. who wrote it for themself. https://discord.com/channels/686053708261228577/707816848615407697/1233953573851762769 */
+
+.workspace .mod-root .workspace-tab-header {
+    min-width: 100px;
+}

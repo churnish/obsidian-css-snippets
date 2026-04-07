@@ -1,0 +1,8 @@
+/* Canvas: Hide H1 headings inside Canvas card embeds to avoid duplicated card title */
+
+/* Source: https://github.com/churnish/obsidian-css-snippets */
+
+.canvas-node-content .markdown-embed-content h1,
+.canvas-node .markdown-rendered h1 {
+    display: none !important;
+}

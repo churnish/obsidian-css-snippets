@@ -1,0 +1,9 @@
+/* Hide the reading/editing view toggle button */
+.view-action[aria-label="Current view: editing
+Click to read
+⌘+Click to open to the right"],
+.view-action[aria-label="Current view: reading
+Click to edit
+⌘+Click to open to the right"] {
+    display: none !important;
+}

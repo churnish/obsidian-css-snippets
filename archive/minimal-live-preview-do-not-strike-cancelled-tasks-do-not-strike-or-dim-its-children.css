@@ -1,0 +1,36 @@
+/* Remove strikethrough from all canceled tasks and their children in all modes */
+body:not(.tasks) .markdown-preview-view ul li[data-task="-"].task-list-item.is-checked,
+body:not(.tasks) .markdown-preview-view ul li[data-task="-"].task-list-item.is-checked ul li,
+body:not(.tasks) .markdown-preview-view ul li[data-task="-"].task-list-item.is-checked ol li,
+body:not(.tasks) .markdown-source-view.mod-cm6 .HyperMD-task-line[data-task="-"],
+body:not(.tasks) .markdown-source-view.mod-cm6 .HyperMD-task-line[data-task="-"] .cm-list-bullet ~ span,
+body:not(.tasks) .markdown-reading-view ul li[data-task="-"].task-list-item.is-checked,
+body:not(.tasks) .markdown-reading-view ul li[data-task="-"].task-list-item.is-checked ul li,
+body:not(.tasks) .markdown-reading-view ul li[data-task="-"].task-list-item.is-checked ol li {
+    text-decoration: none !important;
+}
+
+/* Preserve dimming effect for parent canceled tasks only */
+body:not(.tasks) .markdown-preview-view > ul > li[data-task="-"].task-list-item.is-checked,
+body:not(.tasks) .markdown-source-view.mod-cm6 > .HyperMD-task-line[data-task="-"],
+body:not(.tasks) .markdown-reading-view > ul > li[data-task="-"].task-list-item.is-checked {
+    color: var(--text-faint);
+}
+
+/* Remove dimming from children of canceled tasks */
+body:not(.tasks) .markdown-preview-view ul li[data-task="-"].task-list-item.is-checked ul li,
+body:not(.tasks) .markdown-preview-view ul li[data-task="-"].task-list-item.is-checked ol li,
+body:not(.tasks) .markdown-source-view.mod-cm6 .HyperMD-task-line[data-task="-"] .cm-list-bullet ~ span,
+body:not(.tasks) .markdown-reading-view ul li[data-task="-"].task-list-item.is-checked ul li,
+body:not(.tasks) .markdown-reading-view ul li[data-task="-"].task-list-item.is-checked ol li {
+    color: var(--text-normal) !important;
+}
+
+/* Ensure nested lists are not affected */
+body:not(.tasks) .markdown-preview-view ul li[data-task="-"].task-list-item.is-checked > ul,
+body:not(.tasks) .markdown-preview-view ul li[data-task="-"].task-list-item.is-checked > ol,
+body:not(.tasks) .markdown-reading-view ul li[data-task="-"].task-list-item.is-checked > ul,
+body:not(.tasks) .markdown-reading-view ul li[data-task="-"].task-list-item.is-checked > ol {
+    color: var(--text-normal);
+    text-decoration: none !important;
+}

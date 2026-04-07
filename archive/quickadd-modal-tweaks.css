@@ -1,0 +1,17 @@
+:root {
+  --quickadd-input-height: 13rem;
+  --quickadd-input-margin: 0.5rem; /* Adjust this value */
+}
+
+.quickAddModal textarea {
+  width: calc(100% - (var(--quickadd-input-margin) * 2)) !important;
+  margin: 0 var(--quickadd-input-margin);
+}
+
+@media screen and (max-width: 780px) {
+  .wideInputPromptInputEl {
+    height: var(--quickadd-input-height);
+    min-height: var(--quickadd-input-height); 
+    max-height: var(--quickadd-input-height);
+  }
+}

@@ -1,0 +1,7 @@
+/* Bases: Remove background color from card covers */
+
+/* Source: https://github.com/churnish/obsidian-css-snippets */
+
+.bases-cards-cover {
+    background-color: transparent;
+}

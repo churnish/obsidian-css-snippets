@@ -1,0 +1,11 @@
+/* Bases: Hide text labels in Bases query toolbar, leaving only icons */
+
+/* Source: https://github.com/churnish/obsidian-css-snippets */
+
+body .bases-toolbar-sort-menu .text-button-label,
+body .bases-toolbar-filter-menu .text-button-label,
+body .bases-toolbar-properties-menu .text-button-label,
+body .bases-toolbar-new-item-menu .text-button-label,
+body .bases-toolbar-search .text-button-label {
+    display: none !important;
+}

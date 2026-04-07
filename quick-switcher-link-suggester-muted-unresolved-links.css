@@ -1,0 +1,13 @@
+/* Dim unresolved (non-existent) links in Quick switcher and link suggester */
+
+/* Source: https://github.com/churnish/obsidian-css-snippets */
+
+/* Quick switcher */
+.suggestion-item.mod-complex:has(.suggestion-flair > .lucide-file-plus) > .suggestion-content {
+    opacity: 0.7;
+}
+
+/* Link suggester */
+.suggestion-item:has(.suggestion-note:empty) .suggestion-title {
+    opacity: 0.7;
+}

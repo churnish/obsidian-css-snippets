@@ -1,0 +1,7 @@
+/* Hide backlinks at note bottom when no linked mentions */
+
+/* Source: https://github.com/churnish/obsidian-css-snippets */
+
+.embedded-backlinks:has(.backlink-pane > :nth-child(2) > .search-empty-state) {
+display:none;
+}

@@ -1,0 +1,4 @@
+/* Disable tab header container hover trigger - only allow direct .view-header hover */
+body.minimal-tab-title-hover .workspace-tab-header-container:hover+.workspace-tab-container .view-header-title-container {
+    opacity: 0 !important;
+}

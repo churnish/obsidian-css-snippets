@@ -1,0 +1,8 @@
+/* "Hover Editor": Sets Hover Editor title bar backgrounds to use border colors for better visual distinction */
+
+/* Source: https://github.com/churnish/obsidian-css-snippets */
+
+body {
+  --he-title-bar-active-pinned-bg: var(--background-modifier-border);
+  --he-title-bar-inactive-pinned-bg: var(--background-modifier-border-hover);
+}

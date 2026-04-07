@@ -1,0 +1,7 @@
+/* Hide bookmark icon in tab title bar */
+
+/* Source: https://github.com/churnish/obsidian-css-snippets */
+
+.view-header .clickable-icon.view-action.mod-bookmark {
+    display: none;
+}

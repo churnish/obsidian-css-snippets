@@ -1,0 +1,4 @@
+a.internal-link[href^="#"],
+span.cm-hmd-internal-link.cm-link-alias a.cm-underline {
+    text-decoration-style: dotted !important;
+}

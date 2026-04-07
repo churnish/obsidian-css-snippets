@@ -1,0 +1,8 @@
+/* "Pretty Properties": Remove border radius from banner images */
+
+/* Source: https://github.com/churnish/obsidian-css-snippets */
+
+.banner-image img {
+  border-top-left-radius: 0 !important;
+  border-top-right-radius: 0 !important;
+}

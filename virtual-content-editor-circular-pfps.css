@@ -1,0 +1,11 @@
+/* "Virtual Content": Crops profile pictures into fixed-size circles in "Virtual Content" containers */
+
+/* Source: https://github.com/churnish/obsidian-css-snippets */
+
+.pfp-container .image-embed .image-captions-figure img,
+.pfp-container img {
+    border-radius: 50% !important;
+    width: 96px !important;
+    height: 96px !important;
+    object-fit: cover !important;
+}

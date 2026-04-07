@@ -1,0 +1,9 @@
+/* Hide file icon slot and remove the gap */
+.nn-file-icon-slot {
+    display: none;
+}
+
+/* Remove the gap that was reserved for the icon slot */
+.nn-file-inner-content {
+    gap: 0 !important;
+}

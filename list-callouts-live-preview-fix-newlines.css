@@ -1,0 +1,150 @@
+/* "List Callouts": Fix Live Preview — match newline rendering to Reading view */
+
+/* Source: https://github.com/churnish/obsidian-css-snippets */
+
+/* "List Callouts" hardcodes inline styling for colors
+* so we cannot access previous element's inline style.
+* You will have to manually put them in here */
+
+/* Our color variables */
+
+.markdown-source-view.is-live-preview.mod-cm6 .lc-list-callout[data-callout="✏️"]+div.cm-line.HyperMD-list-line-nobullet {
+    --lc-callout-color: 229, 181, 103;
+}
+
+.markdown-source-view.is-live-preview.mod-cm6 .lc-list-callout[data-callout="📋"]+div.cm-line.HyperMD-list-line-nobullet {
+    --lc-callout-color: 213, 118, 63;
+}
+
+.markdown-source-view.is-live-preview.mod-cm6 .lc-list-callout[data-callout="ℹ️"]+div.cm-line.HyperMD-list-line-nobullet {
+    --lc-callout-color: 108, 153, 187;
+}
+
+.markdown-source-view.is-live-preview.mod-cm6 .lc-list-callout[data-callout="✔️"]+div.cm-line.HyperMD-list-line-nobullet {
+    --lc-callout-color: 158, 158, 158;
+}
+
+.markdown-source-view.is-live-preview.mod-cm6 .lc-list-callout[data-callout="🔥"]+div.cm-line.HyperMD-list-line-nobullet {
+    --lc-callout-color: 213, 118, 63;
+}
+
+.markdown-source-view.is-live-preview.mod-cm6 .lc-list-callout[data-callout="✅"]+div.cm-line.HyperMD-list-line-nobullet {
+    --lc-callout-color: 168, 195, 115;
+}
+
+.markdown-source-view.is-live-preview.mod-cm6 .lc-list-callout[data-callout="❓"]+div.cm-line.HyperMD-list-line-nobullet {
+    --lc-callout-color: 208, 66, 85;
+}
+
+.markdown-source-view.is-live-preview.mod-cm6 .lc-list-callout[data-callout="⚠️"]+div.cm-line.HyperMD-list-line-nobullet {
+    --lc-callout-color: 229, 181, 103;
+}
+
+.markdown-source-view.is-live-preview.mod-cm6 .lc-list-callout[data-callout="❌"]+div.cm-line.HyperMD-list-line-nobullet {
+    --lc-callout-color: 208, 66, 85;
+}
+
+.markdown-source-view.is-live-preview.mod-cm6 .lc-list-callout[data-callout="⚡️"]+div.cm-line.HyperMD-list-line-nobullet {
+    --lc-callout-color: 229, 181, 103;
+}
+
+.markdown-source-view.is-live-preview.mod-cm6 .lc-list-callout[data-callout="🪲"]+div.cm-line.HyperMD-list-line-nobullet {
+    --lc-callout-color: 168, 195, 115;
+}
+
+.markdown-source-view.is-live-preview.mod-cm6 .lc-list-callout[data-callout="🔘"]+div.cm-line.HyperMD-list-line-nobullet {
+    --lc-callout-color: 158, 158, 158;
+}
+
+.markdown-source-view.is-live-preview.mod-cm6 .lc-list-callout[data-callout="🗨️"]+div.cm-line.HyperMD-list-line-nobullet {
+    --lc-callout-color: 158, 158, 158;
+}
+
+.markdown-source-view.is-live-preview.mod-cm6 .lc-list-callout[data-callout="🪄"]+div.cm-line.HyperMD-list-line-nobullet {
+    --lc-callout-color: 229, 181, 103;
+}
+
+.markdown-source-view.is-live-preview.mod-cm6 .lc-list-callout[data-callout="🧩"]+div.cm-line.HyperMD-list-line-nobullet {
+    --lc-callout-color: 168, 195, 115;
+}
+
+.markdown-source-view.is-live-preview.mod-cm6 .lc-list-callout[data-callout="🌟"]+div.cm-line.HyperMD-list-line-nobullet {
+    --lc-callout-color: 229, 181, 103;
+}
+
+.markdown-source-view.is-live-preview.mod-cm6 .lc-list-callout[data-callout="💭"]+div.cm-line.HyperMD-list-line-nobullet {
+    --lc-callout-color: 158, 158, 158;
+}
+
+.markdown-source-view.is-live-preview.mod-cm6 .lc-list-callout[data-callout="💫"]+div.cm-line.HyperMD-list-line-nobullet {
+    --lc-callout-color: 229, 181, 103;
+}
+
+.markdown-source-view.is-live-preview.mod-cm6 .lc-list-callout[data-callout="🔬"]+div.cm-line.HyperMD-list-line-nobullet {
+    --lc-callout-color: 158, 158, 158;
+}
+
+.markdown-source-view.is-live-preview.mod-cm6 .lc-list-callout[data-callout="💚"]+div.cm-line.HyperMD-list-line-nobullet {
+    --lc-callout-color: 168, 195, 115;
+}
+
+.markdown-source-view.is-live-preview.mod-cm6 .lc-list-callout[data-callout="💔"]+div.cm-line.HyperMD-list-line-nobullet {
+    --lc-callout-color: 208, 66, 85;
+}
+
+.markdown-source-view.is-live-preview.mod-cm6 .lc-list-callout[data-callout="🤍"]+div.cm-line.HyperMD-list-line-nobullet {
+    --lc-callout-color: 158, 158, 158;
+}
+
+.markdown-source-view.is-live-preview.mod-cm6 .lc-list-callout[data-callout="🔄"]+div.cm-line.HyperMD-list-line-nobullet {
+    --lc-callout-color: 108, 153, 187;
+}
+
+.markdown-source-view.is-live-preview.mod-cm6 .lc-list-callout[data-callout="💡"]+div.cm-line.HyperMD-list-line-nobullet {
+    --lc-callout-color: 229, 181, 103;
+}
+
+.markdown-source-view.is-live-preview.mod-cm6 .lc-list-callout[data-callout="👎"]+div.cm-line.HyperMD-list-line-nobullet {
+    --lc-callout-color: 229, 181, 103;
+}
+
+/* No padding or curved border between lines to make it look seamless */
+.markdown-source-view.is-live-preview.mod-cm6 .lc-list-callout:has(+ div.cm-line.HyperMD-list-line-nobullet>span.cm-list-1) {
+    padding-bottom: 0px;
+}
+
+.markdown-source-view.is-live-preview.mod-cm6 .lc-list-callout:has(+ div.cm-line.HyperMD-list-line-nobullet>span.cm-list-1)>span.lc-list-bg:after {
+    border-bottom-right-radius: 0px !important;
+    border-bottom-left-radius: 0px !important;
+}
+
+/* Fixing weird offset (kind of) */
+
+.markdown-source-view.is-live-preview.mod-cm6 .lc-list-callout+div.cm-line.HyperMD-list-line-nobullet:has(span.cm-list-1) {
+    display: flex;
+    padding-inline-start: 0px !important;
+    text-indent: 0px !important;
+}
+
+.markdown-source-view.is-live-preview.mod-cm6 .lc-list-callout+div.cm-line.HyperMD-list-line-nobullet>span.cm-hmd-list-indent {
+    margin-left: 5px;
+    /* You will probably have to adjust above. Set somewhere in app.js
+    * and I do not feel like deconstructing where it gets number from, but it
+    * has something to do with character width. */
+
+    background-color: rgba(var(--lc-callout-color), 0.1);
+}
+
+.markdown-source-view.is-live-preview.mod-cm6 .lc-list-callout+div.cm-line.HyperMD-list-line-nobullet>span.cm-list-1 {
+    background-color: rgba(var(--lc-callout-color), 0.1);
+    flex-grow: 2;
+}
+
+/* Dark mode support */
+.theme-dark .markdown-source-view.is-live-preview.mod-cm6 .lc-list-callout+div.cm-line.HyperMD-list-line-nobullet>span.cm-hmd-list-indent {
+    background-color: rgba(var(--lc-callout-color), 0.15);
+}
+
+.theme-dark .markdown-source-view.is-live-preview.mod-cm6 .lc-list-callout+div.cm-line.HyperMD-list-line-nobullet>span.cm-list-1 {
+    background-color: rgba(var(--lc-callout-color), 0.15);
+}

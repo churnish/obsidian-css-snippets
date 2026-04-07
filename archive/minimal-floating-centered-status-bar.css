@@ -1,0 +1,33 @@
+/*
+ * Snippet Name: Minimal Floating Centered Status Bar
+ * Version: 1.2
+ * Source: https://forum.obsidian.md/t/minimal-floating-centered-status-bar/89998
+ * Last Updated: 2024-12-11
+ */
+
+.status-bar {
+  position: fixed;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1000;
+  background-color: var(--background-secondary);
+  border-radius: 5px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  padding: 4px 0px 4px 12px !important;
+  width: max-content;
+  min-width: max-content;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+}
+.status-bar-item + .status-bar-item {
+  margin-left: 0;
+  flex-shrink: 0;
+}
+.workspace-split.mod-vertical.mod-root {
+  position: relative;
+}
+.workspace-split.mod-vertical.mod-root > .workspace-leaf:last-child {
+  position: static;
+}

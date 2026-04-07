@@ -1,0 +1,24 @@
+body {
+  --custom-sidebar-bg: var(--background-secondary);
+}
+
+.workspace-split.mod-horizontal.mod-left-split,
+.workspace-split.mod-horizontal.mod-right-split {
+  background-color: var(--custom-sidebar-bg) !important;
+}
+
+.mod-left-split .workspace-leaf-content,
+.mod-right-split .workspace-leaf-content,
+.mod-left-split .view-content,
+.mod-right-split .view-content,
+.mod-left-split .workspace-tab-header-container,
+.mod-right-split .workspace-tab-header-container {
+  background-color: var(--custom-sidebar-bg) !important;
+}
+
+.mod-left-split .workspace-leaf-content > *,
+.mod-right-split .workspace-leaf-content > *,
+.mod-left-split .workspace-tab-header-container > *,
+.mod-right-split .workspace-tab-header-container > * {
+  background-color: var(--custom-sidebar-bg) !important;
+}

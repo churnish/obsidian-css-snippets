@@ -1,0 +1,9 @@
+/* "Dataview": Add bottom margin to blocks in Reading view to match Live Preview spacing */
+
+/* Source: https://github.com/churnish/obsidian-css-snippets */
+
+/* Spacing for reading time in Reading view */
+.markdown-reading-view .reading-time-span {
+    display: block;
+    margin-bottom: 1em;
+}

@@ -1,0 +1,6 @@
+.novel-word-count--active .nav-header .nav-buttons-container::after,
+.novel-word-count--active .nav-files-container .nav-file-title::after,
+.novel-word-count--active .nav-files-container .nav-folder-title::after {
+    opacity: 0.35 !important;
+    color: var(--text-muted) !important;
+}

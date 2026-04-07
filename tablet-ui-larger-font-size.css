@@ -1,0 +1,7 @@
+/* Bump editor font size to 16px on tablets for better readability */
+
+/* Source: https://github.com/churnish/obsidian-css-snippets */
+
+.is-tablet {
+	--font-text-size: 16px !important;
+}

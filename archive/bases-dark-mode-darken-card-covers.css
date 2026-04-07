@@ -1,0 +1,8 @@
+.theme-dark .bases-cards-cover {
+  opacity: 0.7 !important;
+  transition: opacity .25s linear;
+}
+
+.theme-dark .bases-cards-cover:hover {
+  opacity: 1 !important;
+}

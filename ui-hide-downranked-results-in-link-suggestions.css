@@ -1,0 +1,7 @@
+/* Hide downranked (low-relevance) results from link suggestion dropdown */
+
+/* Source: https://github.com/churnish/obsidian-css-snippets */
+
+.suggestion-item.mod-downranked {
+    display: none !important;
+}

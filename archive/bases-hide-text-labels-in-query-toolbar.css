@@ -1,0 +1,8 @@
+body .query-toolbar .text-button-label {
+    display: none !important;
+}
+
+body .query-toolbar .bases-toolbar-result-count
+.text-button-label {
+    display: block !important;
+}

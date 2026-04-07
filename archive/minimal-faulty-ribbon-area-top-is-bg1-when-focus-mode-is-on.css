@@ -1,0 +1,3 @@
+.workspace-ribbon.mod-left.is-collapsed:before {
+  background-color: var(--bg1) !important;
+}

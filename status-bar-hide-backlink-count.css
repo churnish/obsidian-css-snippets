@@ -1,0 +1,7 @@
+/* Status bar: Hide backlink count */
+
+/* Source: https://github.com/churnish/obsidian-css-snippets */
+
+.status-bar-item.plugin-backlink {
+  display: none;
+}

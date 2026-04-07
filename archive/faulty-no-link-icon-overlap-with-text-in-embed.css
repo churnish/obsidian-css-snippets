@@ -1,0 +1,5 @@
+.markdown-source-view .internal-embed,
+.markdown-preview-view .internal-embed {
+  position: relative;
+  padding-right: 24px;
+}

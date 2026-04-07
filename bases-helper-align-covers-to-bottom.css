@@ -1,0 +1,7 @@
+/* Bases helper: Align card cover images to bottom edge via CSS class */
+
+/* Source: https://github.com/churnish/obsidian-css-snippets */
+
+.card-align-bottom .bases-cards-cover {
+    background-position: center bottom;
+}

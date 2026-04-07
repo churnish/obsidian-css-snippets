@@ -1,0 +1,77 @@
+/*
+ * Snippet name: Dim unfocused note panes
+ * Author: Created via Claude
+ * Source: https://forum.obsidian.md/t/highlight-note-pane-in-focus/91056
+ * Last updated: 2026-01-19
+ */
+
+/*
+ * TOGGLE between two dimming methods:
+ * 1. Brightness method: Uncomment --use-brightness-method and comment --use-background-method
+ *    This dims inactive panes by reducing their brightness
+ * 2. Background method: Uncomment --use-background-method and comment --use-background-method
+ *    This dims inactive panes by changing background to secondary color
+ */
+/* --use-brightness-method: ; */
+--use-background-method: ;
+
+/* Adjust brightness values */
+:root {
+  --light-inactive-dim: brightness(98%);
+  --dark-inactive-dim: brightness(95%);
+}
+
+/* Dim brightness */
+body:not(.is-mobile) .workspace-leaf .view-content,
+body:not(.is-mobile) .workspace-leaf .view-header,
+body:not(.is-mobile) .workspace-tab-header {
+  filter: brightness(100%);
+}
+
+/* Only apply dimming when there are multiple panes - using :has() to detect multiple workspace-tabs */
+.theme-light:not(.is-mobile) .workspace-split:not(.mod-left-split):not(.mod-right-split):has(.workspace-tabs ~ .workspace-tabs) .workspace-leaf:not(.mod-active) .view-content,
+.theme-light:not(.is-mobile) .workspace-split:not(.mod-left-split):not(.mod-right-split):has(.workspace-tabs ~ .workspace-tabs) .workspace-leaf:not(.mod-active) .view-header,
+.theme-light:not(.is-mobile) .workspace-split:not(.mod-left-split):not(.mod-right-split):has(.workspace-tabs ~ .workspace-tabs) .workspace-leaf:not(.mod-active) .workspace-tab-header,
+.theme-light:not(.is-mobile) .workspace-split:not(.mod-left-split):not(.mod-right-split):has(.workspace-tabs ~ .workspace-tabs) .workspace-tab-header:not(.mod-active) {
+  filter: var(--use-brightness-method, var(--light-inactive-dim)) !important;
+}
+
+.theme-dark:not(.is-mobile) .workspace-split:not(.mod-left-split):not(.mod-right-split):has(.workspace-tabs ~ .workspace-tabs) .workspace-leaf:not(.mod-active) .view-content,
+.theme-dark:not(.is-mobile) .workspace-split:not(.mod-left-split):not(.mod-right-split):has(.workspace-tabs ~ .workspace-tabs) .workspace-leaf:not(.mod-active) .view-header,
+.theme-dark:not(.is-mobile) .workspace-split:not(.mod-left-split):not(.mod-right-split):has(.workspace-tabs ~ .workspace-tabs) .workspace-leaf:not(.mod-active) .workspace-tab-header,
+.theme-dark:not(.is-mobile) .workspace-split:not(.mod-left-split):not(.mod-right-split):has(.workspace-tabs ~ .workspace-tabs) .workspace-tab-header:not(.mod-active) {
+  filter: var(--use-brightness-method, var(--dark-inactive-dim)) !important;
+}
+
+/* Apply secondary background when inactive - only when there are multiple panes */
+body:not(.is-mobile) .workspace-split:not(.mod-left-split):not(.mod-right-split):has(.workspace-tabs ~ .workspace-tabs) .workspace-leaf:not(.mod-active):not(.is-being-dragged) .view-content,
+body:not(.is-mobile) .workspace-split:not(.mod-left-split):not(.mod-right-split):has(.workspace-tabs ~ .workspace-tabs) .workspace-leaf:not(.mod-active):not(.is-being-dragged) .view-header {
+  background-color: var(--use-background-method, var(--background-secondary)) !important;
+  --code-background: var(--background-primary);
+  transition: background-color var(--anim-duration-fast) ease-in-out !important;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+}
+
+/* Apply secondary background to tab container when pane is inactive */
+body:not(.is-mobile) .workspace-split:not(.mod-left-split):not(.mod-right-split):has(.workspace-tabs ~ .workspace-tabs) .workspace-tabs:not(:has(.workspace-leaf.mod-active)) .workspace-tab-header-container {
+  background-color: var(--use-background-method, var(--background-secondary)) !important;
+  transition: background-color var(--anim-duration-fast) ease-in-out !important;
+  will-change: background-color;
+}
+
+/* Ensure active panes always use normal background - only when there are multiple panes */
+body:not(.is-mobile) .workspace-split:not(.mod-left-split):not(.mod-right-split):has(.workspace-tabs ~ .workspace-tabs) .workspace-leaf.mod-active .view-content,
+body:not(.is-mobile) .workspace-split:not(.mod-left-split):not(.mod-right-split):has(.workspace-tabs ~ .workspace-tabs) .workspace-leaf.mod-active .view-header {
+  background-color: var(--background-primary) !important;
+  transition: background-color var(--anim-duration-fast) ease-in-out !important;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+}
+
+/* Ensure active panes' tab container uses normal background */
+body:not(.is-mobile) .workspace-split:not(.mod-left-split):not(.mod-right-split):has(.workspace-tabs ~ .workspace-tabs) .workspace-tabs:has(.workspace-leaf.mod-active) .workspace-tab-header-container {
+  background-color: var(--background-primary) !important;
+  transition: background-color var(--anim-duration-fast) ease-in-out !important;
+  will-change: background-color;
+}

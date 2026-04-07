@@ -1,0 +1,12 @@
+/* "Baseline": Set font via custom CSS over "Style Settings" to prevent flash on Obsidian startup */
+
+/* Source: https://github.com/churnish/obsidian-css-snippets */
+
+:body {
+  --h1-font: "Inter";
+  --h2-font: "Inter";
+  --h3-font: "Inter";
+  --h4-font: "Inter";
+  --h5-font: "Inter";
+  --h6-font: "Inter";
+}

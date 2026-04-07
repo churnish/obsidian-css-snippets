@@ -1,0 +1,55 @@
+/* "Baseline": Reset mobile sidebar layout from fixed positioning to normal flow */
+
+/* Source: https://github.com/churnish/obsidian-css-snippets */
+
+/* Do not hide sidebar content when navbar expanded */
+.is-mobile .workspace-drawer-tab-options::before {
+  display: none;
+}
+
+.is-mobile .workspace-drawer-tab-options-list {
+  background-color: var(--mobile-sidebar-background) !important;
+  box-shadow: none !important;
+}
+
+/* Reset vault name from absolute-top to normal flow */
+body.is-phone .workspace-drawer-header-left {
+  position: static !important;
+  top: unset !important;
+  bottom: unset !important;
+  left: unset !important;
+}
+
+/* Reset nav bar from fixed-bottom to normal flow */
+body.is-phone .workspace-drawer-tab-options {
+  position: relative !important;
+  top: unset !important;
+  bottom: unset !important;
+  left: unset !important;
+}
+
+/* Reclaim top padding reserved for vault name */
+body.is-phone .workspace-drawer-inner {
+  padding-top: calc(91px - 26px) !important;
+}
+
+/* Hide file/folder count */
+.is-mobile .workspace-drawer-header-info {
+  display: none !important;
+}
+
+/* Align vault name with navbar icons */
+body.is-phone .workspace-drawer-header {
+  padding-left: 24px !important;
+}
+
+/* Vertically center vault name with settings/pin icons */
+body.is-tablet .workspace-drawer-header {
+  align-items: center;
+  padding-left: 12px !important;
+}
+
+/* Enlarge vault name
+body.is-phone .workspace-drawer-header-name-text {
+  font-size: var(--font-ui-medium) !important;
+}*/

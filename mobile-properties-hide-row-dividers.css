@@ -1,0 +1,7 @@
+/* Remove divider lines between Properties on mobile */
+
+/* Source: https://github.com/churnish/obsidian-css-snippets */
+
+body.is-mobile .metadata-container {
+    --metadata-divider-width: 0;
+}

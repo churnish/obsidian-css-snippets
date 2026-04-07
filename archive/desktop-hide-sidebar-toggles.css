@@ -1,0 +1,4 @@
+body.is-mobile .sidebar-toggle-button.mod-left,
+body.is-mobile .sidebar-toggle-button.mod-right {
+    display: none !important;
+}

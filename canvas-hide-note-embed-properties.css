@@ -1,0 +1,13 @@
+/* Canvas: Hide Properties inside Canvas note embeds */
+
+/* Source: https://github.com/churnish/obsidian-css-snippets */
+
+/* Hide Properties when card unfocused or selected */
+.canvas-node {
+    --metadata-display-reading: none;
+}
+
+/* Hide Properties in edit mode */
+.mod-inside-iframe {
+    --metadata-display-editing: none;
+}

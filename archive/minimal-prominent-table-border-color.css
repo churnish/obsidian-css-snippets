@@ -1,0 +1,35 @@
+/* Variables for easy adjustment */
+:root {
+  /* Default: 6% - makes borders slightly lighter in dark mode */
+  --table-border-dark-adjustment: 12%;
+
+  /* Default: -6% - makes borders slightly darker in light mode */
+  --table-border-light-adjustment: -6%;
+}
+
+/* For explicitly set dark theme */
+.theme-dark {
+  /* Default: calc(var(--base-l) + 6%) */
+  --table-border-color: hsl( var(--base-h), var(--base-s), calc(var(--base-l) + var(--table-border-dark-adjustment))) !important;
+}
+
+/* For explicitly set light theme */
+.theme-light {
+  /* Default: calc(var(--base-l) - 6%) */
+  --table-border-color: hsl( var(--base-h), var(--base-s), calc(var(--base-l) + var(--table-border-light-adjustment))) !important;
+}
+
+/* For system theme preference */
+@media (prefers-color-scheme: dark) {
+  body:not(.theme-light) {
+    /* Default: calc(var(--base-l) + 6%) */
+    --table-border-color: hsl( var(--base-h), var(--base-s), calc(var(--base-l) + var(--table-border-dark-adjustment))) !important;
+  }
+}
+
+@media (prefers-color-scheme: light) {
+  body:not(.theme-dark) {
+    /* Default: calc(var(--base-l) - 6%) */
+    --table-border-color: hsl( var(--base-h), var(--base-s), calc(var(--base-l) + var(--table-border-light-adjustment))) !important;
+  }
+}

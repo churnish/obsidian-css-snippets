@@ -1,0 +1,8 @@
+/*Clean Embeds*/
+.embed-clean .internal-embed > .markdown-embed, .embed-clean .internal-embed.is-loaded:not(.image-embed),
+.internal-embed[alt*=clean] > .markdown-embed,
+.internal-embed[alt*=clean].is-loaded:not(.image-embed) {
+  --embed-padding: 0;
+  border: none;
+  box-shadow: none;
+}

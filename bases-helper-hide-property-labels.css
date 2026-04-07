@@ -1,0 +1,7 @@
+/* Bases helper: Hide property labels on cards via CSS class */
+
+/* Source: https://github.com/churnish/obsidian-css-snippets */
+
+.card-no-labels .bases-cards-label {
+    display: none;
+}

@@ -1,0 +1,35 @@
+/* Hide Properties and show on Hover - only when unfolded */
+.markdown-preview-view, .markdown-source-view {
+    /* Only apply to unfolded properties */
+    .metadata-container:not(.is-collapsed) {
+        .metadata-properties,
+        .metadata-add-button {
+            max-height: 0;
+            opacity: 0;
+            overflow: hidden;
+            transition: max-height 125ms ease-in-out, opacity 125ms;
+        }
+    }
+    
+    /* Show properties on hover - only when unfolded */
+    .metadata-container:not(.is-collapsed):hover .metadata-properties,
+    .metadata-container:not(.is-collapsed):hover .metadata-add-button,
+    .metadata-container:not(.is-collapsed):focus-within .metadata-properties,
+    .metadata-container:not(.is-collapsed):focus-within .metadata-add-button {
+        max-height: 1000px;
+        opacity: 1;
+        transition: max-height 150ms ease-in-out, opacity 150ms;
+    }
+    
+    /* Keep the Properties header visible with slight transparency when not hovered */
+    .metadata-container:not(.is-collapsed) .metadata-container-header {
+        opacity: 0.6;
+        transition: opacity 125ms;
+    }
+    
+    /* Full opacity for header on hover */
+    .metadata-container:not(.is-collapsed):hover .metadata-container-header,
+    .metadata-container:not(.is-collapsed):focus-within .metadata-container-header {
+        opacity: 1;
+    }
+}

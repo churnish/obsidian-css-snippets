@@ -1,0 +1,8 @@
+/* Align list bullet markers to top of embedded images instead of center */
+
+/* Source: https://github.com/churnish/obsidian-css-snippets */
+
+.HyperMD-list-line .image-embed,
+li .image-embed {
+    vertical-align: top !important;
+}

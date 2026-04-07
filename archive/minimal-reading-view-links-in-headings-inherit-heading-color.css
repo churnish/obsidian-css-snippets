@@ -1,0 +1,59 @@
+/* Reading mode - including popovers */
+:is(.markdown-reading-view, .popover.hover-popover .markdown-preview-view) :is(h1,h2,h3,h4,h5,h6) :is(a.internal-link, a.external-link) {
+    color: inherit !important;
+    text-decoration-color: inherit !important;
+}
+
+:is(.markdown-reading-view, .popover.hover-popover .markdown-preview-view) :is(h1,h2,h3,h4,h5,h6) :is(a.internal-link, a.external-link):hover {
+    filter: brightness(0.92) !important;
+}
+
+/* Popover preview in Live Preview */
+.popover.hover-popover .markdown-preview-view :is(h1,h2,h3,h4,h5,h6) :is(a.internal-link, a.external-link) {
+    color: inherit !important;
+    text-decoration-color: inherit !important;
+}
+
+.popover.hover-popover .markdown-preview-view :is(h1,h2,h3,h4,h5,h6) :is(a.internal-link, a.external-link):hover {
+    filter: brightness(0.92) !important;
+}
+
+/* Live Preview */
+.markdown-source-view.mod-cm6.is-live-preview {
+    .cm-header-1 :is(.cm-formatting-link-start, .cm-formatting-link-end, .cm-link, .cm-url, .cm-string, .cm-underline, .cm-hmd-internal-link):not(.cm-hashtag) {
+        color: var(--h1-color) !important;
+        text-decoration-color: var(--h1-color) !important;
+    }
+    .cm-header-2 :is(.cm-formatting-link-start, .cm-formatting-link-end, .cm-link, .cm-url, .cm-string, .cm-underline, .cm-hmd-internal-link):not(.cm-hashtag) {
+        color: var(--h2-color) !important;
+        text-decoration-color: var(--h2-color) !important;
+    }
+    .cm-header-3 :is(.cm-formatting-link-start, .cm-formatting-link-end, .cm-link, .cm-url, .cm-string, .cm-underline, .cm-hmd-internal-link):not(.cm-hashtag) {
+        color: var(--h3-color) !important;
+        text-decoration-color: var(--h3-color) !important;
+    }
+    .cm-header-4 :is(.cm-formatting-link-start, .cm-formatting-link-end, .cm-link, .cm-url, .cm-string, .cm-underline, .cm-hmd-internal-link):not(.cm-hashtag) {
+        color: var(--h4-color) !important;
+        text-decoration-color: var(--h4-color) !important;
+    }
+    .cm-header-5 :is(.cm-formatting-link-start, .cm-formatting-link-end, .cm-link, .cm-url, .cm-string, .cm-underline, .cm-hmd-internal-link):not(.cm-hashtag) {
+        color: var(--h5-color) !important;
+        text-decoration-color: var(--h5-color) !important;
+    }
+    .cm-header-6 :is(.cm-formatting-link-start, .cm-formatting-link-end, .cm-link, .cm-url, .cm-string, .cm-underline, .cm-hmd-internal-link):not(.cm-hashtag) {
+        color: var(--h6-color) !important;
+        text-decoration-color: var(--h6-color) !important;
+    }
+}
+
+/* Live Preview hover states */
+.markdown-source-view.mod-cm6.is-live-preview {
+    .cm-header-1:hover :is(.cm-formatting-link-start, .cm-formatting-link-end, .cm-link, .cm-url, .cm-string, .cm-underline, .cm-hmd-internal-link):not(.cm-hashtag),
+    .cm-header-2:hover :is(.cm-formatting-link-start, .cm-formatting-link-end, .cm-link, .cm-url, .cm-string, .cm-underline, .cm-hmd-internal-link):not(.cm-hashtag),
+    .cm-header-3:hover :is(.cm-formatting-link-start, .cm-formatting-link-end, .cm-link, .cm-url, .cm-string, .cm-underline, .cm-hmd-internal-link):not(.cm-hashtag),
+    .cm-header-4:hover :is(.cm-formatting-link-start, .cm-formatting-link-end, .cm-link, .cm-url, .cm-string, .cm-underline, .cm-hmd-internal-link):not(.cm-hashtag),
+    .cm-header-5:hover :is(.cm-formatting-link-start, .cm-formatting-link-end, .cm-link, .cm-url, .cm-string, .cm-underline, .cm-hmd-internal-link):not(.cm-hashtag),
+    .cm-header-6:hover :is(.cm-formatting-link-start, .cm-formatting-link-end, .cm-link, .cm-url, .cm-string, .cm-underline, .cm-hmd-internal-link):not(.cm-hashtag) {
+        filter: brightness(0.92) !important;
+    }
+}

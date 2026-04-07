@@ -1,0 +1,146 @@
+/* Credit: Border theme by Akifyss: https://github.com/Akifyss/obsidian-border */
+
+/* ========== SETTINGS ========== */
+body {
+    /* HEADING INDICATORS: 1 = show colored bar | 0 = hide */
+    --h1-indicator: 0;
+    --h2-indicator: 1;
+    --h3-indicator: 1;
+    --h4-indicator: 1;
+    --h5-indicator: 1;
+    --h6-indicator: 1;
+    
+    /* Heading colors */
+    --h2-accent-color: var(--color-red);
+    --h3-accent-color: var(--color-orange);
+    --h4-accent-color: var(--color-yellow);
+    --h5-accent-color: var(--color-green);
+    --h6-accent-color: var(--color-blue);
+}
+
+/* ====== Base Heading Styles ====== */
+.markdown-rendered > :is(h2,h3,h4,h5,h6),
+.markdown-preview-sizer > div > :is(h2,h3,h4,h5,h6) {
+    position: relative;
+    padding-left: 12px;
+}
+
+/* Heading collapse positioning - keep chevron outside the indicator */
+.markdown-preview-view .heading-collapse-indicator,
+.is-live-preview .HyperMD-header .collapse-indicator.collapse-icon {
+    transform: translateX(-16px);
+}
+
+/* Align H1 collapse icon with H2-6 collapse icons in Live Preview */
+.markdown-preview-view h1 .heading-collapse-indicator,
+.is-live-preview .HyperMD-header-1 .collapse-indicator.collapse-icon {
+    transform: translateX(-10px);
+}
+
+/* Align H1 collapse icon with H2-6 collapse icons in Reading view */
+.markdown-preview-view h1 .heading-collapse-indicator {
+    transform: translateX(-4px);
+}
+
+/* ====== Colored Heading Indicators ====== */
+.is-live-preview .HyperMD-header-1::before,
+.is-live-preview .HyperMD-header-2::before,
+.is-live-preview .HyperMD-header-3::before,
+.is-live-preview .HyperMD-header-4::before,
+.is-live-preview .HyperMD-header-5::before,
+.is-live-preview .HyperMD-header-6::before {
+    margin-right: 6px;
+    content: " ";
+    display: inline-block;
+    width: 3px;
+    border-radius: var(--radius-m);
+    transform: translateY(4px);
+}
+
+.markdown-rendered > h1::before,
+.markdown-rendered > h2::before,
+.markdown-rendered > h3::before,
+.markdown-rendered > h4::before,
+.markdown-rendered > h5::before,
+.markdown-rendered > h6::before,
+.markdown-preview-sizer > div > h1::before,
+.markdown-preview-sizer > div > h2::before,
+.markdown-preview-sizer > div > h3::before,
+.markdown-preview-sizer > div > h4::before,
+.markdown-preview-sizer > div > h5::before,
+.markdown-preview-sizer > div > h6::before {
+    content: " ";
+    display: inline-block;
+    width: 3px;
+    border-radius: var(--radius-m);
+    position: absolute;
+    top: 4px;
+    left: 3px;
+}
+
+/* Indicator heights and colors per level */
+.is-live-preview .HyperMD-header-1::before,
+.markdown-rendered > h1::before,
+.markdown-preview-sizer > div > h1::before {
+    height: calc(1.2em - 8px);
+    background-color: var(--h1-accent-color);
+    opacity: var(--h1-indicator);
+}
+
+.is-live-preview .HyperMD-header-2::before,
+.markdown-rendered > h2::before,
+.markdown-preview-sizer > div > h2::before {
+    height: calc(1.2em - 8px);
+    background-color: var(--h2-accent-color);
+    opacity: var(--h2-indicator);
+}
+
+.is-live-preview .HyperMD-header-3::before,
+.markdown-rendered > h3::before,
+.markdown-preview-sizer > div > h3::before {
+    height: calc(1.3em - 8px);
+    background-color: var(--h3-accent-color);
+    opacity: var(--h3-indicator);
+}
+
+.is-live-preview .HyperMD-header-4::before,
+.markdown-rendered > h4::before,
+.markdown-preview-sizer > div > h4::before {
+    height: calc(1.4em - 8px);
+    background-color: var(--h4-accent-color);
+    opacity: var(--h4-indicator);
+}
+
+.is-live-preview .HyperMD-header-5::before,
+.is-live-preview .HyperMD-header-6::before,
+.markdown-rendered > h5::before,
+.markdown-rendered > h6::before,
+.markdown-preview-sizer > div > h5::before,
+.markdown-preview-sizer > div > h6::before {
+    height: calc(1.5em - 8px);
+}
+
+.is-live-preview .HyperMD-header-5::before,
+.markdown-rendered > h5::before,
+.markdown-preview-sizer > div > h5::before {
+    background-color: var(--h5-accent-color);
+    opacity: var(--h5-indicator);
+}
+
+.is-live-preview .HyperMD-header-6::before,
+.markdown-rendered > h6::before,
+.markdown-preview-sizer > div > h6::before {
+    background-color: var(--h6-accent-color);
+    opacity: var(--h6-indicator);
+}
+
+/* Remove indent for H1 headings in live preview */
+.is-live-preview .HyperMD-header-1 {
+    padding-left: 0 !important;
+}
+
+/* Remove margin from the ::before pseudo-element for H1 in live preview */
+.is-live-preview .HyperMD-header-1::before {
+    margin-right: 0;
+}
+

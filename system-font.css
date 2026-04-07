@@ -1,0 +1,8 @@
+/* Use platform system font (SF Pro on Apple) for UI and editor text */
+
+body,
+.theme-light,
+.theme-dark {
+  --font-interface-theme: -apple-system, system-ui;
+  --font-text-theme: -apple-system, system-ui;
+}

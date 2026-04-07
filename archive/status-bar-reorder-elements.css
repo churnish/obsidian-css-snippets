@@ -1,0 +1,11 @@
+.status-bar {
+    & div.status-bar-item.plugin-backlink {
+        order: 98;
+    }
+    & div.status-bar-item.plugin-word-count {
+        order: 97;
+    }
+    & div.status-bar-item.left-region {
+        order: 99;
+    }
+}

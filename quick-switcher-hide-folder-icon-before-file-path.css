@@ -1,0 +1,8 @@
+/* "Quick Switcher++": Hide folder icon before file paths in results */
+
+/* Source: https://github.com/churnish/obsidian-css-snippets */
+
+/* Hide qsp-path-indicator span */
+span.qsp-path-indicator {
+    display: none;
+}

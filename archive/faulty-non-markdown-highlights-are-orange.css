@@ -1,0 +1,15 @@
+:root {
+ --orange-opacity: 0.4;
+}
+
+.is-flashing {
+   transition: all 0.25s ease;
+   background-color: rgba(236, 117, 0, var(--orange-opacity)) !important;
+}
+
+.theme-dark .search-result-container {
+ --text-highlight-bg: rgba(236, 117, 0, var(--orange-opacity));
+}
+.theme-light .search-result-container {
+ --text-highlight-bg: rgba(236, 117, 0, var(--orange-opacity));
+}

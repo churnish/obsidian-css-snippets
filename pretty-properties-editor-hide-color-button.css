@@ -1,0 +1,7 @@
+/* "Pretty Properties": Hide color picker button */
+
+/* Source: https://github.com/churnish/obsidian-css-snippets */
+
+body .longtext-color-button {
+    display: none !important;
+}

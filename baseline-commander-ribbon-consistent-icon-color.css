@@ -1,0 +1,7 @@
+/* "Baseline" + "Commander": Force "Commander" Ribbon icons to use default icon color */
+
+/* Source: https://github.com/churnish/obsidian-css-snippets */
+
+.workspace-ribbon .clickable-icon {
+    color: var(--icon-color) !important;
+}

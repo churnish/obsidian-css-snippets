@@ -1,0 +1,5 @@
+.n-slider {
+    --n-dot-border-active: 2px solid var(--ax1) !important;
+    --n-fill-color: var(--ax1) !important;
+    --n-fill-color-hover: var(--ax1) !important;
+}

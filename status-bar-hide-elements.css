@@ -1,0 +1,9 @@
+/* Status bar: Hide selected plugin indicators from status bar (Properties, "Pane Relief", "GitHub Issues") */
+
+/* Source: https://github.com/churnish/obsidian-css-snippets */
+
+.status-bar-item.plugin-properties,
+.status-bar-item.plugin-pane-relief,
+.status-bar-item.plugin-github-issues {
+  display: none;
+}

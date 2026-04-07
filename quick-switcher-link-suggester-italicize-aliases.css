@@ -1,0 +1,18 @@
+/* Italicize alias matches in Quick switcher and link suggester results */
+
+/* Source: https://github.com/churnish/obsidian-css-snippets */
+
+/* "Quick Switcher++" */
+.prompt .qsp-suggestion-alias {
+    font-style: italic;
+}
+
+/* Vanilla Quick switcher */
+.prompt .suggestion-item.mod-complex:has([aria-label='Alias']) {
+    font-style: italic;
+}
+
+/* Link suggester */
+.suggestion-item:has(.suggestion-flair[aria-label="Alias"]) .suggestion-title {
+    font-style: italic;
+}

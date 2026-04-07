@@ -1,0 +1,35 @@
+/* Move sidebar nav bar and toolbar to bottom on tablet, matching phone layout */
+
+/* Source: https://github.com/churnish/obsidian-css-snippets */
+
+body.is-tablet .workspace-drawer-active-tab-container > .workspace-drawer-tab-options {
+  order: 2;
+}
+
+body.is-tablet .workspace-drawer-inner {
+  padding-top: 0;
+}
+
+body.is-tablet .workspace-drawer.is-pinned .workspace-drawer-inner {
+  padding-top: 32px;
+}
+
+body.is-tablet .workspace-drawer .nav-buttons-container {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 1;
+  background-color: var(--modal-background);
+}
+
+body.is-tablet .workspace-drawer.is-pinned .nav-buttons-container {
+  background-color: var(--mobile-sidebar-background);
+}
+
+body.is-tablet .workspace-drawer .workspace-drawer-tab-options-list {
+  padding-top: var(--size-4-2);
+  padding-bottom: var(--touch-size-l);
+  bottom: 0;
+  top: unset;
+}

@@ -1,0 +1,7 @@
+/* Reduce vertical gap between property rows to minimal 1px */
+
+/* Source: https://github.com/churnish/obsidian-css-snippets */
+
+.metadata-properties {
+  --metadata-gap: 1px;
+}
