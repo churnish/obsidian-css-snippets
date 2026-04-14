@@ -1,0 +1,7 @@
+/* Baseline: Set sidebar width to 100% and re-enable sidebar animation when `Reduce motion` style setting is ON */
+
+/* Source: https://github.com/churnish/obsidian-css-snippets */
+
+body.reduce-motion {
+  --mobile-sidebar-width: 100vw !important;
+}

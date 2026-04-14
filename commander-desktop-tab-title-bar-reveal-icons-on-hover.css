@@ -1,8 +1,8 @@
-/* "Commander": Hide tab-title-bar buttons until hovering over header */
+/* Commander: Hide tab-title-bar buttons until hovering over header */
 
 /* Source: https://github.com/churnish/obsidian-css-snippets */
 
-/* Hide "Commander" buttons by default */
+/* Hide Commander buttons by default */
 .view-actions .clickable-icon.cmdr-page-header,
 .view-actions .clickable-icon[class*="cmdr:"],
 .view-actions .view-action.cmdr-page-header,
@@ -11,7 +11,7 @@
     transition: opacity 0.1s ease-out;
 }
 
-/* Show "Commander" buttons on hover over tab title bar */
+/* Show Commander buttons on hover over tab title bar */
 .view-header:hover .view-actions .clickable-icon.cmdr-page-header,
 .view-header:hover .view-actions .clickable-icon[class*="cmdr:"],
 .view-header:hover .view-actions .view-action.cmdr-page-header,

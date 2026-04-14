@@ -1,8 +1,8 @@
-/* "Excalidraw": Icon and button tweaks */
+/* Excalidraw: Icon and button tweaks */
 
 /* Source: https://github.com/churnish/obsidian-css-snippets */
 
-/* Replace "Excalidraw" icon with `lucide-palette` */
+/* Replace Excalidraw icon with `lucide-palette` */
 .svg-icon.excalidraw-icon,
 .nav-file-icon[data-path$=".excalidraw"],
 .menu-item-icon .excalidraw-icon {

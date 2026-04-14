@@ -1,8 +1,8 @@
-/* "Baseline": Visually dim inactive panes with secondary background when multiple panes open */
+/* Baseline: Visually dim inactive panes with secondary background when multiple panes open */
 
 /* Source: https://github.com/churnish/obsidian-css-snippets */
 
-/* Incompatible with "Baseline" 1.5.1. */
+/* Incompatible with Baseline 1.5.1. */
 
 /* Apply secondary background when inactive - only with multiple panes */
 body:not(.is-mobile) .workspace-split:not(.mod-left-split):not(.mod-right-split):has(.workspace-tabs ~ .workspace-tabs, .workspace-split ~ .workspace-split) .workspace-leaf:not(.mod-active):not(.is-being-dragged) .view-content,

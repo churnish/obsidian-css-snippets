@@ -1,8 +1,8 @@
-/* "List Callouts": Fix Live Preview — match newline rendering to Reading view */
+/* List Callouts: Fix Live Preview — match newline rendering to Reading view */
 
 /* Source: https://github.com/churnish/obsidian-css-snippets */
 
-/* "List Callouts" hardcodes inline styling for colors
+/* List Callouts hardcodes inline styling for colors
 * so we cannot access previous element's inline style.
 * You will have to manually put them in here */
 
