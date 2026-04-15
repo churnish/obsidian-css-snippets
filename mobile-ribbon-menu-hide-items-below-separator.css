@@ -1,0 +1,11 @@
+/* Ribbon: Hide separator and all items below it */
+
+.menu .menu-item:has(+ .menu-item .line-horizontal)::after,
+.menu .menu-item:has(+ .menu-item .line-horizontal) .menu-item-title::after {
+  display: none !important;
+}
+
+.menu .menu-item:has(.line-horizontal),
+.menu .menu-item:has(.line-horizontal) ~ .menu-item {
+  display: none;
+}
