@@ -38,12 +38,6 @@
   font-size: var(--font-ui-medium);
 }
 
-/* Anchor block from top so late QSP injection grows downward without shifting logo */
-.empty-state {
-  justify-content: flex-start;
-  padding-top: 38%;
-}
-
 /* Remove background from all empty state action buttons */
 .empty-state-action {
   background: none !important;
