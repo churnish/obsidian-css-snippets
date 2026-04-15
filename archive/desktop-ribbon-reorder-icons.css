@@ -1,0 +1,27 @@
+/* Enforce custom display order for desktop Ribbon icons */
+
+/* Source: https://github.com/churnish/obsidian-css-snippets */
+
+.side-dock-ribbon .clickable-icon[aria-label="Archive file​"] { order: 1 !important; } /* zwsp */
+.side-dock-ribbon .clickable-icon[aria-label="Create new canvas​"] { order: 2 !important; } /* zwsp */
+.side-dock-ribbon .clickable-icon[aria-label="Create new Grid base​"] { order: 3 !important; } /* zwsp */
+.side-dock-ribbon .clickable-icon[aria-label="Create new Masonry base​"] { order: 4 !important; } /* zwsp */
+.side-dock-ribbon .clickable-icon[aria-label="Create new note from template​"] { order: 5 !important; } /* zwsp */
+.side-dock-ribbon .clickable-icon[aria-label="Create new drawing​"] { order: 6 !important; } /* zwsp */
+.side-dock-ribbon .clickable-icon[aria-label="Delete current file​"] { order: 7 !important; } /* zwsp */
+.side-dock-ribbon .clickable-icon[aria-label="Manage workspace layouts​"] { order: 8 !important; } /* zwsp */
+.side-dock-ribbon .clickable-icon[aria-label="Open command list​"] { order: 9 !important; } /* zwsp */
+.side-dock-ribbon .clickable-icon[aria-label="Open local graph​"] { order: 10 !important; } /* zwsp */
+.side-dock-ribbon .clickable-icon[aria-label="Open local history​"] { order: 11 !important; } /* zwsp */
+.side-dock-ribbon .clickable-icon[aria-label="Open Quick Switcher++​"] { order: 12 !important; } /* zwsp */
+.side-dock-ribbon .clickable-icon[aria-label="Open random file​"] { order: 13 !important; } /* zwsp */
+.side-dock-ribbon .clickable-icon[aria-label="Open random file from base​"] { order: 14 !important; } /* zwsp */
+.side-dock-ribbon .clickable-icon[aria-label="Open today's daily note​"] { order: 15 !important; } /* zwsp */
+.side-dock-ribbon .clickable-icon[aria-label="Open trash explorer​"] { order: 16 !important; } /* zwsp */
+.side-dock-ribbon .clickable-icon[aria-label="Shuffle base​"] { order: 17 !important; } /* zwsp */
+.side-dock-ribbon .clickable-icon[aria-label="Toggle compact mode​"] { order: 18 !important; } /* zwsp */
+
+/* Fallback: Any unlisted icons go to end */
+.side-dock-ribbon .clickable-icon {
+    order: 999;
+}

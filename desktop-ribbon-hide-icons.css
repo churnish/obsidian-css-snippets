@@ -1,0 +1,11 @@
+/* Ribbon: Hide icons without ZWSP in aria-label (non-Commander icons) */
+
+/* Source: https://github.com/churnish/obsidian-css-snippets */
+
+.side-dock-ribbon-action {
+    display: none !important;
+}
+
+.side-dock-ribbon-action[aria-label*="​"] {
+    display: flex !important;
+}

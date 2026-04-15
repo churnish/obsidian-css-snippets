@@ -1,5 +1,7 @@
 /* Use platform system font (SF Pro on Apple) for UI and editor text */
 
+/* Source: https://github.com/churnish/obsidian-css-snippets */
+
 body,
 .theme-light,
 .theme-dark {

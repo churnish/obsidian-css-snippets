@@ -1,0 +1,8 @@
+body.is-phone.is-mobile.AT-row .view-content {
+  margin-bottom: 0 !important;
+}
+
+body.is-phone.is-mobile.AT-row.mod-toolbar-open .mobile-toolbar {
+  position: absolute !important;
+  top: calc(100vh - var(--keyboard-height) - var(--touch-size-m) - var(--keyboard-spacing)) !important;
+}
