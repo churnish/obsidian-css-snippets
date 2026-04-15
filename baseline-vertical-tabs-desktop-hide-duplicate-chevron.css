@@ -1,0 +1,7 @@
+/* Baseline + Vertical Tabs: Hide duplicate tab overview chevron */
+
+/* Source: https://github.com/churnish/obsidian-css-snippets */
+
+body:not(.is-phone) .workspace .mod-root .workspace-tab-header-container.vt-has-extra-buttons > .workspace-tab-header-tab-list:not(.vt-extra-group-button) {
+  display: none;
+}
