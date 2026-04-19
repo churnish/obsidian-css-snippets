@@ -1,0 +1,29 @@
+/* Enable image grids globally (no .img-grid class required) */
+
+/* Source: https://github.com/churnish/obsidian-css-snippets */
+
+.markdown-preview-section {
+  .el-p > p:has(> .image-embed):has(span:last-child),
+  .el-p > p:has(> img):not(:has(> :not(img))) {
+    display: flex;
+    align-items: center;
+    gap: var(--img-grid-gap);
+    line-height: 0;
+
+    br {
+      display: none;
+    }
+
+    > img,
+    > .image-embed {
+      flex: 1;
+      object-fit: cover;
+    }
+
+    img {
+      height: -webkit-fill-available;
+      overflow: auto;
+      object-fit: cover;
+    }
+  }
+}
