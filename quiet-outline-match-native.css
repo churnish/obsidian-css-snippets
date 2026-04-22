@@ -1,0 +1,147 @@
+/* Quiet Outline: Match native Outline appearance — typography, spacing, active-item pill, search bar, slider, and chevron */
+
+body .mod-sidedock .workspace-leaf-content[data-type="quiet-outline"] > .view-content {
+	padding-bottom: var(--size-4-9);
+}
+
+/* Mirror Baseline/Cupertino sidedock search overrides onto the QO pill, since QO
+   uses `.n-input` (not `.search-input-container`) and doesn't match those rules */
+body.input-cupertino .workspace-leaf-content[data-type="quiet-outline"] .function-bar .n-input {
+	--input-height: 32px;
+	background-color: var(--background-modifier-hover);
+	border: none;
+	border-radius: 100vh;
+}
+
+/* Hide Naive's teleported slider tooltip; startup script mirrors its text to
+   the handle's aria-label so Obsidian's native tooltip shows instead */
+.n-slider-handle-indicator {
+	display: none;
+}
+
+/* Plugin sets slider margin via inline style; !important is required to override */
+.workspace-leaf-content[data-type="quiet-outline"] .n-slider.n-slider--with-mark {
+	width: calc(100% - 2 * var(--size-4-2)) !important;
+	margin: 18px var(--size-4-2) !important;
+	--n-fill-color: var(--background-modifier-border-focus) !important;
+	--n-fill-color-hover: var(--background-modifier-border-focus) !important;
+	--n-dot-border: 2px solid var(--background-modifier-border-focus) !important;
+	--n-dot-border-active: 2px solid var(--background-modifier-border-focus) !important;
+}
+
+.workspace-leaf-content[data-type="quiet-outline"] {
+	.n-tree {
+		padding: 0 var(--size-4-2);
+	}
+
+	/* Hide "N result(s):" search summary */
+	.n-config-provider > code {
+		display: none;
+	}
+
+	/* Hide underline shown under highlighted search matches */
+	.n-tree .n-tree-node.n-tree-node--highlight .n-tree-node-content .n-tree-node-content__text {
+		border-bottom-color: transparent;
+	}
+
+	.n-tree-node-content {
+		font-size: var(--nav-item-size);
+		color: var(--nav-item-color);
+		line-height: var(--line-height-tight);
+		/* Theme-aware vertical padding: `--nav-item-padding` mirrors native row spacing */
+		padding: var(--nav-item-padding);
+		padding-inline: var(--size-4-1);
+	}
+
+	.n-tree-node-wrapper {
+		margin-bottom: var(--size-2-1);
+	}
+
+	/* Extend indentation guide line to bridge the gap introduced by wrapper margin */
+	.n-tree-node-indent::after {
+		height: calc(100% + var(--size-2-1));
+	}
+
+	.function-bar {
+		padding-inline: var(--size-4-2);
+		margin-bottom: 0;
+	}
+
+	.function-bar .n-button {
+		display: none;
+	}
+
+	.function-bar .n-input {
+		background-color: var(--background-modifier-form-field);
+		border: var(--input-border-width) solid var(--background-modifier-border);
+		border-radius: var(--input-radius);
+		height: var(--input-height);
+
+		/* Lucide search icon on left, matching native Outline search appearance */
+		&::before {
+			content: "";
+			position: absolute;
+			top: 50%;
+			left: 10px;
+			width: 16px;
+			height: 16px;
+			transform: translateY(-50%);
+			pointer-events: none;
+			background-color: var(--icon-color);
+			mask: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><circle cx='11' cy='11' r='8'/><path d='m21 21-4.3-4.3'/></svg>")
+				center / contain no-repeat;
+		}
+
+		.n-input-wrapper {
+			padding-left: 32px;
+		}
+
+		.n-input__border,
+		.n-input__state-border {
+			border: none;
+		}
+
+		.n-input__input-el {
+			font-size: var(--font-ui-small);
+			color: var(--text-normal);
+		}
+	}
+
+	.n-tree-node {
+		border-radius: var(--radius-s);
+		/* Extend node bg (selection pill) to full view-content inner width while keeping content position */
+		margin-inline: calc(-1 * var(--size-4-2));
+		padding-inline: var(--size-4-2);
+	}
+
+	/* Replace switcher chevron with Lucide chevron-right; Naive rotates it 90° when expanded */
+	.n-tree-node-switcher__icon {
+		position: relative;
+
+		> * {
+			visibility: hidden;
+		}
+
+		&::before {
+			content: "";
+			position: absolute;
+			inset: 0;
+			margin: auto;
+			width: 14px;
+			height: 14px;
+			background-color: var(--collapse-icon-color);
+			mask: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='m9 18 6-6-6-6'/></svg>")
+				center / contain no-repeat;
+		}
+	}
+
+	.n-tree-node.located {
+		background-color: var(--nav-item-background-active);
+
+		.n-tree-node-content,
+		.n-tree-node-content__text {
+			color: var(--nav-item-color-active);
+			font-weight: var(--font-normal);
+		}
+	}
+}
