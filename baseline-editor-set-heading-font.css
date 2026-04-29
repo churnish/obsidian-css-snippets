@@ -3,10 +3,10 @@
 /* Source: https://github.com/churnish/obsidian-css-snippets */
 
 :body {
-  --h1-font: "Inter";
-  --h2-font: "Inter";
-  --h3-font: "Inter";
-  --h4-font: "Inter";
-  --h5-font: "Inter";
-  --h6-font: "Inter";
+  --h1-font: system-ui;
+  --h2-font: system-ui;
+  --h3-font: system-ui;
+  --h4-font: system-ui;
+  --h5-font: system-ui;
+  --h6-font: system-ui;
 }

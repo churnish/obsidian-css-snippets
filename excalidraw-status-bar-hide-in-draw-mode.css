@@ -1,0 +1,5 @@
+/* Excalidraw: Hide status bar when active leaf in draw mode */
+
+body:has(.workspace-leaf.mod-active .workspace-leaf-content[data-type="excalidraw"]) .status-bar {
+  display: none;
+}

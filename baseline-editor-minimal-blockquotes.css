@@ -18,7 +18,7 @@
 
 body {
     --blockquote-background-color: transparent;
-    --blockquote-border-color: var(--background-modifier-border);
+    --blockquote-border-color: var(--background-modifier-border-focus);
 }
 
 .HyperMD-quote:last-child, .cm-sizer>div>div>.HyperMD-quote:has(+*:not(.HyperMD-quote)) {
