@@ -1,0 +1,60 @@
+/* Floating mode-switch button on mobile view-actions toolbar */
+
+/* Source: extracted from Baseline theme, https://github.com/aaaaalexis/obsidian-baseline */
+
+body.is-phone {
+    --keyboard-spacing: 8px;
+}
+
+body.is-phone .workspace-leaf-content[data-type="markdown"] .view-actions {
+    backdrop-filter: none;
+}
+
+body.is-phone .workspace-leaf-content[data-type="markdown"] .view-actions button:nth-last-child(2) {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    margin-right: var(--size-4-3);
+    margin-bottom: var(--navbar-bottom-offset);
+    width: 48px;
+    height: 48px;
+    border-radius: 100%;
+    corner-shape: round;
+    background-color: var(--background-secondary);
+    border: var(--border-width) solid var(--background-modifier-border);
+    box-shadow: var(--raised-shadow);
+}
+
+body.is-phone .workspace-leaf-content[data-type="markdown"][data-mode="source"] .view-actions button:nth-last-child(2) {
+    background-color: rgb(from var(--interactive-accent) r g b / 95%);
+    color: oklch(from var(--interactive-accent) 0.95 c h);
+}
+
+body.is-phone.mod-toolbar-open .workspace-leaf-content[data-type="markdown"] .view-actions button:nth-last-child(2) {
+    width: var(--touch-size-m);
+    height: var(--touch-size-m);
+    margin-right: var(--keyboard-spacing);
+    margin-bottom: var(--keyboard-spacing);
+}
+
+body.is-phone.auto-full-screen.is-hidden-nav .mobile-navbar,
+body.is-phone.auto-full-screen.is-hidden-nav .workspace-leaf-content[data-type="markdown"] .view-actions button:nth-last-child(2) {
+    margin-bottom: 0;
+}
+
+body.is-phone .workspace-leaf-content[data-type="markdown"] .view-header {
+    top: 0;
+    transition: top 0.3s ease-in-out, opacity 0.2s ease-in-out;
+    will-change: top;
+}
+
+body.is-phone.auto-full-screen.is-hidden-nav .workspace-leaf-content[data-type="markdown"] .view-header {
+    transform: none;
+    top: calc(var(--hidden-nav-offset) * -1);
+}
+
+body.is-phone.is-floating-nav .mobile-navbar {
+    width: auto;
+    margin-left: var(--size-4-3);
+    margin-right: calc(8px + 48px + var(--size-4-3));
+}

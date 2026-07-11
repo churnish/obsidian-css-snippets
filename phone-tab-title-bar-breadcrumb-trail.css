@@ -1,0 +1,44 @@
+/* Breadcrumb trail in phone tab title bar */
+
+/* Source: extracted from Baseline theme, https://github.com/aaaaalexis/obsidian-baseline */
+
+body.is-phone .view-header {
+    padding-inline: 16px;
+    top: 0;
+    z-index: 3;
+    will-change: top;
+    transition: var(--anim-duration-moderate) cubic-bezier(0.1, 0, 0.1, 1.25);
+}
+
+body.is-phone .view-header-title-container {
+    height: auto !important;
+}
+
+body.is-phone .view-header-title-container > div {
+    transition: var(--anim-duration-moderate) cubic-bezier(0.1, 0, 0.1, 1.25);
+}
+
+body.is-phone .view-header-title-parent {
+    color: var(--text-faint);
+    font-size: var(--font-ui-smaller);
+    opacity: 1;
+}
+
+body.is-phone .view-header-breadcrumb {
+    padding: 0;
+}
+
+body.is-phone .view-header-breadcrumb-separator {
+    padding: 0 4px;
+}
+
+body.is-phone .view-header-breadcrumb-separator:last-child {
+    display: none;
+}
+
+body.is-phone .view-header-title {
+    font-size: inherit;
+    font-weight: max(var(--file-header-font-weight), var(--font-medium));
+    opacity: 1;
+    height: 1lh;
+}
