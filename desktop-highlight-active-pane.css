@@ -1,0 +1,31 @@
+/* Dim unfocused note panes via secondary background */
+
+/* Source: https://forum.obsidian.md/t/highlight-note-pane-in-focus/91056 */
+
+/* Apply secondary background when pane group inactive — only when multiple panes (detected via sibling .workspace-tabs) */
+/* Keyed off the group's :has(.mod-active) state, not the individual leaf's mod-active class. A group's active/inactive state never changes while switching tabs within it — mod-active only moves between sibling leaves in the same group — so the shown leaf's background never passes through a dimmed paint during an intra-group tab switch, which a per-leaf selector could not avoid */
+body:not(.is-mobile) .workspace-split:not(.mod-left-split):not(.mod-right-split):has(.workspace-tabs ~ .workspace-tabs) .workspace-tabs:not(:has(.workspace-leaf.mod-active)) .workspace-leaf:not(.is-being-dragged) .view-content,
+body:not(.is-mobile) .workspace-split:not(.mod-left-split):not(.mod-right-split):has(.workspace-tabs ~ .workspace-tabs) .workspace-tabs:not(:has(.workspace-leaf.mod-active)) .workspace-leaf:not(.is-being-dragged) .view-header {
+  background-color: var(--background-secondary) !important;
+  --code-background: var(--background-primary);
+  transition: background-color 120ms ease !important;
+}
+
+/* Active pane group uses normal background — only when multiple panes */
+body:not(.is-mobile) .workspace-split:not(.mod-left-split):not(.mod-right-split):has(.workspace-tabs ~ .workspace-tabs) .workspace-tabs:has(.workspace-leaf.mod-active) .view-content,
+body:not(.is-mobile) .workspace-split:not(.mod-left-split):not(.mod-right-split):has(.workspace-tabs ~ .workspace-tabs) .workspace-tabs:has(.workspace-leaf.mod-active) .view-header {
+  background-color: var(--background-primary) !important;
+  transition: background-color 60ms ease !important;
+}
+
+/* Dimmed pane's own tab name keeps default white background otherwise; match it to the dimmed editor background */
+/* Override the variable, not background-color directly — app.css also reads --tab-background-active for the rounded corner notch's box-shadow, so overriding only background-color leaves white corners */
+body:not(.is-mobile) .workspace-split:not(.mod-left-split):not(.mod-right-split):has(.workspace-tabs ~ .workspace-tabs) .workspace-tabs:not(:has(.workspace-leaf.mod-active)) .workspace-tab-header.is-active {
+  --tab-background-active: var(--background-secondary);
+  transition: background-color 120ms ease;
+}
+
+body:not(.is-mobile) .workspace-split:not(.mod-left-split):not(.mod-right-split):has(.workspace-tabs ~ .workspace-tabs) .workspace-tabs:not(:has(.workspace-leaf.mod-active)) .workspace-tab-header.is-active::before,
+body:not(.is-mobile) .workspace-split:not(.mod-left-split):not(.mod-right-split):has(.workspace-tabs ~ .workspace-tabs) .workspace-tabs:not(:has(.workspace-leaf.mod-active)) .workspace-tab-header.is-active::after {
+  transition: box-shadow 120ms ease;
+}
