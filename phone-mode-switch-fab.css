@@ -1,4 +1,4 @@
-/* Floating mode-switch button on mobile view-actions toolbar */
+/* Floating mode-switch button on phone view-actions toolbar */
 
 /* Source: extracted from Baseline theme, https://github.com/aaaaalexis/obsidian-baseline */
 
@@ -8,6 +8,19 @@ body.is-phone {
 
 body.is-phone .workspace-leaf-content[data-type="markdown"] .view-actions {
     backdrop-filter: none;
+    position: relative;
+}
+
+/* Re-frost pill via pseudo-element (child box, not ancestor of fixed mode-switch button) to avoid containing-block trap. Omit brightness from core frost value: native icon and ::after layers already supply it, so stacking here over-brightens pill. */
+body.is-phone .workspace-leaf-content[data-type="markdown"] .view-actions::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    border-radius: inherit;
+    -webkit-backdrop-filter: blur(6px) saturate(1.5);
+    backdrop-filter: blur(6px) saturate(1.5);
+    pointer-events: none;
 }
 
 body.is-phone .workspace-leaf-content[data-type="markdown"] .view-actions button:nth-last-child(2) {
@@ -23,6 +36,11 @@ body.is-phone .workspace-leaf-content[data-type="markdown"] .view-actions button
     background-color: var(--background-secondary);
     border: var(--border-width) solid var(--background-modifier-border);
     box-shadow: var(--raised-shadow);
+    /* Mirror native mobile navbar hide/show timing so button slides and fades in lockstep. Values hardcoded because theme exposes no variable for them. */
+    transition:
+        opacity 0.2s ease-in-out,
+        margin-bottom 0.25s ease-in-out,
+        transform 0.3s ease-out;
 }
 
 body.is-phone .workspace-leaf-content[data-type="markdown"][data-mode="source"] .view-actions button:nth-last-child(2) {
@@ -37,15 +55,22 @@ body.is-phone.mod-toolbar-open .workspace-leaf-content[data-type="markdown"] .vi
     margin-bottom: var(--keyboard-spacing);
 }
 
-body.is-phone.auto-full-screen.is-hidden-nav .mobile-navbar,
+/* Hide button while keyboard open outside editor (e.g., tab title bar rename). Pinned margin prevents fly-up from ballooned navbar bottom offset. */
+html[style*="--keyboard-height"]:not([style*="--keyboard-height: 0px"]) body.is-phone:not(.mod-toolbar-open) .workspace-leaf-content[data-type="markdown"] .view-actions button:nth-last-child(2) {
+    margin-bottom: var(--keyboard-spacing);
+    opacity: 0;
+    pointer-events: none;
+}
+
 body.is-phone.auto-full-screen.is-hidden-nav .workspace-leaf-content[data-type="markdown"] .view-actions button:nth-last-child(2) {
     margin-bottom: 0;
+    transform: translateY(100%);
+    opacity: 0;
 }
 
 body.is-phone .workspace-leaf-content[data-type="markdown"] .view-header {
     top: 0;
     transition: top 0.3s ease-in-out, opacity 0.2s ease-in-out;
-    will-change: top;
 }
 
 body.is-phone.auto-full-screen.is-hidden-nav .workspace-leaf-content[data-type="markdown"] .view-header {
@@ -53,7 +78,7 @@ body.is-phone.auto-full-screen.is-hidden-nav .workspace-leaf-content[data-type="
     top: calc(var(--hidden-nav-offset) * -1);
 }
 
-body.is-phone.is-floating-nav .mobile-navbar {
+body.is-phone.is-floating-nav:has(.mod-root .workspace-leaf.mod-active .workspace-leaf-content[data-type="markdown"]) .mobile-navbar {
     width: auto;
     margin-left: var(--size-4-3);
     margin-right: calc(8px + 48px + var(--size-4-3));
