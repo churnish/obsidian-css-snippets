@@ -43,7 +43,7 @@ body:not(.is-mobile) .metadata-properties-heading.is-collapsed .metadata-propert
 
 /* ----------------------------------------- */
 
-/* Replace 'Properties' label with Lucide info icon
+/* Replace 'Properties' label with Lucide info icon */
 
 .metadata-properties-title {
     font-size: 0;
@@ -64,7 +64,7 @@ body:not(.is-mobile) .metadata-properties-heading.is-collapsed .metadata-propert
     font-size: 1rem;
     vertical-align: middle;
 }
-*/
+
 
 /* ----------------------------------------- */
 /* Reading view modifications */

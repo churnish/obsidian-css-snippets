@@ -7,26 +7,26 @@
 /* Note */
 
 .callout[data-callout="note"] {
-    --callout-color: var(--color-yellow-rgb);
+    --callout-color: var(--color-yellow);
     --callout-icon: pencil;
 }
 
 /* Abstract */
 
 .callout[data-callout="abstract"] {
-    --callout-color: var(--color-orange-rgb);
+    --callout-color: var(--color-orange);
 }
 .callout[data-callout="summary"] {
-    --callout-color: var(--color-orange-rgb);
+    --callout-color: var(--color-orange);
 }
 .callout[data-callout="tldr"] {
-    --callout-color: var(--color-orange-rgb);
+    --callout-color: var(--color-orange);
 }
 
 /* Info */
 
 .callout[data-callout="info"] {
-    --callout-color: var(--color-blue-rgb);
+    --callout-color: var(--color-blue);
 }
 
 /* Todo */
@@ -39,91 +39,91 @@
 /* Tip */
 
 .callout[data-callout="tip"] {
-    --callout-color: var(--color-orange-rgb);
+    --callout-color: var(--color-orange);
 }
 .callout[data-callout="hint"] {
-    --callout-color: var(--color-orange-rgb);
+    --callout-color: var(--color-orange);
 }
 .callout[data-callout="important"] {
-    --callout-color: var(--color-orange-rgb);
+    --callout-color: var(--color-orange);
 }
 
 /* Success */
 
 .callout[data-callout="success"] {
-    --callout-color: var(--color-green-rgb);
+    --callout-color: var(--color-green);
     --callout-icon: check;
 }
 .callout[data-callout="check"] {
-    --callout-color: var(--color-green-rgb);
+    --callout-color: var(--color-green);
     --callout-icon: check;
 }
 .callout[data-callout="done"] {
-    --callout-color: var(--color-green-rgb);
+    --callout-color: var(--color-green);
     --callout-icon: check;
 }
 
 /* Question */
 
 .callout[data-callout="question"] {
-    --callout-color: var(--color-red-rgb);
+    --callout-color: var(--color-red);
 }
 .callout[data-callout="help"] {
-    --callout-color: var(--color-red-rgb);
+    --callout-color: var(--color-red);
 }
 .callout[data-callout="faq"] {
-    --callout-color: var(--color-red-rgb);
+    --callout-color: var(--color-red);
 }
 
 /* Warning */
 
 .callout[data-callout="warning"] {
-    --callout-color: var(--color-yellow-rgb);
+    --callout-color: var(--color-yellow);
 }
 .callout[data-callout="caution"] {
-    --callout-color: var(--color-yellow-rgb);
+    --callout-color: var(--color-yellow);
 }
 .callout[data-callout="attention"] {
-    --callout-color: var(--color-yellow-rgb);
+    --callout-color: var(--color-yellow);
 }
 
 /* Failure */
 
 .callout[data-callout="failure"] {
-    --callout-color: var(--color-red-rgb);
+    --callout-color: var(--color-red);
     --callout-icon: x;
 }
 .callout[data-callout="fail"] {
-    --callout-color: var(--color-red-rgb);
+    --callout-color: var(--color-red);
     --callout-icon: x;
 }
 .callout[data-callout="missing"] {
-    --callout-color: var(--color-red-rgb);
+    --callout-color: var(--color-red);
     --callout-icon: x;
 }
 
 /* Danger */
 
 .callout[data-callout="danger"] {
-    --callout-color: var(--color-yellow-rgb);
+    --callout-color: var(--color-yellow);
     --callout-icon: zap;
 }
 .callout[data-callout="error"] {
-    --callout-color: var(--color-yellow-rgb);
+    --callout-color: var(--color-yellow);
     --callout-icon: zap;
 }
 
 /* Bug */
 
 .callout[data-callout="bug"] {
-    --callout-color: var(--color-green-rgb);
+    --callout-color: var(--color-green);
 }
 
 
 /* Example */
 
 .callout[data-callout="example"] {
-    --callout-color: var(--color-blue-rgb);
+    --callout-color: var(--color-blue);
 }
 
 /* Quote */
@@ -139,7 +139,7 @@
 /* Ai */
 
 .callout[data-callout="ai"] {
-    --callout-color: var(--color-yellow-rgb);
+    --callout-color: var(--color-yellow);
     --callout-icon: wand-sparkles;
 }
 
@@ -150,25 +150,24 @@
 /* Embed */
 
 .callout[data-callout="embed"] {
-    --callout-color: var(--color-green-rgb);
+    --callout-color: var(--color-green);
     --callout-icon: puzzle;
 }
 
 /* Exception */
 
 .callout[data-callout="exception"] {
-    --callout-color: var(--color-orange-rgb);
+    --callout-color: var(--color-orange);
     --callout-icon: star-list;
 }
 .callout[data-callout="except"] {
-    --callout-color: var(--color-orange-rgb);
+    --callout-color: var(--color-orange);
     --callout-icon: star-list;
 }
 .callout[data-callout="but"] {
-    --callout-color: var(--color-orange-rgb);
+    --callout-color: var(--color-orange);
     --callout-icon: star-list;
 }
-
 
 /* Rationale */
 
@@ -184,11 +183,11 @@
 /* Related */
 
 .callout[data-callout="related"] {
-    --callout-color: var(--color-yellow-rgb);
+    --callout-color: var(--color-yellow);
     --callout-icon: orbit;
 }
 .callout[data-callout="see"] {
-    --callout-color: var(--color-yellow-rgb);
+    --callout-color: var(--color-yellow);
     --callout-icon: orbit;
 }
 
@@ -210,14 +209,14 @@
 /* Pro */
 
 .callout[data-callout="pro"] {
-    --callout-color: var(--color-green-rgb);
+    --callout-color: var(--color-green);
     --callout-icon: heart;
 }
 
 /* Con */
 
 .callout[data-callout="con"] {
-    --callout-color: var(--color-red-rgb);
+    --callout-color: var(--color-red);
     --callout-icon: heart-crack;
 }
 
@@ -231,28 +230,28 @@
 /* Alternative */
 
 .callout[data-callout="alternative"] {
-    --callout-color: var(--color-blue-rgb);
+    --callout-color: var(--color-blue);
     --callout-icon: refresh-ccw;
 }
 .callout[data-callout="aka"] {
-    --callout-color: var(--color-blue-rgb);
+    --callout-color: var(--color-blue);
     --callout-icon: refresh-ccw;
 }
 
 /* Analogy */
 
 .callout[data-callout="analogy"] {
-    --callout-color: var(--color-yellow-rgb);
+    --callout-color: var(--color-yellow);
     --callout-icon: lightbulb;
 }
 .callout[data-callout="metaphor"] {
-    --callout-color: var(--color-yellow-rgb);
+    --callout-color: var(--color-yellow);
     --callout-icon: lightbulb;
 }
 
 /* Disagree */
 
 .callout[data-callout="disagree"] {
-    --callout-color: var(--color-yellow-rgb);
+    --callout-color: var(--color-yellow);
     --callout-icon: thumbs-down;
 }

@@ -1,20 +1,20 @@
-/* Notebook Navigator: Calm and clean appearance */
+/* Notebook Navigator tweaks */
 
 /* Source: https://github.com/churnish/obsidian-css-snippets */
 
-/* Font size congruent with Baseline
-body {
-  --nn-setting-nav-font-size: var(--font-ui-smaller);
-}*/
-
-/* Calm metadata text colors */
+/* Calm metadata text color */
 body {
   --nn-theme-file-date-color: var(--text-faint);
   --nn-theme-file-parent-color: var(--text-faint);
   --nn-theme-file-tag-color: var(--text-faint);
 }
 
-/* Remove tag background */
+/* Match nav item name color to native tree item color (was darker, using text-normal instead of nav-item-color) */
+body {
+  --nn-theme-navitem-name-color: var(--nav-item-color);
+}
+
+/* Transparent tag background */
 .nn-file-tag {
   background-color: transparent !important;
 }
@@ -23,10 +23,10 @@ body {
   background-color: transparent !important;
 }
 
-/* Calm tag border */
+/* Calm tag border
 body {
-	--nn-file-pill-border-color: var(--background-modifier-border);
-}
+	--nn-theme-file-tag-border-color: var(--background-modifier-border-focus);
+}*/
 
 /* Show indentation lines */
 /* Uses repeating-linear-gradient to support unlimited nesting depth. Avoids conflicting with plugin's ::after hover effect. */
@@ -47,25 +47,6 @@ body {
     pointer-events: none;
 }
 
-/* Override folder note styling */
-.nn-navitem-name.nn-has-folder-note {
-    font-weight: normal !important;
-}
-
-/* Override pane header tranparency 
-.nn-list-pane-scroller > .nn-list-pane-overlay .nn-pane-header,
-.nn-list-pane-scroller > .nn-list-pane-overlay .nn-search-bar-container.nn-search-bar-visible,
-.nn-navigation-pane-scroller > .nn-navigation-pane-overlay .nn-pane-header {
-  background-color: var(--sidedock-background) !important;
-}*/
-
-/* Hide list pane header buttons when not hovering */
-/* Original source: https://discord.com/channels/1405458145974943846/1405889553893691464/1458086484002472047 */
-.notebook-navigator .nn-list-pane .nn-list-pane-overlay:not(:hover) .nn-header-actions .nn-header-actions {
-    opacity: 0;
-    transition: opacity 200ms;
-}
-
 .notebook-navigator .nn-list-pane .nn-list-pane-overlay:not(:hover) .nn-header-actions .nn-header-actions .nn-icon-button {
     min-width: 0;
     padding: 0;
@@ -76,4 +57,81 @@ body {
 
 .notebook-navigator .nn-list-pane .nn-list-pane-overlay:not(:hover) .nn-header-actions .nn-header-actions .nn-icon-button > span {
     width: 16px !important;
+}
+
+/* Set navigation pane and list pane text to font-ui-medium */
+/* Targets classes directly since plugin sets font-size vars as inline styles on .nn-split-container, which beats overriding the vars on body */
+.nn-navitem-name {
+    font-size: var(--font-ui-medium) !important;
+}
+
+/* Folder name breadcrumb in list pane header */
+.nn-mobile-title {
+    font-size: var(--font-ui-large) !important;
+}
+
+.nn-file-name {
+    font-size: var(--font-ui-medium) !important;
+}
+
+.nn-file-preview {
+    font-size: var(--font-ui-medium) !important;
+}
+
+/* Desktop: nav pane text and text preview one step smaller than mobile (font-ui-small instead of font-ui-medium) */
+.nn-desktop .nn-navitem-name,
+.nn-desktop .nn-file-preview {
+    font-size: var(--font-ui-small) !important;
+}
+
+/* Tag, timestamp, and parent folder label to font-ui-small */
+.nn-file-tag,
+.nn-file-date,
+.nn-parent-folder {
+    font-size: var(--font-ui-small) !important;
+}
+
+/* Group header */
+.nn-list-group-header {
+    font-size: var(--font-ui-medium) !important;
+}
+
+/* Item count badge */
+.nn-navitem-count {
+    font-size: var(--font-ui-smaller) !important;
+}
+
+/* Vault title header */
+.nn-vault-title-content {
+    font-size: var(--font-ui-large) !important;
+}
+
+/* Inline rename inputs */
+.nn-navitem-inline-rename,
+.nn-file-inline-rename {
+    font-size: var(--font-ui-medium) !important;
+}
+
+/* Bold root-level nav items: vault name, Tags, Properties */
+.nn-navitem[data-level="0"] .nn-navitem-name {
+    font-weight: var(--bold-weight) !important;
+}
+
+/* Root-level nav item icon color: vault name, Tags, Properties */
+.nn-navitem[data-level="0"] .nn-navitem-icon {
+    color: var(--icon-color-focused) !important;
+}
+
+/* Compact-mode file header row, and file name inside it, to font-ui-small */
+.nn-compact-file-header {
+    font-size: var(--font-ui-small) !important;
+}
+
+.nn-compact-file-header .nn-file-name {
+    font-size: var(--font-ui-small) !important;
+}
+
+/* [Mobile] Back button chevron matches other icon colors instead of accent */
+.notebook-navigator-mobile button.nn-back-button svg {
+    stroke: var(--icon-color) !important;
 }

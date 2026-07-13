@@ -1,0 +1,36 @@
+/* Dark mode image & Bases cover dimming */
+/* Image dimming extracted from Minimal theme (image-filters feature) */
+/* Stephan Ango (@kepano) — MIT License */
+
+:root {
+  --image-muted: 0.7;
+}
+
+/* Dim note images in dark mode, restore to full opacity on hover */
+.theme-dark .markdown-source-view img,
+.theme-dark .markdown-preview-view img {
+  opacity: var(--image-muted);
+  transition: opacity 0.25s linear;
+}
+.theme-dark .print-preview img,
+.theme-dark .markdown-source-view img:hover,
+.theme-dark .markdown-preview-view img:hover {
+  opacity: 1;
+  transition: opacity 0.25s linear;
+}
+
+/* Never dim when printing */
+@media print {
+  body {
+    --image-muted: 1;
+  }
+}
+
+/* Dim Bases card cover images in dark mode, restore on hover */
+.theme-dark .bases-cards-cover {
+  opacity: var(--image-muted) !important;
+  transition: opacity 0.25s linear;
+}
+.theme-dark .bases-cards-cover:hover {
+  opacity: 1 !important;
+}

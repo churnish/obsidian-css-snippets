@@ -1,0 +1,5 @@
+/* Hide breadcrumb trail in tab title bar */
+
+body.is-phone .view-header-title-parent {
+    display: none;
+}

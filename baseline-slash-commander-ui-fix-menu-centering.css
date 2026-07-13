@@ -1,7 +1,0 @@
-/* Baseline + Slash Commander: Fix Slash Commander menu items being off-center */
-
-/* Source: https://github.com/churnish/obsidian-css-snippets */
-
-body.input-cupertino:not(.is-mobile) .suggestion-container .suggestion-item .cmdr-suggest-item {
-  margin-left: 0;
-}

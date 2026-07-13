@@ -1,0 +1,53 @@
+/* Extracted from Baseline theme (https://github.com/aaaaalexis/obsidian-baseline), with modifications */
+
+.markdown-rendered :is(h1, h2, h3, h4, h5, h6) .heading-collapse-indicator,
+.cm-line.HyperMD-header .collapse-indicator {
+  opacity: 1 !important;
+}
+
+.markdown-rendered :is(h1, h2, h3, h4, h5, h6) .heading-collapse-indicator svg.svg-icon,
+.cm-line.HyperMD-header .collapse-indicator svg.svg-icon {
+  border-radius: 100vh;
+  background-color: var(--dot-color);
+}
+
+.markdown-rendered :is(h1, h2, h3, h4, h5, h6) .heading-collapse-indicator svg.svg-icon path,
+.cm-line.HyperMD-header .collapse-indicator svg.svg-icon path {
+  opacity: 0;
+}
+
+.markdown-rendered h1 .heading-collapse-indicator svg.svg-icon,
+.HyperMD-header-1 .collapse-indicator svg.svg-icon {
+  --dot-color: var(--text-faint);
+}
+
+.markdown-rendered h2 .heading-collapse-indicator svg.svg-icon,
+.HyperMD-header-2 .collapse-indicator svg.svg-icon {
+  --dot-color: var(--h2-color, var(--color-red));
+}
+
+.markdown-rendered h3 .heading-collapse-indicator svg.svg-icon,
+.HyperMD-header-3 .collapse-indicator svg.svg-icon {
+  --dot-color: var(--h3-color, var(--color-yellow));
+}
+
+.markdown-rendered h4 .heading-collapse-indicator svg.svg-icon,
+.HyperMD-header-4 .collapse-indicator svg.svg-icon {
+  --dot-color: var(--h4-color, var(--color-green));
+}
+
+.markdown-rendered h5 .heading-collapse-indicator svg.svg-icon,
+.HyperMD-header-5 .collapse-indicator svg.svg-icon {
+  --dot-color: var(--h5-color, var(--color-blue));
+}
+
+.markdown-rendered h6 .heading-collapse-indicator svg.svg-icon,
+.HyperMD-header-6 .collapse-indicator svg.svg-icon {
+  --dot-color: var(--h6-color, var(--color-purple));
+}
+
+.markdown-rendered :is(h1, h2, h3, h4, h5, h6) .heading-collapse-indicator.is-collapsed svg.svg-icon,
+.cm-line.HyperMD-header .collapse-indicator.is-collapsed svg.svg-icon {
+  background-color: transparent;
+  box-shadow: inset 0 0 0 1.5px var(--dot-color);
+}

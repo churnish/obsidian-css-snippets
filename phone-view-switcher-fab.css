@@ -1,6 +1,6 @@
-/* Floating mode-switch button on phone view-actions toolbar */
+/* Floating mode-switch button on phone */
 
-/* Source: extracted from Baseline theme, https://github.com/aaaaalexis/obsidian-baseline */
+/* Source: extracted from Baseline theme https://github.com/aaaaalexis/obsidian-baseline */
 
 body.is-phone {
     --keyboard-spacing: 8px;
@@ -33,9 +33,13 @@ body.is-phone .workspace-leaf-content[data-type="markdown"] .view-actions button
     height: 48px;
     border-radius: 100%;
     corner-shape: round;
-    background-color: var(--background-secondary);
-    border: var(--border-width) solid var(--background-modifier-border);
-    box-shadow: var(--raised-shadow);
+    /* --raised-background is a compound color-mix()+linear-gradient() value: needs the background shorthand, background-color alone drops it as invalid. */
+    background: var(--raised-background);
+    -webkit-backdrop-filter: var(--raised-blur);
+    backdrop-filter: var(--raised-blur);
+    border: none;
+    box-shadow: var(--shadow-xs);
+    color: var(--text-normal);
     /* Mirror native mobile navbar hide/show timing so button slides and fades in lockstep. Values hardcoded because theme exposes no variable for them. */
     transition:
         opacity 0.2s ease-in-out,
@@ -44,8 +48,12 @@ body.is-phone .workspace-leaf-content[data-type="markdown"] .view-actions button
 }
 
 body.is-phone .workspace-leaf-content[data-type="markdown"][data-mode="source"] .view-actions button:nth-last-child(2) {
-    background-color: rgb(from var(--interactive-accent) r g b / 95%);
+    /* Shorthand resets background-image to none, clearing the base rule's gradient instead of layering accent color under it. */
+    background: rgb(from var(--interactive-accent) r g b / 95%);
+    /* Matches Baseline's own native glyph color: light but still accent-tinted, not neutral white. */
     color: oklch(from var(--interactive-accent) 0.95 c h);
+    /* The view-switcher-icons snippet draws the glyph as a ::before mask using --icon-color, not currentColor, so color alone does not reach it. */
+    --icon-color: oklch(from var(--interactive-accent) 0.95 c h);
 }
 
 body.is-phone.mod-toolbar-open .workspace-leaf-content[data-type="markdown"] .view-actions button:nth-last-child(2) {

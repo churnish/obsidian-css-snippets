@@ -1,0 +1,6 @@
+/* obsidian-outliner recolors bullet markers via .outliner-plugin-better-lists .list-bullet::after; this restores Obsidian's default marker color/size */
+.outliner-plugin-better-lists .list-bullet::after {
+	width: var(--list-bullet-size);
+	height: var(--list-bullet-size);
+	background-color: var(--list-marker-color);
+}

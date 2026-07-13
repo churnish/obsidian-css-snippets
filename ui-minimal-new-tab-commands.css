@@ -2,14 +2,17 @@
 
 /* Source: https://github.com/churnish/obsidian-css-snippets */
 
+/* Exclude Obsidian's built-in 'Plugin no longer active' empty state, which reuses
+   .empty-state-action-list/.empty-state-action but should keep its text-labeled Close buttons */
+
 /* Hide all actions except first child and Quick Switcher++ button; keep second child as placeholder until Quick Switcher++ injects */
-.empty-state-action-list:has(.qsp-empty-state-action-launch) .empty-state-action:not(:first-child):not(.qsp-empty-state-action-launch),
-.empty-state-action-list:not(:has(.qsp-empty-state-action-launch)) .empty-state-action:not(:first-child):not(:nth-child(2)) {
+.empty-state-action-list:has(.qsp-empty-state-action-launch):not(:has(> .empty-state-action:first-child.mod-close)) .empty-state-action:not(:first-child):not(.qsp-empty-state-action-launch),
+.empty-state-action-list:not(:has(.qsp-empty-state-action-launch)):not(:has(> .empty-state-action:first-child.mod-close)) .empty-state-action:not(:first-child):not(:nth-child(2)) {
   display: none;
 }
 
 /* Force row layout */
-.empty-state-action-list {
+.empty-state-action-list:not(:has(> .empty-state-action:first-child.mod-close)) {
   display: flex !important;
   flex-direction: row !important;
   align-items: center;
@@ -17,20 +20,20 @@
   gap: 32px;
 }
 
-body.is-mobile .empty-state-action-list {
+body.is-mobile .empty-state-action-list:not(:has(> .empty-state-action:first-child.mod-close)) {
   gap: 16px;
 }
 
 /* Shared icon box for 'Create' and 'Find' buttons */
-.empty-state-action-list .empty-state-action:first-child,
-.empty-state-action-list .qsp-empty-state-action-launch.tappable,
-.empty-state-action-list:not(:has(.qsp-empty-state-action-launch)) .empty-state-action:nth-child(2) {
+.empty-state-action-list:not(:has(> .empty-state-action:first-child.mod-close)) .empty-state-action:first-child,
+.empty-state-action-list:not(:has(> .empty-state-action:first-child.mod-close)) .qsp-empty-state-action-launch.tappable,
+.empty-state-action-list:not(:has(.qsp-empty-state-action-launch)):not(:has(> .empty-state-action:first-child.mod-close)) .empty-state-action:nth-child(2) {
   font-size: 0;
 }
 
-.empty-state-action-list .empty-state-action:first-child::before,
-.empty-state-action-list .qsp-empty-state-action-launch.tappable::before,
-.empty-state-action-list:not(:has(.qsp-empty-state-action-launch)) .empty-state-action:nth-child(2)::before {
+.empty-state-action-list:not(:has(> .empty-state-action:first-child.mod-close)) .empty-state-action:first-child::before,
+.empty-state-action-list:not(:has(> .empty-state-action:first-child.mod-close)) .qsp-empty-state-action-launch.tappable::before,
+.empty-state-action-list:not(:has(.qsp-empty-state-action-launch)):not(:has(> .empty-state-action:first-child.mod-close)) .empty-state-action:nth-child(2)::before {
   content: "";
   display: inline-block;
   vertical-align: middle;
@@ -45,30 +48,30 @@ body.is-mobile .empty-state-action-list {
   -webkit-mask-repeat: no-repeat;
 }
 
-.empty-state-action-list .empty-state-action:first-child:hover::before,
-.empty-state-action-list .empty-state-action:first-child:active::before,
-.empty-state-action-list .qsp-empty-state-action-launch.tappable:hover::before,
-.empty-state-action-list .qsp-empty-state-action-launch.tappable:active::before,
-.empty-state-action-list:not(:has(.qsp-empty-state-action-launch)) .empty-state-action:nth-child(2):hover::before,
-.empty-state-action-list:not(:has(.qsp-empty-state-action-launch)) .empty-state-action:nth-child(2):active::before {
+.empty-state-action-list:not(:has(> .empty-state-action:first-child.mod-close)) .empty-state-action:first-child:hover::before,
+.empty-state-action-list:not(:has(> .empty-state-action:first-child.mod-close)) .empty-state-action:first-child:active::before,
+.empty-state-action-list:not(:has(> .empty-state-action:first-child.mod-close)) .qsp-empty-state-action-launch.tappable:hover::before,
+.empty-state-action-list:not(:has(> .empty-state-action:first-child.mod-close)) .qsp-empty-state-action-launch.tappable:active::before,
+.empty-state-action-list:not(:has(.qsp-empty-state-action-launch)):not(:has(> .empty-state-action:first-child.mod-close)) .empty-state-action:nth-child(2):hover::before,
+.empty-state-action-list:not(:has(.qsp-empty-state-action-launch)):not(:has(> .empty-state-action:first-child.mod-close)) .empty-state-action:nth-child(2):active::before {
   background-color: var(--text-muted);
 }
 
 /* 'Create' icon */
-.empty-state-action-list .empty-state-action:first-child::before {
+.empty-state-action-list:not(:has(> .empty-state-action:first-child.mod-close)) .empty-state-action:first-child::before {
   mask-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIxLjc1IiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiPjxwYXRoIGQ9Ik0xMiAzSDVhMiAyIDAgMCAwLTIgMnYxNGEyIDIgMCAwIDAgMiAyaDE0YTIgMiAwIDAgMCAyLTJ2LTciPjwvcGF0aD48cGF0aCBkPSJNMTguMzc1IDIuNjI1YTEgMSAwIDAgMSAzIDNsLTkuMDEzIDkuMDE0YTIgMiAwIDAgMS0uODUzLjUwNWwtMi44NzMuODRhLjUuNSAwIDAgMS0uNjItLjYybC44NC0yLjg3M2EyIDIgMCAwIDEgLjUwNi0uODUyeiI+PC9wYXRoPjwvc3ZnPg==");
   -webkit-mask-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIxLjc1IiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiPjxwYXRoIGQ9Ik0xMiAzSDVhMiAyIDAgMCAwLTIgMnYxNGEyIDIgMCAwIDAgMiAyaDE0YTIgMiAwIDAgMCAyLTJ2LTciPjwvcGF0aD48cGF0aCBkPSJNMTguMzc1IDIuNjI1YTEgMSAwIDAgMSAzIDNsLTkuMDEzIDkuMDE0YTIgMiAwIDAgMS0uODUzLjUwNWwtMi44NzMuODRhLjUuNSAwIDAgMS0uNjItLjYybC44NC0yLjg3M2EyIDIgMCAwIDEgLjUwNi0uODUyeiI+PC9wYXRoPjwvc3ZnPg==");
 }
 
 /* 'Find' icon (Quick Switcher++, or 'Go to file' fallback) */
-.empty-state-action-list .qsp-empty-state-action-launch.tappable::before,
-.empty-state-action-list:not(:has(.qsp-empty-state-action-launch)) .empty-state-action:nth-child(2)::before {
+.empty-state-action-list:not(:has(> .empty-state-action:first-child.mod-close)) .qsp-empty-state-action-launch.tappable::before,
+.empty-state-action-list:not(:has(.qsp-empty-state-action-launch)):not(:has(> .empty-state-action:first-child.mod-close)) .empty-state-action:nth-child(2)::before {
   mask-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIxLjc1IiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJsdWNpZGUgbHVjaWRlLWhpc3RvcnktaWNvbiBsdWNpZGUtaGlzdG9yeSI+PHBhdGggZD0iTTMgMTJhOSA5IDAgMSAwIDktOSA5Ljc1IDkuNzUgMCAwIDAtNi43NCAyLjc0TDMgOCIvPjxwYXRoIGQ9Ik0zIDN2NWg1Ii8+PHBhdGggZD0iTTEyIDd2NWw0IDIiLz48L3N2Zz4=");
   -webkit-mask-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIxLjc1IiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJsdWNpZGUgbHVjaWRlLWhpc3RvcnktaWNvbiBsdWNpZGUtaGlzdG9yeSI+PHBhdGggZD0iTTMgMTJhOSA5IDAgMSAwIDktOSA5Ljc1IDkuNzUgMCAwIDAtNi43NCAyLjc0TDMgOCIvPjxwYXRoIGQ9Ik0zIDN2NWg1Ii8+PHBhdGggZD0iTTEyIDd2NWw0IDIiLz48L3N2Zz4=");
 }
 
 /* Remove background from all empty state action buttons */
-.empty-state-action {
+.empty-state-action-list:not(:has(> .empty-state-action:first-child.mod-close)) .empty-state-action {
   background: none !important;
   background-color: transparent !important;
 }
