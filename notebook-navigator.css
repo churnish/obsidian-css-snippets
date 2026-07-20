@@ -2,31 +2,65 @@
 
 /* Source: https://github.com/churnish/obsidian-css-snippets */
 
-/* Calm metadata text color */
+/* MANDATORY: AI agents MUST read the official theming guide before editing this file */
+/* https://github.com/johansan/notebook-navigator/blob/main/docs/theming-guide.md */
+/* It documents every supported --nn-theme-* variable. Check for an existing variable before adding new selectors or overrides */
+
+/* WARNING: rules below that target raw plugin classes (not --nn-theme-* variables) rely on undocumented internals with no stability guarantee across NN updates. List mode and compact mode use different class names for the same conceptual element (e.g. .nn-file-extension-badge vs .nn-file-icon-rectangle) — verify both modes when touching file-row badge/icon/thumbnail rules, and re-check against a live vault after any NN update */
+
+/* ========================================================================
+   Global
+   ======================================================================== */
+
+/* Shared hover-darken amount for tag pills and the file-path reveal link, so both stay coupled to one value instead of drifting apart. Direction flips per theme (darken in light, lighten in dark) matching the plugin's own tag-hover split */
 body {
-  --nn-theme-file-date-color: var(--text-faint);
-  --nn-theme-file-parent-color: var(--text-faint);
-  --nn-theme-file-tag-color: var(--text-faint);
+    --nn-hover-emphasis-light: brightness(0.9);
+    --nn-hover-emphasis-dark: brightness(1.05);
 }
 
-/* Match nav item name color to native tree item color (was darker, using text-normal instead of nav-item-color) */
+/* Set navigation pane and list pane text to font-ui-small. Single selector list, one value to change instead of five scattered rules */
+/* Targets classes directly since plugin sets font-size vars as inline styles on .nn-split-container, which beats overriding vars on body */
+.nn-navitem-name,
+.nn-compact-file-header {
+    font-size: var(--font-ui-small) !important;
+}
+
+/* File name matches surrounding metadata, both list and compact mode */
+.nn-file-name {
+    font-size: var(--font-ui-small) !important;
+}
+
+/* Tag pill, timestamp, and parent-folder path one step smaller than surrounding metadata */
+.nn-file-tag,
+.nn-file-date,
+.nn-parent-folder {
+    font-size: var(--font-ui-smaller) !important;
+}
+
+/* Content preview one step bigger than surrounding metadata */
+.nn-file-preview {
+    font-size: var(--font-ui-small) !important;
+}
+
+/* Inline rename inputs, navigation and list pane */
+.nn-navitem-inline-rename,
+.nn-file-inline-rename {
+    font-size: var(--font-ui-medium) !important;
+}
+
+/* ========================================================================
+   Navigation pane
+   ======================================================================== */
+
 body {
-  --nn-theme-navitem-name-color: var(--nav-item-color);
+    /* Nav item name color matches native tree item color (plugin default was darker) */
+    --nn-theme-navitem-name-color: var(--nav-item-color);
 }
 
-/* Transparent tag background */
-.nn-file-tag {
-  background-color: transparent !important;
+/* Icon size for shortcut and recent-file entries matches native Bookmarks pane item icons (measured 14px, plugin default was 16px). Scoped to child rows only, not the Shortcuts/Recent files root headers themselves */
+.nn-shortcut-item {
+    --nn-nav-icon-size: 14px;
 }
-
-.nn-file.nn-selected .nn-file-tag {
-  background-color: transparent !important;
-}
-
-/* Calm tag border
-body {
-	--nn-theme-file-tag-border-color: var(--background-modifier-border-focus);
-}*/
 
 /* Show indentation lines */
 /* Uses repeating-linear-gradient to support unlimited nesting depth. Avoids conflicting with plugin's ::after hover effect. */
@@ -47,6 +81,138 @@ body {
     pointer-events: none;
 }
 
+/* Item count badge */
+.nn-navitem-count {
+    font-size: var(--font-ui-smaller) !important;
+}
+
+/* Root-level nav item icon color: vault name, Tags, Properties */
+.nn-navitem[data-level="0"] .nn-navitem-icon {
+    color: var(--icon-color-focused) !important;
+}
+
+/* Root-level nav item text color matches icon color, bold weight */
+.nn-navitem[data-level="0"] .nn-navitem-name {
+    color: var(--icon-color-focused) !important;
+    font-weight: var(--bold-weight) !important;
+}
+
+/* Hide note count for root-level items only: vault name, Tags, Properties. No such scoping exists in plugin settings (Show note count is global) */
+.nn-navitem[data-level="0"] .nn-navitem-count {
+    display: none;
+}
+
+/* Vault icon mask sources (closed-vault glyph, Lucide-style). -webkit-mask-image omitted: unprefixed mask-image is natively supported on this Electron/Chromium build (verified: Electron 39.8.3 / Chrome 142) */
+:root {
+    --nn-vault-icon-closed: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M21 19.2L21 4.8C21 3.47452 20.6046 3 19.5 3L4.5 3C3.39543 3 3 3.47452 3 4.8L3 19.2C3 20.5255 3.39543 21 4.5 21L19.5 21C20.6046 21 21 20.5255 21 19.2Z'/%3E%3Cpath d='M14.9675 10.56C15.0601 11.1841 14.9535 11.8216 14.6629 12.3817C14.3722 12.9418 13.9124 13.396 13.3488 13.6797C12.7851 13.9634 12.1464 14.0621 11.5234 13.9619C10.9004 13.8616 10.3249 13.5675 9.87868 13.1213C9.43249 12.6751 9.13835 12.0996 9.0381 11.4766C8.93786 10.8536 9.0366 10.2149 9.3203 9.65123C9.60399 9.08759 10.0582 8.62776 10.6183 8.33713C11.1784 8.04651 11.8159 7.93989 12.4401 8.03245C13.0767 8.12687 13.6662 8.42355 14.1213 8.87868C14.5765 9.33381 14.8731 9.92326 14.9675 10.56Z'/%3E%3Cpath d='M12 14L12 17'/%3E%3Cpath d='M21 7L22.5 7'/%3E%3Cpath d='M21 16L22.5 16'/%3E%3C/svg%3E");
+}
+
+/* Vault root icon stays the closed-vault glyph regardless of expand state (plugin swaps to a different open-vault icon when expanded). Mask-based, inherits currentColor so it still picks up the root icon color override above */
+.nn-navitem.nn-folder[data-level="0"] .nn-navitem-icon svg {
+    display: none;
+}
+
+.nn-navitem.nn-folder[data-level="0"] .nn-navitem-icon::before {
+    content: '';
+    display: block;
+    width: var(--nn-nav-icon-size);
+    height: var(--nn-nav-icon-size);
+    background-color: currentColor;
+    mask-repeat: no-repeat;
+    mask-position: center;
+    mask-size: contain;
+    mask-image: var(--nn-vault-icon-closed);
+}
+
+/* ========================================================================
+   List pane (files)
+   ======================================================================== */
+
+body {
+    /* Calm metadata text color */
+    --nn-theme-file-date-color: var(--text-faint);
+    --nn-theme-file-parent-color: var(--text-faint);
+    --nn-theme-file-tag-color: var(--text-faint);
+
+    /* Selected file: date and parent metadata text keep the same color instead of the plugin's default darker/bolder selected-state color (foreground-muted vs. the faint color above). Selected-inactive states inherit from these automatically per the theming guide's variable chain */
+    --nn-theme-file-selected-date-color: var(--text-faint);
+    --nn-theme-file-selected-parent-color: var(--text-faint);
+
+    /* Selected file: tag pill text stays the same base color as unselected. Emphasis is applied entirely via brightness filter below instead of swapping color tokens */
+    --nn-theme-file-selected-tag-color: var(--text-faint);
+}
+
+/* Transparent tag background */
+.nn-file-tag {
+    background-color: transparent !important;
+}
+
+/* Plain tag hover (unselected file): overrides the plugin's own hardcoded filter to instead reference the shared --nn-hover-emphasis-* variables above, so the file-path link below can match this value exactly with no drift risk. Same selector/specificity as the plugin's own rule — snippet load order alone is enough to win, no !important needed */
+.nn-file-tag.nn-clickable-tag:hover {
+    filter: var(--nn-hover-emphasis-light);
+}
+
+.theme-dark .nn-file-tag.nn-clickable-tag:hover {
+    filter: var(--nn-hover-emphasis-dark);
+}
+
+/* File path (parent-folder reveal) link hover: color darkens to match tag hover exactly, via the shared variable. Plugin's own hover treatment was underline-only, no color change */
+.nn-parent-folder-content[data-reveal='true']:hover {
+    filter: var(--nn-hover-emphasis-light);
+}
+
+.theme-dark .nn-parent-folder-content[data-reveal='true']:hover {
+    filter: var(--nn-hover-emphasis-dark);
+}
+
+/* Full pill shape, matching editor tags (--tag-radius: 2em, always half the pill's own height). Plugin hardcodes border-radius: min(10px, var(--nn-theme-file-tag-border-radius)) — the 10px is a literal in the CSS, not just the variable's default, so overriding --nn-theme-file-tag-border-radius alone can't remove the cap; the border-radius property itself has to be overridden directly */
+.nn-file-tag {
+    border-radius: 999px !important;
+}
+
+/* Tag pill outline always tracks 50% of whatever the tag's own text color currently is, in every state (unselected, selected, hover/press) from one rule. currentColor resolves against this element's own computed `color` at use time, not at declaration time, so it stays correct automatically as `color` changes across states — no per-state border value needed. !important beats the plugin's own selected-tag rule (higher specificity via its :not() chain) */
+.nn-file-tag:not(.nn-file-property):not([data-has-color='true']):not([data-has-background='true']) {
+    --nn-file-pill-border-color-resolved: color-mix(in srgb, currentColor 50%, transparent) !important;
+}
+
+/* Selected file: tag pill emphasized via brightness filter (affects text and outline together, since filter paints the whole element, not just one property). Direction flips per theme — darker only reads as more emphasis in light mode; dark mode needs lighter to move away from the background instead of toward it, matching the plugin's own light/dark split for its hover filter below */
+.nn-file.nn-selected .nn-file-tag:not(.nn-file-property):not([data-has-color='true']):not([data-has-background='true']) {
+    filter: brightness(0.8);
+}
+
+.theme-dark .nn-file.nn-selected .nn-file-tag:not(.nn-file-property):not([data-has-color='true']):not([data-has-background='true']) {
+    filter: brightness(1.2);
+}
+
+/* Selected file: hovering/pressing a tag pill compounds a second 20% emphasis step on top of the selected-state filter above — multiplicative, not additive (0.8 × 0.8 = 0.64, not a flat 0.6). !important needed since :hover/:active alone has lower specificity than the :not()-chain selector above. Scoped to exclude colored/custom-background tags, matching the resting selected-state rule above — this was missing here originally, letting this rule's higher specificity beat the colored-tag hover rules below and force a much harsher darken on colored tags than intended */
+.nn-file.nn-selected .nn-file-tag:not(.nn-file-property):not([data-has-color='true']):not([data-has-background='true']):hover,
+.nn-file.nn-selected .nn-file-tag:not(.nn-file-property):not([data-has-color='true']):not([data-has-background='true']):active {
+    filter: brightness(0.64) !important;
+}
+
+.theme-dark .nn-file.nn-selected .nn-file-tag:not(.nn-file-property):not([data-has-color='true']):not([data-has-background='true']):hover,
+.theme-dark .nn-file.nn-selected .nn-file-tag:not(.nn-file-property):not([data-has-color='true']):not([data-has-background='true']):active {
+    filter: brightness(1.44) !important;
+}
+
+/* No outline on colored/custom-background tags (plugin default draws a 30%-opacity currentColor border on these) */
+.nn-file-tag[data-has-color='true'],
+.nn-file-tag[data-has-background='true'] {
+    --nn-file-pill-border-color-resolved: transparent;
+}
+
+/* Colored tag hover matches editor tag hover exactly: verified live via Obsidian's own --tag-background/--tag-background-hover core variables, which only double the background tint (10% -> 20%) and leave text/border untouched. Plugin's own unselected-colored-tag rule already tints at color-mix(currentColor 10%), so this is the same formula at 20%, not a different mechanism. Scoped to data-has-color only — data-has-background uses a different formula below since it stores a flat opaque color, not a percentage tint. filter: none cancels the plugin's own .nn-clickable-tag:hover brightness filter, which applies to every clickable tag regardless of color status and would otherwise stack on top of this, unlike vanilla which has no such filter layer */
+.nn-file-tag[data-has-color='true']:not([data-has-background='true']):hover {
+    background-image: linear-gradient(color-mix(in srgb, currentColor 20%, transparent), color-mix(in srgb, currentColor 20%, transparent)) !important;
+    filter: none !important;
+}
+
+/* Custom-background tag hover matches Pretty Properties' own .custom-color hover 1:1 (the mechanism behind this vault's colored tag pills), verified live via its --pp-background-hsl/--pp-background-hover-hsl pair across four different tags: always drops HSL lightness by exactly 5 points on hover, hue and saturation untouched. Relative color syntax reproduces this regardless of the tag's own hue/lightness, verified to match Pretty Properties' rendered output to the rounding unit. filter: none cancels the plugin's own .nn-clickable-tag:hover brightness filter, which would otherwise stack on top */
+.nn-file-tag[data-has-background='true']:hover {
+    background-image: linear-gradient(hsl(from var(--nn-file-tag-custom-bg, transparent) h s calc(l - 5)), hsl(from var(--nn-file-tag-custom-bg, transparent) h s calc(l - 5))) !important;
+    filter: none !important;
+}
+
 .notebook-navigator .nn-list-pane .nn-list-pane-overlay:not(:hover) .nn-header-actions .nn-header-actions .nn-icon-button {
     min-width: 0;
     padding: 0;
@@ -59,36 +225,10 @@ body {
     width: 16px !important;
 }
 
-/* Set navigation pane and list pane text to font-ui-medium */
-/* Targets classes directly since plugin sets font-size vars as inline styles on .nn-split-container, which beats overriding the vars on body */
-.nn-navitem-name {
-    font-size: var(--font-ui-medium) !important;
-}
-
-/* Folder name breadcrumb in list pane header */
-.nn-mobile-title {
-    font-size: var(--font-ui-large) !important;
-}
-
-.nn-file-name {
-    font-size: var(--font-ui-medium) !important;
-}
-
-.nn-file-preview {
-    font-size: var(--font-ui-medium) !important;
-}
-
-/* Desktop: nav pane text and text preview one step smaller than mobile (font-ui-small instead of font-ui-medium) */
-.nn-desktop .nn-navitem-name,
-.nn-desktop .nn-file-preview {
-    font-size: var(--font-ui-small) !important;
-}
-
-/* Tag, timestamp, and parent folder label to font-ui-small */
-.nn-file-tag,
-.nn-file-date,
-.nn-parent-folder {
-    font-size: var(--font-ui-small) !important;
+/* Breadcrumb path separator */
+.nn-path-separator {
+    color: var(--text-faint) !important;
+    font-weight: normal !important;
 }
 
 /* Group header */
@@ -96,42 +236,224 @@ body {
     font-size: var(--font-ui-medium) !important;
 }
 
-/* Item count badge */
-.nn-navitem-count {
-    font-size: var(--font-ui-smaller) !important;
-}
-
 /* Vault title header */
 .nn-vault-title-content {
     font-size: var(--font-ui-large) !important;
 }
 
-/* Inline rename inputs */
-.nn-navitem-inline-rename,
-.nn-file-inline-rename {
-    font-size: var(--font-ui-medium) !important;
-}
-
-/* Bold root-level nav items: vault name, Tags, Properties */
-.nn-navitem[data-level="0"] .nn-navitem-name {
-    font-weight: var(--bold-weight) !important;
-}
-
-/* Root-level nav item icon color: vault name, Tags, Properties */
-.nn-navitem[data-level="0"] .nn-navitem-icon {
-    color: var(--icon-color-focused) !important;
-}
-
-/* Compact-mode file header row, and file name inside it, to font-ui-small */
+/* Gap between badge and file name matches gap used in file explorer and Quick switcher (plugin default was 8px) */
 .nn-compact-file-header {
-    font-size: var(--font-ui-small) !important;
+    gap: var(--size-2-2) !important;
 }
 
-.nn-compact-file-header .nn-file-name {
-    font-size: var(--font-ui-small) !important;
+/* Extension badge (Canvas, Base, etc.) positioned left of file name, filled pill style shared by compact mode (.nn-file-icon-rectangle) and list mode (.nn-file-extension-badge) */
+.nn-compact-extension-badge {
+    order: -1;
 }
 
-/* [Mobile] Back button chevron matches other icon colors instead of accent */
+.nn-file-icon-rectangle,
+.nn-file-extension-badge:not(:has(.nn-file-extension-icon)) {
+    background-color: var(--background-modifier-border) !important;
+    border-radius: var(--radius-s) !important;
+    padding: 0 var(--size-4-1) !important;
+}
+
+.nn-file-icon-rectangle-text,
+.nn-file-extension-text {
+    color: var(--text-muted) !important;
+    font-weight: var(--nav-tag-weight) !important;
+    letter-spacing: 0.05em !important;
+    line-height: var(--line-height-normal) !important;
+}
+
+/* Compact mode needs explicit uppercase; list mode already inherits it from the plugin's own .nn-file-extension-text rule */
+.nn-file-icon-rectangle-text {
+    text-transform: uppercase !important;
+}
+
+/* Real thumbnails (image/PDF): double gap between thumbnail and text content */
+.nn-file-inner-content:not(:has(.nn-file-thumbnail--extension-badge)) {
+    gap: calc(var(--nn-file-row-gap) * 2);
+}
+
+/* List mode: hide square extension-badge thumbnail placeholder, replace with pill used elsewhere, positioned left of file name only (date line stays flush left, not indented) */
+/* Scoped to rows with extension-badge placeholder only — real image/PDF thumbnails use different element and must keep plugin's original flex layout, or they get auto-placed into badge's grid slot */
+.nn-file-inner-content:has(.nn-file-thumbnail--extension-badge) {
+    display: grid !important;
+    grid-template-columns: auto 1fr;
+    align-items: center;
+    column-gap: var(--size-2-2);
+}
+
+.nn-file-inner-content:has(.nn-file-thumbnail--extension-badge) .nn-file-text-content {
+    display: contents;
+}
+
+.nn-file-inner-content:has(.nn-file-thumbnail--extension-badge) .nn-file-name {
+    grid-column: 2;
+}
+
+.nn-file-inner-content:has(.nn-file-thumbnail--extension-badge) .nn-file-text-content > :not(.nn-file-name) {
+    grid-column: 1 / -1;
+}
+
+.nn-file-thumbnail--extension-badge {
+    order: -1 !important;
+    grid-column: 1;
+    width: auto !important;
+    height: auto !important;
+    margin: 0 !important;
+}
+
+/* Icon badge (Excalidraw, etc.): bare icon left of file name, no pill box — sized and colored to match file name line instead of Canvas/Base-style tag */
+.nn-file-extension-badge:has(.nn-file-extension-icon) {
+    width: auto !important;
+    height: var(--font-ui-medium) !important;
+    padding: 0 !important;
+}
+
+.nn-file-extension-icon {
+    width: var(--font-ui-medium) !important;
+    height: var(--font-ui-medium) !important;
+    color: var(--text-normal) !important;
+}
+
+.nn-file-extension-icon svg {
+    width: 100% !important;
+    height: 100% !important;
+}
+
+.nn-file-extension-badge:has(.nn-file-extension-icon),
+.nn-file.nn-selected .nn-file-extension-badge:has(.nn-file-extension-icon),
+.nn-file:not(.nn-selected) .nn-file-content:hover .nn-file-extension-badge:has(.nn-file-extension-icon) {
+    background-color: transparent !important;
+    border-radius: 0 !important;
+}
+
+/* Base/Canvas extension badge icons (Lucide layout-list / layout-dashboard), mask-based so they inherit --text-normal. White stroke keeps the mask opaque under both luminance and alpha mask modes */
+:root {
+    --nn-badge-icon-base: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='3' y='3' width='7' height='7' rx='1'/%3E%3Crect x='3' y='14' width='7' height='7' rx='1'/%3E%3Cpath d='M14 4h7'/%3E%3Cpath d='M14 9h7'/%3E%3Cpath d='M14 15h7'/%3E%3Cpath d='M14 20h7'/%3E%3C/svg%3E");
+    --nn-badge-icon-canvas: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='3' y='3' width='7' height='9' rx='1'/%3E%3Crect x='14' y='3' width='7' height='5' rx='1'/%3E%3Crect x='14' y='12' width='7' height='9' rx='1'/%3E%3Crect x='3' y='16' width='7' height='5' rx='1'/%3E%3C/svg%3E");
+}
+
+/* Replace Base/Canvas text pill with icon badge, matching drawing-file icon-badge treatment. List mode uses .nn-file-extension-badge/-text, compact mode uses .nn-file-icon-rectangle/-text — both covered. Attribute selector adds one specificity segment beyond the plain-pill and hover/selected pill rules below, so this wins outright in every state regardless of source order */
+.nn-file[data-path$=".base" i] .nn-file-extension-text,
+.nn-file[data-path$=".base" i] .nn-file-icon-rectangle-text,
+.nn-file[data-path$=".canvas" i] .nn-file-extension-text,
+.nn-file[data-path$=".canvas" i] .nn-file-icon-rectangle-text {
+    display: none;
+}
+
+.nn-file[data-path$=".base" i] .nn-file-extension-badge,
+.nn-file[data-path$=".base" i] .nn-file-icon-rectangle,
+.nn-file.nn-selected[data-path$=".base" i] .nn-file-extension-badge,
+.nn-file.nn-selected[data-path$=".base" i] .nn-file-icon-rectangle,
+.nn-file:not(.nn-selected)[data-path$=".base" i] .nn-file-content:hover .nn-file-extension-badge,
+.nn-file:not(.nn-selected)[data-path$=".base" i] .nn-file-content:hover .nn-file-icon-rectangle,
+.nn-file[data-path$=".canvas" i] .nn-file-extension-badge,
+.nn-file[data-path$=".canvas" i] .nn-file-icon-rectangle,
+.nn-file.nn-selected[data-path$=".canvas" i] .nn-file-extension-badge,
+.nn-file.nn-selected[data-path$=".canvas" i] .nn-file-icon-rectangle,
+.nn-file:not(.nn-selected)[data-path$=".canvas" i] .nn-file-content:hover .nn-file-extension-badge,
+.nn-file:not(.nn-selected)[data-path$=".canvas" i] .nn-file-content:hover .nn-file-icon-rectangle {
+    background-color: transparent !important;
+    border-radius: 0 !important;
+    width: auto !important;
+    height: var(--font-ui-medium) !important;
+    padding: 0 !important;
+}
+
+.nn-file[data-path$=".base" i] .nn-file-extension-badge::before,
+.nn-file[data-path$=".base" i] .nn-file-icon-rectangle::before,
+.nn-file[data-path$=".canvas" i] .nn-file-extension-badge::before,
+.nn-file[data-path$=".canvas" i] .nn-file-icon-rectangle::before {
+    content: '';
+    display: block;
+    width: var(--font-ui-medium);
+    height: var(--font-ui-medium);
+    background-color: var(--text-normal);
+    mask-repeat: no-repeat;
+    mask-position: center;
+    mask-size: contain;
+}
+
+.nn-file[data-path$=".base" i] .nn-file-extension-badge::before,
+.nn-file[data-path$=".base" i] .nn-file-icon-rectangle::before {
+    mask-image: var(--nn-badge-icon-base);
+}
+
+.nn-file[data-path$=".canvas" i] .nn-file-extension-badge::before,
+.nn-file[data-path$=".canvas" i] .nn-file-icon-rectangle::before {
+    mask-image: var(--nn-badge-icon-canvas);
+}
+
+/* Hide leading icon for markdown notes (default rendered as generic file icon), icon slot spacing kept for alignment with icons on other file types. Excalidraw notes (*.excalidraw.md) keep their pencil icon */
+.nn-file[data-path$=".md" i]:not([data-path$=".excalidraw.md" i]) .nn-file-icon-slot .nn-file-icon {
+    display: none;
+}
+
+/* Selected or hovered file: pill background matches sidebar background instead of the selection/hover tint, for readability */
+.nn-file.nn-selected .nn-file-extension-badge,
+.nn-file.nn-selected .nn-file-icon-rectangle,
+.nn-file:not(.nn-selected) .nn-file-content:hover .nn-file-extension-badge,
+.nn-file:not(.nn-selected) .nn-file-content:hover .nn-file-icon-rectangle {
+    background-color: var(--background-secondary) !important;
+}
+
+/* Hover state to match native file explorer (plugin disables its own hover box-shadow with no background replacement) */
+/* Excludes selected files: selection background lives on separate ::before layer, so hover background would visually stack on top instead of replacing it */
+.nn-file:not(.nn-selected) .nn-file-content:hover {
+    background-color: var(--nav-item-background-hover);
+    border-radius: var(--nn-file-item-border-radius);
+}
+
+/* ========================================================================
+   Mobile
+   ======================================================================== */
+
+/* Folder name breadcrumb in list pane header */
+.nn-mobile-title {
+    font-size: var(--font-ui-large) !important;
+}
+
+/* Set back button icon color to default */
 .notebook-navigator-mobile button.nn-back-button svg {
     stroke: var(--icon-color) !important;
+}
+
+/* Back button chevron matches size of other visible icons (ribbon, ribbon search, etc.), button hit-target stays plugin's default size */
+/* --icon-size resolves smaller inside NN's own DOM tree than in ribbon/sidebar context, so matched by measured value (24px) instead of var */
+.notebook-navigator-mobile button.nn-back-button svg {
+    width: 24px !important;
+    height: 24px !important;
+}
+
+/* Compact mode: selected file matches native file explorer's rounder mobile pill instead of NN's own 16px-capped radius. List mode (non-compact) keeps its own smaller radius */
+.notebook-navigator-mobile .nn-file.nn-compact {
+    --nn-file-item-border-radius: var(--nav-item-radius) !important;
+}
+
+/* Navigation pane selection: neutral background instead of accent color */
+.nn-split-container.nn-mobile {
+    --nn-theme-navitem-selected-bg: var(--nn-theme-navitem-selected-inactive-bg);
+}
+
+/* Navigation pane selection matches native file explorer's rounder mobile pill instead of NN's own 14px-capped radius */
+.notebook-navigator-mobile .nn-navitem.nn-selected::after {
+    --nn-navitem-top-left-radius: var(--nav-item-radius);
+    --nn-navitem-top-right-radius: var(--nav-item-radius);
+    --nn-navitem-bottom-left-radius: var(--nav-item-radius);
+    --nn-navitem-bottom-right-radius: var(--nav-item-radius);
+}
+
+/* Context-menu-active ring (shown while long-pressing, before release) is separate from selection, with own hard-capped radius and no override variable, so overridden directly. Navigation pane always gets rounder pill; compact-mode file list matches it, list mode keeps own smaller radius */
+.notebook-navigator-mobile .nn-navitem.nn-context-menu-active:not(.nn-selected)::after,
+.notebook-navigator-mobile .nn-file.nn-compact.nn-context-menu-active:not(.nn-selected) .nn-file-content::after {
+    border-radius: var(--nav-item-radius) !important;
+}
+
+/* Long-press touch feedback matches native file explorer's tap highlight. NN file row never gets Obsidian's .tappable/.is-clickable class, so global touchstart handler skips it and no .mobile-tap class ever applies — :active reproduces same visual instead, bound to same variable native uses so it matches whatever color that resolves to on active theme */
+.notebook-navigator-mobile .nn-file:not(.nn-selected) .nn-file-content:active {
+    background-color: var(--nav-item-background-hover);
+    border-radius: var(--nn-file-item-border-radius);
 }

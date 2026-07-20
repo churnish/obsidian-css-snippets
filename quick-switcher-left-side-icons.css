@@ -1,0 +1,42 @@
+/* Quick Switcher++: Move right-side icons left of title, keybinds stay right, and normalize icon color to file name color */
+
+/* Covers single-line suggestions (command mode, search, create-new-note); multi-line suggestions (file/bookmark/recent with path breadcrumb) use own grid layout in quick-switcher-file-extension-badge.css, since unwrapping their second line into this flex row would place it beside the title instead of below it */
+/* .suggestion-aux holds keybind and icon(s) mixed together, so unwrap it and reorder children individually instead of moving whole container */
+.suggestion-item.mod-complex:not(:has(.suggestion-note)) {
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+}
+
+.suggestion-item.mod-complex:not(:has(.suggestion-note)) .suggestion-content,
+.suggestion-item.mod-complex:not(:has(.suggestion-note)) .suggestion-aux {
+    display: contents;
+}
+
+/* Icons (command icon, pin) move before title; auto margin on title pushes keybinds right, replacing container's original space-between */
+/* margin-inline-start zeroed since plugin's own flair styling adds 12px there, otherwise doubling gap between icons */
+/* margin-top centers icon on title's glyphs rather than the line box, same offset as quick-switcher-file-extension-badge.css */
+.suggestion-item.mod-complex:not(:has(.suggestion-note)) .suggestion-flair:not(.suggestion-hotkey) {
+    order: -1;
+    margin-inline-start: 0 !important;
+    margin-inline-end: var(--size-2-2);
+    margin-top: 2px;
+}
+
+/* margin-inline-start doubles gap after last icon (icon's own margin-inline-end still 4px, keeping icon-to-icon gap unchanged) */
+.suggestion-item.mod-complex:not(:has(.suggestion-note)) .suggestion-title {
+    margin-inline-start: var(--size-2-2);
+    margin-inline-end: auto;
+}
+
+/* Pin icon sorts before command icon within left-moved group */
+.suggestion-item.mod-complex:not(:has(.suggestion-note)) .suggestion-flair:has(svg.lucide-pin) {
+    order: -2;
+}
+
+/* Normalize suggestion icons to file name color, excluding folder/tag breadcrumb icons which stay muted to match their text */
+/* Folder/tag icons live in .qsp-breadcrumb-indicator, not .suggestion-flair, so they are unaffected by this selector */
+/* !important needed to beat plugin's own higher-specificity rule coloring the active-editor icon with text-accent */
+.suggestion-item .suggestion-flair svg {
+    color: var(--text-normal) !important;
+}

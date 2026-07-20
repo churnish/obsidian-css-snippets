@@ -1,0 +1,16 @@
+/* Move file extension tag left of file name and adopt Dynamic Views' filled badge style in file explorer */
+
+.nav-file-tag {
+    order: -1;
+    margin-inline-start: 0 !important;
+    margin-inline-end: var(--size-2-2) !important;
+    background-color: var(--background-modifier-border) !important;
+    color: var(--text-muted) !important;
+}
+
+/* Selected or hovered file: badge background matches sidebar background instead of the selection/hover tint, for readability */
+.tree-item-self.is-active .nav-file-tag,
+.tree-item-self.is-selected .nav-file-tag,
+.tree-item-self:hover .nav-file-tag {
+    background-color: var(--background-secondary) !important;
+}
