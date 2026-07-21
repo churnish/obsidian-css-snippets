@@ -2,7 +2,8 @@
 
 /* Source: https://github.com/churnish/obsidian-css-snippets */
 
-kbd {
+/* Excludes Quick Switcher++ hotkey badges, which keep their own plugin-native style */
+kbd:not(.suggestion-hotkey) {
  align-items: center;
  border: 1px solid #bcc2c8;
  border-bottom-width: 2px;
@@ -18,10 +19,10 @@ kbd {
  padding: .15em .6em;
 }
 
-.theme-light kbd {
+.theme-light kbd:not(.suggestion-hotkey) {
  background: #f8f9f9;
 }
 
-.theme-dark kbd {
+.theme-dark kbd:not(.suggestion-hotkey) {
  background: #1c1e1f;
 }

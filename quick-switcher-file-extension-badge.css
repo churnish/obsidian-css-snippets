@@ -33,7 +33,9 @@
             display: contents;
         }
 
+        /* grid-row explicit, not just grid-column: an item with only one axis set skips cells already claimed by another item's fully-explicit placement (the quick-open hotkey below), landing on the next free row instead of sharing this one */
         & .suggestion-title {
+            grid-row: 1;
             grid-column: 2;
         }
 
@@ -59,7 +61,32 @@
         & .suggestion-flair.qsp-file-ext-indicator {
             order: 1;
         }
+
+        /* Quick-open hotkey (saved-search suggestions) is a sibling of .suggestion-aux/.suggestion-content, not a child of either, so it has no grid placement of its own otherwise — it falls back to auto-placement in column 1, which both drags it below the note line (row 3, instead of beside the title on row 1) and widens column 1 to fit its own width, since that column is auto-sized */
+        & .qsp-quick-open-aux {
+            grid-row: 1;
+            grid-column: 2;
+            justify-self: end;
+            align-self: center;
+        }
     }
+}
+
+/* Vault switcher: dim path icon/text to match file suggestions' breadcrumb styling */
+/* Plugin's own CSS dims .qsp-breadcrumb-indicator/.qsp-breadcrumb (file mode) but never applies the same treatment to vault mode's differently-named .qsp-path-indicator/.qsp-path, despite both rendering the same folder-icon-plus-path row */
+.suggestion-item.qsp-suggestion-vault .qsp-path-indicator {
+    color: var(--text-faint);
+}
+
+.suggestion-item.qsp-suggestion-vault .qsp-path-indicator svg {
+    width: 1em;
+    height: 1em;
+}
+
+/* display:inline undoes the plugin's own .qsp-path { display: flex } rule — meant for file mode's row container, which shares this class name, but here .qsp-path is the text span itself, and flex blockifies it onto its own line below the inline folder icon */
+.suggestion-item.qsp-suggestion-vault .qsp-path {
+    display: inline;
+    color: var(--text-muted);
 }
 
 /* Swap path and tags breadcrumb line order: tags line above, path line below */
