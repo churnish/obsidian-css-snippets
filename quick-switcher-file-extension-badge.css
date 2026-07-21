@@ -5,51 +5,61 @@
     background-color: var(--background-secondary) !important;
 }
 
-/* Extension badge and other flairs (e.g. open-editor indicator, bookmark/recent indicators) reuse .suggestion-aux, right-aligned by default, so reorder container instead of tag itself */
-/* Grid layout instead of flex: icon shares row with only title; path/tag breadcrumbs (further lines, in complex suggestions) span full width flush left, matching icon-less suggestions, instead of being indented under title */
 /* Scoped to suggestions with a second line (.suggestion-note): single-line suggestions use flex layout in quick-switcher-left-side-icons.css instead */
-.suggestion-item.mod-complex:has(.suggestion-note):has(.suggestion-flair) {
-    display: grid;
-    grid-template-columns: auto 1fr;
-    align-items: flex-start;
-}
+.suggestion-item.mod-complex:has(.suggestion-note) {
+    /* Center badge/icon on title's text instead of centering across full multi-line suggestion height */
+    /* Plugin's own CSS sets align-self: center directly on .suggestion-aux, which wins over the container's align-items, so overridden here directly */
+    & .suggestion-aux {
+        align-self: flex-start;
+    }
 
-/* Center badge/icon on title's text instead of centering across full multi-line suggestion height */
-/* Plugin's own CSS sets align-self: center directly on .suggestion-aux, which wins over the container's align-items, so overridden here directly */
-.suggestion-item.mod-complex:has(.suggestion-note) .suggestion-aux {
-    align-self: flex-start;
-}
+    /* margin-top values differ because the badge (13.5px, padded text pill) and a bare flair icon (16px) need different offsets to land on the same visual center */
+    &:has(.nav-file-tag) .suggestion-aux {
+        margin-top: 3.25px;
+    }
 
-/* margin-top values differ because the badge (13.5px, padded text pill) and a bare flair icon (16px) need different offsets to land on the same visual center */
-.suggestion-item.mod-complex:has(.suggestion-note) .suggestion-aux:has(.nav-file-tag) {
-    margin-top: 3.25px;
-}
+    &:not(:has(.nav-file-tag)) .suggestion-aux {
+        margin-top: 2px;
+    }
 
-.suggestion-item.mod-complex:has(.suggestion-note) .suggestion-aux:not(:has(.nav-file-tag)) {
-    margin-top: 2px;
-}
+    /* Extension badge and other flairs (e.g. open-editor indicator, bookmark/recent indicators) reuse .suggestion-aux, right-aligned by default, so reorder container instead of tag itself */
+    /* Grid layout instead of flex: icon shares row with only title; path/tag breadcrumbs (further lines, in complex suggestions) span full width flush left, matching icon-less suggestions, instead of being indented under title */
+    &:has(.suggestion-flair) {
+        display: grid;
+        grid-template-columns: auto 1fr;
+        align-items: flex-start;
 
-.suggestion-item.mod-complex:has(.suggestion-note):has(.suggestion-flair) .suggestion-content {
-    display: contents;
-}
+        & .suggestion-content {
+            display: contents;
+        }
 
-.suggestion-item.mod-complex:has(.suggestion-note):has(.suggestion-flair) .suggestion-title {
-    grid-column: 2;
-}
+        & .suggestion-title {
+            grid-column: 2;
+        }
 
-.suggestion-item.mod-complex:has(.suggestion-note):has(.suggestion-flair) .suggestion-content > :not(.suggestion-title) {
-    grid-column: 1 / -1;
-}
+        & .suggestion-content > :not(.suggestion-title) {
+            grid-column: 1 / -1;
+        }
 
-.suggestion-item.mod-complex:has(.suggestion-note):has(.suggestion-flair) .suggestion-aux {
-    grid-column: 1;
-    order: -1;
-    margin-inline-end: var(--size-2-1);
-}
+        & .suggestion-aux {
+            grid-column: 1;
+            order: -1;
+            gap: var(--size-4-2);
+            margin-inline-end: var(--size-2-2);
+        }
 
-/* Plugin's own CSS adds margin-inline-start: 12px on flairs (e.g. active-editor indicator) for the default right-aligned layout, unlike the extension badge which carries no such margin, so it is zeroed here to match the badge's left edge */
-.suggestion-item.mod-complex:has(.suggestion-note):has(.suggestion-flair) .suggestion-flair {
-    margin-inline-start: 0;
+        /* Plugin's own CSS adds margin-inline-start: 12px on flairs (e.g. active-editor indicator), unlike the extension badge which carries no such margin, so it is zeroed here to leave only the aux's own gap and margin controlling spacing */
+        /* margin-inline-end needs !important: file-explorer-file-extension-badge.css sets margin-inline-end !important directly on the shared .nav-file-tag class, which the badge also carries */
+        & .suggestion-flair {
+            margin-inline-start: 0;
+            margin-inline-end: 0 !important;
+        }
+
+        /* Extension badge always sorts last (rightmost, closest to title) within the icon cluster */
+        & .suggestion-flair.qsp-file-ext-indicator {
+            order: 1;
+        }
+    }
 }
 
 /* Swap path and tags breadcrumb line order: tags line above, path line below */
@@ -59,4 +69,36 @@
 
 .suggestion-item .qsp-tags-breadcrumbs {
     order: 1;
+}
+
+/* Canvas/Base badges: replace text with an icon glyph instead of the plain text pill used for other extensions */
+/* Requires data-ext, stamped onto the badge by the startup-stamp-quick-switcher++-file-ext-badge Templater startup template — the plugin renders the badge as a bare text node with no attribute or child element of its own, so pure CSS has nothing else to select on */
+/* Reuses --nn-badge-icon-canvas/--nn-badge-icon-base, defined at :root in notebook-navigator.css, so both plugins draw from one icon source */
+.qsp-file-ext-indicator[data-ext="canvas"],
+.qsp-file-ext-indicator[data-ext="base"] {
+    color: transparent;
+    font-size: 0;
+    width: var(--font-ui-medium);
+    height: var(--font-ui-medium);
+    padding: 0;
+    background-color: transparent !important;
+
+    &::before {
+        content: "";
+        display: block;
+        width: var(--font-ui-medium);
+        height: var(--font-ui-medium);
+        background-color: var(--text-normal);
+        mask-repeat: no-repeat;
+        mask-position: center;
+        mask-size: contain;
+    }
+}
+
+.qsp-file-ext-indicator[data-ext="canvas"]::before {
+    mask-image: var(--nn-badge-icon-canvas);
+}
+
+.qsp-file-ext-indicator[data-ext="base"]::before {
+    mask-image: var(--nn-badge-icon-base);
 }

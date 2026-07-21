@@ -1,11 +1,13 @@
-/* Quick Switcher++: Move right-side icons left of title, keybinds stay right, and normalize icon color to file name color */
+/* Quick Switcher++: Move right-side icons left of title, keybinds stay right, and normalize icon color to faint text color */
 
 /* Covers single-line suggestions (command mode, search, create-new-note); multi-line suggestions (file/bookmark/recent with path breadcrumb) use own grid layout in quick-switcher-file-extension-badge.css, since unwrapping their second line into this flex row would place it beside the title instead of below it */
 /* .suggestion-aux holds keybind and icon(s) mixed together, so unwrap it and reorder children individually instead of moving whole container */
+/* gap gives uniform spacing between every adjacent item in visual order (icon-to-icon and icon-to-title alike), instead of hand-tuning two separate margins to match */
 .suggestion-item.mod-complex:not(:has(.suggestion-note)) {
     display: flex;
     align-items: flex-start;
     justify-content: flex-start;
+    gap: var(--size-4-2);
 }
 
 .suggestion-item.mod-complex:not(:has(.suggestion-note)) .suggestion-content,
@@ -14,18 +16,16 @@
 }
 
 /* Icons (command icon, pin) move before title; auto margin on title pushes keybinds right, replacing container's original space-between */
-/* margin-inline-start zeroed since plugin's own flair styling adds 12px there, otherwise doubling gap between icons */
+/* margin-inline-start and margin-inline-end zeroed since plugin's own flair styling sets both, which would stack on top of the container's gap */
 /* margin-top centers icon on title's glyphs rather than the line box, same offset as quick-switcher-file-extension-badge.css */
 .suggestion-item.mod-complex:not(:has(.suggestion-note)) .suggestion-flair:not(.suggestion-hotkey) {
     order: -1;
     margin-inline-start: 0 !important;
-    margin-inline-end: var(--size-2-2);
+    margin-inline-end: 0 !important;
     margin-top: 2px;
 }
 
-/* margin-inline-start doubles gap after last icon (icon's own margin-inline-end still 4px, keeping icon-to-icon gap unchanged) */
 .suggestion-item.mod-complex:not(:has(.suggestion-note)) .suggestion-title {
-    margin-inline-start: var(--size-2-2);
     margin-inline-end: auto;
 }
 
@@ -34,9 +34,9 @@
     order: -2;
 }
 
-/* Normalize suggestion icons to file name color, excluding folder/tag breadcrumb icons which stay muted to match their text */
+/* Normalize suggestion icons to faint text color, excluding folder/tag breadcrumb icons (already faint to match their own text) and the canvas/base badge icons (mask-based ::before in quick-switcher-file-extension-badge.css, not an svg, so unaffected by this selector regardless) */
 /* Folder/tag icons live in .qsp-breadcrumb-indicator, not .suggestion-flair, so they are unaffected by this selector */
 /* !important needed to beat plugin's own higher-specificity rule coloring the active-editor icon with text-accent */
 .suggestion-item .suggestion-flair svg {
-    color: var(--text-normal) !important;
+    color: var(--text-faint) !important;
 }
