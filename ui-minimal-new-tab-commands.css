@@ -17,11 +17,7 @@
   flex-direction: row !important;
   align-items: center;
   justify-content: center;
-  gap: 32px;
-}
-
-body.is-mobile .empty-state-action-list:not(:has(> .empty-state-action:first-child.mod-close)) {
-  gap: 16px;
+  gap: 48px;
 }
 
 /* Shared icon box for 'Create' and 'Find' buttons */
@@ -29,6 +25,14 @@ body.is-mobile .empty-state-action-list:not(:has(> .empty-state-action:first-chi
 .empty-state-action-list:not(:has(> .empty-state-action:first-child.mod-close)) .qsp-empty-state-action-launch.tappable,
 .empty-state-action-list:not(:has(.qsp-empty-state-action-launch)):not(:has(> .empty-state-action:first-child.mod-close)) .empty-state-action:nth-child(2) {
   font-size: 0;
+}
+
+/* Remove Obsidian's mobile tap-target padding on these buttons, which otherwise doubles the visible icon gap beyond the flex gap above */
+body.is-mobile .empty-state-action-list:not(:has(> .empty-state-action:first-child.mod-close)) .empty-state-action:first-child,
+body.is-mobile .empty-state-action-list:not(:has(> .empty-state-action:first-child.mod-close)) .qsp-empty-state-action-launch.tappable,
+body.is-mobile .empty-state-action-list:not(:has(.qsp-empty-state-action-launch)):not(:has(> .empty-state-action:first-child.mod-close)) .empty-state-action:nth-child(2) {
+  padding-left: 0;
+  padding-right: 0;
 }
 
 .empty-state-action-list:not(:has(> .empty-state-action:first-child.mod-close)) .empty-state-action:first-child::before,

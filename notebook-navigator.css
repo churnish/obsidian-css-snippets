@@ -30,11 +30,15 @@ body {
     font-size: var(--font-ui-small) !important;
 }
 
-/* Tag pill, timestamp, and parent-folder path one step smaller than surrounding metadata */
-.nn-file-tag,
+/* Tag pill one step smaller than surrounding metadata */
+.nn-file-tag {
+    font-size: var(--font-ui-smaller) !important;
+}
+
+/* Timestamp and parent-folder path match surrounding metadata */
 .nn-file-date,
 .nn-parent-folder {
-    font-size: var(--font-ui-smaller) !important;
+    font-size: var(--font-ui-small) !important;
 }
 
 /* Content preview one step bigger than surrounding metadata */
@@ -46,6 +50,35 @@ body {
 .nn-navitem-inline-rename,
 .nn-file-inline-rename {
     font-size: var(--font-ui-medium) !important;
+}
+
+/* ========================================================================
+   Pane header (list only)
+   ======================================================================== */
+
+/* Toolbar icon buttons hidden until the header is hovered, matching native sidebar's hover-to-reveal action icons. Scoped to .nn-list-pane-chrome only — the navigation pane's own header buttons (Show single pane, Collapse items) stay always visible. Media-gated: on touch devices there is no hover to reveal them with, so the rule is skipped and buttons stay visible. Excludes [data-pane-toggle], the chevron button that switches between navigation and list pane, which stays visible at all times as primary navigation */
+@media (hover: hover) {
+    .nn-list-pane-chrome .nn-pane-header .nn-icon-button:not([data-pane-toggle]) {
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity var(--anim-duration-moderate);
+    }
+
+    .nn-list-pane-chrome .nn-pane-header:hover .nn-icon-button:not([data-pane-toggle]) {
+        opacity: 1;
+        pointer-events: auto;
+    }
+
+    /* Collapse the hidden icon group's own width (not just fade it) so the pane title can grow into the freed space and render unabbreviated instead of staying truncated behind invisible buttons */
+    .nn-list-pane-chrome .nn-header-actions--space-between > .nn-header-actions {
+        max-width: 0;
+        overflow: hidden;
+        transition: max-width var(--anim-duration-moderate);
+    }
+
+    .nn-list-pane-chrome .nn-pane-header:hover .nn-header-actions--space-between > .nn-header-actions {
+        max-width: 300px;
+    }
 }
 
 /* ========================================================================
@@ -402,9 +435,12 @@ body {
 
 /* Hover state to match native file explorer (plugin disables its own hover box-shadow with no background replacement) */
 /* Excludes selected files: selection background lives on separate ::before layer, so hover background would visually stack on top instead of replacing it */
-.nn-file:not(.nn-selected) .nn-file-content:hover {
-    background-color: var(--nav-item-background-hover);
-    border-radius: var(--nn-file-item-border-radius);
+/* Media-gated: touch devices simulate :hover on touchstart with no real pointer hovering, which was dimming rows the instant a long-press began, well before the context menu actually opened. Desktop/mouse only, where :hover genuinely means the pointer is over the row */
+@media (hover: hover) {
+    .nn-file:not(.nn-selected) .nn-file-content:hover {
+        background-color: var(--nav-item-background-hover);
+        border-radius: var(--nn-file-item-border-radius);
+    }
 }
 
 /* ========================================================================
@@ -413,7 +449,33 @@ body {
 
 /* Folder name breadcrumb in list pane header */
 .nn-mobile-title {
-    font-size: var(--font-ui-large) !important;
+    font-size: var(--font-ui-medium) !important;
+}
+
+/* Parent folder segments in breadcrumb use normal text color instead of plugin's accent-tinted link color */
+body {
+    --nn-theme-mobile-list-header-link-color: var(--text-normal);
+}
+
+/* Current (last) segment matches parent segments' color. Bold weight kept, inherited from .nn-mobile-title on both segments */
+.nn-path-current {
+    color: var(--text-normal) !important;
+}
+
+/* Parent folder segment chip shape matches desktop tab title bar's breadcrumb, for the hover background below to render as a padded pill instead of hugging the text */
+/* Vertical padding omitted: .nn-breadcrumb-scroll clips overflow-y, and any vertical padding grows the segment past the container's line-height, cutting off the pill's top edge */
+.nn-path-segment {
+    padding: 0 4px !important;
+    border-radius: 4px !important;
+}
+
+/* Hover state matches desktop tab title bar's breadcrumb: background chip and darker text, replacing plugin's own underline-only treatment */
+@media (hover: hover) {
+    .nn-path-segment:hover {
+        background-color: var(--background-modifier-hover);
+        color: var(--text-normal) !important;
+        text-decoration: none;
+    }
 }
 
 /* Set back button icon color to default */
@@ -452,8 +514,8 @@ body {
     border-radius: var(--nav-item-radius) !important;
 }
 
-/* Long-press touch feedback matches native file explorer's tap highlight. NN file row never gets Obsidian's .tappable/.is-clickable class, so global touchstart handler skips it and no .mobile-tap class ever applies — :active reproduces same visual instead, bound to same variable native uses so it matches whatever color that resolves to on active theme */
-.notebook-navigator-mobile .nn-file:not(.nn-selected) .nn-file-content:active {
+/* Dim background only while the long-press context menu is actually open, not on every touchstart. :active alone was dropped — it fires the instant a finger lands, including the start of a scroll gesture, so rows flashed dimmed on every scroll. A plain tap now falls through to the plugin's own immediate accent-colored selection with no dimming step in between */
+.notebook-navigator-mobile .nn-file.nn-context-menu-active:not(.nn-selected) .nn-file-content {
     background-color: var(--nav-item-background-hover);
     border-radius: var(--nn-file-item-border-radius);
 }
