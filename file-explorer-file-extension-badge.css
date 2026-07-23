@@ -1,4 +1,4 @@
-/* Move file extension tag left of file name and adopt Dynamic Views' filled badge style in file explorer */
+/* Move file extension tag left of file name, adopt Dynamic Views' filled badge style, and replace Canvas/Base/PDF badges with Lucide icons in file explorer */
 
 .nav-file-tag {
     order: -1;
@@ -13,4 +13,42 @@
 .tree-item-self.is-selected .nav-file-tag,
 .tree-item-self:hover .nav-file-tag {
     background-color: var(--background-secondary) !important;
+}
+
+/* Canvas/Base/PDF badges: replace text with an icon glyph instead of the plain text pill used for other extensions */
+/* No JS stamping needed here (unlike Quick Switcher++'s equivalent rule): the file explorer already carries the file path as data-path on .tree-item-self, so the extension is selectable directly via attribute selector */
+/* Reuses --badge-icon-canvas/--badge-icon-base/--badge-icon-pdf, defined at :root in file-extension-icons.css, so all three plugins draw from one icon source */
+/* Sized/colored to match this pane's own tree-item icons (e.g. bookmarks pane's file icon): app.css scopes .tree-item-self .tree-item-icon .svg-icon to --icon-xs/--icon-color, distinct from the generic --icon-size/--icon-color pairing used elsewhere */
+.tree-item-self[data-path$=".canvas" i] .nav-file-tag,
+.tree-item-self[data-path$=".base" i] .nav-file-tag,
+.tree-item-self[data-path$=".pdf" i] .nav-file-tag {
+    color: transparent !important;
+    font-size: 0;
+    width: var(--icon-xs);
+    height: var(--icon-xs);
+    padding: 0;
+    background-color: transparent !important;
+
+    &::before {
+        content: "";
+        display: block;
+        width: var(--icon-xs);
+        height: var(--icon-xs);
+        background-color: var(--icon-color);
+        mask-repeat: no-repeat;
+        mask-position: center;
+        mask-size: contain;
+    }
+}
+
+.tree-item-self[data-path$=".canvas" i] .nav-file-tag::before {
+    mask-image: var(--badge-icon-canvas);
+}
+
+.tree-item-self[data-path$=".base" i] .nav-file-tag::before {
+    mask-image: var(--badge-icon-base);
+}
+
+.tree-item-self[data-path$=".pdf" i] .nav-file-tag::before {
+    mask-image: var(--badge-icon-pdf);
 }
