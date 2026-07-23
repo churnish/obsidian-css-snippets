@@ -1,0 +1,10 @@
+/* Shared file-extension badge icon set, consumed by notebook-navigator.css, file-explorer-file-extension-badge.css, and quick-switcher-file-extension-badge.css */
+
+/* Base/Canvas/PDF badge icons (Lucide home / layout-dashboard / file-text), mask-based so they inherit --icon-color. White stroke/fill keeps the mask opaque under both luminance and alpha mask modes */
+/* Kept in their own file rather than one consumer's — no single one of the three owns this set (PDF in particular has no consumer in Notebook Navigator, which renders no extension badge for PDFs to begin with), so housing it inside any one of them was misleading regardless of variable prefix */
+/* --badge-icon-pdf matches Obsidian's own native PDF tab/pane-header icon exactly (verified live via a PDF's .workspace-tab-header-inner-icon); the others are this vault's own choices */
+:root {
+    --badge-icon-base: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8'/%3E%3Cpath d='M3 10a2 2 0 0 1 .709-1.528l7-6a2 2 0 0 1 2.582 0l7 6A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z'/%3E%3C/svg%3E");
+    --badge-icon-canvas: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='3' y='3' width='7' height='9' rx='1'/%3E%3Crect x='14' y='3' width='7' height='5' rx='1'/%3E%3Crect x='14' y='12' width='7' height='9' rx='1'/%3E%3Crect x='3' y='16' width='7' height='5' rx='1'/%3E%3C/svg%3E");
+    --badge-icon-pdf: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 22a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.704.706l3.588 3.588A2.4 2.4 0 0 1 20 8v12a2 2 0 0 1-2 2z'/%3E%3Cpath d='M14 2v5a1 1 0 0 0 1 1h5'/%3E%3Cpath d='M10 9H8'/%3E%3Cpath d='M16 13H8'/%3E%3Cpath d='M16 17H8'/%3E%3C/svg%3E");
+}

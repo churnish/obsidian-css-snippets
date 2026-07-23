@@ -363,12 +363,7 @@ body {
     border-radius: 0 !important;
 }
 
-/* Base/Canvas extension badge icons (Lucide layout-list / layout-dashboard), mask-based so they inherit --text-normal. White stroke keeps the mask opaque under both luminance and alpha mask modes */
-:root {
-    --nn-badge-icon-base: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='3' y='3' width='7' height='7' rx='1'/%3E%3Crect x='3' y='14' width='7' height='7' rx='1'/%3E%3Cpath d='M14 4h7'/%3E%3Cpath d='M14 9h7'/%3E%3Cpath d='M14 15h7'/%3E%3Cpath d='M14 20h7'/%3E%3C/svg%3E");
-    --nn-badge-icon-canvas: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='3' y='3' width='7' height='9' rx='1'/%3E%3Crect x='14' y='3' width='7' height='5' rx='1'/%3E%3Crect x='14' y='12' width='7' height='9' rx='1'/%3E%3Crect x='3' y='16' width='7' height='5' rx='1'/%3E%3C/svg%3E");
-}
-
+/* Base/Canvas extension badge icons (Lucide home / layout-dashboard): --badge-icon-base/-canvas, shared with file-explorer-file-extension-badge.css and quick-switcher-file-extension-badge.css, defined in file-extension-icons.css */
 /* Replace Base/Canvas text pill with icon badge, matching drawing-file icon-badge treatment. List mode uses .nn-file-extension-badge/-text, compact mode uses .nn-file-icon-rectangle/-text — both covered. Attribute selector adds one specificity segment beyond the plain-pill and hover/selected pill rules below, so this wins outright in every state regardless of source order */
 .nn-file[data-path$=".base" i] .nn-file-extension-text,
 .nn-file[data-path$=".base" i] .nn-file-icon-rectangle-text,
@@ -392,19 +387,20 @@ body {
     background-color: transparent !important;
     border-radius: 0 !important;
     width: auto !important;
-    height: var(--font-ui-medium) !important;
+    height: var(--icon-xs) !important;
     padding: 0 !important;
 }
 
+/* Sized/colored to match native tree-item icons (e.g. bookmarks pane's file icon): app.css scopes .tree-item-self .tree-item-icon .svg-icon to --icon-xs/--icon-color, distinct from the generic --icon-size/--icon-color pairing used elsewhere */
 .nn-file[data-path$=".base" i] .nn-file-extension-badge::before,
 .nn-file[data-path$=".base" i] .nn-file-icon-rectangle::before,
 .nn-file[data-path$=".canvas" i] .nn-file-extension-badge::before,
 .nn-file[data-path$=".canvas" i] .nn-file-icon-rectangle::before {
     content: '';
     display: block;
-    width: var(--font-ui-medium);
-    height: var(--font-ui-medium);
-    background-color: var(--text-normal);
+    width: var(--icon-xs);
+    height: var(--icon-xs);
+    background-color: var(--icon-color);
     mask-repeat: no-repeat;
     mask-position: center;
     mask-size: contain;
@@ -412,12 +408,12 @@ body {
 
 .nn-file[data-path$=".base" i] .nn-file-extension-badge::before,
 .nn-file[data-path$=".base" i] .nn-file-icon-rectangle::before {
-    mask-image: var(--nn-badge-icon-base);
+    mask-image: var(--badge-icon-base);
 }
 
 .nn-file[data-path$=".canvas" i] .nn-file-extension-badge::before,
 .nn-file[data-path$=".canvas" i] .nn-file-icon-rectangle::before {
-    mask-image: var(--nn-badge-icon-canvas);
+    mask-image: var(--badge-icon-canvas);
 }
 
 /* Hide leading icon for markdown notes (default rendered as generic file icon), icon slot spacing kept for alignment with icons on other file types. Excalidraw notes (*.excalidraw.md) keep their pencil icon */

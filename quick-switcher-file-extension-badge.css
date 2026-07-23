@@ -33,7 +33,9 @@
             display: contents;
         }
 
+        /* grid-row explicit, not just grid-column: an item with only one axis set skips cells already claimed by another item's fully-explicit placement (the quick-open hotkey below), landing on the next free row instead of sharing this one */
         & .suggestion-title {
+            grid-row: 1;
             grid-column: 2;
         }
 
@@ -59,7 +61,32 @@
         & .suggestion-flair.qsp-file-ext-indicator {
             order: 1;
         }
+
+        /* Quick-open hotkey (saved-search suggestions) is a sibling of .suggestion-aux/.suggestion-content, not a child of either, so it has no grid placement of its own otherwise — it falls back to auto-placement in column 1, which both drags it below the note line (row 3, instead of beside the title on row 1) and widens column 1 to fit its own width, since that column is auto-sized */
+        & .qsp-quick-open-aux {
+            grid-row: 1;
+            grid-column: 2;
+            justify-self: end;
+            align-self: center;
+        }
     }
+}
+
+/* Vault switcher: dim path icon/text to match file suggestions' breadcrumb styling */
+/* Plugin's own CSS dims .qsp-breadcrumb-indicator/.qsp-breadcrumb (file mode) but never applies the same treatment to vault mode's differently-named .qsp-path-indicator/.qsp-path, despite both rendering the same folder-icon-plus-path row */
+.suggestion-item.qsp-suggestion-vault .qsp-path-indicator {
+    color: var(--text-faint);
+}
+
+.suggestion-item.qsp-suggestion-vault .qsp-path-indicator svg {
+    width: 1em;
+    height: 1em;
+}
+
+/* display:inline undoes the plugin's own .qsp-path { display: flex } rule — meant for file mode's row container, which shares this class name, but here .qsp-path is the text span itself, and flex blockifies it onto its own line below the inline folder icon */
+.suggestion-item.qsp-suggestion-vault .qsp-path {
+    display: inline;
+    color: var(--text-muted);
 }
 
 /* Swap path and tags breadcrumb line order: tags line above, path line below */
@@ -71,23 +98,25 @@
     order: 1;
 }
 
-/* Canvas/Base badges: replace text with an icon glyph instead of the plain text pill used for other extensions */
+/* Canvas/Base/PDF badges: replace text with an icon glyph instead of the plain text pill used for other extensions */
 /* Requires data-ext, stamped onto the badge by the startup-stamp-quick-switcher++-file-ext-badge Templater startup template — the plugin renders the badge as a bare text node with no attribute or child element of its own, so pure CSS has nothing else to select on */
-/* Reuses --nn-badge-icon-canvas/--nn-badge-icon-base, defined at :root in notebook-navigator.css, so both plugins draw from one icon source */
+/* Reuses --badge-icon-canvas/--badge-icon-base/--badge-icon-pdf, defined at :root in file-extension-icons.css, so all consumers draw from one icon source */
+/* Sized to match native tree-item icons (app.css scopes .tree-item-self .tree-item-icon .svg-icon to --icon-xs, distinct from the generic --icon-size used elsewhere), but colored to match the suggestion's own file name text (--text-normal) instead of --icon-color: unlike file explorer/NN tree rows, where icon and label sit in the same dim tree-item-icon/tree-item-inner-text pairing, QSP's title text renders at full --text-normal contrast, so an --icon-color badge reads visibly dimmer than the name beside it */
 .qsp-file-ext-indicator[data-ext="canvas"],
-.qsp-file-ext-indicator[data-ext="base"] {
+.qsp-file-ext-indicator[data-ext="base"],
+.qsp-file-ext-indicator[data-ext="pdf"] {
     color: transparent;
     font-size: 0;
-    width: var(--font-ui-medium);
-    height: var(--font-ui-medium);
+    width: var(--icon-xs);
+    height: var(--icon-xs);
     padding: 0;
     background-color: transparent !important;
 
     &::before {
         content: "";
         display: block;
-        width: var(--font-ui-medium);
-        height: var(--font-ui-medium);
+        width: var(--icon-xs);
+        height: var(--icon-xs);
         background-color: var(--text-normal);
         mask-repeat: no-repeat;
         mask-position: center;
@@ -96,9 +125,19 @@
 }
 
 .qsp-file-ext-indicator[data-ext="canvas"]::before {
-    mask-image: var(--nn-badge-icon-canvas);
+    mask-image: var(--badge-icon-canvas);
 }
 
 .qsp-file-ext-indicator[data-ext="base"]::before {
-    mask-image: var(--nn-badge-icon-base);
+    mask-image: var(--badge-icon-base);
+}
+
+.qsp-file-ext-indicator[data-ext="pdf"]::before {
+    mask-image: var(--badge-icon-pdf);
+}
+
+/* Hide trailing slash on folder path breadcrumbs */
+/* Requires the wrapping span, stamped by the startup-stamp-quick-switcher++-file-ext-badge Templater startup template — the plugin renders the whole breadcrumb as one bare text node, so pure CSS has no separate element to select the trailing slash */
+.qsp-trailing-slash {
+    display: none;
 }
