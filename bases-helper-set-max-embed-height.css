@@ -1,5 +1,7 @@
 /* Cap Bases embed height at 70% of client height, fade top/bottom edges when scrollable */
 
+/* Fade uses an in-box gradient, not box-shadow: box-shadow blur reliably fails to paint on a position:sticky element whose opacity is driven by animation-timeline: scroll() (its raster falls outside the sticky layer's bounds, worst on the bottom-anchored side) */
+
 @keyframes bases-embed-fade-in-top {
     from { opacity: 0; }
     to { opacity: 1; }
@@ -20,7 +22,7 @@
     content: "";
     display: block;
     position: sticky;
-    height: 32px;
+    height: 40px;
     pointer-events: none;
     z-index: 1;
     animation-timeline: scroll(nearest block);
@@ -29,7 +31,7 @@
 
 .bases-embed > .bases-view::before {
     top: -4px;
-    margin: 0 -1px -32px -1px;
+    margin: 0 -1px -40px -1px;
     background: linear-gradient(to bottom,
         var(--background-primary) 0%,
         color-mix(in srgb, var(--background-primary) 56%, transparent) 25%,
@@ -42,7 +44,7 @@
 
 .bases-embed > .bases-view::after {
     bottom: -4px;
-    margin: -32px -1px 0 -1px;
+    margin: -40px -1px 0 -1px;
     background: linear-gradient(to top,
         var(--background-primary) 0%,
         color-mix(in srgb, var(--background-primary) 56%, transparent) 25%,

@@ -53,35 +53,6 @@ body {
 }
 
 /* ========================================================================
-   Pane header (list only)
-   ======================================================================== */
-
-/* Toolbar icon buttons hidden until the header is hovered, matching native sidebar's hover-to-reveal action icons. Scoped to .nn-list-pane-chrome only — the navigation pane's own header buttons (Show single pane, Collapse items) stay always visible. Media-gated: on touch devices there is no hover to reveal them with, so the rule is skipped and buttons stay visible. Excludes [data-pane-toggle], the chevron button that switches between navigation and list pane, which stays visible at all times as primary navigation */
-@media (hover: hover) {
-    .nn-list-pane-chrome .nn-pane-header .nn-icon-button:not([data-pane-toggle]) {
-        opacity: 0;
-        pointer-events: none;
-        transition: opacity var(--anim-duration-moderate);
-    }
-
-    .nn-list-pane-chrome .nn-pane-header:hover .nn-icon-button:not([data-pane-toggle]) {
-        opacity: 1;
-        pointer-events: auto;
-    }
-
-    /* Collapse the hidden icon group's own width (not just fade it) so the pane title can grow into the freed space and render unabbreviated instead of staying truncated behind invisible buttons */
-    .nn-list-pane-chrome .nn-header-actions--space-between > .nn-header-actions {
-        max-width: 0;
-        overflow: hidden;
-        transition: max-width var(--anim-duration-moderate);
-    }
-
-    .nn-list-pane-chrome .nn-pane-header:hover .nn-header-actions--space-between > .nn-header-actions {
-        max-width: 300px;
-    }
-}
-
-/* ========================================================================
    Navigation pane
    ======================================================================== */
 
@@ -160,6 +131,35 @@ body {
 /* ========================================================================
    List pane (files)
    ======================================================================== */
+
+/* ------------------------------------------------------------------------
+   Pane header
+   ------------------------------------------------------------------------ */
+
+/* Toolbar icon buttons hidden until the header is hovered, matching native sidebar's hover-to-reveal action icons. Scoped to .nn-list-pane-chrome only — the navigation pane's own header buttons (Show single pane, Collapse items) stay always visible. Media-gated: on touch devices there is no hover to reveal them with, so the rule is skipped and buttons stay visible. Excludes [data-pane-toggle], the chevron button that switches between navigation and list pane, which stays visible at all times as primary navigation */
+@media (hover: hover) {
+    .nn-list-pane-chrome .nn-pane-header .nn-icon-button:not([data-pane-toggle]) {
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity var(--anim-duration-moderate);
+    }
+
+    .nn-list-pane-chrome .nn-pane-header:hover .nn-icon-button:not([data-pane-toggle]) {
+        opacity: 1;
+        pointer-events: auto;
+    }
+
+    /* Collapse the hidden icon group's own width (not just fade it) so the pane title can grow into the freed space and render unabbreviated instead of staying truncated behind invisible buttons */
+    .nn-list-pane-chrome .nn-header-actions--space-between > .nn-header-actions {
+        max-width: 0;
+        overflow: hidden;
+        transition: max-width var(--anim-duration-moderate);
+    }
+
+    .nn-list-pane-chrome .nn-pane-header:hover .nn-header-actions--space-between > .nn-header-actions {
+        max-width: 300px;
+    }
+}
 
 body {
     /* Calm metadata text color */
