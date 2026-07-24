@@ -1,0 +1,54 @@
+/* Cap Bases embed height at 70% of client height, fade top/bottom edges when scrollable */
+
+@keyframes bases-embed-fade-in-top {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes bases-embed-fade-out-bottom {
+    from { opacity: 1; }
+    to { opacity: 0; }
+}
+
+.bases-embed > .bases-view {
+    max-height: 70vh;
+    overflow-y: auto;
+}
+
+.bases-embed > .bases-view::before,
+.bases-embed > .bases-view::after {
+    content: "";
+    display: block;
+    position: sticky;
+    height: 32px;
+    pointer-events: none;
+    z-index: 1;
+    animation-timeline: scroll(nearest block);
+    animation-fill-mode: both;
+}
+
+.bases-embed > .bases-view::before {
+    top: -4px;
+    margin: 0 -1px -32px -1px;
+    background: linear-gradient(to bottom,
+        var(--background-primary) 0%,
+        color-mix(in srgb, var(--background-primary) 56%, transparent) 25%,
+        color-mix(in srgb, var(--background-primary) 25%, transparent) 50%,
+        color-mix(in srgb, var(--background-primary) 6%, transparent) 75%,
+        transparent 100%);
+    animation-name: bases-embed-fade-in-top;
+    animation-range: 0px 40px;
+}
+
+.bases-embed > .bases-view::after {
+    bottom: -4px;
+    margin: -32px -1px 0 -1px;
+    background: linear-gradient(to top,
+        var(--background-primary) 0%,
+        color-mix(in srgb, var(--background-primary) 56%, transparent) 25%,
+        color-mix(in srgb, var(--background-primary) 25%, transparent) 50%,
+        color-mix(in srgb, var(--background-primary) 6%, transparent) 75%,
+        transparent 100%);
+    animation-name: bases-embed-fade-out-bottom;
+    animation-range: calc(100% - 40px) 100%;
+}

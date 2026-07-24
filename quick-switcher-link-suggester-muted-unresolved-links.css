@@ -3,18 +3,19 @@
 /* Source: https://github.com/churnish/obsidian-css-snippets */
 
 /* Quick switcher */
+/* :not(.qsp-suggestion-command) excludes command-mode entries: several built-in commands (Create new note, Create note to the right, Create new note in current tab) legitimately reuse the same lucide-file-plus flair icon, and command mode has no such thing as an unresolved link, so without this exclusion those three commands were incorrectly dimmed and had their icon hidden as if they were unresolved-link suggestions */
 /* Targets .suggestion-content's own children, not the wrapper itself: quick-switcher-left-side-icons.css sets .suggestion-content to display: contents for icon repositioning, and opacity has no effect on an element with no box */
-.suggestion-item.mod-complex:has(.suggestion-flair > .lucide-file-plus) .suggestion-content > * {
+.suggestion-item.mod-complex:not(.qsp-suggestion-command):has(.suggestion-flair > .lucide-file-plus) .suggestion-content > * {
     color: var(--text-faint);
 }
 
 /* Hide create-new-note flair icon entirely */
-.suggestion-item.mod-complex .suggestion-flair:has(> .lucide-file-plus) {
+.suggestion-item.mod-complex:not(.qsp-suggestion-command) .suggestion-flair:has(> .lucide-file-plus) {
     display: none;
 }
 
 /* Title's margin-inline-start in quick-switcher-left-side-icons.css pairs with the icon's own margin to form the icon-to-title gap; with the icon hidden above, that margin is orphaned and reads as an indent */
-.suggestion-item.mod-complex:has(.suggestion-flair > .lucide-file-plus) .suggestion-title {
+.suggestion-item.mod-complex:not(.qsp-suggestion-command):has(.suggestion-flair > .lucide-file-plus) .suggestion-title {
     margin-inline-start: 0 !important;
 }
 
