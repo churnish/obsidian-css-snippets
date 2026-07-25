@@ -101,27 +101,35 @@
 /* Canvas/Base/PDF badges: replace text with an icon glyph instead of the plain text pill used for other extensions */
 /* Requires data-ext, stamped onto the badge by the startup-stamp-quick-switcher++-file-ext-badge Templater startup template — the plugin renders the badge as a bare text node with no attribute or child element of its own, so pure CSS has nothing else to select on */
 /* Reuses --badge-icon-canvas/--badge-icon-base/--badge-icon-pdf, defined at :root in file-extension-icons.css, so all consumers draw from one icon source */
-/* Sized to match native tree-item icons (app.css scopes .tree-item-self .tree-item-icon .svg-icon to --icon-xs, distinct from the generic --icon-size used elsewhere), but colored to match the suggestion's own file name text (--text-normal) instead of --icon-color: unlike file explorer/NN tree rows, where icon and label sit in the same dim tree-item-icon/tree-item-inner-text pairing, QSP's title text renders at full --text-normal contrast, so an --icon-color badge reads visibly dimmer than the name beside it */
+/* Sized to var(--icon-s), matching the sibling suggestion-flair icons (open-editor, recent-file indicators), which get that size from .suggestion-flair's own --icon-size: var(--icon-s) — not var(--icon-xs), which happens to equal --icon-s on mobile but is smaller (14px vs 16px) on desktop, making the badge visibly undersized next to its siblings there */
+/* Colored to match the suggestion's own file name text (--text-normal) instead of --icon-color: unlike file explorer/NN tree rows, where icon and label sit in the same dim tree-item-icon/tree-item-inner-text pairing, QSP's title text renders at full --text-normal contrast, so an --icon-color badge reads visibly dimmer than the name beside it */
 .qsp-file-ext-indicator[data-ext="canvas"],
 .qsp-file-ext-indicator[data-ext="base"],
 .qsp-file-ext-indicator[data-ext="pdf"] {
     color: transparent;
     font-size: 0;
-    width: var(--icon-xs);
-    height: var(--icon-xs);
+    width: var(--icon-s);
+    height: var(--icon-s);
     padding: 0;
     background-color: transparent !important;
 
     &::before {
         content: "";
         display: block;
-        width: var(--icon-xs);
-        height: var(--icon-xs);
+        width: var(--icon-s);
+        height: var(--icon-s);
         background-color: var(--text-normal);
         mask-repeat: no-repeat;
         mask-position: center;
         mask-size: contain;
     }
+}
+
+/* Selected suggestion: re-assert transparent background — .suggestion-item.is-selected .nav-file-tag above carries the same !important but three classes of specificity (vs. two classes + one attribute here), so it wins over the plain rule above whenever the row is highlighted, which QSP's first result always is */
+.suggestion-item.is-selected .qsp-file-ext-indicator[data-ext="canvas"],
+.suggestion-item.is-selected .qsp-file-ext-indicator[data-ext="base"],
+.suggestion-item.is-selected .qsp-file-ext-indicator[data-ext="pdf"] {
+    background-color: transparent !important;
 }
 
 .qsp-file-ext-indicator[data-ext="canvas"]::before {
