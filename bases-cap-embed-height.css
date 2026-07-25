@@ -1,0 +1,47 @@
+/* Cap Bases embed height at 60% of client height, fade top/bottom edges when scrollable */
+
+/* Fade visibility driven by bases-fade-top/bases-fade-bottom classes (see startup-bases-embed-scroll-fade.md Templater startup script), not CSS scroll-driven animations: animation-timeline/scroll-timeline on .bases-view, or any ancestor of Dynamic Views' Masonry/Grid position:absolute cards, breaks card rendering outright on both Chromium and WebKit when present from initial page load. Moving the timeline off .bases-view avoids that but the resulting positioned pseudo-elements fail to paint on WebKit/iOS despite computing correct opacity - a paint bug, not a logic bug, confirmed via on-device testing across three separate CSS-only redesigns. A plain JS scroll listener sidesteps both failure modes entirely and matches Dynamic Views' own proven approach for its datacore query view's identical scroll-edge-fade problem */
+
+/* top/bottom: 0, not a negative offset: --bases-embed-padding (Obsidian core, theme/setting-dependent) can resolve as a two-value shorthand, which makes calc(-1 * var(...)) invalid CSS and silently drops the sticky offset entirely, so the pseudo stops sticking and scrolls with content instead */
+
+/* padding-block: 0 removes .bases-view's own top/bottom padding (Obsidian core, var(--bases-embed-padding)) entirely: sticky top/bottom: 0 resolves against the padding edge, so any nonzero padding leaves that strip of card content past the fade, unflush with the true visible boundary */
+
+/* !important needed: Obsidian core's own .bases-view padding rule has higher selector specificity than a plain .bases-embed > .bases-view snippet rule */
+
+.bases-embed > .bases-view {
+    max-height: 60vh;
+    overflow-y: auto;
+    padding-block: 0 !important;
+}
+
+.bases-embed > .bases-view::before,
+.bases-embed > .bases-view::after {
+    content: "";
+    display: block;
+    position: sticky;
+    z-index: 1;
+    height: 40px;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 150ms ease;
+}
+
+.bases-embed > .bases-view::before {
+    top: 0;
+    margin-bottom: -40px;
+    background: linear-gradient(to bottom, var(--background-primary), transparent);
+}
+
+.bases-embed > .bases-view::after {
+    bottom: 0;
+    margin-top: -40px;
+    background: linear-gradient(to top, var(--background-primary), transparent);
+}
+
+.bases-embed > .bases-view.bases-fade-top::before {
+    opacity: 1;
+}
+
+.bases-embed > .bases-view.bases-fade-bottom::after {
+    opacity: 1;
+}
