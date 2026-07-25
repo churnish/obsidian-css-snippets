@@ -3,7 +3,8 @@
 /* Source: https://github.com/churnish/obsidian-css-snippets */
 
 /* Quick Switcher++ */
-.prompt .qsp-suggestion-alias {
+/* Scoped to title only: .qsp-suggestion-alias is set on the whole suggestion-item, so italicizing it directly also italicizes the path/tags breadcrumbs below the title */
+.prompt .qsp-suggestion-alias .suggestion-title {
     font-style: italic;
 }
 
