@@ -36,7 +36,7 @@
 
 /* Normalize suggestion icons to faint text color, excluding folder/tag breadcrumb icons (already faint to match their own text) and the canvas/base badge icons (mask-based ::before in quick-switcher-file-extension-badge.css, not an svg, so unaffected by this selector regardless) */
 /* Folder/tag icons live in .qsp-breadcrumb-indicator, not .suggestion-flair, so they are unaffected by this selector */
-/* !important needed to beat plugin's own higher-specificity rule coloring the active-editor icon with text-accent */
-.suggestion-item .suggestion-flair svg {
+/* Open-in-editor icon (.qsp-editor-indicator) also excluded: keeps QSP's own text-accent styling instead of being flattened to faint like every other icon */
+.suggestion-item .suggestion-flair:not(.qsp-editor-indicator) svg {
     color: var(--text-faint) !important;
 }
