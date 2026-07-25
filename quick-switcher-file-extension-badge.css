@@ -22,8 +22,9 @@
         margin-top: 2px;
     }
 
-    /* Canvas/Base/PDF badges are full-height flair icons (18px, sized off var(--icon-s)), not the padded 13.5px text pill the :has(.nav-file-tag) margin above assumes — that margin sits them ~3px below the title's vertical center */
+    /* Canvas/Base/PDF badges are var(--icon-s) flair icons, not the padded 13.5px text pill the :has(.nav-file-tag) margin above assumes — that fixed offset over- or under-shoots depending on how --icon-s compares to the title's line height, which differs between desktop (16px vs ~19.5px) and mobile (18px vs ~18.2px), so centered dynamically within the row instead of guessing another fixed value */
     &:has(.qsp-file-ext-indicator[data-ext="canvas"], .qsp-file-ext-indicator[data-ext="base"], .qsp-file-ext-indicator[data-ext="pdf"]) .suggestion-aux {
+        align-self: center;
         margin-top: 0;
     }
 
