@@ -22,6 +22,11 @@
         margin-top: 2px;
     }
 
+    /* Canvas/Base/PDF badges are full-height flair icons (18px, sized off var(--icon-s)), not the padded 13.5px text pill the :has(.nav-file-tag) margin above assumes — that margin sits them ~3px below the title's vertical center */
+    &:has(.qsp-file-ext-indicator[data-ext="canvas"], .qsp-file-ext-indicator[data-ext="base"], .qsp-file-ext-indicator[data-ext="pdf"]) .suggestion-aux {
+        margin-top: 0;
+    }
+
     /* Extension badge and other flairs (e.g. open-editor indicator, bookmark/recent indicators) reuse .suggestion-aux, right-aligned by default, so reorder container instead of tag itself */
     /* Grid layout instead of flex: icon shares row with only title; path/tag breadcrumbs (further lines, in complex suggestions) span full width flush left, matching icon-less suggestions, instead of being indented under title */
     &:has(.suggestion-flair) {
