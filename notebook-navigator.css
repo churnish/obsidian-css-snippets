@@ -246,16 +246,11 @@ body {
     filter: none !important;
 }
 
-.notebook-navigator .nn-list-pane .nn-list-pane-overlay:not(:hover) .nn-header-actions .nn-header-actions .nn-icon-button {
-    min-width: 0;
-    padding: 0;
-    transition: all 200ms;
-    transition-delay: 200ms;
-    margin-right: -16px;
-}
-
-.notebook-navigator .nn-list-pane .nn-list-pane-overlay:not(:hover) .nn-header-actions .nn-header-actions .nn-icon-button > span {
-    width: 16px !important;
+/* Search match highlight: color only, no underline (plugin default draws border-bottom: 1px solid
+   currentColor on the mark itself, not text-decoration — verified via computed styles). Same
+   selector/specificity as the plugin's own rule, snippet load order alone is enough to win */
+.nn-search-highlight {
+    border-bottom: none;
 }
 
 /* Breadcrumb path separator */
@@ -391,7 +386,12 @@ body {
     padding: 0 !important;
 }
 
-/* Sized/colored to match native tree-item icons (e.g. bookmarks pane's file icon): app.css scopes .tree-item-self .tree-item-icon .svg-icon to --icon-xs/--icon-color, distinct from the generic --icon-size/--icon-color pairing used elsewhere */
+/* Sized to match native tree-item icons (e.g. bookmarks pane's file icon): app.css scopes
+   .tree-item-self .tree-item-icon .svg-icon to --icon-xs, distinct from the generic --icon-size
+   used elsewhere. Colored with currentColor, not --icon-color: the badge's own `color` already
+   tracks the file name's color exactly (verified live, list and compact mode, both rgb(34,34,34)),
+   while --icon-color is a fixed muted token (rgb(92,92,92)) that doesn't move with selection/hover
+   state the way the file name does — using it here was a visibly dimmer icon than the file name */
 .nn-file[data-path$=".base" i] .nn-file-extension-badge::before,
 .nn-file[data-path$=".base" i] .nn-file-icon-rectangle::before,
 .nn-file[data-path$=".canvas" i] .nn-file-extension-badge::before,
@@ -400,7 +400,7 @@ body {
     display: block;
     width: var(--icon-xs);
     height: var(--icon-xs);
-    background-color: var(--icon-color);
+    background-color: currentColor;
     mask-repeat: no-repeat;
     mask-position: center;
     mask-size: contain;
@@ -458,10 +458,11 @@ body {
     color: var(--text-normal) !important;
 }
 
-/* Parent folder segment chip shape matches desktop tab title bar's breadcrumb, for the hover background below to render as a padded pill instead of hugging the text */
+/* Parent folder segment chip shape matches desktop tab title bar's breadcrumb, for the hover background below to render as a padded pill instead of hugging the text. Includes .nn-path-current (the last, non-hoverable segment) purely for spacing symmetry — without it, this padding stacked onto the separator's own baked-in leading/trailing spaces (" / ") only on the side facing a .nn-path-segment, making the gap before the separator visibly wider than the gap after it */
 /* Vertical padding omitted: .nn-breadcrumb-scroll clips overflow-y, and any vertical padding grows the segment past the container's line-height, cutting off the pill's top edge */
-.nn-path-segment {
-    padding: 0 4px !important;
+.nn-path-segment,
+.nn-path-current {
+    padding: 0 2px !important;
     border-radius: 4px !important;
 }
 
