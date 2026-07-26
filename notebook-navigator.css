@@ -46,10 +46,10 @@ body {
     font-size: var(--font-ui-small) !important;
 }
 
-/* Inline rename inputs, navigation and list pane */
+/* Inline rename inputs match the item name's own font-size, navigation and list pane */
 .nn-navitem-inline-rename,
 .nn-file-inline-rename {
-    font-size: var(--font-ui-medium) !important;
+    font-size: var(--font-ui-small) !important;
 }
 
 /* ========================================================================
@@ -132,10 +132,6 @@ body {
    List pane (files)
    ======================================================================== */
 
-/* ------------------------------------------------------------------------
-   Pane header
-   ------------------------------------------------------------------------ */
-
 /* Toolbar icon buttons hidden until the header is hovered, matching native sidebar's hover-to-reveal action icons. Scoped to .nn-list-pane-chrome only — the navigation pane's own header buttons (Show single pane, Collapse items) stay always visible. Media-gated: on touch devices there is no hover to reveal them with, so the rule is skipped and buttons stay visible. Excludes [data-pane-toggle], the chevron button that switches between navigation and list pane, which stays visible at all times as primary navigation */
 @media (hover: hover) {
     .nn-list-pane-chrome .nn-pane-header .nn-icon-button:not([data-pane-toggle]) {
@@ -217,7 +213,7 @@ body {
     filter: brightness(1.2);
 }
 
-/* Selected file: hovering/pressing a tag pill compounds a second 20% emphasis step on top of the selected-state filter above — multiplicative, not additive (0.8 × 0.8 = 0.64, not a flat 0.6). !important needed since :hover/:active alone has lower specificity than the :not()-chain selector above. Scoped to exclude colored/custom-background tags, matching the resting selected-state rule above — this was missing here originally, letting this rule's higher specificity beat the colored-tag hover rules below and force a much harsher darken on colored tags than intended */
+/* Selected file: hovering/pressing a tag pill compounds a second 20% emphasis step on top of the selected-state filter above — multiplicative, not additive (0.8 × 0.8 = 0.64, not a flat 0.6). !important needed since :hover/:active has lower specificity than the :not()-chain selector above. Scoped to exclude colored/custom-background tags, matching the resting selected-state rule above, so this rule's higher specificity doesn't override their own hover rules below */
 .nn-file.nn-selected .nn-file-tag:not(.nn-file-property):not([data-has-color='true']):not([data-has-background='true']):hover,
 .nn-file.nn-selected .nn-file-tag:not(.nn-file-property):not([data-has-color='true']):not([data-has-background='true']):active {
     filter: brightness(0.64) !important;
@@ -234,13 +230,13 @@ body {
     --nn-file-pill-border-color-resolved: transparent;
 }
 
-/* Colored tag hover matches editor tag hover exactly: verified live via Obsidian's own --tag-background/--tag-background-hover core variables, which only double the background tint (10% -> 20%) and leave text/border untouched. Plugin's own unselected-colored-tag rule already tints at color-mix(currentColor 10%), so this is the same formula at 20%, not a different mechanism. Scoped to data-has-color only — data-has-background uses a different formula below since it stores a flat opaque color, not a percentage tint. filter: none cancels the plugin's own .nn-clickable-tag:hover brightness filter, which applies to every clickable tag regardless of color status and would otherwise stack on top of this, unlike vanilla which has no such filter layer */
+/* Colored tag hover matches editor tag hover exactly: doubles the background tint (10% -> 20%), same formula as the plugin's own unselected-colored-tag rule, just at 20%. Scoped to data-has-color only — data-has-background uses a different formula below since it stores a flat opaque color, not a percentage tint. filter: none cancels the plugin's own .nn-clickable-tag:hover brightness filter, which would otherwise stack on top */
 .nn-file-tag[data-has-color='true']:not([data-has-background='true']):hover {
     background-image: linear-gradient(color-mix(in srgb, currentColor 20%, transparent), color-mix(in srgb, currentColor 20%, transparent)) !important;
     filter: none !important;
 }
 
-/* Custom-background tag hover matches Pretty Properties' own .custom-color hover 1:1 (the mechanism behind this vault's colored tag pills), verified live via its --pp-background-hsl/--pp-background-hover-hsl pair across four different tags: always drops HSL lightness by exactly 5 points on hover, hue and saturation untouched. Relative color syntax reproduces this regardless of the tag's own hue/lightness, verified to match Pretty Properties' rendered output to the rounding unit. filter: none cancels the plugin's own .nn-clickable-tag:hover brightness filter, which would otherwise stack on top */
+/* Custom-background tag hover matches Pretty Properties' own .custom-color hover 1:1 (the mechanism behind this vault's colored tag pills): drops HSL lightness by 5 points on hover, hue and saturation untouched. Relative color syntax reproduces this regardless of the tag's own hue/lightness. filter: none cancels the plugin's own .nn-clickable-tag:hover brightness filter, which would otherwise stack on top */
 .nn-file-tag[data-has-background='true']:hover {
     background-image: linear-gradient(hsl(from var(--nn-file-tag-custom-bg, transparent) h s calc(l - 5)), hsl(from var(--nn-file-tag-custom-bg, transparent) h s calc(l - 5))) !important;
     filter: none !important;
