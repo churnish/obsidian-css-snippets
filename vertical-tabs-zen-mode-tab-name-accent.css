@@ -1,0 +1,5 @@
+/* Vertical Tabs: Color tab name accent in zen mode */
+
+body.vt-zen-mode .workspace-tab-header.mod-active .workspace-tab-header-inner-title {
+    color: var(--text-accent) !important;
+}
