@@ -106,6 +106,14 @@ body {
     display: none;
 }
 
+/* Excluded items keep full opacity instead of plugin's dimmed treatment. Plugin dims chevron/icon/name/count to 0.5 for anything under an excluded folder, including shortcuts pinned to an excluded note */
+.nn-navitem.nn-excluded .nn-navitem-chevron,
+.nn-navitem.nn-excluded .nn-navitem-icon,
+.nn-navitem.nn-excluded .nn-navitem-name,
+.nn-navitem.nn-excluded .nn-navitem-count {
+    opacity: 1;
+}
+
 /* Vault icon mask sources (closed-vault glyph, Lucide-style). -webkit-mask-image omitted: unprefixed mask-image is natively supported on this Electron/Chromium build (verified: Electron 39.8.3 / Chrome 142) */
 :root {
     --nn-vault-icon-closed: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M21 19.2L21 4.8C21 3.47452 20.6046 3 19.5 3L4.5 3C3.39543 3 3 3.47452 3 4.8L3 19.2C3 20.5255 3.39543 21 4.5 21L19.5 21C20.6046 21 21 20.5255 21 19.2Z'/%3E%3Cpath d='M14.9675 10.56C15.0601 11.1841 14.9535 11.8216 14.6629 12.3817C14.3722 12.9418 13.9124 13.396 13.3488 13.6797C12.7851 13.9634 12.1464 14.0621 11.5234 13.9619C10.9004 13.8616 10.3249 13.5675 9.87868 13.1213C9.43249 12.6751 9.13835 12.0996 9.0381 11.4766C8.93786 10.8536 9.0366 10.2149 9.3203 9.65123C9.60399 9.08759 10.0582 8.62776 10.6183 8.33713C11.1784 8.04651 11.8159 7.93989 12.4401 8.03245C13.0767 8.12687 13.6662 8.42355 14.1213 8.87868C14.5765 9.33381 14.8731 9.92326 14.9675 10.56Z'/%3E%3Cpath d='M12 14L12 17'/%3E%3Cpath d='M21 7L22.5 7'/%3E%3Cpath d='M21 16L22.5 16'/%3E%3C/svg%3E");
@@ -192,6 +200,14 @@ body {
 
 .theme-dark .nn-parent-folder-content[data-reveal='true']:hover {
     filter: var(--nn-hover-emphasis-dark);
+}
+
+/* Dim "/" separators in the parent-folder metadata field below the path text itself */
+/* Requires the wrapping span, stamped by the startup-notebook-navigator Templater startup template — the plugin renders the whole label as one bare text node, so pure CSS has no separate element to select the slash */
+/* Opacity, not a dimmer color var: the label itself already sits at --text-faint, Obsidian's dimmest semantic tier, so there's no var left to step down to */
+.nn-path-slash {
+    opacity: 0.6;
+    margin-inline: 2px;
 }
 
 /* Full pill shape, matching editor tags (--tag-radius: 2em, always half the pill's own height). Plugin hardcodes border-radius: min(10px, var(--nn-theme-file-tag-border-radius)) — the 10px is a literal in the CSS, not just the variable's default, so overriding --nn-theme-file-tag-border-radius alone can't remove the cap; the border-radius property itself has to be overridden directly */

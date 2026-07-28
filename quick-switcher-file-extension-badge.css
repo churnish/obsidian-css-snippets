@@ -155,3 +155,10 @@
 .qsp-trailing-slash {
     display: none;
 }
+
+/* Dim "/" separators between path segments below the folder names themselves, same wrapping-span requirement and rationale as the trailing slash above */
+/* One step dimmer than --text-muted, the plugin's own color for the breadcrumb text (folder names) this sits inside */
+.qsp-path-slash {
+    color: var(--text-faint);
+    margin-inline: 2px;
+}

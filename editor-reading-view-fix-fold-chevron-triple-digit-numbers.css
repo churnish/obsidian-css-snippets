@@ -1,0 +1,8 @@
+/* Fix fold chevron colliding with ordered list numbers ≥100 in Reading view */
+
+/* Fold chevron uses fixed -2.65em offset that only clears 2-digit markers */
+/* Live Preview reserves marker width dynamically, so unaffected */
+
+.markdown-rendered .list-collapse-indicator {
+    margin-inline-start: -3.1em;
+}
