@@ -3,6 +3,7 @@
 - Do NOT update files in `archive/` to follow the rules below.
 - Ensure a single blank line at file end.
 - snippets/ is a git repo.
+- Obsidian applies CSS snippet edits instantly on file save — no reload required.
 
 ## File name
 
