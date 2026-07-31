@@ -148,8 +148,14 @@ body {
         transition: opacity var(--anim-duration-moderate);
     }
 
-    .nn-list-pane-chrome .nn-pane-header:hover .nn-icon-button:not([data-pane-toggle]) {
+    .nn-list-pane-chrome .nn-pane-header:hover .nn-icon-button:not([data-pane-toggle]):not(:disabled) {
         opacity: 1;
+        pointer-events: auto;
+    }
+
+    /* Disabled buttons stay at the plugin's own dimmed opacity on reveal, not full opacity like enabled buttons */
+    .nn-list-pane-chrome .nn-pane-header:hover .nn-icon-button:not([data-pane-toggle]):disabled {
+        opacity: 0.5;
         pointer-events: auto;
     }
 
