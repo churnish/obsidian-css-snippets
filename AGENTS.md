@@ -4,6 +4,7 @@
 - Ensure a single blank line at file end.
 - snippets/ is a git repo.
 - Obsidian applies CSS snippet edits instantly on file save — no reload required.
+- **CSS limits**: When a snippet needs state CSS cannot select on, propose a Templater startup script in `Utility/Templates/` and register it in Templater `startup_templates`. ALWAYS read existing `startup-*.md` scripts first for house conventions. Add JS ONLY for parts CSS cannot express. NEVER port working CSS to JS.
 
 ## File name
 
