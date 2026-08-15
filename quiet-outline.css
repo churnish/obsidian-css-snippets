@@ -116,6 +116,12 @@ body .mod-sidedock .workspace-leaf-content[data-type="quiet-outline"] > .view-co
 		padding-inline: var(--size-4-2);
 	}
 
+	/* Plugin draws focus ring as outset shadow; extending node to full .n-tree width leaves no room outside it,
+	   so .n-tree overflow clips ring left and right edges. Inset keeps ring fully inside node bounds */
+	.n-tree.n-tree--block-line:focus .n-tree-node:not(.n-tree-node--disabled).n-tree-node--selected {
+		box-shadow: inset 0 0 0 2px var(--background-modifier-border-focus);
+	}
+
 	/* Replace switcher chevron with Lucide chevron-right; Naive rotates it 90° when expanded */
 	.n-tree-node-switcher__icon {
 		position: relative;

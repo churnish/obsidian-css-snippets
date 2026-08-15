@@ -279,7 +279,7 @@ body {
 
 /* Group header */
 .nn-list-group-header {
-    font-size: var(--font-ui-medium) !important;
+    font-size: var(--font-ui-small) !important;
 }
 
 /* Vault title header */
