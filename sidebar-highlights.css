@@ -1,8 +1,341 @@
-/* Highlights: Style search container with centered layout and secondary background */
+/* Highlights: Center toolbar buttons and match native sidebar button styling, hide dividers and card shadows */
 
 /* Source: https://github.com/churnish/obsidian-css-snippets */
 
 .highlights-search-container {
-  background-color: var(--background-secondary);
   justify-content: center;
+  border-bottom: none;
+}
+
+/* Plugin pins overflow button right via margin-left: auto, which absorbs all free space and defeats centering */
+.highlights-search-container .highlights-group-button.highlights-overflow-button {
+  margin-left: 0;
+}
+
+/* Native puts opacity on glyph, plugin puts it on button — plugin therefore dims its own hover and active background too */
+.highlights-search-container .highlights-group-button,
+.highlights-search-container .highlights-group-button:hover {
+  opacity: 1;
+}
+
+.highlights-search-container .highlights-group-button svg {
+  opacity: var(--icon-opacity);
+}
+
+.highlights-search-container .highlights-group-button:hover svg {
+  opacity: var(--icon-opacity-hover);
+}
+
+/* Native dims icon color on hover; plugin pins it with !important and never changes it */
+.highlights-search-container .highlights-group-button:hover {
+  color: var(--icon-color-hover) !important;
+}
+
+/* Selected state: native sidebar nav buttons use neutral focused color over plain hover fill */
+/* Plugin uses accent-tinted --icon-color-active over --background-modifier-active-hover instead */
+/* Native has no is-active:hover override, so selected buttons hold their fill on hover — mirrored here */
+.highlights-search-container .highlights-group-button.active,
+.highlights-search-container .highlights-group-button.is-active,
+.highlights-search-container .highlights-group-button.active:hover,
+.highlights-search-container .highlights-group-button.is-active:hover {
+  color: var(--icon-color-focused) !important;
+  background-color: var(--background-modifier-hover) !important;
+}
+
+.highlights-search-container .highlights-group-button.active svg,
+.highlights-search-container .highlights-group-button.is-active svg {
+  opacity: var(--icon-opacity-hover);
+}
+
+/* Plugin swaps toggle glyph to an X while search open; native keeps loupe and only restyles it */
+/* Path data cannot be reached from CSS, so hide swapped glyph and mask native loupe over it */
+.highlights-search-container .highlights-group-button[aria-label="Close search"] > svg {
+  display: none;
+}
+
+.highlights-search-container .highlights-group-button[aria-label="Close search"]::before {
+  content: "";
+  flex: 0 0 auto;
+  width: var(--icon-size);
+  height: var(--icon-size);
+  background-color: currentColor;
+  opacity: var(--icon-opacity-hover);
+  mask-image: url("data:image/svg+xml,<svg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 24 24%27 fill=%27none%27 stroke=%27currentColor%27 stroke-width=%271.75%27 stroke-linecap=%27round%27 stroke-linejoin=%27round%27><circle cx=%2711%27 cy=%2711%27 r=%278%27></circle><line x1=%2721%27 y1=%2721%27 x2=%2716.65%27 y2=%2716.65%27></line></svg>");
+  mask-size: contain;
+  mask-position: center;
+  mask-repeat: no-repeat;
+}
+
+/* Search bar sits in own opaque strip fenced by 1px border on all sides, reading as dividers above and below */
+/* Rest of pane runs transparent over sidebar background, so drop both to match */
+.highlights-search-input-container {
+  /* Native insets its field by --size-4-2 via .nav-header padding; plugin uses 12px, leaving field visibly narrower */
+  --sh-search-inset-x: var(--size-4-2);
+
+  /* Native separates buttons row from field by a 4px container margin; plugin's 8px padding reads as a taller gap */
+  --sh-search-inset-y: var(--size-4-1);
+
+  border: none;
+  background-color: transparent;
+  padding: var(--sh-search-inset-y) var(--sh-search-inset-x);
+}
+
+/* Native draws its loupe as a masked ::before on the container, since ::before does not render on a replaced input */
+/* Mask copied verbatim from Obsidian's own .search-input-container:before, offset by container padding native does not carry */
+.highlights-search-input-container::before {
+  content: "";
+  position: absolute;
+  top: calc(var(--sh-search-inset-y) + (var(--input-height) - var(--search-icon-size)) / 2);
+  inset-inline-start: calc(var(--sh-search-inset-x) + var(--size-4-2));
+  display: block;
+  width: var(--search-icon-size);
+  height: var(--search-icon-size);
+  background-color: var(--search-icon-color);
+  mask-image: url("data:image/svg+xml,<svg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 24 24%27 fill=%27none%27 stroke=%27currentColor%27 stroke-width=%272%27 stroke-linecap=%27round%27 stroke-linejoin=%27round%27><circle cx=%2711%27 cy=%2711%27 r=%278%27></circle><line x1=%2721%27 y1=%2721%27 x2=%2716.65%27 y2=%2716.65%27></line></svg>");
+  mask-repeat: no-repeat;
+  pointer-events: none;
+}
+
+/* Plugin draws focus as a 1px inset ring; native draws --input-border-width-focus outside the box */
+.highlights-search-input-container .highlights-search-input:focus {
+  box-shadow: 0 0 0 var(--input-border-width-focus) var(--background-modifier-border-focus);
+}
+
+.highlights-search-input-container .highlights-search-input {
+  border-radius: var(--search-input-radius);
+  padding-inline-start: calc(var(--search-icon-size) * 2 - 2px);
+
+  /* Plugin asks for var(--font-ui), which Obsidian does not define — declaration drops and font silently inherits */
+  font-family: var(--font-interface);
+}
+
+/* Plugin hardcodes pixel sizes for search chips, suggestions and badges, so this text ignores interface font size */
+/* Standalone text takes absolute UI scale; badges and indicators take relative --font-smallest to stay sub-scale against their host */
+
+.search-chip,
+.search-chip-group-label,
+.simple-search-suggestion-icon,
+.simple-search-preview {
+  font-size: var(--font-ui-smaller);
+}
+
+.simple-search-suggestion-text {
+  font-size: var(--font-ui-small);
+}
+
+/* Native renders its search explanation as plain muted text on the pane background */
+/* Plugin boxes the same content in a filled, rounded, italicised chip with a monospace term */
+/* Native drops its explanation 12px below the field: 8px clear of it, then 4px of container padding */
+/* Horizontal 8px lands the text at 16px from the pane edge, matching native once the parent's own inset is added */
+.simple-search-preview {
+  background-color: transparent;
+  border-radius: 0;
+  margin-top: var(--size-4-2);
+  padding: var(--size-4-1) var(--size-4-2) var(--size-4-2);
+}
+
+.simple-search-preview-label,
+.simple-search-preview-text {
+  font-style: normal;
+}
+
+.simple-search-preview-logic {
+  font-family: var(--font-interface);
+  font-weight: var(--font-normal);
+}
+
+/* Accent tinting of search matches in this pane lives in element-highlight-color-accent.css, which owns that concern */
+
+.search-chip-or-indicator,
+.tag-filter-badge {
+  font-size: var(--font-smallest);
+}
+
+/* Plugin writes card typography as inline --sh-* properties on body, fed by its own font size settings */
+/* Declaring them here wins without !important: inline style sets body, this sets a descendant, so subtree resolves to these */
+/* Plugin's own fallbacks already name these same tokens, so this restores its intended defaults */
+/* Trade-off: plugin's font size and weight settings no longer reach this pane */
+.highlights-sidebar-content {
+  /* Highlight text sits a step above its own metadata, mirroring native's 13px title over 12px excerpt */
+  --sh-quote-font-size: var(--font-ui-small);
+  --sh-comment-font-size: var(--font-ui-smaller);
+  --sh-details-font-size: var(--font-ui-smaller);
+
+  /* Weight fallback in plugin is --font-light (300), but settings currently render 400 — keep that */
+  --sh-highlight-font-weight: var(--font-normal);
+  --sh-task-font-weight: var(--font-normal);
+}
+
+/* Plugin hardcodes every icon dimension in px. Obsidian pairs each size token with its own stroke token, */
+/* consumed by svg.svg-icon { width/height: var(--icon-size); stroke-width: var(--icon-stroke) } */
+/* Set directly on the glyph rather than via --icon-size, since the plugin's own px rules outrank that base rule */
+/* Containers carry their own fixed box and flex the glyph, so both must resize or the icon squashes */
+
+/* xs — count glyphs (were 10px), add-comment and delete glyphs (were 12px), copy and task glyphs (already 14px) */
+.highlights-sidebar-content .line-icon,
+.highlights-sidebar-content .comment-icon,
+.highlights-sidebar-content .group-tag-icon,
+.highlights-sidebar-content .highlight-add-comment-icon {
+  width: var(--icon-xs);
+  height: var(--icon-xs);
+}
+
+.highlights-sidebar-content .line-icon svg,
+.highlights-sidebar-content .comment-icon svg,
+.highlights-sidebar-content .group-tag-icon svg,
+.highlights-sidebar-content .highlight-add-comment-icon svg,
+.highlights-sidebar-content .collection-delete-btn svg,
+.highlights-sidebar-content .highlight-quote-copy-button .copy-icon svg,
+.highlights-sidebar-content .task-filename-icon svg,
+.highlights-sidebar-content .task-parent-icon svg {
+  flex: 0 0 auto;
+  width: var(--icon-xs);
+  height: var(--icon-xs);
+  stroke-width: var(--icon-xs-stroke-width);
+}
+
+/* Delete button's own 20px circle is a hit target rather than an icon box, so only its glyph is retokenized */
+
+/* s — task action buttons (already 16px) */
+.highlights-sidebar-content .task-flag-button svg,
+.highlights-sidebar-content .task-calendar-button svg {
+  flex: 0 0 auto;
+  width: var(--icon-s);
+  height: var(--icon-s);
+  stroke-width: var(--icon-s-stroke-width);
+}
+
+/* Native collapse control uses its own right-triangle glyph, not a Lucide chevron: a wider, deeper */
+/* stroke (M3 8L12 17L21 8 against Lucide's m6 9 6 6 6-6) drawn at 10px with a 4px stroke */
+/* Sizes are hardcoded in app.css with no token, so they are mirrored literally here */
+.highlights-sidebar-content .highlight-group-chevron {
+  display: flex;
+  align-items: center;
+  width: var(--icon-s);
+  height: var(--icon-s);
+
+  /* Plugin eases over 0.2s; native runs 100ms */
+  transition: transform 100ms ease-in-out;
+}
+
+.highlights-sidebar-content .highlight-group-chevron > svg {
+  display: none;
+}
+
+.highlights-sidebar-content .highlight-group-chevron::before {
+  content: "";
+  flex: 0 0 auto;
+  width: 10px;
+  height: 10px;
+  background-color: var(--nav-collapse-icon-color);
+  mask-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='4' stroke-linecap='round' stroke-linejoin='round'><path d='M3 8L12 17L21 8'/></svg>");
+  mask-size: contain;
+  mask-position: center;
+  mask-repeat: no-repeat;
+}
+
+/* m — task checkbox and progress ring, nearest step below their hardcoded 20px */
+/* --checkbox-size would be semantically closer for the checkbox, but resolves to 14px here and would shrink a tap target */
+.highlights-sidebar-content .task-checkbox,
+.highlights-sidebar-content .task-progress-circle-container {
+  width: var(--icon-m);
+  height: var(--icon-m);
+}
+
+.highlights-sidebar-content .task-checkbox svg,
+.highlights-sidebar-content .task-progress-circle-container.task-progress-complete svg {
+  flex: 0 0 auto;
+  width: var(--icon-m);
+  height: var(--icon-m);
+  stroke-width: var(--icon-m-stroke-width);
+}
+
+/* Plugin hardcodes numeric weights; Obsidian defines exact equivalents, so these map 1:1 with no visual change */
+
+.highlight-add-comment-line,
+.task-section-ellipsis {
+  font-weight: var(--font-normal);
+}
+
+.pagination-info-compact,
+.task-section-header {
+  font-weight: var(--font-medium);
+}
+
+.collection-name,
+.highlights-dropdown-heading,
+.tag-filter-badge {
+  font-weight: var(--font-semibold);
+}
+
+.highlights-list-area .highlight-item-card {
+  background: var(--background-secondary-alt);
+  border-radius: var(--radius-m);
+  overflow: hidden;
+}
+
+/* Footer reads as a separate panel because of its own top rule; card is one surface */
+/* Quote's 10px bottom padding plus footer's own top padding also opened a 16px gap between them */
+.highlights-list-area .highlight-actions {
+  border-top: none;
+}
+
+/* Line under a group header is drawn by the counts row's own top border, not by the header */
+.highlights-list-area .highlight-group-header,
+.highlights-list-area .collection-stats {
+  border-top: none;
+  border-bottom: none;
+}
+
+/* Group header is the counterpart of a native search-result file title, which renders at */
+/* --font-ui-small / --font-normal / --text-normal; plugin ran a heavier 15px at weight 500 */
+/* Uppercasing is presentational only — plugin keeps original case in the DOM, so dropping the */
+/* transform restores it. Letter spacing goes with it: it exists to make all-caps legible, and */
+/* native titles run at normal spacing */
+.highlights-list-area .highlight-group-header {
+  font-size: var(--font-ui-small);
+  font-weight: var(--font-normal);
+  text-transform: none;
+  letter-spacing: normal;
+
+  /* Native mutes a collapsed result title and lifts it once expanded, via */
+  /* .search-result:not(.is-collapsed) .search-result-file-title { color: var(--nav-item-color-active) } */
+  color: var(--nav-item-color);
+}
+
+.highlights-list-area .highlight-group-header:not(.collapsed) {
+  color: var(--nav-item-color-active);
+}
+
+/* Highlight text keeps the plugin's own --text-normal, unlike native's muted search excerpt: it reads */
+/* as primary content here, not as a preview of something else */
+.highlights-list-area .highlight-quote {
+  padding-bottom: var(--size-4-1);
+}
+
+/* Plugin only lights the quote on hover, so quote and footer respond as two separate elements */
+/* Scoped to direct children so a comments block keeps its own independent hover */
+.highlights-list-area .highlight-item-card:has(> .highlight-quote:hover, > .highlight-actions:hover) > .highlight-quote,
+.highlights-list-area .highlight-item-card:has(> .highlight-quote:hover, > .highlight-actions:hover) > .highlight-actions {
+  background-color: var(--background-modifier-hover);
+}
+
+/* Children paint their own hover backgrounds, and each hardcodes a partial 6px rounding that does */
+/* not match the card. Clipping at the card is more robust than restating four sets of corners, and */
+/* handles the left edge correctly: the 5px color stripe shrinks the inner radius there to 3px */
+/* Popups are appended to document.body rather than the card, so clipping cannot trap them */
+.highlights-list-area .highlight-quote,
+.highlights-list-area .highlight-comments,
+.highlights-list-area .highlight-comment:last-child,
+.highlights-list-area .highlight-add-comment-line,
+.highlights-list-area .highlight-add-comment-line:hover,
+.highlights-list-area .highlight-actions:last-child {
+  border-radius: 0;
+}
+
+/* Card shadow and selection ring share one box-shadow property, and every selected variant ends with var(--shadow-s) */
+/* Neutralizing token drops shadows while leaving rings intact, and keeps working when plugin adds new highlight colors */
+/* Scoped to list area so floating dropdowns in toolbar above keep their own elevation */
+.highlights-list-area {
+  --shadow-s: 0 0 0 0 transparent;
 }

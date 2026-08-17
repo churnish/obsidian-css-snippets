@@ -1,0 +1,70 @@
+/* Notebook Navigator + Quiet Outline + Sidebar Highlights + Strange New Worlds + Trash Explorer + Vertical Tabs: Replace sidebar tab icons, keyed by registered view type */
+
+/* Companion to Utility/Templates/startup-show-delayed-plugin-names.md, which relabels these same views */
+/* That script runs inside workspace.onLayoutReady, so tabs paint with wrong icons first; snippets load before workspace.initialize(), landing ahead of first paint */
+/* Labels still arrive late — no CSS selector matches on text content, and CSS cannot set text or aria-label, so relabelling stays in script */
+/* Mask images render as isolated documents, so paint gets baked to literal black; only alpha matters for match-source masking */
+/* Baked stroke-width 1.75 matches value --icon-stroke resolves to on sidebar tab headers, and will not follow later changes to that variable */
+
+/* Each view opts in by declaring all three properties; views declaring none keep native icon untouched, so mechanics rules stay document-wide */
+
+/* Notebook Navigator */
+.workspace-tab-header[data-type="notebook-navigator"] {
+    --tab-icon-replacement: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><g stroke='%23000' fill='none' stroke-linecap='round' stroke-linejoin='round'> <rect x='19.88' y='12.42' width='66.42' height='75.21' rx='6.25' stroke-width='8'></rect> <g stroke-width='4'> <line x1='13.29' y1='24.38' x2='28.5' y2='24.38'></line> <line x1='13.29' y1='37.21' x2='28.5' y2='37.21'></line> <line x1='13.29' y1='50' x2='28.5' y2='50'></line> <line x1='13.29' y1='62.79' x2='28.5' y2='62.79'></line> <line x1='13.29' y1='75.63' x2='28.5' y2='75.63'></line> </g> <g stroke-width='3.5'> <circle cx='28.5' cy='24.38' r='1.38'></circle> <circle cx='28.5' cy='37.21' r='1.38'></circle> <circle cx='28.5' cy='50' r='1.38'></circle> <circle cx='28.5' cy='62.79' r='1.38'></circle> <circle cx='28.5' cy='75.63' r='1.38'></circle> </g> <polygon points='52.77 53.33 36.22 49.08 70.07 34.18 57.25 69.38 52.77 53.33' fill='%23000' stroke='none'></polygon> </g></svg>");
+    --tab-icon-replaced: "";
+    --tab-icon-native-display: none;
+}
+
+/* Quiet Outline */
+.workspace-tab-header[data-type="quiet-outline"] {
+    --tab-icon-replacement: url("data:image/svg+xml,<svg stroke-width='1.75' xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-linecap='round' stroke-linejoin='round'><path d='M21 5H3'></path><path d='M15 12H3'></path><path d='M17 19H3'></path></svg>");
+    --tab-icon-replaced: "";
+    --tab-icon-native-display: none;
+}
+
+/* Sidebar Highlights */
+.workspace-tab-header[data-type="highlights-sidebar"] {
+    --tab-icon-replacement: url("data:image/svg+xml,<svg stroke-width='1.75' xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-linecap='round' stroke-linejoin='round'><path d='m9 11-6 6v3h9l3-3'></path><path d='m22 12-4.6 4.6a2 2 0 0 1-2.8 0l-5.2-5.2a2 2 0 0 1 0-2.8L14 4'></path></svg>");
+    --tab-icon-replaced: "";
+    --tab-icon-native-display: none;
+}
+
+/* Strange New Worlds */
+.workspace-tab-header[data-type="Strange New Worlds"] {
+    --tab-icon-replacement: url("data:image/svg+xml,<svg stroke-width='1.75' xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-linecap='round' stroke-linejoin='round'><path d='M4 12V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.706.706l3.588 3.588A2.4 2.4 0 0 1 20 8v12a2 2 0 0 1-2 2'></path><path d='M14 2v5a1 1 0 0 0 1 1h5'></path><path d='M10 16h2v6'></path><path d='M10 22h4'></path><rect x='2' y='16' width='4' height='6' rx='2'></rect></svg>");
+    --tab-icon-replaced: "";
+    --tab-icon-native-display: none;
+}
+
+/* Trash Explorer */
+.workspace-tab-header[data-type="trash-explorer"] {
+    --tab-icon-replacement: url("data:image/svg+xml,<svg stroke-width='1.75' xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-linecap='round' stroke-linejoin='round'><path d='M10 11v6'></path><path d='M14 11v6'></path><path d='M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6'></path><path d='M3 6h18'></path><path d='M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2'></path></svg>");
+    --tab-icon-replaced: "";
+    --tab-icon-native-display: none;
+}
+
+/* Vertical Tabs */
+.workspace-tab-header[data-type="vertical-tabs"] {
+    --tab-icon-replacement: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'> <path d='M20.8333 8.33333L79.1667 8.33333' stroke='%23000' stroke-width='8' stroke-linecap='round' stroke-linejoin='round' fill='none' /> <path d='M49.5225 48.6766C49.3723 48.2998 49.3359 47.8872 49.4177 47.4899C49.4995 47.0926 49.6959 46.7279 49.9828 46.4411C50.2696 46.1542 50.6343 45.9578 51.0316 45.876C51.4289 45.7942 51.8415 45.8306 52.2183 45.9808L89.7183 60.5641C90.1204 60.7212 90.4637 60.9993 90.7009 61.36C90.938 61.7207 91.0573 62.1461 91.0422 62.5775C91.0271 63.0088 90.8784 63.4249 90.6166 63.7681C90.3548 64.1113 89.9929 64.3647 89.5809 64.4933L75.2309 68.9433C74.5834 69.1435 73.9945 69.4986 73.5153 69.9778C73.0361 70.457 72.681 71.0459 72.4809 71.6933L68.035 86.0392C67.9064 86.4512 67.653 86.8131 67.3098 87.0749C66.9666 87.3367 66.5505 87.4854 66.1192 87.5005C65.6878 87.5156 65.2624 87.3963 64.9017 87.1592C64.541 86.922 64.2629 86.5787 64.1059 86.1766L49.5225 48.6766Z' stroke='%23000' stroke-width='8' stroke-linecap='round' stroke-linejoin='round' fill='none' /> <path d='M20.8333 91.6667H47.9167' stroke='%23000' stroke-width='8' stroke-linecap='round' stroke-linejoin='round' fill='none' /> <path d='M87.5 41.6667V33.3333C87.5 28.731 83.769 25 79.1667 25H20.8333C16.231 25 12.5 28.731 12.5 33.3333V66.6667C12.5 71.269 16.231 75 20.8333 75H41.6667' stroke='%23000' stroke-width='8' stroke-linecap='round' stroke-linejoin='round' fill='none' /> </svg>");
+    --tab-icon-replaced: "";
+    --tab-icon-native-display: none;
+}
+
+/* Swap mechanics — both custom properties fall back to inert values, leaving every other tab alone */
+
+.workspace-tab-header-inner-icon > svg {
+    display: var(--tab-icon-native-display, revert);
+}
+
+/* content: none suppresses pseudo-element entirely, so unopted tabs generate no box */
+.workspace-tab-header-inner-icon::before {
+    content: var(--tab-icon-replaced, none);
+    flex: 0 0 auto;
+    width: var(--icon-size);
+    height: var(--icon-size);
+    background-color: currentColor;
+    mask-image: var(--tab-icon-replacement);
+    mask-size: contain;
+    mask-position: center;
+    mask-repeat: no-repeat;
+}

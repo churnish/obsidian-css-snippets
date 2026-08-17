@@ -1,4 +1,4 @@
-/* Use accent color for UI flash highlights and search result highlighting */
+/* Sidebar Highlights: Use accent color for UI flash highlights and search result highlighting, natively and in plugin panes */
 
 /* Source: https://github.com/churnish/obsidian-css-snippets */
 
@@ -11,4 +11,12 @@
 }
 .theme-light .search-result-container {
   --text-highlight-bg: hsla(var(--accent-h), var(--accent-s), var(--accent-l), 0.4) !important;
+}
+
+/* Sidebar Highlights cannot take the same --text-highlight-bg redefinition: it reuses that variable for */
+/* .cm-highlight, which renders real ==highlight== content rather than a search match, so match classes are targeted directly */
+.highlights-sidebar-content .search-term-highlight,
+.highlights-sidebar-content .task-search-match,
+.highlights-sidebar-content .task-search-match-tag {
+  background-color: hsla(var(--accent-h), var(--accent-s), var(--accent-l), 0.4);
 }
