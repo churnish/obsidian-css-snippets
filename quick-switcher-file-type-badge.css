@@ -1,4 +1,66 @@
-/* Quick Switcher++: Align file extension badge and other file icons with file name */
+/* Quick Switcher++: Align file extension badge and other file icons with file name, and widen outline heading indentation */
+
+/* Outline mode: double heading indent per level, from plugin default 12px to 24px, so nesting depth reads at a glance */
+/* Scoped to .modal-container .prompt rather than :root: plugin declares both variables at :root too, identical specificity, so an unscoped override would depend on snippet-vs-plugin stylesheet order */
+/* Only --symbol-indent-padding set; --symbol-base-padding (plugin default 0px) stays untouched, since doubling zero shifts nothing and a non-zero base would indent top-level headings too */
+.modal-container .prompt {
+    --symbol-indent-padding: 24px;
+}
+
+/* Outline mode: indentation guides matching native tree panes (Outline, File explorer), which draw one border-inline-start per nesting level on each .tree-item-children wrapper */
+/* Quick Switcher++ renders symbol suggestions as a flat list of siblings with no per-level wrapper to carry that border, so guides are painted on each row instead: a repeating-linear-gradient lays down one line per ancestor level, repeating at the indent step, same technique as notebook-navigator.css */
+/* Absolutely positioned so the pseudo-element stays out of the row's flex flow — quick-switcher-left-side-icons.css makes these rows flex containers, where an in-flow ::before would become a flex item and displace the icons */
+/* Line sits half an indent step left of the row's own text, so each guide lands midway between its parent's text and its children's, and reuses the native --nav-indentation-guide-* variables so guides match tree panes in both themes */
+.qsp-suggestion-symbol {
+    position: relative;
+}
+
+/* Depth as a number, so the guide rule below can be written once instead of per level. Plugin emits qsp-symbol-l0 through qsp-symbol-l6 only */
+.qsp-symbol-l1 {
+    --qsp-symbol-depth: 1;
+}
+
+.qsp-symbol-l2 {
+    --qsp-symbol-depth: 2;
+}
+
+.qsp-symbol-l3 {
+    --qsp-symbol-depth: 3;
+}
+
+.qsp-symbol-l4 {
+    --qsp-symbol-depth: 4;
+}
+
+.qsp-symbol-l5 {
+    --qsp-symbol-depth: 5;
+}
+
+.qsp-symbol-l6 {
+    --qsp-symbol-depth: 6;
+}
+
+/* Level 0 excluded: top-level headings have no ancestor to draw a guide for */
+.qsp-suggestion-symbol:not(.qsp-symbol-l0)::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    /* Bridges the 1px bottom margin Obsidian puts on every suggestion row, which would otherwise break each guide into per-row dashes */
+    bottom: -1px;
+    left: calc(var(--symbol-base-padding) + var(--symbol-indent-padding) / 2);
+    width: calc(
+        (var(--qsp-symbol-depth) - 1) * var(--symbol-indent-padding) +
+            var(--nav-indentation-guide-width)
+    );
+    background: repeating-linear-gradient(
+        to right,
+        var(--nav-indentation-guide-color) 0,
+        var(--nav-indentation-guide-color) var(--nav-indentation-guide-width),
+        transparent var(--nav-indentation-guide-width),
+        transparent var(--symbol-indent-padding)
+    );
+    pointer-events: none;
+}
 
 /* Highlighted suggestion: badge background matches sidebar background instead of the hover tint, for readability, same treatment as file explorer */
 .suggestion-item.is-selected .nav-file-tag {
@@ -106,7 +168,7 @@
 
 /* Canvas/Base/PDF badges: replace text with an icon glyph instead of the plain text pill used for other extensions */
 /* Requires data-ext, stamped onto the badge by the startup-stamp-quick-switcher++-file-ext-badge Templater startup template — the plugin renders the badge as a bare text node with no attribute or child element of its own, so pure CSS has nothing else to select on */
-/* Reuses --badge-icon-canvas/--badge-icon-base/--badge-icon-pdf, defined at :root in file-extension-icons.css, so all consumers draw from one icon source */
+/* Reuses --badge-icon-canvas/--badge-icon-base/--badge-icon-pdf, defined at :root in file-type-icons.css, so all consumers draw from one icon source */
 /* Sized to var(--icon-s), matching the sibling suggestion-flair icons (open-editor, recent-file indicators), which get that size from .suggestion-flair's own --icon-size: var(--icon-s) — not var(--icon-xs), which happens to equal --icon-s on mobile but is smaller (14px vs 16px) on desktop, making the badge visibly undersized next to its siblings there */
 /* Colored to match the suggestion's own file name text (--text-normal) instead of --icon-color: unlike file explorer/NN tree rows, where icon and label sit in the same dim tree-item-icon/tree-item-inner-text pairing, QSP's title text renders at full --text-normal contrast, so an --icon-color badge reads visibly dimmer than the name beside it */
 .qsp-file-ext-indicator[data-ext="canvas"],
