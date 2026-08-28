@@ -1,42 +1,46 @@
-/* Quick Switcher++: Move right-side icons left of title, keybinds stay right, and normalize icon color to faint text color */
+/* Move right-side suggestion icons left of title in prompts, keybinds stay right, and normalize icon color to faint text color */
 
-/* Covers single-line suggestions (command mode, search, create-new-note); multi-line suggestions (file/bookmark/recent with path breadcrumb) use own grid layout in quick-switcher-file-extension-badge.css, since unwrapping their second line into this flex row would place it beside the title instead of below it */
+/* Targets Obsidian's own suggestion markup only, so it applies to Quick switcher, Command palette and other prompts with or without Quick Switcher++ installed. Plugin-specific layout lives in quick-switcher-file-type-badge.css and desktop-quick-switcher-quick-open-hotkey-gutter.css */
+
+/* Scoped to .prompt because Obsidian reuses .suggestion-item.mod-complex outside prompts, notably in combobox suggesters such as Bases Sort and Group by property pickers, where the same markup carries different content: .suggestion-aux holds the property key (file.folder) rather than a keybind, so unwrapping and reordering it moved the key ahead of both type icon and property name */
+
+/* Covers single-line suggestions (command mode, search, create-new-note); multi-line suggestions (file/bookmark/recent with path breadcrumb) use own grid layout in quick-switcher-file-type-badge.css, since unwrapping their second line into this flex row would place it beside the title instead of below it */
 /* .suggestion-aux holds keybind and icon(s) mixed together, so unwrap it and reorder children individually instead of moving whole container */
 /* gap gives uniform spacing between every adjacent item in visual order (icon-to-icon and icon-to-title alike), instead of hand-tuning two separate margins to match */
-.suggestion-item.mod-complex:not(:has(.suggestion-note)) {
+.prompt .suggestion-item.mod-complex:not(:has(.suggestion-note)) {
     display: flex;
     align-items: flex-start;
     justify-content: flex-start;
     gap: var(--size-4-2);
 }
 
-.suggestion-item.mod-complex:not(:has(.suggestion-note)) .suggestion-content,
-.suggestion-item.mod-complex:not(:has(.suggestion-note)) .suggestion-aux {
+.prompt .suggestion-item.mod-complex:not(:has(.suggestion-note)) .suggestion-content,
+.prompt .suggestion-item.mod-complex:not(:has(.suggestion-note)) .suggestion-aux {
     display: contents;
 }
 
 /* Icons (command icon, pin) move before title; auto margin on title pushes keybinds right, replacing container's original space-between */
 /* margin-inline-start and margin-inline-end zeroed since plugin's own flair styling sets both, which would stack on top of the container's gap */
-/* margin-top centers icon on title's glyphs rather than the line box, same offset as quick-switcher-file-extension-badge.css */
-.suggestion-item.mod-complex:not(:has(.suggestion-note)) .suggestion-flair:not(.suggestion-hotkey) {
+/* margin-top centers icon on title's glyphs rather than the line box, same offset as quick-switcher-file-type-badge.css */
+.prompt .suggestion-item.mod-complex:not(:has(.suggestion-note)) .suggestion-flair:not(.suggestion-hotkey) {
     order: -1;
     margin-inline-start: 0 !important;
     margin-inline-end: 0 !important;
     margin-top: 2px;
 }
 
-.suggestion-item.mod-complex:not(:has(.suggestion-note)) .suggestion-title {
+.prompt .suggestion-item.mod-complex:not(:has(.suggestion-note)) .suggestion-title {
     margin-inline-end: auto;
 }
 
 /* Pin icon sorts before command icon within left-moved group */
-.suggestion-item.mod-complex:not(:has(.suggestion-note)) .suggestion-flair:has(svg.lucide-pin) {
+.prompt .suggestion-item.mod-complex:not(:has(.suggestion-note)) .suggestion-flair:has(svg.lucide-pin) {
     order: -2;
 }
 
-/* Normalize suggestion icons to faint text color, excluding folder/tag breadcrumb icons (already faint to match their own text) and the canvas/base badge icons (mask-based ::before in quick-switcher-file-extension-badge.css, not an svg, so unaffected by this selector regardless) */
+/* Normalize suggestion icons to faint text color, excluding folder/tag breadcrumb icons (already faint to match their own text) and the canvas/base badge icons (mask-based ::before in quick-switcher-file-type-badge.css, not an svg, so unaffected by this selector regardless) */
 /* Folder/tag icons live in .qsp-breadcrumb-indicator, not .suggestion-flair, so they are unaffected by this selector */
-/* Open-in-editor icon (.qsp-editor-indicator) also excluded: keeps QSP's own text-accent styling instead of being flattened to faint like every other icon */
-.suggestion-item .suggestion-flair:not(.qsp-editor-indicator) svg {
+/* Open-in-editor icon (.qsp-editor-indicator) also excluded: keeps Quick Switcher++ own text-accent styling instead of being flattened to faint like every other icon. Guard only, not a dependency — without that plugin no element carries the class and the rule behaves the same */
+.prompt .suggestion-item .suggestion-flair:not(.qsp-editor-indicator) svg {
     color: var(--text-faint) !important;
 }
