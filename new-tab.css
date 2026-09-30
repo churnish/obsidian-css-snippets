@@ -1,0 +1,100 @@
+/* Quick Switcher++: Replace native Go to file action on new tab page with Quick Switcher++ launch button, and hide action hotkeys */
+
+/* Source: https://github.com/churnish/obsidian-css-snippets */
+
+/* Obsidian 1.14.3 renders actions as icon pills in this order: New note, New base (Bases enabled), New canvas (Canvas enabled), Go to file (vault not empty), Open web viewer (Web viewer enabled). Quick Switcher++ injects its plain-text launch button as second child */
+/* Native Go to file matched by its lucide-search icon, since no class or locale-independent attribute distinguishes it */
+/* 'Plugin no longer active' pane reuses action list, but holds no hotkeys, search icon or Quick Switcher++ button, so no rule below reaches it */
+
+/* Hide hotkey badges on every action — by default only New note and Go to file carry one */
+.empty-state-hotkey {
+  display: none;
+}
+
+/* Hide native Go to file only when Quick Switcher++ button present, so native action returns whenever plugin skips a tab */
+.empty-state-action-list:has(> .qsp-empty-state-action-launch) > .empty-state-action:has(.lucide-search) {
+  display: none;
+}
+
+/* Move Quick Switcher++ button from second place into native Go to file slot */
+.empty-state-action-list > .qsp-empty-state-action-launch {
+  order: 1;
+}
+
+/* Keep actions native renders after Go to file (Open web viewer) after replacement too */
+.empty-state-action-list > .empty-state-action:has(.lucide-search) ~ .empty-state-action {
+  order: 2;
+}
+
+/* Mirror native pill, which Quick Switcher++ button lacks */
+/* font-size: 0 hides plugin label; native --pill-radius (2em) would collapse to 0 at that size, so radius derives from --font-ui-small instead */
+.empty-state-action-list > .qsp-empty-state-action-launch {
+  display: flex;
+  align-items: center;
+  padding: var(--size-4-2) var(--size-4-3);
+  border: 0.5px solid var(--background-modifier-border);
+  border-radius: calc(2 * var(--font-ui-small));
+  color: var(--text-normal);
+  font-size: 0;
+  white-space: nowrap;
+  cursor: var(--cursor);
+}
+
+/* 'Go to file' icon (lucide search, same as native) */
+/* Margin instead of flex gap, since hidden plugin label still forms zero-width flex item that gap would pad on both sides */
+.empty-state-action-list > .qsp-empty-state-action-launch::before {
+  content: "";
+  flex-shrink: 0;
+  width: var(--icon-s);
+  height: var(--icon-s);
+  margin-inline-end: var(--size-4-2);
+  background-color: currentColor;
+  -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m21 21-4.34-4.34'/%3E%3Ccircle cx='11' cy='11' r='8'/%3E%3C/svg%3E");
+  -webkit-mask-size: contain;
+  -webkit-mask-repeat: no-repeat;
+}
+
+.empty-state-action-list > .qsp-empty-state-action-launch::after {
+  content: "Go to file";
+  font-size: var(--font-ui-small);
+}
+
+@media (hover: hover) {
+  .empty-state-action-list > .qsp-empty-state-action-launch:hover {
+    background-color: var(--background-modifier-hover);
+    border-color: var(--background-modifier-border-hover);
+  }
+}
+
+/* Native icon-only layout in narrow panes; on mobile, padding rule below outranks this one, as native mobile pill padding does */
+@container empty-state (max-width: 230px) {
+  .empty-state-action-list > .qsp-empty-state-action-launch {
+    padding-inline: 8px;
+    justify-content: center;
+  }
+
+  .empty-state-action-list > .qsp-empty-state-action-launch::before {
+    margin-inline-end: 0;
+  }
+
+  .empty-state-action-list > .qsp-empty-state-action-launch::after {
+    display: none;
+  }
+
+  /* Native centers odd last action by DOM position, which hidden Go to file and moved Quick Switcher++ button throw off, so cancel it here and recenter by visible count below */
+  .empty-state-action-list:has(> .qsp-empty-state-action-launch) > .text-icon-button.mod-pill:last-child {
+    grid-column: auto;
+    justify-self: auto;
+  }
+
+  /* Visible count odd when DOM count even (Go to file hidden): recenter Quick Switcher++ button if Go to file ends DOM, else action after Go to file (Open web viewer). Nested :has() invalid, so first selector matches search icon by descendant chain */
+  .empty-state-action-list:has(> .empty-state-action:last-child:nth-child(even) .lucide-search) > .qsp-empty-state-action-launch,
+  .empty-state-action-list:has(> .qsp-empty-state-action-launch) > .empty-state-action:has(.lucide-search) ~ .empty-state-action:last-child:nth-child(even) {
+    grid-column: 1 / -1;
+    justify-self: center;
+  }
+}
+
+.is-mobile .empty-state-action-list > .qsp-empty-state-action-launch {
+  padding: var(--size-4-3) var(--size-4-4);
+}
