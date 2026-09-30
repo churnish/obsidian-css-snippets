@@ -2,10 +2,7 @@
 
 /* Source: https://github.com/churnish/obsidian-css-snippets */
 
-body .bases-toolbar-sort-menu .text-button-label,
-body .bases-toolbar-filter-menu .text-button-label,
-body .bases-toolbar-properties-menu .text-button-label,
-body .bases-toolbar-new-item-menu .text-button-label,
-body .bases-toolbar-search .text-button-label {
-    display: none !important;
+/* Native variable Obsidian itself sets to none in narrow toolbars and on phones; it governs every toolbar button except view switcher and result count, so buttons Obsidian adds later (Group in 1.14.3) need no new selector */
+body {
+    --bases-toolbar-label-display: none;
 }
