@@ -15,7 +15,7 @@
 .el-h4 a.external-link,
 .el-h5 a.external-link,
 .el-h6 a.external-link {
-    text-decoration-line: none !important;
+  text-decoration-line: none !important;
 }
 
 /* Show underline on hover - Reading view */
@@ -31,17 +31,17 @@
 .el-h4 a.external-link:hover,
 .el-h5 a.external-link:hover,
 .el-h6 a.external-link:hover {
-    text-decoration-line: underline !important;
+  text-decoration-line: underline !important;
 }
 
 /* Hide link underlines in headings - Editing view */
 .HyperMD-header a.cm-underline {
-    text-decoration-line: none !important;
+  text-decoration-line: none !important;
 }
 
 /* Show underline on hover - Editing view */
 .HyperMD-header a.cm-underline:hover {
-    text-decoration-line: underline !important;
+  text-decoration-line: underline !important;
 }
 
 /* Remove tag background in headings */
@@ -52,5 +52,5 @@
 .el-h5 a.tag,
 .el-h6 a.tag,
 .HyperMD-header a.tag {
-    background-color: transparent !important;
+  background-color: transparent !important;
 }

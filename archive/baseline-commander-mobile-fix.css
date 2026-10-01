@@ -4,5 +4,8 @@ body.is-phone.is-mobile.AT-row .view-content {
 
 body.is-phone.is-mobile.AT-row.mod-toolbar-open .mobile-toolbar {
   position: absolute !important;
-  top: calc(100vh - var(--keyboard-height) - var(--touch-size-m) - var(--keyboard-spacing)) !important;
+  top: calc(
+    100vh - var(--keyboard-height) - var(--touch-size-m) -
+      var(--keyboard-spacing)
+  ) !important;
 }

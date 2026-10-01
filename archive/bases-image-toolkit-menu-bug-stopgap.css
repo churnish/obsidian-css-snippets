@@ -1,9 +1,5 @@
 @media (min-width: 845px) {
-
-    .menu {
-
-        z-index: 50;
-
-    }
-
+  .menu {
+    z-index: 50;
+  }
 }

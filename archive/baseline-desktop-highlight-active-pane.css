@@ -5,8 +5,20 @@
 /* Incompatible with Baseline 1.5.1. */
 
 /* Apply secondary background when inactive - only with multiple panes */
-body:not(.is-mobile) .workspace-split:not(.mod-left-split):not(.mod-right-split):has(.workspace-tabs ~ .workspace-tabs, .workspace-split ~ .workspace-split) .workspace-leaf:not(.mod-active):not(.is-being-dragged) .view-content,
-body:not(.is-mobile) .workspace-split:not(.mod-left-split):not(.mod-right-split):has(.workspace-tabs ~ .workspace-tabs, .workspace-split ~ .workspace-split) .workspace-leaf:not(.mod-active):not(.is-being-dragged) .view-header {
+body:not(.is-mobile)
+  .workspace-split:not(.mod-left-split):not(.mod-right-split):has(
+    .workspace-tabs ~ .workspace-tabs,
+    .workspace-split ~ .workspace-split
+  )
+  .workspace-leaf:not(.mod-active):not(.is-being-dragged)
+  .view-content,
+body:not(.is-mobile)
+  .workspace-split:not(.mod-left-split):not(.mod-right-split):has(
+    .workspace-tabs ~ .workspace-tabs,
+    .workspace-split ~ .workspace-split
+  )
+  .workspace-leaf:not(.mod-active):not(.is-being-dragged)
+  .view-header {
   background-color: var(--background-secondary);
   --code-background: var(--background-primary);
   transition: background-color var(--anim-duration-fast) ease-in-out;
@@ -15,19 +27,35 @@ body:not(.is-mobile) .workspace-split:not(.mod-left-split):not(.mod-right-split)
 }
 
 /* Setup pseudo-element background for all tab containers to enable smooth transitions */
-body:not(.is-mobile) .workspace-split:not(.mod-left-split):not(.mod-right-split):has(.workspace-tabs ~ .workspace-tabs, .workspace-split ~ .workspace-split) .workspace-tab-header-container {
+body:not(.is-mobile)
+  .workspace-split:not(.mod-left-split):not(.mod-right-split):has(
+    .workspace-tabs ~ .workspace-tabs,
+    .workspace-split ~ .workspace-split
+  )
+  .workspace-tab-header-container {
   position: relative;
   isolation: isolate;
   background-color: transparent !important;
 }
 
 /* Override theme opacity for inactive panes - we use background color instead */
-body:not(.is-focused):not(.is-mobile) .workspace-split:not(.mod-left-split):not(.mod-right-split):has(.workspace-tabs ~ .workspace-tabs, .workspace-split ~ .workspace-split) .workspace-tabs:not(:has(.workspace-leaf.mod-active)) .workspace-tab-header-container {
+body:not(.is-focused):not(.is-mobile)
+  .workspace-split:not(.mod-left-split):not(.mod-right-split):has(
+    .workspace-tabs ~ .workspace-tabs,
+    .workspace-split ~ .workspace-split
+  )
+  .workspace-tabs:not(:has(.workspace-leaf.mod-active))
+  .workspace-tab-header-container {
   opacity: 1 !important;
 }
 
-body:not(.is-mobile) .workspace-split:not(.mod-left-split):not(.mod-right-split):has(.workspace-tabs ~ .workspace-tabs, .workspace-split ~ .workspace-split) .workspace-tab-header-container::before {
-  content: '';
+body:not(.is-mobile)
+  .workspace-split:not(.mod-left-split):not(.mod-right-split):has(
+    .workspace-tabs ~ .workspace-tabs,
+    .workspace-split ~ .workspace-split
+  )
+  .workspace-tab-header-container::before {
+  content: "";
   position: absolute;
   top: 0;
   left: 0;
@@ -41,7 +69,13 @@ body:not(.is-mobile) .workspace-split:not(.mod-left-split):not(.mod-right-split)
 }
 
 /* Add primary color strip with gradient to inactive tabs in top-most panes */
-body.mod-macos:not(.is-mobile) .workspace-split:not(.mod-left-split):not(.mod-right-split):has(.workspace-tabs ~ .workspace-tabs, .workspace-split ~ .workspace-split) .workspace-tabs.mod-top:not(:has(.workspace-leaf.mod-active)) .workspace-tab-header-container::before {
+body.mod-macos:not(.is-mobile)
+  .workspace-split:not(.mod-left-split):not(.mod-right-split):has(
+    .workspace-tabs ~ .workspace-tabs,
+    .workspace-split ~ .workspace-split
+  )
+  .workspace-tabs.mod-top:not(:has(.workspace-leaf.mod-active))
+  .workspace-tab-header-container::before {
   background-image: linear-gradient(
     to bottom,
     var(--background-primary) 0px,
@@ -51,8 +85,20 @@ body.mod-macos:not(.is-mobile) .workspace-split:not(.mod-left-split):not(.mod-ri
 }
 
 /* Ensure active panes always use normal background - only with multiple panes */
-body:not(.is-mobile) .workspace-split:not(.mod-left-split):not(.mod-right-split):has(.workspace-tabs ~ .workspace-tabs, .workspace-split ~ .workspace-split) .workspace-leaf.mod-active .view-content,
-body:not(.is-mobile) .workspace-split:not(.mod-left-split):not(.mod-right-split):has(.workspace-tabs ~ .workspace-tabs, .workspace-split ~ .workspace-split) .workspace-leaf.mod-active .view-header {
+body:not(.is-mobile)
+  .workspace-split:not(.mod-left-split):not(.mod-right-split):has(
+    .workspace-tabs ~ .workspace-tabs,
+    .workspace-split ~ .workspace-split
+  )
+  .workspace-leaf.mod-active
+  .view-content,
+body:not(.is-mobile)
+  .workspace-split:not(.mod-left-split):not(.mod-right-split):has(
+    .workspace-tabs ~ .workspace-tabs,
+    .workspace-split ~ .workspace-split
+  )
+  .workspace-leaf.mod-active
+  .view-header {
   background-color: var(--background-primary);
   transition: background-color var(--anim-duration-fast) ease-in-out;
   transform: translateZ(0);
@@ -60,7 +106,13 @@ body:not(.is-mobile) .workspace-split:not(.mod-left-split):not(.mod-right-split)
 }
 
 /* Active panes: primary background */
-body:not(.is-mobile) .workspace-split:not(.mod-left-split):not(.mod-right-split):has(.workspace-tabs ~ .workspace-tabs, .workspace-split ~ .workspace-split) .workspace-tabs:has(.workspace-leaf.mod-active) .workspace-tab-header-container::before {
+body:not(.is-mobile)
+  .workspace-split:not(.mod-left-split):not(.mod-right-split):has(
+    .workspace-tabs ~ .workspace-tabs,
+    .workspace-split ~ .workspace-split
+  )
+  .workspace-tabs:has(.workspace-leaf.mod-active)
+  .workspace-tab-header-container::before {
   background-color: var(--background-primary);
 }
 

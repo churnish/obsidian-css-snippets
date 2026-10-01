@@ -18,7 +18,9 @@
   mask-size: contain;
 }
 
-[data-type="notebook-navigator"] .workspace-tab-header-inner-icon .lucide-ghost {
+[data-type="notebook-navigator"]
+  .workspace-tab-header-inner-icon
+  .lucide-ghost {
   display: none !important;
 }
 

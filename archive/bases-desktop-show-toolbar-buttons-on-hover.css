@@ -1,9 +1,12 @@
 /* Show query toolbar buttons on hover */
-.bases-header .query-toolbar-item:not(.mod-views, .bases-toolbar-result-count) .text-icon-button {
-    transition: color 0.1s ease;
+.bases-header
+  .query-toolbar-item:not(.mod-views, .bases-toolbar-result-count)
+  .text-icon-button {
+  transition: color 0.1s ease;
 }
 
-.bases-header:not(:hover) .query-toolbar-item:not(.mod-views, .bases-toolbar-result-count) .text-icon-button {
-    color: var(--background-primary);
+.bases-header:not(:hover)
+  .query-toolbar-item:not(.mod-views, .bases-toolbar-result-count)
+  .text-icon-button {
+  color: var(--background-primary);
 }
-

@@ -27,21 +27,46 @@
 /* ----------------------------------------- */
 
 /* Override CSS variable for external image grid behavior */
-.markdown-preview-view.crop-to-fit, .crop-to-fit .markdown-preview-view,
-.markdown-source-view.crop-to-fit, .crop-to-fit .markdown-source-view {
+.markdown-preview-view.crop-to-fit,
+.crop-to-fit .markdown-preview-view,
+.markdown-source-view.crop-to-fit,
+.crop-to-fit .markdown-source-view {
   --image-grid-fit: cover !important;
 }
 
 /* Apply crop with custom size check for locals */
-.markdown-preview-view.crop-to-fit .internal-embed.media-embed.image-embed:not(:has([width])) img,
-.markdown-source-view.crop-to-fit .internal-embed.media-embed.image-embed:not(:has([width])) img,
-.crop-to-fit .markdown-preview-view .internal-embed.media-embed.image-embed:not(:has([width])) img,
-.crop-to-fit .markdown-source-view .internal-embed.media-embed.image-embed:not(:has([width])) img,
-.markdown-preview-view.crop-to-fit div[data-is-embed] > p:has(br) > img:not([alt*="banner"]):not([width]),
-.markdown-source-view.crop-to-fit div[data-is-embed] > p:has(br) > img:not([alt*="banner"]):not([width]),
-.crop-to-fit div[data-is-embed] > p:has(br) > img:not([alt*="banner"]):not([width]),
-.markdown-preview-view.crop-to-fit p:has(br) > img:not([alt*="banner"]):not([width]),
-.markdown-source-view.crop-to-fit p:has(br) > img:not([alt*="banner"]):not([width]),
+.markdown-preview-view.crop-to-fit
+  .internal-embed.media-embed.image-embed:not(:has([width]))
+  img,
+.markdown-source-view.crop-to-fit
+  .internal-embed.media-embed.image-embed:not(:has([width]))
+  img,
+.crop-to-fit
+  .markdown-preview-view
+  .internal-embed.media-embed.image-embed:not(:has([width]))
+  img,
+.crop-to-fit
+  .markdown-source-view
+  .internal-embed.media-embed.image-embed:not(:has([width]))
+  img,
+.markdown-preview-view.crop-to-fit
+  div[data-is-embed]
+  > p:has(br)
+  > img:not([alt*="banner"]):not([width]),
+.markdown-source-view.crop-to-fit
+  div[data-is-embed]
+  > p:has(br)
+  > img:not([alt*="banner"]):not([width]),
+.crop-to-fit
+  div[data-is-embed]
+  > p:has(br)
+  > img:not([alt*="banner"]):not([width]),
+.markdown-preview-view.crop-to-fit
+  p:has(br)
+  > img:not([alt*="banner"]):not([width]),
+.markdown-source-view.crop-to-fit
+  p:has(br)
+  > img:not([alt*="banner"]):not([width]),
 .crop-to-fit p:has(br) > img:not([alt*="banner"]):not([width]) {
   object-fit: cover !important;
   width: 100% !important;
@@ -54,21 +79,43 @@
 /* ----------------------------------------- */
 
 /* Override CSS variable for external image grid behavior */
-.markdown-preview-view.full-image, .full-image .markdown-preview-view,
-.markdown-source-view.full-image, .full-image .markdown-source-view {
+.markdown-preview-view.full-image,
+.full-image .markdown-preview-view,
+.markdown-source-view.full-image,
+.full-image .markdown-source-view {
   --image-grid-fit: contain !important;
 }
 
 /* Apply full display with custom size check for locals */
-.markdown-preview-view.full-image .internal-embed.media-embed.image-embed:not(:has([width])) img,
-.markdown-source-view.full-image .internal-embed.media-embed.image-embed:not(:has([width])) img,
-.full-image .markdown-preview-view .internal-embed.media-embed.image-embed:not(:has([width])) img,
-.full-image .markdown-source-view .internal-embed.media-embed.image-embed:not(:has([width])) img,
-.markdown-preview-view.full-image div[data-is-embed] > p:has(br) > img:not([width]),
-.markdown-source-view.full-image div[data-is-embed] > p:has(br) > img:not([width]),
+.markdown-preview-view.full-image
+  .internal-embed.media-embed.image-embed:not(:has([width]))
+  img,
+.markdown-source-view.full-image
+  .internal-embed.media-embed.image-embed:not(:has([width]))
+  img,
+.full-image
+  .markdown-preview-view
+  .internal-embed.media-embed.image-embed:not(:has([width]))
+  img,
+.full-image
+  .markdown-source-view
+  .internal-embed.media-embed.image-embed:not(:has([width]))
+  img,
+.markdown-preview-view.full-image
+  div[data-is-embed]
+  > p:has(br)
+  > img:not([width]),
+.markdown-source-view.full-image
+  div[data-is-embed]
+  > p:has(br)
+  > img:not([width]),
 .full-image div[data-is-embed] > p:has(br) > img:not([width]),
-.markdown-preview-view.full-image p:has(br) > img:not([alt*="banner"]):not([width]),
-.markdown-source-view.full-image p:has(br) > img:not([alt*="banner"]):not([width]),
+.markdown-preview-view.full-image
+  p:has(br)
+  > img:not([alt*="banner"]):not([width]),
+.markdown-source-view.full-image
+  p:has(br)
+  > img:not([alt*="banner"]):not([width]),
 .full-image p:has(br) > img:not([alt*="banner"]):not([width]) {
   object-fit: contain !important;
   width: auto !important;

@@ -5,5 +5,5 @@
 .markdown-reading-view .task-done,
 .markdown-reading-view .task-cancelled,
 .markdown-reading-view .task-created {
-    display: none !important;
+  display: none !important;
 }

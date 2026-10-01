@@ -8,7 +8,7 @@
   --h4-underline-enabled: 1;
   --h5-underline-enabled: 1;
   --h6-underline-enabled: 1;
-  
+
   /* Global settings */
   --heading-underline-opacity: 0.5;
   --heading-underline-gradient-start: 30%;
@@ -16,18 +16,18 @@
 }
 
 /* Base positioning for all headings */
-.markdown-preview-sizer>div>h1,
-.markdown-preview-sizer>div>h2,
-.markdown-preview-sizer>div>h3,
-.markdown-preview-sizer>div>h4,
-.markdown-preview-sizer>div>h5,
-.markdown-preview-sizer>div>h6,
-.markdown-rendered>h1,
-.markdown-rendered>h2,
-.markdown-rendered>h3,
-.markdown-rendered>h4,
-.markdown-rendered>h5,
-.markdown-rendered>h6,
+.markdown-preview-sizer > div > h1,
+.markdown-preview-sizer > div > h2,
+.markdown-preview-sizer > div > h3,
+.markdown-preview-sizer > div > h4,
+.markdown-preview-sizer > div > h5,
+.markdown-preview-sizer > div > h6,
+.markdown-rendered > h1,
+.markdown-rendered > h2,
+.markdown-rendered > h3,
+.markdown-rendered > h4,
+.markdown-rendered > h5,
+.markdown-rendered > h6,
 .HyperMD-header-1,
 .HyperMD-header-2,
 .HyperMD-header-3,
@@ -38,8 +38,8 @@
 }
 
 /* H1 Underline */
-.markdown-preview-sizer>div>h1::after,
-.markdown-rendered>h1::after,
+.markdown-preview-sizer > div > h1::after,
+.markdown-rendered > h1::after,
 .HyperMD-header-1::after {
   content: "";
   position: absolute;
@@ -56,8 +56,8 @@
 }
 
 /* H2 Underline */
-.markdown-preview-sizer>div>h2::after,
-.markdown-rendered>h2::after,
+.markdown-preview-sizer > div > h2::after,
+.markdown-rendered > h2::after,
 .HyperMD-header-2::after {
   content: "";
   position: absolute;
@@ -74,8 +74,8 @@
 }
 
 /* H3 Underline */
-.markdown-preview-sizer>div>h3::after,
-.markdown-rendered>h3::after,
+.markdown-preview-sizer > div > h3::after,
+.markdown-rendered > h3::after,
 .HyperMD-header-3::after {
   content: "";
   position: absolute;
@@ -92,8 +92,8 @@
 }
 
 /* H4 Underline */
-.markdown-preview-sizer>div>h4::after,
-.markdown-rendered>h4::after,
+.markdown-preview-sizer > div > h4::after,
+.markdown-rendered > h4::after,
 .HyperMD-header-4::after {
   content: "";
   position: absolute;
@@ -110,8 +110,8 @@
 }
 
 /* H5 Underline */
-.markdown-preview-sizer>div>h5::after,
-.markdown-rendered>h5::after,
+.markdown-preview-sizer > div > h5::after,
+.markdown-rendered > h5::after,
 .HyperMD-header-5::after {
   content: "";
   position: absolute;
@@ -128,8 +128,8 @@
 }
 
 /* H6 Underline */
-.markdown-preview-sizer>div>h6::after,
-.markdown-rendered>h6::after,
+.markdown-preview-sizer > div > h6::after,
+.markdown-rendered > h6::after,
 .HyperMD-header-6::after {
   content: "";
   position: absolute;

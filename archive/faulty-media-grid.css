@@ -38,35 +38,52 @@ Width:
 
 /* Apply default width to main container */
 .markdown-preview-view.is-readable-line-width .markdown-preview-section {
-  max-width: var(--content-max-width, var(--file-line-width, var(--line-width, 45rem)));
+  max-width: var(
+    --content-max-width,
+    var(--file-line-width, var(--line-width, 45rem))
+  );
 }
 
 /* Width override classes - applied to container */
-.media-base .markdown-preview-view.is-readable-line-width .markdown-preview-section {
+.media-base
+  .markdown-preview-view.is-readable-line-width
+  .markdown-preview-section {
   max-width: var(--file-line-width, var(--line-width, 45rem)) !important;
 }
 
-.media-small .markdown-preview-view.is-readable-line-width .markdown-preview-section {
+.media-small
+  .markdown-preview-view.is-readable-line-width
+  .markdown-preview-section {
   max-width: calc(var(--content-base-width) * 1.05) !important;
 }
 
-.media-medium .markdown-preview-view.is-readable-line-width .markdown-preview-section {
+.media-medium
+  .markdown-preview-view.is-readable-line-width
+  .markdown-preview-section {
   max-width: calc(var(--content-base-width) * 1.1) !important;
 }
 
-.media-large .markdown-preview-view.is-readable-line-width .markdown-preview-section {
+.media-large
+  .markdown-preview-view.is-readable-line-width
+  .markdown-preview-section {
   max-width: calc(var(--content-base-width) * 1.2) !important;
 }
 
-.media-wide .markdown-preview-view.is-readable-line-width .markdown-preview-section {
+.media-wide
+  .markdown-preview-view.is-readable-line-width
+  .markdown-preview-section {
   max-width: var(--line-width-wide) !important;
 }
 
-.media-max .markdown-preview-view.is-readable-line-width .markdown-preview-section {
+.media-max
+  .markdown-preview-view.is-readable-line-width
+  .markdown-preview-section {
   max-width: var(--max-width) !important;
 }
 
-.media-100 .markdown-preview-view.is-readable-line-width .markdown-preview-section {
+.media-100
+  .markdown-preview-view.is-readable-line-width
+  .markdown-preview-section {
   max-width: 100% !important;
 }
 
@@ -82,9 +99,18 @@ Width:
 }
 
 /* Only activate with media-grid class when toggle is enabled */
-body.media-grid-activation .markdown-preview-view:not(.media-grid) div[data-is-embed] > p:has(br),
-body.media-grid-activation .markdown-preview-view:not(.media-grid) div[data-is-embed] > p:has(img + *),
-body.media-grid-activation .markdown-preview-view:not(.media-grid) div[data-is-embed] > p:has(span + *) {
+body.media-grid-activation
+  .markdown-preview-view:not(.media-grid)
+  div[data-is-embed]
+  > p:has(br),
+body.media-grid-activation
+  .markdown-preview-view:not(.media-grid)
+  div[data-is-embed]
+  > p:has(img + *),
+body.media-grid-activation
+  .markdown-preview-view:not(.media-grid)
+  div[data-is-embed]
+  > p:has(span + *) {
   display: block !important;
 }
 
@@ -93,9 +119,18 @@ body.media-grid-activation .markdown-preview-view:not(.media-grid) div[data-is-e
 /* ----------------------------------------- */
 
 /* p tags wrap each row - only target paragraphs with multiple images or br tags */
-.markdown-preview-view.is-readable-line-width .markdown-preview-section div[data-is-embed] > p:has(br),
-.markdown-preview-view.is-readable-line-width .markdown-preview-section div[data-is-embed] > p:has(img + *),
-.markdown-preview-view.is-readable-line-width .markdown-preview-section div[data-is-embed] > p:has(span + *) {
+.markdown-preview-view.is-readable-line-width
+  .markdown-preview-section
+  div[data-is-embed]
+  > p:has(br),
+.markdown-preview-view.is-readable-line-width
+  .markdown-preview-section
+  div[data-is-embed]
+  > p:has(img + *),
+.markdown-preview-view.is-readable-line-width
+  .markdown-preview-section
+  div[data-is-embed]
+  > p:has(span + *) {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(0, 1fr));
   grid-gap: var(--media-grid-gap, 7px);
@@ -105,37 +140,127 @@ body.media-grid-activation .markdown-preview-view:not(.media-grid) div[data-is-e
 }
 
 /* Remove breaks from the document flow - only in grid contexts */
-.markdown-preview-view.is-readable-line-width .markdown-preview-section div[data-is-embed] > p:has(br) br,
-.markdown-preview-view.is-readable-line-width .markdown-preview-section div[data-is-embed] > p:has(img + *) br,
-.markdown-preview-view.is-readable-line-width .markdown-preview-section div[data-is-embed] > p:has(span + *) br {
+.markdown-preview-view.is-readable-line-width
+  .markdown-preview-section
+  div[data-is-embed]
+  > p:has(br)
+  br,
+.markdown-preview-view.is-readable-line-width
+  .markdown-preview-section
+  div[data-is-embed]
+  > p:has(img + *)
+  br,
+.markdown-preview-view.is-readable-line-width
+  .markdown-preview-section
+  div[data-is-embed]
+  > p:has(span + *)
+  br {
   display: none;
 }
 
 /* Media items sourced from your vault are wrapped in a span - only in grid contexts */
-.markdown-preview-view.is-readable-line-width .markdown-preview-section div[data-is-embed] > p:has(br) > span:has(img),
-.markdown-preview-view.is-readable-line-width .markdown-preview-section div[data-is-embed] > p:has(br) > span:has(video),
-.markdown-preview-view.is-readable-line-width .markdown-preview-section div[data-is-embed] > p:has(img + *) > span:has(img),
-.markdown-preview-view.is-readable-line-width .markdown-preview-section div[data-is-embed] > p:has(img + *) > span:has(video),
-.markdown-preview-view.is-readable-line-width .markdown-preview-section div[data-is-embed] > p:has(span + *) > span:has(img),
-.markdown-preview-view.is-readable-line-width .markdown-preview-section div[data-is-embed] > p:has(span + *) > span:has(video) {
+.markdown-preview-view.is-readable-line-width
+  .markdown-preview-section
+  div[data-is-embed]
+  > p:has(br)
+  > span:has(img),
+.markdown-preview-view.is-readable-line-width
+  .markdown-preview-section
+  div[data-is-embed]
+  > p:has(br)
+  > span:has(video),
+.markdown-preview-view.is-readable-line-width
+  .markdown-preview-section
+  div[data-is-embed]
+  > p:has(img + *)
+  > span:has(img),
+.markdown-preview-view.is-readable-line-width
+  .markdown-preview-section
+  div[data-is-embed]
+  > p:has(img + *)
+  > span:has(video),
+.markdown-preview-view.is-readable-line-width
+  .markdown-preview-section
+  div[data-is-embed]
+  > p:has(span + *)
+  > span:has(img),
+.markdown-preview-view.is-readable-line-width
+  .markdown-preview-section
+  div[data-is-embed]
+  > p:has(span + *)
+  > span:has(video) {
   display: flex;
   align-items: center;
   height: 100%;
 }
 
 /* Apply grid styles to all img/video tags in grid contexts only */
-.markdown-preview-view.is-readable-line-width .markdown-preview-section div[data-is-embed] > p:has(br) > img,
-.markdown-preview-view.is-readable-line-width .markdown-preview-section div[data-is-embed] > p:has(br) > video,
-.markdown-preview-view.is-readable-line-width .markdown-preview-section div[data-is-embed] > p:has(br) > span > img,
-.markdown-preview-view.is-readable-line-width .markdown-preview-section div[data-is-embed] > p:has(br) > span > video,
-.markdown-preview-view.is-readable-line-width .markdown-preview-section div[data-is-embed] > p:has(img + *) > img,
-.markdown-preview-view.is-readable-line-width .markdown-preview-section div[data-is-embed] > p:has(img + *) > video,
-.markdown-preview-view.is-readable-line-width .markdown-preview-section div[data-is-embed] > p:has(img + *) > span > img,
-.markdown-preview-view.is-readable-line-width .markdown-preview-section div[data-is-embed] > p:has(img + *) > span > video,
-.markdown-preview-view.is-readable-line-width .markdown-preview-section div[data-is-embed] > p:has(span + *) > img,
-.markdown-preview-view.is-readable-line-width .markdown-preview-section div[data-is-embed] > p:has(span + *) > video,
-.markdown-preview-view.is-readable-line-width .markdown-preview-section div[data-is-embed] > p:has(span + *) > span > img,
-.markdown-preview-view.is-readable-line-width .markdown-preview-section div[data-is-embed] > p:has(span + *) > span > video {
+.markdown-preview-view.is-readable-line-width
+  .markdown-preview-section
+  div[data-is-embed]
+  > p:has(br)
+  > img,
+.markdown-preview-view.is-readable-line-width
+  .markdown-preview-section
+  div[data-is-embed]
+  > p:has(br)
+  > video,
+.markdown-preview-view.is-readable-line-width
+  .markdown-preview-section
+  div[data-is-embed]
+  > p:has(br)
+  > span
+  > img,
+.markdown-preview-view.is-readable-line-width
+  .markdown-preview-section
+  div[data-is-embed]
+  > p:has(br)
+  > span
+  > video,
+.markdown-preview-view.is-readable-line-width
+  .markdown-preview-section
+  div[data-is-embed]
+  > p:has(img + *)
+  > img,
+.markdown-preview-view.is-readable-line-width
+  .markdown-preview-section
+  div[data-is-embed]
+  > p:has(img + *)
+  > video,
+.markdown-preview-view.is-readable-line-width
+  .markdown-preview-section
+  div[data-is-embed]
+  > p:has(img + *)
+  > span
+  > img,
+.markdown-preview-view.is-readable-line-width
+  .markdown-preview-section
+  div[data-is-embed]
+  > p:has(img + *)
+  > span
+  > video,
+.markdown-preview-view.is-readable-line-width
+  .markdown-preview-section
+  div[data-is-embed]
+  > p:has(span + *)
+  > img,
+.markdown-preview-view.is-readable-line-width
+  .markdown-preview-section
+  div[data-is-embed]
+  > p:has(span + *)
+  > video,
+.markdown-preview-view.is-readable-line-width
+  .markdown-preview-section
+  div[data-is-embed]
+  > p:has(span + *)
+  > span
+  > img,
+.markdown-preview-view.is-readable-line-width
+  .markdown-preview-section
+  div[data-is-embed]
+  > p:has(span + *)
+  > span
+  > video {
   width: 100%;
   height: 100%;
   object-fit: var(--media-object-fit, cover);
@@ -143,9 +268,18 @@ body.media-grid-activation .markdown-preview-view:not(.media-grid) div[data-is-e
 }
 
 /* Create gaps between rows - only between actual grid containers */
-.markdown-preview-view.is-readable-line-width .markdown-preview-section div[data-is-embed]:has(> p > br) + div[data-is-embed]:has(> p > br),
-.markdown-preview-view.is-readable-line-width .markdown-preview-section div[data-is-embed]:has(> p > img + *) + div[data-is-embed]:has(> p > img + *),
-.markdown-preview-view.is-readable-line-width .markdown-preview-section div[data-is-embed]:has(> p > span + *) + div[data-is-embed]:has(> p > span + *) {
+.markdown-preview-view.is-readable-line-width
+  .markdown-preview-section
+  div[data-is-embed]:has(> p > br)
+  + div[data-is-embed]:has(> p > br),
+.markdown-preview-view.is-readable-line-width
+  .markdown-preview-section
+  div[data-is-embed]:has(> p > img + *)
+  + div[data-is-embed]:has(> p > img + *),
+.markdown-preview-view.is-readable-line-width
+  .markdown-preview-section
+  div[data-is-embed]:has(> p > span + *)
+  + div[data-is-embed]:has(> p > span + *) {
   margin-top: var(--media-grid-gap, 7px);
 }
 

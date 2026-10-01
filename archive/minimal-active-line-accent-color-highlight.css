@@ -6,31 +6,46 @@
 
 /* Light theme - override Minimal's rgba(0,0,0,0.035) with accent color */
 .theme-light {
-    --active-line-bg: hsla(var(--accent-h), var(--accent-s), var(--accent-l), 0.12) !important;
+  --active-line-bg: hsla(
+    var(--accent-h),
+    var(--accent-s),
+    var(--accent-l),
+    0.12
+  ) !important;
 }
 
 /* Dark theme - override Minimal's rgba(255,255,255,0.04) with accent color */
 .theme-dark {
-    --active-line-bg: hsla(var(--accent-h), var(--accent-s), var(--accent-l), 0.18) !important;
+  --active-line-bg: hsla(
+    var(--accent-h),
+    var(--accent-s),
+    var(--accent-l),
+    0.18
+  ) !important;
 }
 
 /* Dark black theme - override Minimal's rgba(255,255,255,0.085) with accent color */
 .theme-dark.minimal-dark-black {
-    --active-line-bg: hsla(var(--accent-h), var(--accent-s), var(--accent-l), 0.20) !important;
+  --active-line-bg: hsla(
+    var(--accent-h),
+    var(--accent-s),
+    var(--accent-l),
+    0.2
+  ) !important;
 }
 
 /* ===== ENHANCED ACTIVE LINE NUMBER STYLING ===== */
 
 /* Active line number in Source View */
 .CodeMirror-activeline .CodeMirror-linenumber {
-    color: hsl(var(--accent-h), var(--accent-s), var(--accent-l)) !important;
-    font-weight: 600;
+  color: hsl(var(--accent-h), var(--accent-s), var(--accent-l)) !important;
+  font-weight: 600;
 }
 
 /* Active line number in Live Preview */
 .cm-editor .cm-lineNumbers .cm-gutterElement.cm-active {
-    color: hsl(var(--accent-h), var(--accent-s), var(--accent-l)) !important;
-    font-weight: 600;
+  color: hsl(var(--accent-h), var(--accent-s), var(--accent-l)) !important;
+  font-weight: 600;
 }
 
 /* ===== ENHANCED CURSOR VISIBILITY ===== */
@@ -38,8 +53,12 @@
 /* Make cursor more visible on active line with accent color */
 .CodeMirror-activeline .CodeMirror-cursor,
 .cm-active .cm-cursor {
-    border-left-color: hsl(var(--accent-h), var(--accent-s), var(--accent-l)) !important;
-    border-left-width: 2px !important;
+  border-left-color: hsl(
+    var(--accent-h),
+    var(--accent-s),
+    var(--accent-l)
+  ) !important;
+  border-left-width: 2px !important;
 }
 
 /* ===== READING VIEW LIMITATION ===== */
@@ -57,13 +76,13 @@
 
 /* Fallback for themes that don't define accent HSL variables */
 body:not(:has([style*="--accent-h"])) .theme-light {
-    --active-line-bg: rgba(var(--accent), 0.12) !important;
+  --active-line-bg: rgba(var(--accent), 0.12) !important;
 }
 
 body:not(:has([style*="--accent-h"])) .theme-dark {
-    --active-line-bg: rgba(var(--accent), 0.18) !important;
+  --active-line-bg: rgba(var(--accent), 0.18) !important;
 }
 
 body:not(:has([style*="--accent-h"])) .theme-dark.minimal-dark-black {
-    --active-line-bg: rgba(var(--accent), 0.20) !important;
+  --active-line-bg: rgba(var(--accent), 0.2) !important;
 }

@@ -11,7 +11,7 @@
 @media screen and (max-width: 780px) {
   .wideInputPromptInputEl {
     height: var(--quickadd-input-height);
-    min-height: var(--quickadd-input-height); 
+    min-height: var(--quickadd-input-height);
     max-height: var(--quickadd-input-height);
   }
 }

@@ -54,19 +54,21 @@
 }
 
 /* Remove .md extension */
-.markdown-source-view:not(.no-bc) .internal-embed[src$=".md"][alt$=".md"]::before,
-.markdown-preview-view:not(.no-bc) .internal-embed[src$=".md"][alt$=".md"]::before {
+.markdown-source-view:not(.no-bc)
+  .internal-embed[src$=".md"][alt$=".md"]::before,
+.markdown-preview-view:not(.no-bc)
+  .internal-embed[src$=".md"][alt$=".md"]::before {
   content: attr(alt slice(0, -3));
 }
 
 /* Alt text support */
 .internal-embed[alt*="no-bc"] .markdown-rendered blockquote {
-    border-left: transparent;
-    padding-left: 0px;
+  border-left: transparent;
+  padding-left: 0px;
 }
 .no-bc .internal-embed .markdown-rendered blockquote {
-    border-left: transparent;
-    padding-left: 0px;
+  border-left: transparent;
+  padding-left: 0px;
 }
 
 /* Ensure the "open link" button stays on top */

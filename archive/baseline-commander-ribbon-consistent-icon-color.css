@@ -3,5 +3,5 @@
 /* Source: https://github.com/churnish/obsidian-css-snippets */
 
 .workspace-ribbon .clickable-icon {
-    color: var(--icon-color) !important;
+  color: var(--icon-color) !important;
 }

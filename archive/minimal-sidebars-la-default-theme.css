@@ -27,18 +27,24 @@
 */
 
 body:not(.sidebar-color) .mod-right-split {
-    --background-secondary: var(--bg2) !important;
+  --background-secondary: var(--bg2) !important;
 }
 
-body:not(.sidebar-color) .mod-right-split :not(.mod-top) .workspace-tab-header-container {
-    --tab-container-background: var(--background-secondary);
+body:not(.sidebar-color)
+  .mod-right-split
+  :not(.mod-top)
+  .workspace-tab-header-container {
+  --tab-container-background: var(--background-secondary);
 }
 
-body:not(.sidebar-color) .workspace-split .workspace-tabs:not(.mod-top) .workspace-tab-header-container {
-    background-color: var(--background-secondary) !important;
+body:not(.sidebar-color)
+  .workspace-split
+  .workspace-tabs:not(.mod-top)
+  .workspace-tab-header-container {
+  background-color: var(--background-secondary) !important;
 }
 
 body {
-    --titlebar-background: var(--background-primary) !important;
-    --titlebar-background-focused: var(--background-primary) !important;
+  --titlebar-background: var(--background-primary) !important;
+  --titlebar-background-focused: var(--background-primary) !important;
 }

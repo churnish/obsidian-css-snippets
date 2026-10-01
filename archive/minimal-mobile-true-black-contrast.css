@@ -30,18 +30,30 @@
 }
 
 /* Dimming effect when sidebar is open */
-.theme-dark.is-mobile .workspace-split.mod-left-split .workspace-tabs.mod-active,
-.theme-dark.is-mobile .workspace-split.mod-right-split .workspace-tabs.mod-active {
+.theme-dark.is-mobile
+  .workspace-split.mod-left-split
+  .workspace-tabs.mod-active,
+.theme-dark.is-mobile
+  .workspace-split.mod-right-split
+  .workspace-tabs.mod-active {
   background-color: rgba(0, 0, 0, 0.5);
 }
 
-.theme-dark.is-mobile .workspace-split.mod-left-split .workspace-tabs.mod-active .workspace-leaf-content,
-.theme-dark.is-mobile .workspace-split.mod-right-split .workspace-tabs.mod-active .workspace-leaf-content {
+.theme-dark.is-mobile
+  .workspace-split.mod-left-split
+  .workspace-tabs.mod-active
+  .workspace-leaf-content,
+.theme-dark.is-mobile
+  .workspace-split.mod-right-split
+  .workspace-tabs.mod-active
+  .workspace-leaf-content {
   background-color: rgba(0, 0, 0, 0.3);
 }
 
 /* Ensure the main content area stays black */
-.theme-dark.is-mobile .workspace-split.mod-root > .workspace-leaf:not(.mod-active) {
+.theme-dark.is-mobile
+  .workspace-split.mod-root
+  > .workspace-leaf:not(.mod-active) {
   background-color: #000000;
 }
 
@@ -51,7 +63,11 @@
   color: rgba(255, 255, 255, 0.7);
 }
 
-.theme-dark.is-mobile .workspace-tab-header.is-active .workspace-tab-header-inner-icon,
-.theme-dark.is-mobile .workspace-tab-header.is-active .workspace-tab-header-inner-title {
+.theme-dark.is-mobile
+  .workspace-tab-header.is-active
+  .workspace-tab-header-inner-icon,
+.theme-dark.is-mobile
+  .workspace-tab-header.is-active
+  .workspace-tab-header-inner-title {
   color: rgba(255, 255, 255, 0.9);
 }

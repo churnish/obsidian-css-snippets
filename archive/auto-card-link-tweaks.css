@@ -4,15 +4,15 @@
 }
 
 .auto-card-link-title {
-    &:hover {
-        color: var(--text-normal);
-    }
+  &:hover {
+    color: var(--text-normal);
+  }
 }
 
 .auto-card-link-host {
-    &:hover {
-        color: var(--text-normal);
-    }
+  &:hover {
+    color: var(--text-normal);
+  }
 }
 
 /* Remove background

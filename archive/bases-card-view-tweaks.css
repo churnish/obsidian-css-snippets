@@ -45,7 +45,7 @@
   padding-inline-start: 0;
 }
 
-/* Optional: Fixes label positioning */ 
+/* Optional: Fixes label positioning */
 .bases-cards-label {
   /* Forces the property labels to center vertically. Otherwise each one appears placed too high on the card. */
   align-content: center;

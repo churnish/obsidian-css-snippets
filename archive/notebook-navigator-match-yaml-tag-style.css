@@ -1,4 +1,4 @@
-.nn-file-tag:not([style*='background-color']) {
+.nn-file-tag:not([style*="background-color"]) {
   background: var(--tag-background) !important;
   color: var(--tag-color) !important;
   border: var(--tag-border-width) solid var(--tag-border-color) !important;
@@ -7,8 +7,7 @@
   font-weight: var(--tag-weight) !important;
   text-decoration: var(--tag-decoration) !important;
 }
-w
-.nn-file-tag:not([style*='background-color']):hover {
+w .nn-file-tag:not([style*="background-color"]):hover {
   background: var(--tag-background-hover) !important;
   color: var(--tag-color-hover) !important;
   border-color: var(--tag-border-color-hover) !important;
