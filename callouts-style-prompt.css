@@ -1,6 +1,8 @@
 /* Chat-style callouts for AI prompts: system, user, assistant, and model-specific variants with branded icons */
 
-/* Source: https://github.com/aaaaalexis/obsidian-baseline/blob/main/snippets/prompt-callouts.css */
+/* Source: https://github.com/churnish/obsidian-css-snippets */
+
+/* Extracted from Baseline theme: https://github.com/aaaaalexis/obsidian-baseline/blob/main/snippets/prompt-callouts.css | MIT License, Copyright (c) 2025 aaaaalexis */
 
 .callout[data-callout="system"],
 .callout[data-callout="user"],

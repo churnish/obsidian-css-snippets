@@ -1,6 +1,8 @@
 /* Inline spoiler tags: hidden text revealed on click/focus */
 
-/* Source: https://forum.obsidian.md/t/inline-spoilers-with-css/104840 */
+/* Source: https://github.com/churnish/obsidian-css-snippets */
+
+/* Extracted from Obsidian Forum: https://forum.obsidian.md/t/inline-spoilers-with-css/104840 */
 
 .spoiler {
   background-color: var(--interactive-accent);

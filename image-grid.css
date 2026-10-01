@@ -1,14 +1,9 @@
-/* MIT License | Copyright (c) Stephan Ango (@kepano)
+/* Arrange adjacent images into grids in Reading view */
 
-Image Grid snippet for Obsidian
+/* Source: https://github.com/churnish/obsidian-css-snippets */
 
-author: @kepano
-version: 4.0.0
+/* Extracted from Minimal theme: https://github.com/kepano/obsidian-minimal | MIT License, Copyright (c) 2020-2024 Steph Ango (@kepano) */
 
-Support my work:
-https://github.com/sponsors/kepano
-
-*/
 /* Revamped for Obsidian 1.1.9+ using :has() */
 
 /* Modified: applies globally to all reading-view notes.

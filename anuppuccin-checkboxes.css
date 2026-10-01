@@ -1,9 +1,10 @@
-/*
-author: Anubis, mahashemi (compiled by)
-source: https://forum.obsidian.md/t/alternative-checkboxes-icon-bullets-copy-and-paste/35962/15
+/* Distinct icons and colors for custom task checkboxes such as [!], [?], [-], [/] and [>] */
 
-- https://github.com/AnubisNekhet/AnuPpuccin/blob/main/src/modules/Features/custom-checkboxes.scss
-*/
+/* Source: https://github.com/churnish/obsidian-css-snippets */
+
+/* Extracted from Obsidian Forum post by mahashemi: https://forum.obsidian.md/t/alternative-checkboxes-icon-bullets-copy-and-paste/35962/15 */
+
+/* Extracted from AnuPpuccin theme: https://github.com/AnubisNekhet/AnuPpuccin | GNU General Public License v3.0 */
 
 /* Save this as a CSS Snippet alternativeCheckboxes.css */
 

@@ -53,7 +53,8 @@ NEVER wrap these feature names in 'quotes'.
 
 - Every CSS snippet MUST start with a single-line `/* <Description> */` comment summarizing what the snippet does.
 - Add `<Add-on Name>:` prefix to description if plugin or theme is targeted. For multiple add-ons, join with ` + ` (e.g., `Baseline + Pane Relief:`).
-- Optionally follow with `/* Source: ... */`, separated by a blank line.
+- Optionally follow with `/* Source: https://github.com/churnish/obsidian-css-snippets */`, separated by a blank line. `Source:` MUST link **ONLY to this repo**.
+- **Upstream credit**: For snippets derived from upstream code, ALWAYS add the `Source:` line, then one `/* Extracted from <Project>: <URL> | <License notice> */` line per upstream, each separated by a blank line. Append ` | <License notice>` ONLY when upstream ships a license, copied from its LICENSE (e.g., `| MIT License, Copyright (c) 2020-2024 Steph Ango (@kepano)`). Credit a color palette as `/* Palette: <URL> */` directly below its `Extracted from` line.
 - Add one blank line between header comments and CSS.
 - When a comment starts with a lead-in followed by a colon (e.g., `Baseline: Set x to y`), the first word after the colon MUST be capitalized.
 - Keep descriptions accurate and up-to-date — when edits change a snippet's behavior or scope, update the header to reflect it (without superfluous details).

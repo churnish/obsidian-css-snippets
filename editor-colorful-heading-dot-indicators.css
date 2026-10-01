@@ -1,4 +1,8 @@
-/* Extracted from Baseline theme (https://github.com/aaaaalexis/obsidian-baseline), with modifications */
+/* Turn heading fold indicators into always-visible dots colored by heading level, hollow when folded */
+
+/* Source: https://github.com/churnish/obsidian-css-snippets */
+
+/* Extracted from Baseline theme: https://github.com/aaaaalexis/obsidian-baseline | MIT License, Copyright (c) 2025 aaaaalexis */
 
 .markdown-rendered :is(h1, h2, h3, h4, h5, h6) .heading-collapse-indicator,
 .cm-line.HyperMD-header .collapse-indicator {

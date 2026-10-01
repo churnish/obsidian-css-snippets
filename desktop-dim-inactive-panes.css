@@ -1,6 +1,8 @@
 /* Dim unfocused note panes via secondary background */
 
-/* Source: https://forum.obsidian.md/t/highlight-note-pane-in-focus/91056 */
+/* Source: https://github.com/churnish/obsidian-css-snippets */
+
+/* Extracted from Obsidian Forum: https://forum.obsidian.md/t/highlight-note-pane-in-focus/91056 */
 
 /* No transitions by design — dimming swaps instantly when focus moves */
 

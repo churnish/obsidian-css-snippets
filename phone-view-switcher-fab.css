@@ -1,6 +1,8 @@
 /* Floating mode-switch button on phone */
 
-/* Source: extracted from Baseline theme https://github.com/aaaaalexis/obsidian-baseline */
+/* Source: https://github.com/churnish/obsidian-css-snippets */
+
+/* Extracted from Baseline theme: https://github.com/aaaaalexis/obsidian-baseline | MIT License, Copyright (c) 2025 aaaaalexis */
 
 body.is-phone {
   --keyboard-spacing: 8px;

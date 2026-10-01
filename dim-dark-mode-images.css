@@ -1,6 +1,10 @@
 /* Dark mode image & Bases cover dimming */
-/* Image dimming extracted from Minimal theme (image-filters feature) */
-/* Stephan Ango (@kepano) — MIT License */
+
+/* Source: https://github.com/churnish/obsidian-css-snippets */
+
+/* Extracted from Minimal theme: https://github.com/kepano/obsidian-minimal | MIT License, Copyright (c) 2020-2024 Steph Ango (@kepano) */
+
+/* Modified: Adds Bases cover dimming on top of Minimal image dimming */
 
 :root {
   --image-muted: 0.7;
