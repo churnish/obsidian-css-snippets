@@ -5,7 +5,12 @@
 - snippets/ is a public git repo: **NEVER put personal information in any file or commit message** — names, email addresses, home-directory paths, vault note titles or content.
 - **No history rewrites**: NEVER amend, rebase or otherwise rewrite a commit — fix mistakes with a new commit.
 - Obsidian applies CSS snippet edits instantly on file save — no reload required.
+
+## CSS
+
 - **CSS limits**: When a snippet needs state CSS cannot select on, propose a Templater startup script in `Utility/Templates/` and register it in Templater `startup_templates`. ALWAYS read existing `startup-*.md` scripts first for house conventions. Add JS ONLY for parts CSS cannot express. NEVER port working CSS to JS.
+- **Avoid `:has()`**: Use ONLY when no `:has()`-free selector matches the same elements.
+- **Avoid `!important`**: Override by raising selector specificity or by setting the CSS variable the target rule reads. Use `!important` ONLY against inline styles or another `!important` declaration.
 
 ## File name
 
