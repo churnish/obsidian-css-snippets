@@ -14,5 +14,5 @@
 .no-h4 .internal-embed .markdown-rendered h4,
 .no-h5 .internal-embed .markdown-rendered h5,
 .no-h6 .internal-embed .markdown-rendered h6 {
-    display: none;
+  display: none;
 }

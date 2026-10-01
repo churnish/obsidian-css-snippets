@@ -2,12 +2,12 @@
 
 /* Source: https://github.com/churnish/obsidian-css-snippets */
 
-.internal-embed[alt*=no-2bq] .markdown-rendered blockquote {
-    border-left: transparent;
-    padding-left: 0px;
+.internal-embed[alt*="no-2bq"] .markdown-rendered blockquote {
+  border-left: transparent;
+  padding-left: 0px;
 }
 
 .no-2bq .internal-embed .markdown-rendered blockquote {
-    border-left: transparent;
-    padding-left: 0px;
+  border-left: transparent;
+  padding-left: 0px;
 }

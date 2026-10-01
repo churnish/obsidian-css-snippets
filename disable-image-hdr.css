@@ -1,5 +1,5 @@
 /* Force HDR images to SDR */
 
 body {
-    dynamic-range-limit: standard;
+  dynamic-range-limit: standard;
 }

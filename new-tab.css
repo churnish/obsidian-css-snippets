@@ -12,7 +12,8 @@
 }
 
 /* Hide native Go to file only when Quick Switcher++ button present, so native action returns whenever plugin skips a tab */
-.empty-state-action-list:has(> .qsp-empty-state-action-launch) > .empty-state-action:has(.lucide-search) {
+.empty-state-action-list:has(> .qsp-empty-state-action-launch)
+  > .empty-state-action:has(.lucide-search) {
   display: none;
 }
 
@@ -22,7 +23,9 @@
 }
 
 /* Keep actions native renders after Go to file (Open web viewer) after replacement too */
-.empty-state-action-list > .empty-state-action:has(.lucide-search) ~ .empty-state-action {
+.empty-state-action-list
+  > .empty-state-action:has(.lucide-search)
+  ~ .empty-state-action {
   order: 2;
 }
 
@@ -82,14 +85,20 @@
   }
 
   /* Native centers odd last action by DOM position, which hidden Go to file and moved Quick Switcher++ button throw off, so cancel it here and recenter by visible count below */
-  .empty-state-action-list:has(> .qsp-empty-state-action-launch) > .text-icon-button.mod-pill:last-child {
+  .empty-state-action-list:has(> .qsp-empty-state-action-launch)
+    > .text-icon-button.mod-pill:last-child {
     grid-column: auto;
     justify-self: auto;
   }
 
   /* Visible count odd when DOM count even (Go to file hidden): recenter Quick Switcher++ button if Go to file ends DOM, else action after Go to file (Open web viewer). Nested :has() invalid, so first selector matches search icon by descendant chain */
-  .empty-state-action-list:has(> .empty-state-action:last-child:nth-child(even) .lucide-search) > .qsp-empty-state-action-launch,
-  .empty-state-action-list:has(> .qsp-empty-state-action-launch) > .empty-state-action:has(.lucide-search) ~ .empty-state-action:last-child:nth-child(even) {
+  .empty-state-action-list:has(
+      > .empty-state-action:last-child:nth-child(even) .lucide-search
+    )
+    > .qsp-empty-state-action-launch,
+  .empty-state-action-list:has(> .qsp-empty-state-action-launch)
+    > .empty-state-action:has(.lucide-search)
+    ~ .empty-state-action:last-child:nth-child(even) {
     grid-column: 1 / -1;
     justify-self: center;
   }

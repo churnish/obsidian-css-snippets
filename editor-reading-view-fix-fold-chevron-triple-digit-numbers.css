@@ -4,5 +4,5 @@
 /* Live Preview reserves marker width dynamically, so unaffected */
 
 .markdown-rendered .list-collapse-indicator {
-    margin-inline-start: -3.1em;
+  margin-inline-start: -3.1em;
 }

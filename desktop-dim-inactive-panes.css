@@ -6,20 +6,47 @@
 
 /* Apply secondary background when pane group inactive — only when multiple panes (detected via sibling .workspace-tabs) */
 /* Keyed off the group's :has(.mod-active) state, not the individual leaf's mod-active class. A group's active/inactive state never changes while switching tabs within it — mod-active only moves between sibling leaves in the same group — so the shown leaf's background never passes through a dimmed paint during an intra-group tab switch, which a per-leaf selector could not avoid */
-body:not(.is-mobile) .workspace-split:not(.mod-left-split):not(.mod-right-split):has(.workspace-tabs ~ .workspace-tabs) .workspace-tabs:not(:has(.workspace-leaf.mod-active)) .workspace-leaf:not(.is-being-dragged) .view-content,
-body:not(.is-mobile) .workspace-split:not(.mod-left-split):not(.mod-right-split):has(.workspace-tabs ~ .workspace-tabs) .workspace-tabs:not(:has(.workspace-leaf.mod-active)) .workspace-leaf:not(.is-being-dragged) .view-header {
+body:not(.is-mobile)
+  .workspace-split:not(.mod-left-split):not(.mod-right-split):has(
+    .workspace-tabs ~ .workspace-tabs
+  )
+  .workspace-tabs:not(:has(.workspace-leaf.mod-active))
+  .workspace-leaf:not(.is-being-dragged)
+  .view-content,
+body:not(.is-mobile)
+  .workspace-split:not(.mod-left-split):not(.mod-right-split):has(
+    .workspace-tabs ~ .workspace-tabs
+  )
+  .workspace-tabs:not(:has(.workspace-leaf.mod-active))
+  .workspace-leaf:not(.is-being-dragged)
+  .view-header {
   background-color: var(--background-secondary) !important;
   --code-background: var(--background-primary);
 }
 
 /* Active pane group uses normal background — only when multiple panes */
-body:not(.is-mobile) .workspace-split:not(.mod-left-split):not(.mod-right-split):has(.workspace-tabs ~ .workspace-tabs) .workspace-tabs:has(.workspace-leaf.mod-active) .view-content,
-body:not(.is-mobile) .workspace-split:not(.mod-left-split):not(.mod-right-split):has(.workspace-tabs ~ .workspace-tabs) .workspace-tabs:has(.workspace-leaf.mod-active) .view-header {
+body:not(.is-mobile)
+  .workspace-split:not(.mod-left-split):not(.mod-right-split):has(
+    .workspace-tabs ~ .workspace-tabs
+  )
+  .workspace-tabs:has(.workspace-leaf.mod-active)
+  .view-content,
+body:not(.is-mobile)
+  .workspace-split:not(.mod-left-split):not(.mod-right-split):has(
+    .workspace-tabs ~ .workspace-tabs
+  )
+  .workspace-tabs:has(.workspace-leaf.mod-active)
+  .view-header {
   background-color: var(--background-primary) !important;
 }
 
 /* Dimmed pane's own tab name keeps default white background otherwise; match it to the dimmed editor background */
 /* Override the variable, not background-color directly — app.css also reads --tab-background-active for the rounded corner notch's box-shadow, so overriding only background-color leaves white corners */
-body:not(.is-mobile) .workspace-split:not(.mod-left-split):not(.mod-right-split):has(.workspace-tabs ~ .workspace-tabs) .workspace-tabs:not(:has(.workspace-leaf.mod-active)) .workspace-tab-header.is-active {
+body:not(.is-mobile)
+  .workspace-split:not(.mod-left-split):not(.mod-right-split):has(
+    .workspace-tabs ~ .workspace-tabs
+  )
+  .workspace-tabs:not(:has(.workspace-leaf.mod-active))
+  .workspace-tab-header.is-active {
   --tab-background-active: var(--background-secondary);
 }

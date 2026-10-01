@@ -52,8 +52,14 @@
 }
 
 /* Fullscreen icons (lucide-maximize / lucide-minimize via ::after) */
-.is-tablet .excalidraw .ExcalidrawObsidianMenu .ToolIcon__icon[aria-label="Goto fullscreen mode"]::after,
-.is-tablet .excalidraw .ExcalidrawObsidianMenu .ToolIcon__icon[aria-label="Exit fullscreen mode"]::after {
+.is-tablet
+  .excalidraw
+  .ExcalidrawObsidianMenu
+  .ToolIcon__icon[aria-label="Goto fullscreen mode"]::after,
+.is-tablet
+  .excalidraw
+  .ExcalidrawObsidianMenu
+  .ToolIcon__icon[aria-label="Exit fullscreen mode"]::after {
   width: 18px !important;
   height: 18px !important;
 }

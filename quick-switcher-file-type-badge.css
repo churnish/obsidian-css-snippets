@@ -4,7 +4,7 @@
 /* Scoped to .modal-container .prompt rather than :root: plugin declares both variables at :root too, identical specificity, so an unscoped override would depend on snippet-vs-plugin stylesheet order */
 /* Only --symbol-indent-padding set; --symbol-base-padding (plugin default 0px) stays untouched, since doubling zero shifts nothing and a non-zero base would indent top-level headings too */
 .modal-container .prompt {
-    --symbol-indent-padding: 24px;
+  --symbol-indent-padding: 24px;
 }
 
 /* Outline mode: indentation guides matching native tree panes (Outline, File explorer), which draw one border-inline-start per nesting level on each .tree-item-children wrapper */
@@ -12,158 +12,163 @@
 /* Absolutely positioned so the pseudo-element stays out of the row's flex flow — quick-switcher-left-side-icons.css makes these rows flex containers, where an in-flow ::before would become a flex item and displace the icons */
 /* Line sits half an indent step left of the row's own text, so each guide lands midway between its parent's text and its children's, and reuses the native --nav-indentation-guide-* variables so guides match tree panes in both themes */
 .qsp-suggestion-symbol {
-    position: relative;
+  position: relative;
 }
 
 /* Depth as a number, so the guide rule below can be written once instead of per level. Plugin emits qsp-symbol-l0 through qsp-symbol-l6 only */
 .qsp-symbol-l1 {
-    --qsp-symbol-depth: 1;
+  --qsp-symbol-depth: 1;
 }
 
 .qsp-symbol-l2 {
-    --qsp-symbol-depth: 2;
+  --qsp-symbol-depth: 2;
 }
 
 .qsp-symbol-l3 {
-    --qsp-symbol-depth: 3;
+  --qsp-symbol-depth: 3;
 }
 
 .qsp-symbol-l4 {
-    --qsp-symbol-depth: 4;
+  --qsp-symbol-depth: 4;
 }
 
 .qsp-symbol-l5 {
-    --qsp-symbol-depth: 5;
+  --qsp-symbol-depth: 5;
 }
 
 .qsp-symbol-l6 {
-    --qsp-symbol-depth: 6;
+  --qsp-symbol-depth: 6;
 }
 
 /* Level 0 excluded: top-level headings have no ancestor to draw a guide for */
 .qsp-suggestion-symbol:not(.qsp-symbol-l0)::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    /* Bridges the 1px bottom margin Obsidian puts on every suggestion row, which would otherwise break each guide into per-row dashes */
-    bottom: -1px;
-    left: calc(var(--symbol-base-padding) + var(--symbol-indent-padding) / 2);
-    width: calc(
-        (var(--qsp-symbol-depth) - 1) * var(--symbol-indent-padding) +
-            var(--nav-indentation-guide-width)
-    );
-    background: repeating-linear-gradient(
-        to right,
-        var(--nav-indentation-guide-color) 0,
-        var(--nav-indentation-guide-color) var(--nav-indentation-guide-width),
-        transparent var(--nav-indentation-guide-width),
-        transparent var(--symbol-indent-padding)
-    );
-    pointer-events: none;
+  content: "";
+  position: absolute;
+  top: 0;
+  /* Bridges the 1px bottom margin Obsidian puts on every suggestion row, which would otherwise break each guide into per-row dashes */
+  bottom: -1px;
+  left: calc(var(--symbol-base-padding) + var(--symbol-indent-padding) / 2);
+  width: calc(
+    (var(--qsp-symbol-depth) - 1) * var(--symbol-indent-padding) +
+      var(--nav-indentation-guide-width)
+  );
+  background: repeating-linear-gradient(
+    to right,
+    var(--nav-indentation-guide-color) 0,
+    var(--nav-indentation-guide-color) var(--nav-indentation-guide-width),
+    transparent var(--nav-indentation-guide-width),
+    transparent var(--symbol-indent-padding)
+  );
+  pointer-events: none;
 }
 
 /* Highlighted suggestion: badge background matches sidebar background instead of the hover tint, for readability, same treatment as file explorer */
 .suggestion-item.is-selected .nav-file-tag {
-    background-color: var(--background-secondary) !important;
+  background-color: var(--background-secondary) !important;
 }
 
 /* Scoped to suggestions with a second line (.suggestion-note): single-line suggestions use flex layout in quick-switcher-left-side-icons.css instead */
 .suggestion-item.mod-complex:has(.suggestion-note) {
-    /* Center badge/icon on title's text instead of centering across full multi-line suggestion height */
-    /* Plugin's own CSS sets align-self: center directly on .suggestion-aux, which wins over the container's align-items, so overridden here directly */
+  /* Center badge/icon on title's text instead of centering across full multi-line suggestion height */
+  /* Plugin's own CSS sets align-self: center directly on .suggestion-aux, which wins over the container's align-items, so overridden here directly */
+  & .suggestion-aux {
+    align-self: flex-start;
+  }
+
+  /* margin-top values differ because the badge (13.5px, padded text pill) and a bare flair icon (16px) need different offsets to land on the same visual center */
+  &:has(.nav-file-tag) .suggestion-aux {
+    margin-top: 3.25px;
+  }
+
+  &:not(:has(.nav-file-tag)) .suggestion-aux {
+    margin-top: 2px;
+  }
+
+  /* Canvas/Base/PDF badges are var(--icon-s) flair icons, not the padded 13.5px text pill the :has(.nav-file-tag) margin above assumes — that fixed offset over- or under-shoots depending on how --icon-s compares to the title's line height, which differs between desktop (16px vs ~19.5px) and mobile (18px vs ~18.2px), so centered dynamically within the row instead of guessing another fixed value */
+  &:has(
+      .qsp-file-ext-indicator[data-ext="canvas"],
+      .qsp-file-ext-indicator[data-ext="base"],
+      .qsp-file-ext-indicator[data-ext="pdf"]
+    )
+    .suggestion-aux {
+    align-self: center;
+    margin-top: 0;
+  }
+
+  /* Extension badge and other flairs (e.g. open-editor indicator, bookmark/recent indicators) reuse .suggestion-aux, right-aligned by default, so reorder container instead of tag itself */
+  /* Grid layout instead of flex: icon shares row with only title; path/tag breadcrumbs (further lines, in complex suggestions) span full width flush left, matching icon-less suggestions, instead of being indented under title */
+  &:has(.suggestion-flair) {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    align-items: flex-start;
+
+    & .suggestion-content {
+      display: contents;
+    }
+
+    /* grid-row explicit, not just grid-column: an item with only one axis set skips cells already claimed by another item's fully-explicit placement (the quick-open hotkey below), landing on the next free row instead of sharing this one */
+    & .suggestion-title {
+      grid-row: 1;
+      grid-column: 2;
+    }
+
+    & .suggestion-content > :not(.suggestion-title) {
+      grid-column: 1 / -1;
+    }
+
     & .suggestion-aux {
-        align-self: flex-start;
+      grid-column: 1;
+      order: -1;
+      gap: var(--size-4-2);
+      margin-inline-end: var(--size-2-2);
     }
 
-    /* margin-top values differ because the badge (13.5px, padded text pill) and a bare flair icon (16px) need different offsets to land on the same visual center */
-    &:has(.nav-file-tag) .suggestion-aux {
-        margin-top: 3.25px;
+    /* Plugin's own CSS adds margin-inline-start: 12px on flairs (e.g. active-editor indicator), unlike the extension badge which carries no such margin, so it is zeroed here to leave only the aux's own gap and margin controlling spacing */
+    /* margin-inline-end needs !important: file-explorer-file-extension-badge.css sets margin-inline-end !important directly on the shared .nav-file-tag class, which the badge also carries */
+    & .suggestion-flair {
+      margin-inline-start: 0;
+      margin-inline-end: 0 !important;
     }
 
-    &:not(:has(.nav-file-tag)) .suggestion-aux {
-        margin-top: 2px;
+    /* Extension badge always sorts last (rightmost, closest to title) within the icon cluster */
+    & .suggestion-flair.qsp-file-ext-indicator {
+      order: 1;
     }
 
-    /* Canvas/Base/PDF badges are var(--icon-s) flair icons, not the padded 13.5px text pill the :has(.nav-file-tag) margin above assumes — that fixed offset over- or under-shoots depending on how --icon-s compares to the title's line height, which differs between desktop (16px vs ~19.5px) and mobile (18px vs ~18.2px), so centered dynamically within the row instead of guessing another fixed value */
-    &:has(.qsp-file-ext-indicator[data-ext="canvas"], .qsp-file-ext-indicator[data-ext="base"], .qsp-file-ext-indicator[data-ext="pdf"]) .suggestion-aux {
-        align-self: center;
-        margin-top: 0;
+    /* Quick-open hotkey (saved-search suggestions) is a sibling of .suggestion-aux/.suggestion-content, not a child of either, so it has no grid placement of its own otherwise — it falls back to auto-placement in column 1, which both drags it below the note line (row 3, instead of beside the title on row 1) and widens column 1 to fit its own width, since that column is auto-sized */
+    & .qsp-quick-open-aux {
+      grid-row: 1;
+      grid-column: 2;
+      justify-self: end;
+      align-self: center;
     }
-
-    /* Extension badge and other flairs (e.g. open-editor indicator, bookmark/recent indicators) reuse .suggestion-aux, right-aligned by default, so reorder container instead of tag itself */
-    /* Grid layout instead of flex: icon shares row with only title; path/tag breadcrumbs (further lines, in complex suggestions) span full width flush left, matching icon-less suggestions, instead of being indented under title */
-    &:has(.suggestion-flair) {
-        display: grid;
-        grid-template-columns: auto 1fr;
-        align-items: flex-start;
-
-        & .suggestion-content {
-            display: contents;
-        }
-
-        /* grid-row explicit, not just grid-column: an item with only one axis set skips cells already claimed by another item's fully-explicit placement (the quick-open hotkey below), landing on the next free row instead of sharing this one */
-        & .suggestion-title {
-            grid-row: 1;
-            grid-column: 2;
-        }
-
-        & .suggestion-content > :not(.suggestion-title) {
-            grid-column: 1 / -1;
-        }
-
-        & .suggestion-aux {
-            grid-column: 1;
-            order: -1;
-            gap: var(--size-4-2);
-            margin-inline-end: var(--size-2-2);
-        }
-
-        /* Plugin's own CSS adds margin-inline-start: 12px on flairs (e.g. active-editor indicator), unlike the extension badge which carries no such margin, so it is zeroed here to leave only the aux's own gap and margin controlling spacing */
-        /* margin-inline-end needs !important: file-explorer-file-extension-badge.css sets margin-inline-end !important directly on the shared .nav-file-tag class, which the badge also carries */
-        & .suggestion-flair {
-            margin-inline-start: 0;
-            margin-inline-end: 0 !important;
-        }
-
-        /* Extension badge always sorts last (rightmost, closest to title) within the icon cluster */
-        & .suggestion-flair.qsp-file-ext-indicator {
-            order: 1;
-        }
-
-        /* Quick-open hotkey (saved-search suggestions) is a sibling of .suggestion-aux/.suggestion-content, not a child of either, so it has no grid placement of its own otherwise — it falls back to auto-placement in column 1, which both drags it below the note line (row 3, instead of beside the title on row 1) and widens column 1 to fit its own width, since that column is auto-sized */
-        & .qsp-quick-open-aux {
-            grid-row: 1;
-            grid-column: 2;
-            justify-self: end;
-            align-self: center;
-        }
-    }
+  }
 }
 
 /* Vault switcher: dim path icon/text to match file suggestions' breadcrumb styling */
 /* Plugin's own CSS dims .qsp-breadcrumb-indicator/.qsp-breadcrumb (file mode) but never applies the same treatment to vault mode's differently-named .qsp-path-indicator/.qsp-path, despite both rendering the same folder-icon-plus-path row */
 .suggestion-item.qsp-suggestion-vault .qsp-path-indicator {
-    color: var(--text-faint);
+  color: var(--text-faint);
 }
 
 .suggestion-item.qsp-suggestion-vault .qsp-path-indicator svg {
-    width: 1em;
-    height: 1em;
+  width: 1em;
+  height: 1em;
 }
 
 /* display:inline undoes the plugin's own .qsp-path { display: flex } rule — meant for file mode's row container, which shares this class name, but here .qsp-path is the text span itself, and flex blockifies it onto its own line below the inline folder icon */
 .suggestion-item.qsp-suggestion-vault .qsp-path {
-    display: inline;
-    color: var(--text-muted);
+  display: inline;
+  color: var(--text-muted);
 }
 
 /* Swap path and tags breadcrumb line order: tags line above, path line below */
 .suggestion-item .qsp-path {
-    order: 2;
+  order: 2;
 }
 
 .suggestion-item .qsp-tags-breadcrumbs {
-    order: 1;
+  order: 1;
 }
 
 /* Canvas/Base/PDF badges: replace text with an icon glyph instead of the plain text pill used for other extensions */
@@ -174,53 +179,53 @@
 .qsp-file-ext-indicator[data-ext="canvas"],
 .qsp-file-ext-indicator[data-ext="base"],
 .qsp-file-ext-indicator[data-ext="pdf"] {
-    color: transparent;
-    font-size: 0;
+  color: transparent;
+  font-size: 0;
+  width: var(--icon-s);
+  height: var(--icon-s);
+  padding: 0;
+  background-color: transparent !important;
+
+  &::before {
+    content: "";
+    display: block;
     width: var(--icon-s);
     height: var(--icon-s);
-    padding: 0;
-    background-color: transparent !important;
-
-    &::before {
-        content: "";
-        display: block;
-        width: var(--icon-s);
-        height: var(--icon-s);
-        background-color: var(--text-normal);
-        mask-repeat: no-repeat;
-        mask-position: center;
-        mask-size: contain;
-    }
+    background-color: var(--text-normal);
+    mask-repeat: no-repeat;
+    mask-position: center;
+    mask-size: contain;
+  }
 }
 
 /* Selected suggestion: re-assert transparent background — .suggestion-item.is-selected .nav-file-tag above carries the same !important but three classes of specificity (vs. two classes + one attribute here), so it wins over the plain rule above whenever the row is highlighted, which QSP's first result always is */
 .suggestion-item.is-selected .qsp-file-ext-indicator[data-ext="canvas"],
 .suggestion-item.is-selected .qsp-file-ext-indicator[data-ext="base"],
 .suggestion-item.is-selected .qsp-file-ext-indicator[data-ext="pdf"] {
-    background-color: transparent !important;
+  background-color: transparent !important;
 }
 
 .qsp-file-ext-indicator[data-ext="canvas"]::before {
-    mask-image: var(--badge-icon-canvas);
+  mask-image: var(--badge-icon-canvas);
 }
 
 .qsp-file-ext-indicator[data-ext="base"]::before {
-    mask-image: var(--badge-icon-base);
+  mask-image: var(--badge-icon-base);
 }
 
 .qsp-file-ext-indicator[data-ext="pdf"]::before {
-    mask-image: var(--badge-icon-pdf);
+  mask-image: var(--badge-icon-pdf);
 }
 
 /* Hide trailing slash on folder path breadcrumbs */
 /* Requires the wrapping span, stamped by the startup-stamp-quick-switcher++-file-ext-badge Templater startup template — the plugin renders the whole breadcrumb as one bare text node, so pure CSS has no separate element to select the trailing slash */
 .qsp-trailing-slash {
-    display: none;
+  display: none;
 }
 
 /* Dim "/" separators between path segments below the folder names themselves, same wrapping-span requirement and rationale as the trailing slash above */
 /* One step dimmer than --text-muted, the plugin's own color for the breadcrumb text (folder names) this sits inside */
 .qsp-path-slash {
-    color: var(--text-faint);
-    margin-inline: 2px;
+  color: var(--text-faint);
+  margin-inline: 2px;
 }

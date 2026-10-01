@@ -3,7 +3,7 @@
 /* Source: https://github.com/churnish/obsidian-css-snippets */
 
 .center-images :is(.media-embed, img):not(li *, .auto-card-link-favicon) {
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
 }

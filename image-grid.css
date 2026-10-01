@@ -40,17 +40,40 @@ body {
 .markdown-preview-view:not(.no-img-grid) .image-embed.is-loaded img:active {
   background-color: transparent;
 }
-.markdown-preview-view:not(.no-img-grid) .markdown-preview-section > div:has(img) p:empty,
-.markdown-preview-view:not(.no-img-grid) .markdown-preview-section > div:has(img) img ~ br,
-.markdown-preview-view:not(.no-img-grid) .markdown-preview-section > div:has(img) .image-embed ~ br {
+.markdown-preview-view:not(.no-img-grid)
+  .markdown-preview-section
+  > div:has(img)
+  p:empty,
+.markdown-preview-view:not(.no-img-grid)
+  .markdown-preview-section
+  > div:has(img)
+  img
+  ~ br,
+.markdown-preview-view:not(.no-img-grid)
+  .markdown-preview-section
+  > div:has(img)
+  .image-embed
+  ~ br {
   display: none;
 }
-.markdown-preview-view:not(.no-img-grid) .markdown-preview-section div:has(> .image-embed ~ .image-embed),
-.markdown-preview-view:not(.no-img-grid) .markdown-preview-section p:has(> .image-embed ~ .image-embed),
-.markdown-preview-view:not(.no-img-grid) .markdown-preview-section div:has(> img ~ img),
-.markdown-preview-view:not(.no-img-grid) .markdown-preview-section p:has(> .image-embed ~ img),
-.markdown-preview-view:not(.no-img-grid) .markdown-preview-section p:has(> img ~ .image-embed),
-.markdown-preview-view:not(.no-img-grid) .markdown-preview-section p:has(> img ~ img) {
+.markdown-preview-view:not(.no-img-grid)
+  .markdown-preview-section
+  div:has(> .image-embed ~ .image-embed),
+.markdown-preview-view:not(.no-img-grid)
+  .markdown-preview-section
+  p:has(> .image-embed ~ .image-embed),
+.markdown-preview-view:not(.no-img-grid)
+  .markdown-preview-section
+  div:has(> img ~ img),
+.markdown-preview-view:not(.no-img-grid)
+  .markdown-preview-section
+  p:has(> .image-embed ~ img),
+.markdown-preview-view:not(.no-img-grid)
+  .markdown-preview-section
+  p:has(> img ~ .image-embed),
+.markdown-preview-view:not(.no-img-grid)
+  .markdown-preview-section
+  p:has(> img ~ img) {
   display: grid;
   margin-block-start: var(--img-grid-gap);
   margin-block-end: var(--img-grid-gap);
@@ -58,25 +81,70 @@ body {
   grid-row-gap: 0;
   grid-template-columns: repeat(auto-fit, minmax(0, 1fr));
 }
-.markdown-preview-view:not(.no-img-grid) .markdown-preview-section div:has(> .image-embed ~ .image-embed) > img,
-.markdown-preview-view:not(.no-img-grid) .markdown-preview-section p:has(> .image-embed ~ .image-embed) > img,
-.markdown-preview-view:not(.no-img-grid) .markdown-preview-section div:has(> img ~ img) > img,
-.markdown-preview-view:not(.no-img-grid) .markdown-preview-section p:has(> .image-embed ~ img) > img,
-.markdown-preview-view:not(.no-img-grid) .markdown-preview-section p:has(> img ~ .image-embed) > img,
-.markdown-preview-view:not(.no-img-grid) .markdown-preview-section p:has(> img ~ img) > img {
+.markdown-preview-view:not(.no-img-grid)
+  .markdown-preview-section
+  div:has(> .image-embed ~ .image-embed)
+  > img,
+.markdown-preview-view:not(.no-img-grid)
+  .markdown-preview-section
+  p:has(> .image-embed ~ .image-embed)
+  > img,
+.markdown-preview-view:not(.no-img-grid)
+  .markdown-preview-section
+  div:has(> img ~ img)
+  > img,
+.markdown-preview-view:not(.no-img-grid)
+  .markdown-preview-section
+  p:has(> .image-embed ~ img)
+  > img,
+.markdown-preview-view:not(.no-img-grid)
+  .markdown-preview-section
+  p:has(> img ~ .image-embed)
+  > img,
+.markdown-preview-view:not(.no-img-grid)
+  .markdown-preview-section
+  p:has(> img ~ img)
+  > img {
   object-fit: var(--image-grid-fit);
   align-self: stretch;
 }
-.markdown-preview-view:not(.no-img-grid) .markdown-preview-section div:has(> .image-embed ~ .image-embed) > .internal-embed img,
-.markdown-preview-view:not(.no-img-grid) .markdown-preview-section p:has(> .image-embed ~ .image-embed) > .internal-embed img,
-.markdown-preview-view:not(.no-img-grid) .markdown-preview-section div:has(> img ~ img) > .internal-embed img,
-.markdown-preview-view:not(.no-img-grid) .markdown-preview-section p:has(> .image-embed ~ img) > .internal-embed img,
-.markdown-preview-view:not(.no-img-grid) .markdown-preview-section p:has(> img ~ .image-embed) > .internal-embed img,
-.markdown-preview-view:not(.no-img-grid) .markdown-preview-section p:has(> img ~ img) > .internal-embed img {
+.markdown-preview-view:not(.no-img-grid)
+  .markdown-preview-section
+  div:has(> .image-embed ~ .image-embed)
+  > .internal-embed
+  img,
+.markdown-preview-view:not(.no-img-grid)
+  .markdown-preview-section
+  p:has(> .image-embed ~ .image-embed)
+  > .internal-embed
+  img,
+.markdown-preview-view:not(.no-img-grid)
+  .markdown-preview-section
+  div:has(> img ~ img)
+  > .internal-embed
+  img,
+.markdown-preview-view:not(.no-img-grid)
+  .markdown-preview-section
+  p:has(> .image-embed ~ img)
+  > .internal-embed
+  img,
+.markdown-preview-view:not(.no-img-grid)
+  .markdown-preview-section
+  p:has(> img ~ .image-embed)
+  > .internal-embed
+  img,
+.markdown-preview-view:not(.no-img-grid)
+  .markdown-preview-section
+  p:has(> img ~ img)
+  > .internal-embed
+  img {
   object-fit: var(--image-grid-fit);
   align-self: center;
 }
-.markdown-preview-view:not(.no-img-grid) .markdown-preview-section > div:has(img) > p {
+.markdown-preview-view:not(.no-img-grid)
+  .markdown-preview-section
+  > div:has(img)
+  > p {
   display: grid;
   margin-block-start: var(--img-grid-gap);
   margin-block-end: var(--img-grid-gap);
@@ -84,6 +152,10 @@ body {
   grid-row-gap: 0;
   grid-template-columns: repeat(auto-fit, minmax(0, 1fr));
 }
-.markdown-preview-view:not(.no-img-grid) .markdown-preview-section > div:has(img) > p > br {
+.markdown-preview-view:not(.no-img-grid)
+  .markdown-preview-section
+  > div:has(img)
+  > p
+  > br {
   display: none;
 }

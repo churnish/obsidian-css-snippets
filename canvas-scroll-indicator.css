@@ -18,7 +18,8 @@
     );
   }
 
-  1%, 99% {
+  1%,
+  99% {
     mask-image: linear-gradient(
       to bottom,
       transparent 0%,

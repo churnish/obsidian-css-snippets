@@ -63,7 +63,6 @@
   content: attr(src slice(0, -3));
 }
 
-
 /* Ensure "Open link" button stays on top */
 .internal-embed[alt*="show-bc"] .markdown-embed-link,
 .show-bc .internal-embed .markdown-embed-link {

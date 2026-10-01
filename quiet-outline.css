@@ -1,165 +1,173 @@
 /* Quiet Outline: Match native Outline appearance */
 
-body .mod-sidedock .workspace-leaf-content[data-type="quiet-outline"] > .view-content {
-	padding-bottom: var(--size-4-9);
+body
+  .mod-sidedock
+  .workspace-leaf-content[data-type="quiet-outline"]
+  > .view-content {
+  padding-bottom: var(--size-4-9);
 }
 
 /* Hide Naive's teleported slider tooltip; startup script mirrors its text to
    the handle's aria-label so Obsidian's native tooltip shows instead */
 .n-slider-handle-indicator {
-	display: none;
+  display: none;
 }
 
 /* Plugin sets slider margin via inline style; !important needed to override */
-.workspace-leaf-content[data-type="quiet-outline"] .n-slider.n-slider--with-mark {
-	width: calc(100% - 2 * var(--size-4-2)) !important;
-	margin: 18px var(--size-4-2) !important;
-	--n-fill-color: var(--background-modifier-border-focus) !important;
-	--n-fill-color-hover: var(--background-modifier-border-focus) !important;
-	--n-dot-border: 2px solid var(--background-modifier-border-focus) !important;
-	--n-dot-border-active: 2px solid var(--background-modifier-border-focus) !important;
+.workspace-leaf-content[data-type="quiet-outline"]
+  .n-slider.n-slider--with-mark {
+  width: calc(100% - 2 * var(--size-4-2)) !important;
+  margin: 18px var(--size-4-2) !important;
+  --n-fill-color: var(--background-modifier-border-focus) !important;
+  --n-fill-color-hover: var(--background-modifier-border-focus) !important;
+  --n-dot-border: 2px solid var(--background-modifier-border-focus) !important;
+  --n-dot-border-active: 2px solid var(--background-modifier-border-focus) !important;
 }
 
 .workspace-leaf-content[data-type="quiet-outline"] {
-	.n-tree {
-		padding: 0 var(--size-4-2);
-	}
+  .n-tree {
+    padding: 0 var(--size-4-2);
+  }
 
-	/* Hide "N result(s):" search summary */
-	.n-config-provider > code {
-		display: none;
-	}
+  /* Hide "N result(s):" search summary */
+  .n-config-provider > code {
+    display: none;
+  }
 
-	/* Hide underline shown under highlighted search matches */
-	.n-tree .n-tree-node.n-tree-node--highlight .n-tree-node-content .n-tree-node-content__text {
-		border-bottom-color: transparent;
-	}
+  /* Hide underline shown under highlighted search matches */
+  .n-tree
+    .n-tree-node.n-tree-node--highlight
+    .n-tree-node-content
+    .n-tree-node-content__text {
+    border-bottom-color: transparent;
+  }
 
-	.n-tree-node-content {
-		font-size: var(--nav-item-size);
-		color: var(--nav-item-color);
-		line-height: var(--line-height-tight);
-		/* Theme-aware vertical padding: `--nav-item-padding` mirrors native row spacing */
-		padding: var(--nav-item-padding);
-		padding-inline: var(--size-4-1);
-	}
+  .n-tree-node-content {
+    font-size: var(--nav-item-size);
+    color: var(--nav-item-color);
+    line-height: var(--line-height-tight);
+    /* Theme-aware vertical padding: `--nav-item-padding` mirrors native row spacing */
+    padding: var(--nav-item-padding);
+    padding-inline: var(--size-4-1);
+  }
 
-	.n-tree-node-wrapper {
-		margin-bottom: var(--size-2-1);
-	}
+  .n-tree-node-wrapper {
+    margin-bottom: var(--size-2-1);
+  }
 
-	/* Extend indentation guide line to bridge the gap introduced by wrapper margin */
-	.n-tree-node-indent::after {
-		height: calc(100% + var(--size-2-1));
-	}
+  /* Extend indentation guide line to bridge the gap introduced by wrapper margin */
+  .n-tree-node-indent::after {
+    height: calc(100% + var(--size-2-1));
+  }
 
-	.function-bar {
-		padding-inline: var(--size-4-2);
-		margin-bottom: 0;
-	}
+  .function-bar {
+    padding-inline: var(--size-4-2);
+    margin-bottom: 0;
+  }
 
-	.function-bar .n-button {
-		display: none;
-	}
+  .function-bar .n-button {
+    display: none;
+  }
 
-	.function-bar .n-input {
-		background-color: var(--background-modifier-form-field);
-		border: var(--input-border-width) solid var(--background-modifier-border);
-		/* Native Outline search pill uses a fixed 100px radius, not the theme's standard input radius */
-		border-radius: 100px;
-		height: var(--input-height);
+  .function-bar .n-input {
+    background-color: var(--background-modifier-form-field);
+    border: var(--input-border-width) solid var(--background-modifier-border);
+    /* Native Outline search pill uses a fixed 100px radius, not the theme's standard input radius */
+    border-radius: 100px;
+    height: var(--input-height);
 
-		/* Lucide search icon on left, matching native Outline search appearance */
-		&::before {
-			content: "";
-			position: absolute;
-			top: 50%;
-			left: 8px;
-			width: 18px;
-			height: 18px;
-			transform: translateY(-50%);
-			pointer-events: none;
-			background-color: var(--icon-color);
-			mask: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><circle cx='11' cy='11' r='8'/><path d='m21 21-4.3-4.3'/></svg>")
-				center / contain no-repeat;
-		}
+    /* Lucide search icon on left, matching native Outline search appearance */
+    &::before {
+      content: "";
+      position: absolute;
+      top: 50%;
+      left: 8px;
+      width: 18px;
+      height: 18px;
+      transform: translateY(-50%);
+      pointer-events: none;
+      background-color: var(--icon-color);
+      mask: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><circle cx='11' cy='11' r='8'/><path d='m21 21-4.3-4.3'/></svg>")
+        center / contain no-repeat;
+    }
 
-		.n-input-wrapper {
-			padding-left: var(--size-4-9);
-		}
+    .n-input-wrapper {
+      padding-left: var(--size-4-9);
+    }
 
-		.n-input__border,
-		.n-input__state-border {
-			border: none;
-			/* Neutralize Naive's own purple focus-ring shadow; the real one goes on the bordered box below */
-			box-shadow: none;
-		}
+    .n-input__border,
+    .n-input__state-border {
+      border: none;
+      /* Neutralize Naive's own purple focus-ring shadow; the real one goes on the bordered box below */
+      box-shadow: none;
+    }
 
-		.n-input__input-el {
-			font-size: var(--font-ui-small);
-			color: var(--text-normal);
-		}
+    .n-input__input-el {
+      font-size: var(--font-ui-small);
+      color: var(--text-normal);
+    }
 
-		/* Naive's own focus ring is a translucent purple accent; replace with native's solid muted-border ring.
+    /* Naive's own focus ring is a translucent purple accent; replace with native's solid muted-border ring.
 		   Shadow goes on this bordered box directly (not .n-input__state-border, which sits inset 1px inside
 		   it and would swallow 1px of spread under the border, making the ring read thinner than native's) */
-		&.n-input--focus {
-			border-color: var(--background-modifier-border-focus);
-			box-shadow: 0 0 0 2px var(--background-modifier-border-focus);
-		}
-	}
+    &.n-input--focus {
+      border-color: var(--background-modifier-border-focus);
+      box-shadow: 0 0 0 2px var(--background-modifier-border-focus);
+    }
+  }
 
-	.n-tree-node {
-		border-radius: var(--radius-s);
-		/* Extend node bg (selection pill) to full view-content inner width while keeping content position */
-		margin-inline: calc(-1 * var(--size-4-2));
-		padding-inline: var(--size-4-2);
-	}
+  .n-tree-node {
+    border-radius: var(--radius-s);
+    /* Extend node bg (selection pill) to full view-content inner width while keeping content position */
+    margin-inline: calc(-1 * var(--size-4-2));
+    padding-inline: var(--size-4-2);
+  }
 
-	/* Plugin draws focus ring as outset shadow; extending node to full .n-tree width leaves no room outside it,
+  /* Plugin draws focus ring as outset shadow; extending node to full .n-tree width leaves no room outside it,
 	   so .n-tree overflow clips ring left and right edges. Inset keeps ring fully inside node bounds */
-	.n-tree.n-tree--block-line:focus .n-tree-node:not(.n-tree-node--disabled).n-tree-node--selected {
-		box-shadow: inset 0 0 0 2px var(--background-modifier-border-focus);
-	}
+  .n-tree.n-tree--block-line:focus
+    .n-tree-node:not(.n-tree-node--disabled).n-tree-node--selected {
+    box-shadow: inset 0 0 0 2px var(--background-modifier-border-focus);
+  }
 
-	/* Replace switcher chevron with Lucide chevron-right; Naive rotates it 90° when expanded */
-	.n-tree-node-switcher__icon {
-		position: relative;
-		/* Native collapse-icon container renders at reduced opacity on top of an already-muted color */
-		opacity: 0.85;
+  /* Replace switcher chevron with Lucide chevron-right; Naive rotates it 90° when expanded */
+  .n-tree-node-switcher__icon {
+    position: relative;
+    /* Native collapse-icon container renders at reduced opacity on top of an already-muted color */
+    opacity: 0.85;
 
-		> * {
-			visibility: hidden;
-		}
+    > * {
+      visibility: hidden;
+    }
 
-		&::before {
-			content: "";
-			position: absolute;
-			inset: 0;
-			margin: auto;
-			width: 14px;
-			height: 14px;
-			background-color: var(--collapse-icon-color);
-			/* stroke-width 3 (native uses 2) compensates for CSS mask antialiasing washing out thin
+    &::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      margin: auto;
+      width: 14px;
+      height: 14px;
+      background-color: var(--collapse-icon-color);
+      /* stroke-width 3 (native uses 2) compensates for CSS mask antialiasing washing out thin
 			   strokes at small sizes; at native's literal 10px/stroke-width-2 the line reads as barely
 			   visible here, unlike its crisp native SVG rendering at the same nominal size */
-			mask: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'><path d='m9 18 6-6-6-6'/></svg>")
-				center / contain no-repeat;
-		}
-	}
+      mask: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'><path d='m9 18 6-6-6-6'/></svg>")
+        center / contain no-repeat;
+    }
+  }
 
-	.n-tree-node.located {
-		background-color: var(--nav-item-background-active);
+  .n-tree-node.located {
+    background-color: var(--nav-item-background-active);
 
-		.n-tree-node-content,
-		.n-tree-node-content__text {
-			color: var(--nav-item-color-active);
-			font-weight: var(--font-normal);
-		}
-	}
+    .n-tree-node-content,
+    .n-tree-node-content__text {
+      color: var(--nav-item-color-active);
+      font-weight: var(--font-normal);
+    }
+  }
 
-	/* Plugin paints its own narrower background on this wrapper when located; without suppressing it, it stacks with the extended background above and produces a lighter ring where the two rects don't overlap */
-	.n-tree-node-wrapper:has(.n-tree-node.located) {
-		background-color: transparent;
-	}
+  /* Plugin paints its own narrower background on this wrapper when located; without suppressing it, it stacks with the extended background above and produces a lighter ring where the two rects don't overlap */
+  .n-tree-node-wrapper:has(.n-tree-node.located) {
+    background-color: transparent;
+  }
 }

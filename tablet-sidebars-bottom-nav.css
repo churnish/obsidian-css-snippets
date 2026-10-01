@@ -2,7 +2,9 @@
 
 /* Source: https://github.com/churnish/obsidian-css-snippets */
 
-body.is-tablet .workspace-drawer-active-tab-container > .workspace-drawer-tab-options {
+body.is-tablet
+  .workspace-drawer-active-tab-container
+  > .workspace-drawer-tab-options {
   order: 2;
 }
 

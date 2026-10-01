@@ -2,14 +2,30 @@
 
 /* Scope to mod-root: sidebar tab headers also carry is-active */
 
-body.vt-zen-mode .mod-root .workspace-tab-header.is-active .workspace-tab-header-inner-title,
-body.vt-zen-mode .mod-root .workspace-tab-header.is-active .workspace-tab-header-inner-icon {
-    color: var(--text-accent) !important;
+body.vt-zen-mode
+  .mod-root
+  .workspace-tab-header.is-active
+  .workspace-tab-header-inner-title,
+body.vt-zen-mode
+  .mod-root
+  .workspace-tab-header.is-active
+  .workspace-tab-header-inner-icon {
+  color: var(--text-accent) !important;
 }
 
 /* Vertical Tabs pane: Exclude is-sidebar groups, their entries also carry is-active */
 
-body.vt-zen-mode .vertical-tabs .tree-item.is-group:not(.is-sidebar) .tree-item.is-tab .tree-item-self.is-active .tree-item-inner-text,
-body.vt-zen-mode .vertical-tabs .tree-item.is-group:not(.is-sidebar) .tree-item.is-tab .tree-item-self.is-active .tree-item-icon {
-    color: var(--text-accent) !important;
+body.vt-zen-mode
+  .vertical-tabs
+  .tree-item.is-group:not(.is-sidebar)
+  .tree-item.is-tab
+  .tree-item-self.is-active
+  .tree-item-inner-text,
+body.vt-zen-mode
+  .vertical-tabs
+  .tree-item.is-group:not(.is-sidebar)
+  .tree-item.is-tab
+  .tree-item-self.is-active
+  .tree-item-icon {
+  color: var(--text-accent) !important;
 }

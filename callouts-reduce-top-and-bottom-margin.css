@@ -2,9 +2,9 @@
 
 /* Source: https://github.com/churnish/obsidian-css-snippets */
 
-  .callout-content > :first-child {
-      margin-top: 0.5em;
-  }
-  .callout-content > :last-child {
-      margin-bottom: 0.5em;
-  }
+.callout-content > :first-child {
+  margin-top: 0.5em;
+}
+.callout-content > :last-child {
+  margin-bottom: 0.5em;
+}

@@ -5,13 +5,20 @@
   opacity: 1 !important;
 }
 
-.markdown-rendered :is(h1, h2, h3, h4, h5, h6) .heading-collapse-indicator svg.svg-icon,
+.markdown-rendered
+  :is(h1, h2, h3, h4, h5, h6)
+  .heading-collapse-indicator
+  svg.svg-icon,
 .cm-line.HyperMD-header .collapse-indicator svg.svg-icon {
   border-radius: 100vh;
   background-color: var(--dot-color);
 }
 
-.markdown-rendered :is(h1, h2, h3, h4, h5, h6) .heading-collapse-indicator svg.svg-icon path,
+.markdown-rendered
+  :is(h1, h2, h3, h4, h5, h6)
+  .heading-collapse-indicator
+  svg.svg-icon
+  path,
 .cm-line.HyperMD-header .collapse-indicator svg.svg-icon path {
   opacity: 0;
 }
@@ -46,7 +53,10 @@
   --dot-color: var(--h6-color, var(--color-purple));
 }
 
-.markdown-rendered :is(h1, h2, h3, h4, h5, h6) .heading-collapse-indicator.is-collapsed svg.svg-icon,
+.markdown-rendered
+  :is(h1, h2, h3, h4, h5, h6)
+  .heading-collapse-indicator.is-collapsed
+  svg.svg-icon,
 .cm-line.HyperMD-header .collapse-indicator.is-collapsed svg.svg-icon {
   background-color: transparent;
   box-shadow: inset 0 0 0 1.5px var(--dot-color);

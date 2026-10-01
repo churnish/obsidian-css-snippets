@@ -8,39 +8,49 @@
 /* .suggestion-aux holds keybind and icon(s) mixed together, so unwrap it and reorder children individually instead of moving whole container */
 /* gap gives uniform spacing between every adjacent item in visual order (icon-to-icon and icon-to-title alike), instead of hand-tuning two separate margins to match */
 .prompt .suggestion-item.mod-complex:not(:has(.suggestion-note)) {
-    display: flex;
-    align-items: flex-start;
-    justify-content: flex-start;
-    gap: var(--size-4-2);
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: var(--size-4-2);
 }
 
-.prompt .suggestion-item.mod-complex:not(:has(.suggestion-note)) .suggestion-content,
-.prompt .suggestion-item.mod-complex:not(:has(.suggestion-note)) .suggestion-aux {
-    display: contents;
+.prompt
+  .suggestion-item.mod-complex:not(:has(.suggestion-note))
+  .suggestion-content,
+.prompt
+  .suggestion-item.mod-complex:not(:has(.suggestion-note))
+  .suggestion-aux {
+  display: contents;
 }
 
 /* Icons (command icon, pin) move before title; auto margin on title pushes keybinds right, replacing container's original space-between */
 /* margin-inline-start and margin-inline-end zeroed since plugin's own flair styling sets both, which would stack on top of the container's gap */
 /* margin-top centers icon on title's glyphs rather than the line box, same offset as quick-switcher-file-type-badge.css */
-.prompt .suggestion-item.mod-complex:not(:has(.suggestion-note)) .suggestion-flair:not(.suggestion-hotkey) {
-    order: -1;
-    margin-inline-start: 0 !important;
-    margin-inline-end: 0 !important;
-    margin-top: 2px;
+.prompt
+  .suggestion-item.mod-complex:not(:has(.suggestion-note))
+  .suggestion-flair:not(.suggestion-hotkey) {
+  order: -1;
+  margin-inline-start: 0 !important;
+  margin-inline-end: 0 !important;
+  margin-top: 2px;
 }
 
-.prompt .suggestion-item.mod-complex:not(:has(.suggestion-note)) .suggestion-title {
-    margin-inline-end: auto;
+.prompt
+  .suggestion-item.mod-complex:not(:has(.suggestion-note))
+  .suggestion-title {
+  margin-inline-end: auto;
 }
 
 /* Pin icon sorts before command icon within left-moved group */
-.prompt .suggestion-item.mod-complex:not(:has(.suggestion-note)) .suggestion-flair:has(svg.lucide-pin) {
-    order: -2;
+.prompt
+  .suggestion-item.mod-complex:not(:has(.suggestion-note))
+  .suggestion-flair:has(svg.lucide-pin) {
+  order: -2;
 }
 
 /* Normalize suggestion icons to faint text color, excluding folder/tag breadcrumb icons (already faint to match their own text) and the canvas/base badge icons (mask-based ::before in quick-switcher-file-type-badge.css, not an svg, so unaffected by this selector regardless) */
 /* Folder/tag icons live in .qsp-breadcrumb-indicator, not .suggestion-flair, so they are unaffected by this selector */
 /* Open-in-editor icon (.qsp-editor-indicator) also excluded: keeps Quick Switcher++ own text-accent styling instead of being flattened to faint like every other icon. Guard only, not a dependency — without that plugin no element carries the class and the rule behaves the same */
 .prompt .suggestion-item .suggestion-flair:not(.qsp-editor-indicator) svg {
-    color: var(--text-faint) !important;
+  color: var(--text-faint) !important;
 }

@@ -1,5 +1,5 @@
 /* Full-width sidebars on phone */
 
 body.is-phone .workspace-drawer {
-    width: 100%;
+  width: 100%;
 }

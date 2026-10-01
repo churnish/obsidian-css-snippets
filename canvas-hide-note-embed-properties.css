@@ -4,10 +4,10 @@
 
 /* Hide Properties when card unfocused or selected */
 .canvas-node {
-    --metadata-display-reading: none;
+  --metadata-display-reading: none;
 }
 
 /* Hide Properties in edit mode */
 .mod-inside-iframe {
-    --metadata-display-editing: none;
+  --metadata-display-editing: none;
 }
