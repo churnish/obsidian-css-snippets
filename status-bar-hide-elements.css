@@ -2,42 +2,16 @@
 
 /* Source: https://github.com/churnish/obsidian-css-snippets */
 
-/* Zero-backlink count and Excalidraw word count arrive inline-hidden from companion Templater startup script (see startup-status-bar-item-visibility.md), which collapse rule below counts as hidden */
+/* Zero-backlink count, Excalidraw word count, idle Plugin Update Tracker item and empty bar state come from companion Templater startup script (see startup-status-bar-item-visibility.md) */
 
 .status-bar-item.plugin-properties,
 .status-bar-item.plugin-pane-relief,
 .status-bar-item.plugin-github-issues,
-.status-bar-item.plugin-obsidian-plugin-update-tracker:has(
-    .plugin-update-tracker-icon--no-updates-available,
-    .plugin-update-tracker-icon--loading
-  ) {
+.status-bar-item.plugin-obsidian-plugin-update-tracker.update-tracker-idle {
   display: none;
 }
 
 /* Obsidian hides empty items via .status-bar-item:empty but never collapses bar, leaving padding nub in corner */
-/* Hidden-item list repeated here because CSS cannot read computed display of children: :empty covers native rule, [style] covers plugins calling hide() */
-/* Update tracker excluded unconditionally, then re-admitted by second guard when updates pending or plugin errored, because :has() cannot nest inside :has() */
-/* Second guard requires icon's host item visible: plugin inline-hides item when pending count below its show threshold while icon still carries updates-available class */
-.status-bar:not(
-    :has(
-      > .status-bar-item:not(
-        :empty,
-        [style*="display: none"],
-        [style*="display:none"],
-        .plugin-properties,
-        .plugin-pane-relief,
-        .plugin-github-issues,
-        .plugin-obsidian-plugin-update-tracker
-      )
-    )
-  ):not(
-    :has(
-      > .status-bar-item:not([style*="display: none"], [style*="display:none"])
-        .plugin-update-tracker-icon:not(
-          .plugin-update-tracker-icon--no-updates-available,
-          .plugin-update-tracker-icon--loading
-        )
-    )
-  ) {
+.status-bar.status-bar-empty {
   display: none;
 }
