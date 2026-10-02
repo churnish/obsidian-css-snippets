@@ -1,2 +1,4 @@
 .claude/
 .DS_Store
+# Embeds Font Awesome Pro icons; Pro license forbids redistribution
+anuppuccin-checkboxes.css
