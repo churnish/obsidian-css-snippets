@@ -9,7 +9,10 @@
 ## CSS
 
 - **CSS limits**: When a snippet needs state CSS cannot select on, propose a Templater startup script in `Utility/Templates/` and register it in Templater `startup_templates`. ALWAYS read existing `startup-*.md` scripts first for house conventions. Add JS ONLY for parts CSS cannot express. NEVER port working CSS to JS.
-- **Avoid `:has()`**: Use ONLY when no `:has()`-free selector matches the same elements.
+- **Avoid `:has()`**: Use ONLY when no `:has()`-free CSS renders the same, and ONLY after an A/B on Android shows no performance dip — desktop hides the cost.
+	- **A/B**: In one run, swap the snippet's `<style>` text between versions and time re-appending the elements it targets plus a forced style recalc. Compare only within one run; absolute times drift between runs.
+	- **Hot shape**: A catch-all child behind a `:has()` ancestor (`> *`, `> :not(…)`) cost about 10 ms per Quick switcher redraw on Android, against 0.2 ms with the children named. Name the children first.
+	- **On a dip no rewrite removes**: Propose a Templater startup script that stamps a class CSS can select on (see **CSS limits**). This is the ONLY case where CSS may move to JS.
 - **Avoid `!important`**: Override by raising selector specificity or by setting the CSS variable the target rule reads. Use `!important` ONLY against inline styles or another `!important` declaration.
 
 ## File name
