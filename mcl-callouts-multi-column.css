@@ -559,6 +559,7 @@ body {
 
 /* -- Main Code. Use media query so that floats only works when there's enough width */
 @media (min-width: 500px) {
+  /* Reading view only: Live Preview wraps each callout in .cm-embed-block, which carries no callout metadata, so floating that wrapper would need :has() */
   .markdown-reading-view div[data-callout-metadata*="left"].callout {
     float: left;
   }
@@ -731,6 +732,8 @@ body[class*="minimal-tab-title"].contextual-typography
 	*/
 
 /* -- List Column/Grid/Card general styling -- */
+
+/* #mcl/... tag triggers: Work only through Contextual Typography plugin's tag-mcllist-* classes; selecting list from tag inside it would need :has() */
 
 /* hide tag in rendered view, dim it in edit mode and small size */
 :is(div[class*="mcl"].markdown-rendered, .markdown-rendered) a[href*="#mcl"] {
