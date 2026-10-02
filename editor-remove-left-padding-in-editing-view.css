@@ -1,5 +1,11 @@
 /* Remove left padding in editing view by collapsing gutter into content area */
 
-/* Source: https://forum.obsidian.md/t/removing-left-padding-on-editing-view-in-default-theme-css-snippet/54936 */
+/* Source: https://github.com/churnish/obsidian-css-snippets */
 
-.markdown-source-view.mod-cm6 .cm-gutters{position:absolute!important;z-index:0;margin-left:0}
+/* Extracted from Obsidian Forum: https://forum.obsidian.md/t/removing-left-padding-on-editing-view-in-default-theme-css-snippet/54936 */
+
+.markdown-source-view.mod-cm6 .cm-gutters {
+  position: absolute !important;
+  z-index: 0;
+  margin-left: 0;
+}

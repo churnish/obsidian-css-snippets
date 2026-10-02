@@ -1,0 +1,13 @@
+/* Remove rounded corners from image embeds */
+
+/* Source: https://github.com/churnish/obsidian-css-snippets */
+
+body {
+  --image-radius: 0;
+}
+
+/* Live Preview: Obsidian resets radius to 8px on selected and menu-open images; body prefix outranks its selectors without !important */
+body .cm-editor.cm-focused .image-embed.is-selected,
+body .cm-editor .image-embed.has-active-menu {
+  --image-radius: 0;
+}

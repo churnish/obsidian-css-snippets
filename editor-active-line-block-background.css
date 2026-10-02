@@ -1,7 +1,8 @@
 /* Highlight active line with block background in Live Preview and Source view */
 
-/* Borrowed from Baseline theme, Active line settings: Block background + Monochrome */
-/* Source: https://github.com/aaaaalexis/obsidian-baseline */
+/* Source: https://github.com/churnish/obsidian-css-snippets */
+
+/* Extracted from Baseline theme: https://github.com/aaaaalexis/obsidian-baseline | MIT License, Copyright (c) 2025 aaaaalexis */
 
 /* Reading view has no cursor, so no active line exists to highlight */
 /* Direct child of view-content: excludes note embeds and other nested editors */
@@ -11,27 +12,43 @@
 /* beneath opaque .view-content background, hiding highlight entirely */
 
 .view-content
-    > .markdown-source-view
-    .cm-line.cm-active:not(.cm-gutterElement, .HyperMD-callout, .HyperMD-codeblock-bg, .HyperMD-quote) {
-    isolation: isolate;
+  > .markdown-source-view
+  .cm-line.cm-active:not(
+    .cm-gutterElement,
+    .HyperMD-callout,
+    .HyperMD-codeblock-bg,
+    .HyperMD-quote
+  ) {
+  isolation: isolate;
 }
 
 /* Underlay pseudo element instead of line background: bleeds 2px/4px past line box for padded look */
 /* Negative z-index keeps underlay behind text; native .cm-line already position: relative */
 
 .view-content
-    > .markdown-source-view
-    .cm-line.cm-active:not(.cm-gutterElement, .HyperMD-callout, .HyperMD-codeblock-bg, .HyperMD-quote)::before {
-    position: absolute;
-    inset: -2px -4px;
-    background: var(--background-secondary);
-    content: "";
-    z-index: -2;
-    border-radius: var(--radius-s);
+  > .markdown-source-view
+  .cm-line.cm-active:not(
+    .cm-gutterElement,
+    .HyperMD-callout,
+    .HyperMD-codeblock-bg,
+    .HyperMD-quote
+  )::before {
+  position: absolute;
+  inset: -2px -4px;
+  background: var(--background-secondary);
+  content: "";
+  z-index: -2;
+  border-radius: var(--radius-s);
 }
 
 /* Callouts, code blocks and quotes render own background: tint line directly instead of underlaying */
 
-.view-content > .markdown-source-view .cm-line.cm-active:is(.HyperMD-callout, .HyperMD-codeblock-bg, .HyperMD-quote) {
-    background-color: var(--background-modifier-hover) !important;
+.view-content
+  > .markdown-source-view
+  .cm-line.cm-active:is(
+    .HyperMD-callout,
+    .HyperMD-codeblock-bg,
+    .HyperMD-quote
+  ) {
+  background-color: var(--background-modifier-hover) !important;
 }
