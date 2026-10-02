@@ -1,0 +1,32 @@
+/* Quick switcher: Hide Quick switcher hotkey tips and reveal on hover */
+
+/* Source: https://github.com/churnish/obsidian-css-snippets */
+
+/* Extracted from Obsidian Forum: https://forum.obsidian.md/t/hide-quick-switcher-hotkey-tips-and-reveal-them-on-hover/104828 */
+
+.prompt-instructions {
+  max-height: 0;
+  opacity: 0;
+  transition: all 0.2s ease;
+}
+
+/* Last selector reveals bars before hovered one: bar has one fewer non-hovered bar after it than bars after it only when later bar is hovered. Spelled out for up to 5 bars (Obsidian 1, Quick Switcher++ up to 3) */
+.prompt-instructions:hover,
+.prompt-instructions:hover ~ .prompt-instructions,
+.prompt-instructions:is(
+  :nth-last-child(2 of .prompt-instructions):nth-last-child(
+    1 of .prompt-instructions:not(:hover)
+  ),
+  :nth-last-child(3 of .prompt-instructions):nth-last-child(
+    2 of .prompt-instructions:not(:hover)
+  ),
+  :nth-last-child(4 of .prompt-instructions):nth-last-child(
+    3 of .prompt-instructions:not(:hover)
+  ),
+  :nth-last-child(5 of .prompt-instructions):nth-last-child(
+    4 of .prompt-instructions:not(:hover)
+  )
+) {
+  max-height: 500px;
+  opacity: 1;
+}

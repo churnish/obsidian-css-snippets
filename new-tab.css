@@ -5,6 +5,7 @@
 /* Obsidian 1.14.3 renders actions as icon pills in this order: New note, New base (Bases enabled), New canvas (Canvas enabled), Go to file (vault not empty), Open web viewer (Web viewer enabled). Quick Switcher++ injects its plain-text launch button as second child */
 /* Native Go to file matched by its lucide-search icon, since no class or locale-independent attribute distinguishes it */
 /* 'Plugin no longer active' pane reuses action list, but holds no hotkeys, search icon or Quick Switcher++ button, so no rule below reaches it */
+/* Rules gated on Quick Switcher++ button reach their targets with ~ from it, since plugin inserts it second, ahead of every action they target */
 
 /* Hide hotkey badges on every action — by default only New note and Go to file carry one */
 .empty-state-hotkey {
@@ -12,8 +13,9 @@
 }
 
 /* Hide native Go to file only when Quick Switcher++ button present, so native action returns whenever plugin skips a tab */
-.empty-state-action-list:has(> .qsp-empty-state-action-launch)
-  > .empty-state-action:has(.lucide-search) {
+.empty-state-action-list
+  > .qsp-empty-state-action-launch
+  ~ .empty-state-action:has(.lucide-search) {
   display: none;
 }
 
@@ -85,8 +87,9 @@
   }
 
   /* Native centers odd last action by DOM position, which hidden Go to file and moved Quick Switcher++ button throw off, so cancel it here and recenter by visible count below */
-  .empty-state-action-list:has(> .qsp-empty-state-action-launch)
-    > .text-icon-button.mod-pill:last-child {
+  .empty-state-action-list
+    > .qsp-empty-state-action-launch
+    ~ .text-icon-button.mod-pill:last-child {
     grid-column: auto;
     justify-self: auto;
   }
@@ -96,8 +99,9 @@
       > .empty-state-action:last-child:nth-child(even) .lucide-search
     )
     > .qsp-empty-state-action-launch,
-  .empty-state-action-list:has(> .qsp-empty-state-action-launch)
-    > .empty-state-action:has(.lucide-search)
+  .empty-state-action-list
+    > .qsp-empty-state-action-launch
+    ~ .empty-state-action:has(.lucide-search)
     ~ .empty-state-action:last-child:nth-child(even) {
     grid-column: 1 / -1;
     justify-self: center;

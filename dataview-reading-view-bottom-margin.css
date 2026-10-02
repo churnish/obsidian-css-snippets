@@ -4,6 +4,6 @@
 
 /* Spacing for reading time in Reading view */
 .markdown-reading-view .reading-time-span {
-    display: block;
-    margin-bottom: 1em;
+  display: block;
+  margin-bottom: 1em;
 }

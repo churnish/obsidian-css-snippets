@@ -35,16 +35,20 @@
   margin-top: 2px;
 }
 
+/* Title last among title and notes means row has no note, since suggesters always place notes after title */
 .prompt
-  .suggestion-item.mod-complex:not(:has(.suggestion-note))
-  .suggestion-title {
+  .suggestion-item.mod-complex
+  .suggestion-title:nth-last-child(1 of .suggestion-title, .suggestion-note) {
   margin-inline-end: auto;
 }
 
 /* Pin icon sorts before command icon within left-moved group */
+/* Only Quick Switcher++ command rows place pin after another flair (command icon); elsewhere pin is sole flair, where order changes nothing. Recent-command indicator is other possible second flair and keeps default order */
 .prompt
-  .suggestion-item.mod-complex:not(:has(.suggestion-note))
-  .suggestion-flair:has(svg.lucide-pin) {
+  .suggestion-item.mod-complex.qsp-suggestion-command
+  .suggestion-flair:nth-child(n + 2 of .suggestion-flair):not(
+    .qsp-recent-indicator
+  ) {
   order: -2;
 }
 

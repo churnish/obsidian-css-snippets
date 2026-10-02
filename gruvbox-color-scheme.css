@@ -1,0 +1,91 @@
+/* Gruvbox color scheme for default Obsidian theme */
+
+/* Source: https://github.com/churnish/obsidian-css-snippets */
+
+/* Extracted from Minimal theme: https://github.com/kepano/obsidian-minimal | MIT License, Copyright (c) 2020-2024 Steph Ango (@kepano) */
+/* Palette: https://github.com/morhetz/gruvbox */
+
+/* Minimal defines private token layer (--bg1, --ui1, --tx1) requiring Minimal theme install. This snippet re-expresses same colors as default theme --color-base-* ramp, documented override point for color schemes, so every semantic variable derived from ramp follows automatically. */
+
+/* Scope note, nothing below implements this: Minimal rebinds --background-secondary to primary background scoped to right split alone (theme.css:3727, body:not(.sidebar-color) .mod-right-split), so right sidebar matches editor while left stays secondary. Default theme paints both sidebars from --background-secondary and never separates them, and this snippet only sets variables at body level, so both sidebars stay secondary. */
+
+body.theme-light {
+  /* Surfaces and text, lightest to darkest */
+  --color-base-00: #fcf2c7;
+  --color-base-05: #f9eec4;
+  --color-base-10: #f5eac0;
+  --color-base-20: #f2e6bd;
+  --color-base-25: #eee0b8;
+  --color-base-30: #ebdbb2;
+  --color-base-35: #d5c4a1;
+  --color-base-40: #bdae93;
+  --color-base-50: #a89a85;
+  --color-base-60: #928575;
+  --color-base-70: #7c7065;
+  --color-base-100: #282828;
+
+  /* !important required because Obsidian writes --accent-h/s/l as inline styles on body when custom accent set in Appearance, and inline styles outrank class selectors */
+  --accent-h: 24 !important;
+  --accent-s: 88% !important;
+  --accent-l: 45% !important;
+  --text-on-accent: white !important;
+
+  --text-selection: rgba(192, 165, 125, 0.3);
+  --text-highlight-bg: rgba(215, 153, 33, 0.4);
+  --text-highlight-bg-rgb: 215, 153, 33;
+}
+
+body.theme-dark {
+  /* Surfaces and text, darkest to lightest */
+  --color-base-00: #282828;
+  --color-base-05: #2b2b2a;
+  --color-base-10: #2f2d2d;
+  --color-base-20: #32302f;
+  --color-base-25: #373432;
+  --color-base-30: #3c3836;
+  --color-base-35: #504945;
+  --color-base-40: #665c54;
+  --color-base-50: #7c6f64;
+  --color-base-60: #9c8e7c;
+  --color-base-70: #bdae93;
+  --color-base-100: #fbf1c7;
+
+  --accent-h: 24 !important;
+  --accent-s: 88% !important;
+  --accent-l: 45% !important;
+  --text-on-accent: white !important;
+
+  --text-selection: rgba(173, 149, 139, 0.3);
+  --text-highlight-bg: rgba(215, 153, 33, 0.4);
+  --text-highlight-bg-rgb: 215, 153, 33;
+}
+
+/* Gruvbox uses one set of hues for both modes */
+body.theme-light,
+body.theme-dark {
+  --color-red: #cc241d;
+  --color-orange: #d65d0e;
+  --color-yellow: #d79921;
+  --color-green: #98971a;
+  --color-cyan: #689d6a;
+  --color-blue: #458588;
+  --color-purple: #b16286;
+  --color-pink: #b16286;
+
+  /* -rgb pairs deprecated as of Obsidian 1.13, but default theme still defines them, so leaving them unset would leak stock palette into anything still reading them */
+  --color-red-rgb: 204, 36, 29;
+  --color-orange-rgb: 214, 93, 14;
+  --color-yellow-rgb: 215, 153, 33;
+  --color-green-rgb: 152, 151, 26;
+  --color-cyan-rgb: 104, 157, 106;
+  --color-blue-rgb: 69, 133, 136;
+  --color-purple-rgb: 177, 98, 134;
+  --color-pink-rgb: 177, 98, 134;
+}
+
+/* Minimal renders Gruvbox dark sidebar darker than editor (#1e2021). Default theme ramp runs one direction only, each step sitting further from editor background and closer to text color, so values above keep sidebar on lighter side. Uncomment to restore Minimal inverted look; moves both sidebars, which default theme expects. */
+/*
+body.theme-dark {
+    --background-secondary: #1e2021;
+}
+*/

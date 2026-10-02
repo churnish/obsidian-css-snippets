@@ -1,44 +1,84 @@
-/* Cap Bases embed height at 60% of client height, fade top/bottom edges when scrollable */
+/* Cap Bases embed height, fade top/bottom edges when scrollable.
 
-/* Fade opacity driven by --bases-fade-top/--bases-fade-bottom custom properties (see startup-bases-embed-scroll-fade.md Templater startup script), not CSS scroll-driven animations: animation-timeline/scroll-timeline on .bases-view, or any ancestor of Dynamic Views' Masonry/Grid position:absolute cards, breaks card rendering outright on both Chromium and WebKit when present from initial page load. Moving the timeline off .bases-view avoids that but the resulting positioned pseudo-elements fail to paint on WebKit/iOS despite computing correct opacity - a paint bug, not a logic bug, confirmed via on-device testing across three separate CSS-only redesigns. A plain JS scroll listener sidesteps both failure modes entirely and matches Dynamic Views' own proven approach for its datacore query view's identical scroll-edge-fade problem */
+   Excludes the view types that must not be capped: Dynamic Views' Grid and
+   Masonry and Maps ship their own embed height control, so capping them here
+   would fight their own setting and double their own fade; Kanban scrolls its
+   columns internally, so an outer cap and a horizontal fade fight the board.
 
-/* top/bottom: 0, not a negative offset: --bases-embed-padding (Obsidian core, theme/setting-dependent) can resolve as a two-value shorthand, which makes calc(-1 * var(...)) invalid CSS and silently drops the sticky offset entirely, so the pseudo stops sticking and scrolls with content instead */
+   Fade opacity is driven by --bases-fade-top/--bases-fade-bottom, written per
+   scroll event by the Templater startup script (see
+   startup-bases-embed-scroll-fade.md), NOT by CSS scroll-driven animations.
+   animation-timeline/scroll-timeline on .bases-view — or on any ancestor of a
+   position: absolute card — breaks card rendering outright on Chromium AND
+   WebKit when present from initial page load. Hosting the timeline elsewhere
+   keeps the cards, but the positioned pseudo-elements then never paint on
+   WebKit/iOS despite computing correct opacity, across three separate CSS-only
+   redesigns. A plain JS scroll listener sidesteps both failure modes. */
 
-/* padding-block: 0 removes .bases-view's own top/bottom padding (Obsidian core, var(--bases-embed-padding)) entirely: sticky top/bottom: 0 resolves against the padding edge, so any nonzero padding leaves that strip of card content past the fade, unflush with the true visible boundary */
+.bases-embed
+  > .bases-view:not(
+    [data-view-type="dynamic-views-grid"],
+    [data-view-type="dynamic-views-masonry"],
+    [data-view-type="map"],
+    [data-view-type="kanban"]
+  ) {
+  max-height: 60vh;
+  overflow-y: auto;
 
-/* !important needed: Obsidian core's own .bases-view padding rule has higher selector specificity than a plain .bases-embed > .bases-view snippet rule */
+  /* Re-point core's own variables rather than overriding padding-block and
+     border-block with !important. Sticky top/bottom resolve against the PADDING
+     edge, so core's padding would leave a strip of content visible past the
+     fade, and its hairline border (0.33px at iOS Retina scale) sits outside that
+     edge again — but a blunt padding/border override also strips an embedded
+     Cards view's padding and deletes an embedded Table's own borders, which
+     these variables leave intact everywhere the fade is not drawn. */
+  --bases-embed-padding: 0 1px;
+  --bases-embed-border-width: 0;
 
-/* border-block: 0 removes .bases-view's hairline top/bottom border (device-pixel-ratio-dependent - measured 0px on desktop, 0.33px on iOS Retina): borders sit outside the padding edge, which is where sticky top/bottom: 0 anchors, so the border remains visible above/below the fade's coverage regardless of the padding-block fix above */
+  /* Phone keeps a horizontal inset — a full-bleed embed reads as broken there */
+  body.is-phone & {
+    --bases-embed-padding: 0 var(--size-4-2);
+  }
 
-/* No transition: the JS updates --bases-fade-top/--bases-fade-bottom on every scroll event already, a CSS transition on top of that would lag behind the actual scroll position instead of tracking it */
-
-.bases-embed > .bases-view {
-    max-height: 60vh;
-    overflow-y: auto;
-    padding-block: 0 !important;
-    border-block: 0 !important;
-}
-
-.bases-embed > .bases-view::before,
-.bases-embed > .bases-view::after {
+  &::before,
+  &:not(.is-being-dragged-over)::after {
     content: "";
     display: block;
     position: sticky;
-    z-index: 1;
+    /* Above resting cards (z-index 1), below a stuck group heading (20/24),
+       which is opaque chrome and should occlude the fade. */
+    z-index: 2;
     height: 28px;
+    /* Without this the strips swallow clicks on the rows beneath */
     pointer-events: none;
-}
+    /* No transition: the script writes a new value every scroll event, so one
+       would only lag behind the actual scroll position. */
+  }
 
-.bases-embed > .bases-view::before {
+  &::before {
+    /* A plain zero, never a negative offset: --bases-embed-padding can resolve
+       as a two-value shorthand, which makes calc(-1 * var(...)) invalid and
+       silently drops the sticky offset, so the strip scrolls with the content. */
     top: 0;
     margin-bottom: -28px;
     opacity: var(--bases-fade-top, 0);
-    background: linear-gradient(to bottom, var(--background-primary), transparent);
-}
+    background: linear-gradient(
+      to bottom,
+      var(--background-primary),
+      transparent
+    );
+  }
 
-.bases-embed > .bases-view::after {
+  /* Guarded on :not(.is-being-dragged-over) because app.css paints Obsidian's
+     own drop tint on .bases-view.is-being-dragged-over::after, and an element
+     has only one ::after — without the guard this gradient outranks the tint and
+     the embed silently stops showing any drop affordance. The bottom fade is
+     therefore absent for the length of a drag, which a snippet cannot avoid:
+     reclaiming it would need a real element appended to the scroller. */
+  &:not(.is-being-dragged-over)::after {
     bottom: 0;
     margin-top: -28px;
     opacity: var(--bases-fade-bottom, 0);
     background: linear-gradient(to top, var(--background-primary), transparent);
+  }
 }

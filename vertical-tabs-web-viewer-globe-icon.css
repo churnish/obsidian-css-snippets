@@ -2,20 +2,28 @@
 
 /* Source: https://github.com/churnish/obsidian-css-snippets */
 
+/* Covers every surface Obsidian paints the Web viewer globe on: tab headers, view headers, Vertical Tabs rows, the Settings sidebar, and the link context menu */
 /* Obsidian renders this icon as inline SVG markup, so it cannot be swapped by changing a value — native paths are painted transparent and replaced by a mask on the SVG box itself, which inherits size and currentColor from its host */
 /* Vertical Tabs reads leaf.getIcon() and builds its own SVG for its tab rows, so that copy inherits nothing from rules below and needs its own selector */
-/* Stroke width is baked into mask geometry and cannot follow --icon-s-stroke-width, so each size context gets its own mask matching Obsidian's stroke for that size */
+/* Stroke width is baked into mask geometry and cannot follow --icon-s-stroke-width, so a mask is needed per stroke value Obsidian uses */
+/* Box size is irrelevant to that split: native icon and mask are both 24-viewBox SVGs scaled to the same box, so a mask matches whenever its stroke-width equals the computed one — which is why menu icons at 18px on mobile reuse the 16px desktop mask */
+/* The link context menu paints globe-2 on both 'Open link in default browser' and 'Open link in web viewer'; the two rows are identical in markup (same class, same data-section) so no selector can separate them, and mismatched globes side by side would read as a bug — both are swapped */
+/* Settings opens as its own window in Obsidian 1.13+, so its sidebar icon is never reachable from the main window's DOM; it renders at --icon-s with a 2px stroke and therefore shares the tab-header mask */
 
 .workspace-tab-header-inner-icon .svg-icon.lucide-globe-2 > *,
 .vt-tab-container .tree-item-icon .svg-icon.lucide-globe-2 > *,
-.view-header-icon .svg-icon.lucide-globe-2 > * {
+.view-header-icon .svg-icon.lucide-globe-2 > *,
+.vertical-tab-nav-item-icon .svg-icon.lucide-globe-2 > *,
+.menu-item-icon .svg-icon.lucide-globe-2 > * {
   stroke: transparent;
   fill: transparent;
 }
 
 .workspace-tab-header-inner-icon .svg-icon.lucide-globe-2,
 .vt-tab-container .tree-item-icon .svg-icon.lucide-globe-2,
-.view-header-icon .svg-icon.lucide-globe-2 {
+.view-header-icon .svg-icon.lucide-globe-2,
+.vertical-tab-nav-item-icon .svg-icon.lucide-globe-2,
+.menu-item-icon .svg-icon.lucide-globe-2 {
   background-color: currentColor;
   mask-position: 50% 50%;
   mask-size: 100%;
@@ -26,7 +34,9 @@
 }
 
 .workspace-tab-header-inner-icon .svg-icon.lucide-globe-2,
-.vt-tab-container .tree-item-icon .svg-icon.lucide-globe-2 {
+.vt-tab-container .tree-item-icon .svg-icon.lucide-globe-2,
+.vertical-tab-nav-item-icon .svg-icon.lucide-globe-2,
+.menu-item-icon .svg-icon.lucide-globe-2 {
   mask-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiPjxjaXJjbGUgY3g9IjEyIiBjeT0iMTIiIHI9IjEwIi8+PHBhdGggZD0iTTEyIDJhMTQuNSAxNC41IDAgMCAwIDAgMjAgMTQuNSAxNC41IDAgMCAwIDAtMjAiLz48cGF0aCBkPSJNMiAxMmgyMCIvPjwvc3ZnPg==");
   -webkit-mask-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiPjxjaXJjbGUgY3g9IjEyIiBjeT0iMTIiIHI9IjEwIi8+PHBhdGggZD0iTTEyIDJhMTQuNSAxNC41IDAgMCAwIDAgMjAgMTQuNSAxNC41IDAgMCAwIDAtMjAiLz48cGF0aCBkPSJNMiAxMmgyMCIvPjwvc3ZnPg==");
 }

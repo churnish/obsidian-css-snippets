@@ -112,7 +112,8 @@
       grid-column: 2;
     }
 
-    & .suggestion-content > :not(.suggestion-title) {
+    /* Notes named rather than :not(.suggestion-title) — negated catch-all behind :has() ancestor measured about 10 ms per list redraw on Android (Pixel 8a, Obsidian 1.14.3); content holds only title and notes */
+    & .suggestion-content > .suggestion-note {
       grid-column: 1 / -1;
     }
 
@@ -124,7 +125,7 @@
     }
 
     /* Plugin's own CSS adds margin-inline-start: 12px on flairs (e.g. active-editor indicator), unlike the extension badge which carries no such margin, so it is zeroed here to leave only the aux's own gap and margin controlling spacing */
-    /* margin-inline-end needs !important: file-explorer-file-extension-badge.css sets margin-inline-end !important directly on the shared .nav-file-tag class, which the badge also carries */
+    /* margin-inline-end needs !important: file-explorer-file-type-badge.css sets margin-inline-end !important directly on the shared .nav-file-tag class, which the badge also carries */
     & .suggestion-flair {
       margin-inline-start: 0;
       margin-inline-end: 0 !important;

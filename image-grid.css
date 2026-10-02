@@ -51,12 +51,12 @@ body {
   p:empty:where(:not(.list-cards.markdown-preview-view div > ul *)),
 .markdown-preview-view:not(.no-img-grid)
   .markdown-preview-section
-  > div:has(img)
+  > div
   img
   ~ br:where(:not(.list-cards.markdown-preview-view div > ul *)),
 .markdown-preview-view:not(.no-img-grid)
   .markdown-preview-section
-  > div:has(img)
+  > div
   .image-embed
   ~ br:where(:not(.list-cards.markdown-preview-view div > ul *)) {
   display: none;
@@ -96,38 +96,35 @@ body {
   grid-row-gap: 0;
   grid-template-columns: repeat(auto-fit, minmax(0, 1fr));
 }
+/* Img children counted among image-like siblings (img, image embed) instead of :has() on container. Paragraph gates take any 2+ image-likes; div gates take 2+ of one kind, so div form needs 2+ img, or lone img beside 2+ embeds (3+ image-likes) */
 .markdown-preview-view:not(.no-img-grid)
   .markdown-preview-section
-  div:has(> .image-embed ~ .image-embed):where(
-    :not(.list-cards.markdown-preview-view div > ul *)
-  )
-  > img,
+  p:where(:not(.list-cards.markdown-preview-view div > ul *))
+  > img:not(
+    :nth-child(1 of img, .image-embed):nth-last-child(1 of img, .image-embed)
+  ),
 .markdown-preview-view:not(.no-img-grid)
   .markdown-preview-section
-  p:has(> .image-embed ~ .image-embed):where(
-    :not(.list-cards.markdown-preview-view div > ul *)
-  )
-  > img,
-.markdown-preview-view:not(.no-img-grid)
-  .markdown-preview-section
-  div:has(> img ~ img):where(:not(.list-cards.markdown-preview-view div > ul *))
-  > img,
-.markdown-preview-view:not(.no-img-grid)
-  .markdown-preview-section
-  p:has(> .image-embed ~ img):where(
-    :not(.list-cards.markdown-preview-view div > ul *)
-  )
-  > img,
-.markdown-preview-view:not(.no-img-grid)
-  .markdown-preview-section
-  p:has(> img ~ .image-embed):where(
-    :not(.list-cards.markdown-preview-view div > ul *)
-  )
-  > img,
-.markdown-preview-view:not(.no-img-grid)
-  .markdown-preview-section
-  p:has(> img ~ img):where(:not(.list-cards.markdown-preview-view div > ul *))
-  > img {
+  div:where(:not(.list-cards.markdown-preview-view div > ul *))
+  > img:is(
+    :not(:only-of-type),
+    :not(
+        :nth-child(1 of img, .image-embed):nth-last-child(
+          1 of img,
+          .image-embed
+        )
+      ):not(
+        :nth-child(1 of img, .image-embed):nth-last-child(
+          2 of img,
+          .image-embed
+        )
+      ):not(
+        :nth-child(2 of img, .image-embed):nth-last-child(
+          1 of img,
+          .image-embed
+        )
+      )
+  ) {
   object-fit: var(--image-grid-fit);
   align-self: stretch;
 }

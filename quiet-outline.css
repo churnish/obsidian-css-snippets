@@ -167,7 +167,8 @@ body
   }
 
   /* Plugin paints its own narrower background on this wrapper when located; without suppressing it, it stacks with the extended background above and produces a lighter ring where the two rects don't overlap */
-  .n-tree-node-wrapper:has(.n-tree-node.located) {
+  /* Cleared on every wrapper: located paint is only background plugin or Naive gives wrappers, so no :has() needed. .n-tree.n-tree--block-line lifts specificity above plugin's rule */
+  .n-tree.n-tree--block-line .n-tree-node-wrapper {
     background-color: transparent;
   }
 }

@@ -2,11 +2,11 @@
 
 /* Source: https://github.com/churnish/obsidian-css-snippets */
 
+/* Extracted from MCL Multi Column by Faiz Khuzaimah: https://github.com/efemkay/obsidian-modular-css-layout | GNU General Public License v3.0 */
+
 /* Tag triggers (#mcl/...) need Contextual Typography plugin; float callouts apply in Reading view only — both previously relied on :has() */
 
 /* === README ===
-	Snippet: MCL Multi Column / Author: Faiz Khuzaimah / twitter: @faizkhuzaimah / github: https://github.com/efemkay
-
 	Ver 0.10.0 (updated 2024-09-01)
 	- introduce fw dw and pw
 	- added left-right margin for Float Callout

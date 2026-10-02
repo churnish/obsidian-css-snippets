@@ -5,6 +5,9 @@
 /* Commander injects its page header commands into every view header, including Web viewer, where file-scoped commands have no file to act on */
 /* Scoped to Web viewer — Commander buttons in every other view stay untouched */
 
-.workspace-leaf-content[data-type="webviewer"] .view-header .view-actions .cmdr-page-header {
+.workspace-leaf-content[data-type="webviewer"]
+  .view-header
+  .view-actions
+  .cmdr-page-header {
   display: none;
 }

@@ -1,0 +1,113 @@
+/* Catppuccin color scheme for default Obsidian theme, Latte in light mode and Frappé in dark mode */
+
+/* Source: https://github.com/churnish/obsidian-css-snippets */
+
+/* Extracted from Minimal theme: https://github.com/kepano/obsidian-minimal | MIT License, Copyright (c) 2020-2024 Steph Ango (@kepano) */
+/* Palette: https://github.com/catppuccin/catppuccin */
+
+/* Minimal defines private token layer (--bg1, --ui1, --tx1) requiring Minimal theme install. This snippet re-expresses same colors as default theme --color-base-* ramp, documented override point for color schemes, so every semantic variable derived from ramp follows automatically. */
+
+/* Scope note, nothing below implements this: Minimal rebinds --background-secondary to primary background scoped to right split alone (theme.css:3727, body:not(.sidebar-color) .mod-right-split), so right sidebar matches editor while left stays secondary. Default theme paints both sidebars from --background-secondary and never separates them, and this snippet only sets variables at body level, so both sidebars stay secondary. */
+
+/* Latte */
+body.theme-light {
+  /* Surfaces and text, lightest to darkest */
+  --color-base-00: #f0f1f5;
+  --color-base-05: #e9ebf1;
+  --color-base-10: #e3e6ec;
+  --color-base-20: #dce0e8;
+  --color-base-25: #d4d8e1;
+  --color-base-30: #ccd0da;
+  --color-base-35: #bcc0cc;
+  --color-base-40: #acb0be;
+  --color-base-50: #8d8fa2;
+  --color-base-60: #75778c;
+  --color-base-70: #5d5f77;
+  --color-base-100: #4d4f69;
+
+  /* !important required because Obsidian writes --accent-h/s/l as inline styles on body when custom accent set in Appearance, and inline styles outrank class selectors */
+  --accent-h: 11 !important;
+  --accent-s: 59% !important;
+  --accent-l: 67% !important;
+  --text-on-accent: white !important;
+
+  --text-selection: rgba(172, 176, 190, 0.3);
+  --text-highlight-bg: rgba(223, 142, 29, 0.3);
+  --text-highlight-bg-rgb: 223, 142, 29;
+
+  --color-red: #e64553;
+  --color-orange: #fe640c;
+  --color-yellow: #df8e1d;
+  --color-green: #40a02b;
+  --color-cyan: #17929a;
+  --color-blue: #2166f6;
+  --color-purple: #8938ef;
+  --color-pink: #ea77cb;
+
+  /* -rgb pairs deprecated as of Obsidian 1.13, but default theme still defines them, so leaving them unset would leak stock palette into anything still reading them */
+  --color-red-rgb: 230, 69, 83;
+  --color-orange-rgb: 254, 100, 12;
+  --color-yellow-rgb: 223, 142, 29;
+  --color-green-rgb: 64, 160, 43;
+  --color-cyan-rgb: 23, 146, 154;
+  --color-blue-rgb: 33, 102, 246;
+  --color-purple-rgb: 137, 56, 239;
+  --color-pink-rgb: 234, 119, 203;
+}
+
+/* Frappé */
+body.theme-dark {
+  /* Surfaces and text, darkest to lightest */
+  --color-base-00: #303446;
+  --color-base-05: #333749;
+  --color-base-10: #35394c;
+  --color-base-20: #383c4f;
+  --color-base-25: #3c4054;
+  --color-base-30: #41455a;
+  --color-base-35: #51576d;
+  --color-base-40: #626880;
+  --color-base-50: #848ba7;
+  --color-base-60: #959cba;
+  --color-base-70: #a6adce;
+  --color-base-100: #c6d0f5;
+
+  --accent-h: 10 !important;
+  --accent-s: 57% !important;
+  --accent-l: 88% !important;
+
+  /* Accent (rosewater) near-white, and default theme derives hover shades by multiplying lightness, so 88% * 1.15 clamps to pure white. Set both shades explicitly to keep links and hover states distinguishable. */
+  --color-accent-1: hsl(10, 57%, 93%) !important;
+  --color-accent-2: hsl(10, 57%, 96%) !important;
+
+  /* Dark text on light accent, matching Minimal choice for this scheme */
+  --text-on-accent: #242634 !important;
+
+  --text-selection: rgba(98, 104, 128, 0.5);
+  --text-highlight-bg: rgba(223, 142, 29, 0.4);
+  --text-highlight-bg-rgb: 223, 142, 29;
+
+  --color-red: #eb999c;
+  --color-orange: #efa076;
+  --color-yellow: #e5c890;
+  --color-green: #a6d18a;
+  --color-cyan: #81c8be;
+  --color-blue: #8caaee;
+  --color-purple: #ca9ee6;
+  --color-pink: #f4b9e5;
+
+  --color-red-rgb: 235, 153, 156;
+  --color-orange-rgb: 239, 160, 118;
+  --color-yellow-rgb: 229, 200, 144;
+  --color-green-rgb: 166, 209, 138;
+  --color-cyan-rgb: 129, 200, 190;
+  --color-blue-rgb: 140, 170, 238;
+  --color-purple-rgb: 202, 158, 230;
+  --color-pink-rgb: 244, 185, 229;
+}
+
+/* Minimal renders Frappé sidebar darker than editor (#242634, crust color). Default theme ramp runs one direction only, each step sitting further from editor background and closer to text color, so values above keep sidebar on lighter side. Uncomment to restore Minimal inverted look; moves both sidebars, which default theme expects. */
+/*
+body.theme-dark {
+    --background-secondary: #242634;
+}
+*/

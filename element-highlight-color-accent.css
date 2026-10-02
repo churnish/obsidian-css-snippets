@@ -2,21 +2,29 @@
 
 /* Source: https://github.com/churnish/obsidian-css-snippets */
 
-.is-flashing {
-    transition: all 0.25s ease;
-    background-color: hsla(var(--accent-h), var(--accent-s), var(--accent-l), 0.4) !important;
-}
-.theme-dark .search-result-container {
-  --text-highlight-bg: hsla(var(--accent-h), var(--accent-s), var(--accent-l), 0.4) !important;
-}
-.theme-light .search-result-container {
-  --text-highlight-bg: hsla(var(--accent-h), var(--accent-s), var(--accent-l), 0.4) !important;
+/* Single source for the tint, so alpha changes in one place rather than three */
+body {
+  --snip-accent-highlight-bg: hsla(
+    var(--accent-h),
+    var(--accent-s),
+    var(--accent-l),
+    0.4
+  );
 }
 
-/* Sidebar Highlights cannot take the same --text-highlight-bg redefinition: it reuses that variable for */
-/* .cm-highlight, which renders real ==highlight== content rather than a search match, so match classes are targeted directly */
+/* Only background-color changes here, so transitioning all properties makes the style system watch every animatable property while the class is present */
+.is-flashing {
+  transition: background-color 0.25s ease;
+  background-color: var(--snip-accent-highlight-bg) !important;
+}
+
+.search-result-container {
+  --text-highlight-bg: var(--snip-accent-highlight-bg) !important;
+}
+
+/* Sidebar Highlights cannot take the same --text-highlight-bg redefinition: it reuses that variable for .cm-highlight, which renders real ==highlight== content rather than a search match, so match classes are targeted directly */
 .highlights-sidebar-content .search-term-highlight,
 .highlights-sidebar-content .task-search-match,
 .highlights-sidebar-content .task-search-match-tag {
-  background-color: hsla(var(--accent-h), var(--accent-s), var(--accent-l), 0.4);
+  background-color: var(--snip-accent-highlight-bg);
 }

@@ -1,0 +1,92 @@
+/* Quick Switcher++: Move quick-open hotkeys (⌥ 1-9) into a left gutter on desktop, and indent suggestion rows to match */
+
+/* Split out of quick-switcher-left-side-icons.css, which stays free of plugin dependencies: every rule below needs Quick Switcher++, either through its qsp- classes or through its --symbol-base-padding variable */
+
+/* Desktop: move quick-open hotkeys (⌥ 1-9) into a reserved left gutter, and indent every row by that gutter so titles line up whether or not a row carries a hotkey */
+/* Excluded on mobile: Obsidian hides suggestion hotkeys on phones outright, so the gutter would be dead space */
+/* Set on every prompt, ungated: only the gated rules below and the plugin's own symbol rows read these variables, and symbol rows appear only in Quick Switcher++ prompts */
+body:not(.is-mobile) .prompt {
+  --qsp-quick-open-inset: var(--size-4-3);
+  --qsp-quick-open-cap-width: 36px;
+  --qsp-quick-open-gap: var(--size-4-2);
+  --qsp-quick-open-gutter: calc(
+    var(--qsp-quick-open-inset) + var(--qsp-quick-open-cap-width) +
+      var(--qsp-quick-open-gap)
+  );
+
+  /* Symbol suggestions take their indent from this plugin variable, with level × --symbol-indent-padding added on top, so setting the gutter here shifts their text AND the indentation guides in quick-switcher-file-type-badge.css together. A padding declaration would instead overwrite the per-level math and flatten the outline */
+  --symbol-base-padding: var(--qsp-quick-open-gutter);
+}
+
+/* Containing block for the absolutely positioned hotkeys below */
+/* Set on every prompt row, ungated: rows are otherwise static and no rule anchors absolutely positioned row content elsewhere, so other prompts render unchanged */
+body:not(.is-mobile) .prompt .suggestion-item {
+  position: relative;
+}
+
+/* Two gates, because the plugin renders these hotkeys in its own modes only: :has(.qsp-quick-open-hotkey) catches modes with real hotkey elements (commands, editors, bookmarks, symbols), while :has([class*="qsp-"]) also catches standard mode, which the plugin drives but never decorates with hotkeys. The second gate doubles as the discriminator against Obsidian own prompts (Command palette), which contain no qsp- element at all and where ⌥ 1-9 does nothing */
+/* Matches any qsp- element rather than a decorated row: plugin skips unresolved-link suggestions entirely, so a search returning only those (create-new-note rows) leaves every row undecorated, and a row-based gate drops hotkeys for that search. Plugin mode-trigger instruction bar keeps prompt matching in that case */
+/* Residual gap: with Display mode trigger instructions turned off in plugin settings AND every visible row unresolved, prompt carries no qsp- element and hotkeys do not render */
+/* Symbol rows excluded: they already carry the gutter via --symbol-base-padding above */
+body:not(.is-mobile)
+  .prompt:has(.qsp-quick-open-hotkey)
+  .suggestion-item:not(.qsp-suggestion-symbol),
+body:not(.is-mobile)
+  .prompt:has([class*="qsp-"])
+  .suggestion-item:not(.qsp-suggestion-symbol) {
+  padding-inline-start: var(--qsp-quick-open-gutter);
+}
+
+/* Absolute so the hotkey sits in the gutter without joining the row's flex or grid flow, leaving one shared title column across rows with and without a hotkey */
+/* grid-area reset: quick-switcher-file-type-badge.css places this container in the multi-line grid, and an absolutely positioned grid child is otherwise positioned against that grid area rather than the row's padding box */
+/* .suggestion-item doubled purely for specificity: grid placement there sits inside :has() chain, which outranks shorter selector here. No prompt gate needed, since plugin creates every .qsp-quick-open-aux around hotkey */
+/* Right-aligned in a fixed-width box so the gap to the title stays constant even though ⌥ 1-9 caps differ slightly in width (measured 33-35px) */
+/* Full-height box so the plugin's own align-items: center keeps the cap centred on the row, including two-line rows */
+body:not(.is-mobile)
+  .prompt
+  .suggestion-item.suggestion-item
+  .qsp-quick-open-aux {
+  position: absolute;
+  grid-area: auto;
+  top: 0;
+  bottom: 0;
+  left: var(--qsp-quick-open-inset);
+  width: var(--qsp-quick-open-cap-width);
+  justify-content: flex-end;
+}
+
+/* Standard mode (file search): ⌥ 1-9 already select the first nine results, but the plugin only draws hotkey elements in its own suggestion pipeline, which standard mode bypasses in favour of Obsidian's — so the caps are drawn as generated content instead */
+/* Counter rather than :nth-child() for the number itself, so numbering stays correct if Obsidian ever puts a non-suggestion child in the results list; :nth-child() still caps the run at nine, matching the plugin's default keyList */
+/* Assumes the plugin's default quickOpen settings (Alt, keys 1-9). Changing either in plugin settings leaves these labels stale, since CSS cannot read them */
+/* ⌥ is macOS-specific: this whole block is desktop-only and the user's desktop is macOS. On Windows or Linux the plugin itself writes "Alt" instead */
+/* Counter reset and incremented in every prompt, ungated: only the gated ::after below displays it, and no other rule sets counters on these elements */
+body:not(.is-mobile) .prompt .prompt-results {
+  counter-reset: qsp-quick-open;
+}
+
+body:not(.is-mobile) .prompt .suggestion-item {
+  counter-increment: qsp-quick-open;
+}
+
+/* Anchored by its right edge so caps of different widths keep a constant gap to the title, matching the real hotkeys above */
+/* Styling mirrors the native cap: kbd background and radius, overridden by Obsidian's own .suggestion-hotkey font rules and .suggestion-flair colour/opacity */
+body:not(.is-mobile)
+  .prompt:not(:has(.qsp-quick-open-hotkey)):has([class*="qsp-"])
+  .suggestion-item:nth-child(-n + 9)::after {
+  content: "⌥ " counter(qsp-quick-open);
+  position: absolute;
+  top: 50%;
+  right: calc(
+    100% - var(--qsp-quick-open-inset) - var(--qsp-quick-open-cap-width)
+  );
+  transform: translateY(-50%);
+  padding: 2px 6px;
+  border-radius: var(--radius-s);
+  background-color: var(--code-background);
+  color: var(--text-muted);
+  font-family: var(--font-interface);
+  font-size: var(--font-ui-smaller);
+  line-height: 1;
+  opacity: var(--icon-opacity);
+  pointer-events: none;
+}

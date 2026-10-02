@@ -51,6 +51,8 @@ NEVER wrap these feature names in 'quotes'.
 - No articles (a/an/the).
 - No contractions (e.g., 'do not' NOT 'don't').
 - Drop linking verbs (is/are/was) when sentence remains clear without them.
+- Place rule-specific comment directly above its rule. NEVER leave blank line between comment and its rule.
+- Place file-level notes — scope, rationale, deliberate omissions — with header comments, NEVER at file end.
 
 ## Metadata header
 

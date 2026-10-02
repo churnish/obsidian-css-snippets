@@ -3,8 +3,9 @@
 /* Source: https://github.com/churnish/obsidian-css-snippets */
 
 /* Normal text appearance for non-foldable callouts without content */
+/* Title last among title and content siblings means no content — Obsidian places content right after title, and of-filter ignores other children such as copy buttons */
 .callout:not([data-callout|="chatgpt"]):not(.is-collapsible)
-  .callout-title:not(:has(+ .callout-content))
+  .callout-title:nth-last-child(1 of .callout-title, .callout-content)
   .callout-title-inner {
   color: var(--text-normal);
   font-variant: normal;
@@ -12,7 +13,7 @@
 }
 
 .callout:not([data-callout|="chatgpt"]):not(.is-collapsible)
-  .callout-title:not(:has(+ .callout-content))
+  .callout-title:nth-last-child(1 of .callout-title, .callout-content)
   .callout-title-inner {
   font-weight: normal;
 }

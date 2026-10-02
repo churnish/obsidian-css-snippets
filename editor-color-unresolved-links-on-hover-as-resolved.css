@@ -3,5 +3,5 @@
 /* Source: https://github.com/churnish/obsidian-css-snippets */
 
 :not(h1):not(h2):not(h3):not(h4):not(h5):not(h6) .is-unresolved:hover {
-    color: var(--link-color-hover) !important;
+  color: var(--link-color-hover) !important;
 }
