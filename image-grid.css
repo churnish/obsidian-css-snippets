@@ -6,8 +6,7 @@
 
 /* Revamped for Obsidian 1.1.9+ using :has() */
 
-/* Modified: applies globally to all reading-view notes.
-   Add the `no-img-grid` cssclass to a note's frontmatter to opt out. */
+/* Modified: Applies globally to all Reading view notes; no-img-grid cssclass opts note out, and content inside list cards always opts out so cards keep own image layout, wrapped in :where() to keep original specificity */
 
 body {
   --image-grid-fit: cover;
@@ -24,51 +23,72 @@ body {
   --image-grid-fit: contain;
 }
 
-.markdown-preview-view:not(.no-img-grid) .image-embed.is-loaded {
+.markdown-preview-view:not(.no-img-grid)
+  .image-embed.is-loaded:where(
+    :not(.list-cards.markdown-preview-view div > ul *)
+  ) {
   line-height: 0;
   display: flex;
   align-items: stretch;
 }
-.markdown-preview-view:not(.no-img-grid) .image-embed.is-loaded img {
+.markdown-preview-view:not(.no-img-grid)
+  .image-embed.is-loaded:where(
+    :not(.list-cards.markdown-preview-view div > ul *)
+  )
+  img {
   background-color: var(--image-grid-background);
 }
-.markdown-preview-view:not(.no-img-grid) .image-embed.is-loaded img:active {
+.markdown-preview-view:not(.no-img-grid)
+  .image-embed.is-loaded:where(
+    :not(.list-cards.markdown-preview-view div > ul *)
+  )
+  img:active {
   background-color: transparent;
 }
 .markdown-preview-view:not(.no-img-grid)
   .markdown-preview-section
   > div:has(img)
-  p:empty,
+  p:empty:where(:not(.list-cards.markdown-preview-view div > ul *)),
 .markdown-preview-view:not(.no-img-grid)
   .markdown-preview-section
   > div:has(img)
   img
-  ~ br,
+  ~ br:where(:not(.list-cards.markdown-preview-view div > ul *)),
 .markdown-preview-view:not(.no-img-grid)
   .markdown-preview-section
   > div:has(img)
   .image-embed
-  ~ br {
+  ~ br:where(:not(.list-cards.markdown-preview-view div > ul *)) {
   display: none;
 }
 .markdown-preview-view:not(.no-img-grid)
   .markdown-preview-section
-  div:has(> .image-embed ~ .image-embed),
+  div:has(> .image-embed ~ .image-embed):where(
+    :not(.list-cards.markdown-preview-view div > ul *)
+  ),
 .markdown-preview-view:not(.no-img-grid)
   .markdown-preview-section
-  p:has(> .image-embed ~ .image-embed),
+  p:has(> .image-embed ~ .image-embed):where(
+    :not(.list-cards.markdown-preview-view div > ul *)
+  ),
 .markdown-preview-view:not(.no-img-grid)
   .markdown-preview-section
-  div:has(> img ~ img),
+  div:has(> img ~ img):where(
+    :not(.list-cards.markdown-preview-view div > ul *)
+  ),
 .markdown-preview-view:not(.no-img-grid)
   .markdown-preview-section
-  p:has(> .image-embed ~ img),
+  p:has(> .image-embed ~ img):where(
+    :not(.list-cards.markdown-preview-view div > ul *)
+  ),
 .markdown-preview-view:not(.no-img-grid)
   .markdown-preview-section
-  p:has(> img ~ .image-embed),
+  p:has(> img ~ .image-embed):where(
+    :not(.list-cards.markdown-preview-view div > ul *)
+  ),
 .markdown-preview-view:not(.no-img-grid)
   .markdown-preview-section
-  p:has(> img ~ img) {
+  p:has(> img ~ img):where(:not(.list-cards.markdown-preview-view div > ul *)) {
   display: grid;
   margin-block-start: var(--img-grid-gap);
   margin-block-end: var(--img-grid-gap);
@@ -78,59 +98,75 @@ body {
 }
 .markdown-preview-view:not(.no-img-grid)
   .markdown-preview-section
-  div:has(> .image-embed ~ .image-embed)
+  div:has(> .image-embed ~ .image-embed):where(
+    :not(.list-cards.markdown-preview-view div > ul *)
+  )
   > img,
 .markdown-preview-view:not(.no-img-grid)
   .markdown-preview-section
-  p:has(> .image-embed ~ .image-embed)
+  p:has(> .image-embed ~ .image-embed):where(
+    :not(.list-cards.markdown-preview-view div > ul *)
+  )
   > img,
 .markdown-preview-view:not(.no-img-grid)
   .markdown-preview-section
-  div:has(> img ~ img)
+  div:has(> img ~ img):where(:not(.list-cards.markdown-preview-view div > ul *))
   > img,
 .markdown-preview-view:not(.no-img-grid)
   .markdown-preview-section
-  p:has(> .image-embed ~ img)
+  p:has(> .image-embed ~ img):where(
+    :not(.list-cards.markdown-preview-view div > ul *)
+  )
   > img,
 .markdown-preview-view:not(.no-img-grid)
   .markdown-preview-section
-  p:has(> img ~ .image-embed)
+  p:has(> img ~ .image-embed):where(
+    :not(.list-cards.markdown-preview-view div > ul *)
+  )
   > img,
 .markdown-preview-view:not(.no-img-grid)
   .markdown-preview-section
-  p:has(> img ~ img)
+  p:has(> img ~ img):where(:not(.list-cards.markdown-preview-view div > ul *))
   > img {
   object-fit: var(--image-grid-fit);
   align-self: stretch;
 }
 .markdown-preview-view:not(.no-img-grid)
   .markdown-preview-section
-  div:has(> .image-embed ~ .image-embed)
+  div:has(> .image-embed ~ .image-embed):where(
+    :not(.list-cards.markdown-preview-view div > ul *)
+  )
   > .internal-embed
   img,
 .markdown-preview-view:not(.no-img-grid)
   .markdown-preview-section
-  p:has(> .image-embed ~ .image-embed)
+  p:has(> .image-embed ~ .image-embed):where(
+    :not(.list-cards.markdown-preview-view div > ul *)
+  )
   > .internal-embed
   img,
 .markdown-preview-view:not(.no-img-grid)
   .markdown-preview-section
-  div:has(> img ~ img)
+  div:has(> img ~ img):where(:not(.list-cards.markdown-preview-view div > ul *))
   > .internal-embed
   img,
 .markdown-preview-view:not(.no-img-grid)
   .markdown-preview-section
-  p:has(> .image-embed ~ img)
+  p:has(> .image-embed ~ img):where(
+    :not(.list-cards.markdown-preview-view div > ul *)
+  )
   > .internal-embed
   img,
 .markdown-preview-view:not(.no-img-grid)
   .markdown-preview-section
-  p:has(> img ~ .image-embed)
+  p:has(> img ~ .image-embed):where(
+    :not(.list-cards.markdown-preview-view div > ul *)
+  )
   > .internal-embed
   img,
 .markdown-preview-view:not(.no-img-grid)
   .markdown-preview-section
-  p:has(> img ~ img)
+  p:has(> img ~ img):where(:not(.list-cards.markdown-preview-view div > ul *))
   > .internal-embed
   img {
   object-fit: var(--image-grid-fit);

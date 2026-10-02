@@ -2,10 +2,15 @@
 
 /* Source: https://github.com/churnish/obsidian-css-snippets */
 
-.markdown-preview-view li .internal-embed.media-embed.image-embed,
+/* List cards hide bullet markers and lay out own images, so embeds inside list cards opt out; :where() keeps original specificity */
+.markdown-preview-view
+  li
+  .internal-embed.media-embed.image-embed:where(
+    :not(.list-cards.markdown-preview-view div > ul *)
+  ),
 .markdown-source-view.mod-cm6 .cm-line .internal-embed.media-embed,
-li .internal-embed {
-    vertical-align: top !important;
-    margin-top: 0 !important;
-    display: inline-block !important;
+li .internal-embed:where(:not(.list-cards.markdown-preview-view div > ul *)) {
+  vertical-align: top !important;
+  margin-top: 0 !important;
+  display: inline-block !important;
 }
