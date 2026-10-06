@@ -1,4 +1,4 @@
-/* Dim unfocused note panes via secondary background */
+/* Dim unfocused panes via secondary background, Terminal plugin shell included */
 
 /* Source: https://github.com/churnish/obsidian-css-snippets */
 
@@ -67,4 +67,48 @@ body:not(.is-mobile)
   ):not(.mod-active)
   .workspace-tab-header.is-active {
   --tab-background-active: var(--background-secondary);
+}
+
+/* Terminal plugin: WebGL canvas paints its own opaque background from --background-primary read off body, so neither view-content background nor scoped variable reaches it */
+/* Repaint backdrop behind canvas with dimmed background; !important beats inline background xterm sets from its theme */
+body:not(.is-mobile)
+  .workspace-split:not(.mod-left-split):not(.mod-right-split)
+  .workspace-tabs:not(
+    :nth-child(1 of .workspace-tabs, .workspace-split):nth-last-child(
+      1 of .workspace-tabs,
+      .workspace-split
+    )
+  ):not(.mod-active)
+  .workspace-leaf:not(.is-being-dragged)
+  .xterm-scrollable-element {
+  background-color: var(--background-secondary) !important;
+}
+
+/* Blend canvas onto dimmed backdrop so its background pixels take backdrop color while text keeps its own */
+/* Darken in light mode, lighten in dark mode: default theme ramp moves --background-secondary toward text color, darker than editor in light mode and lighter in dark mode. Color scheme that inverts this in dark mode needs darken there too */
+/* Text lighter than dimmed background in light mode, or darker in dark mode, merges into backdrop */
+body.theme-light:not(.is-mobile)
+  .workspace-split:not(.mod-left-split):not(.mod-right-split)
+  .workspace-tabs:not(
+    :nth-child(1 of .workspace-tabs, .workspace-split):nth-last-child(
+      1 of .workspace-tabs,
+      .workspace-split
+    )
+  ):not(.mod-active)
+  .workspace-leaf:not(.is-being-dragged)
+  .xterm-screen {
+  mix-blend-mode: darken;
+}
+
+body.theme-dark:not(.is-mobile)
+  .workspace-split:not(.mod-left-split):not(.mod-right-split)
+  .workspace-tabs:not(
+    :nth-child(1 of .workspace-tabs, .workspace-split):nth-last-child(
+      1 of .workspace-tabs,
+      .workspace-split
+    )
+  ):not(.mod-active)
+  .workspace-leaf:not(.is-being-dragged)
+  .xterm-screen {
+  mix-blend-mode: lighten;
 }
