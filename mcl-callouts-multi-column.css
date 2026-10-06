@@ -546,15 +546,12 @@ body {
 
   --float-left-callout-margin: 0 15px 0 0;
   --float-right-callout-margin: 0 0 0 15px;
-  --float-callout-top-margin: 0em;
-  --float-callout-bottom-margin: 0em;
   --float-callout-snw-display: none;
 }
 /* variables */
 body {
   --float-left-callout-margin-inline: 0 12px;
   --float-right-callout-margin-inline: 12px 0;
-  --float-snw-display: none;
 }
 
 /* -- Main Code. Use media query so that floats only works when there's enough width */
@@ -663,39 +660,6 @@ div:is(
 }
 
 /* -- Special Adjustment for Themes -- */
-
-/* Minimal. Minimal Float. Updated for Minimal V7.4.7 */
-/* "Reset" the default "cm-sizer" width but respect Minimal Settings, and require cssclass ".minimal-float" as Minimal own wide table will not work together with float i.e. removing :not(:has(table)) from .markdown-source-view.mod-cm6.is-readable-line-width:not(:has(table)) */
-.minimal-float.markdown-source-view.mod-cm6 {
-  .cm-sizer {
-    max-width: var(--max-width);
-    width: var(--line-width);
-  }
-  .cm-contentContainer.cm-contentContainer > .cm-content > div,
-  .cm-sizer > .embedded-backlinks,
-  .cm-sizer > .inline-title,
-  .cm-sizer > .metadata-container {
-    max-width: none;
-    width: auto;
-  }
-}
-
-/* Minimal. Previous Minimal Float but with performance issue. Kept for reference until 30 June 2024 */ /*
-		:is(body[class*="minimal-tab-title"] .markdown-source-view.mod-cm6.is-readable-line-width:not(:has(table)), .minimal-float.markdown-source-view.mod-cm6) .cm-sizer { max-width: var(--max-width); width: var(--line-width); }
-
-		:is(body[class*="minimal-tab-title"] .markdown-source-view.mod-cm6.is-readable-line-width:not(:has(table)), .minimal-float.markdown-source-view.mod-cm6) .cm-contentContainer.cm-contentContainer>.cm-content>div,
-		:is(body[class*="minimal-tab-title"] .markdown-source-view.mod-cm6.is-readable-line-width:not(:has(table)), .minimal-float.markdown-source-view.mod-cm6) .cm-sizer>.embedded-backlinks,
-		:is(body[class*="minimal-tab-title"] .markdown-source-view.mod-cm6.is-readable-line-width:not(:has(table)), .minimal-float.markdown-source-view.mod-cm6) .cm-sizer>.inline-title,
-		:is(body[class*="minimal-tab-title"] .markdown-source-view.mod-cm6.is-readable-line-width:not(:has(table)), .minimal-float.markdown-source-view.mod-cm6) .cm-sizer>.metadata-container
-			{ max-width: none; width: auto; }
-
-
-		/* Minimal - fix to support Breadcrumbs plugin. Sub to the above LP float fix for Minimal */
-body[class*="minimal-tab-title"].contextual-typography
-  .minimal-float.markdown-preview-view.markdown-preview-view
-  .BC-trail.markdown-preview-sizer {
-  display: flex;
-}
 
 /* Minimal - Size Option fix due to !important */
 /* Minimal. Uses body[class*="minimal-tab-title"] as identifier. To override (have higher specificity) the width param. Can be merged to main code later on */
@@ -1125,12 +1089,6 @@ settings:
         level: 2
 		collapsed: false
 	-
-	    id: float-callout-top-margin
-		title: Adjust top margin for Float Left and Float Right
-		description: Can use em or px unit
-	    type: variable-text
-	    default: 0em
-	-
 	    id: float-left-callout-margin-inline
 		title: Adjust left-right margin for Float Left Callout
 		description: Enter in this order - "left right". Can use em or px unit
@@ -1148,7 +1106,7 @@ settings:
     -
         id: mc-list-column-title
         title: List Column
-		description: using `{.xxx-column-list-xxx}` and `#mcl/list-column`
+		description: using `{.xxx-column-list-xxx}`, YAML cssclass, or `#mcl/list-column` with Contextual Typography plugin
         type: heading
         level: 1
 		collapsed: true
@@ -1197,7 +1155,7 @@ settings:
 	-
         id: mc-list-grid-title
         title: List Grid and List Card
-		description: using `#mcl/list-grid` and `#mcl/list-card`
+		description: using YAML cssclass, or `#mcl/list-grid` and `#mcl/list-card` with Contextual Typography plugin
         type: heading
         level: 1
 		collapsed: true
