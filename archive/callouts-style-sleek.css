@@ -1,45 +1,45 @@
-.callout:not([data-callout|="chatgpt"]):not(.is-collapsible) {
+.callout:not(.is-collapsible) {
   padding: 0px;
 }
 
-.callout:not([data-callout|="chatgpt"]):not(.is-collapsible) .callout-title {
+.callout:not(.is-collapsible) .callout-title {
   background-color: rgba(var(--callout-color), 0.1);
   padding: var(--callout-title-padding);
   cursor: pointer;
 }
 
-.callout:not([data-callout|="chatgpt"]):not(.is-collapsible)
+.callout:not(.is-collapsible)
   .callout-title:not(:has(+ .callout-content))
   .callout-title-inner {
   font-weight: normal;
 }
 
-.callout:not([data-callout|="chatgpt"]):not(.is-collapsible) {
+.callout:not(.is-collapsible) {
   border-color: rgba(var(--callout-color), 0.4);
   border-width: 1px;
   border-radius: var(--callout-radius);
   background-color: rgba(var(--ctp-mantle), 0.4);
 }
 
-.callout:not([data-callout|="chatgpt"]) .callout-content {
+.callout .callout-content {
   padding: var(--callout-title-padding) var(--callout-title-padding)
     var(--callout-title-padding) calc(var(--callout-title-padding) * 1.5);
   border-top: 1px solid rgba(var(--callout-color), 0.4);
 }
 
-.callout:not([data-callout|="chatgpt"]) .callout-fold {
+.callout .callout-fold {
   padding-right: 0px;
 }
 
-.callout:not([data-callout|="chatgpt"]) .callout-title-inner {
+.callout .callout-title-inner {
   flex-grow: var(--anp-callout-fold-position, unset);
 }
 
-.callout:not([data-callout|="chatgpt"]) {
+.callout {
   --callout-title-padding: var(--size-4-2);
 }
 
-.callout:not([data-callout|="chatgpt"]).is-collapsible {
+.callout.is-collapsible {
   border-color: rgba(var(--callout-color), 0.4);
   border-width: 1px;
   border-radius: var(--callout-radius);
@@ -48,52 +48,48 @@
   padding: 0;
 }
 
-.callout:not([data-callout|="chatgpt"]).is-collapsible .callout-fold {
+.callout.is-collapsible .callout-fold {
   padding-right: 0px;
 }
 
-.callout:not([data-callout|="chatgpt"]).is-collapsible .callout-title-inner {
+.callout.is-collapsible .callout-title-inner {
   flex-grow: var(--anp-callout-fold-position, unset);
 }
 
-.callout:not([data-callout|="chatgpt"]).is-collapsible.is-collapsed {
+.callout.is-collapsible.is-collapsed {
   padding: 0;
 }
 
-.callout:not([data-callout|="chatgpt"]).is-collapsible.is-collapsed
-  .callout-title {
+.callout.is-collapsible.is-collapsed .callout-title {
   background-color: rgba(var(--callout-color), 0.1);
   padding: var(--callout-title-padding);
   cursor: pointer;
 }
 
-.callout:not([data-callout|="chatgpt"]).is-collapsible.is-collapsed
-  .callout-content {
+.callout.is-collapsible.is-collapsed .callout-content {
   display: none;
 }
 
-.callout:not([data-callout|="chatgpt"]).is-collapsible:not(.is-collapsed)
-  .callout-title {
+.callout.is-collapsible:not(.is-collapsed) .callout-title {
   background-color: rgba(var(--callout-color), 0.1);
   padding: var(--callout-title-padding);
   border-color: rgba(var(--callout-color), 0.4);
   cursor: pointer;
 }
 
-.callout:not([data-callout|="chatgpt"]).is-collapsible:not(.is-collapsed)
-  .callout-content:not(:empty) {
+.callout.is-collapsible:not(.is-collapsed) .callout-content:not(:empty) {
   padding: var(--callout-title-padding) var(--callout-title-padding)
     var(--callout-title-padding) calc(var(--callout-title-padding) * 1.5);
   border-top: 1px solid rgba(var(--callout-color), 0.4);
 }
 
-.callout:not([data-callout|="chatgpt"]) .list-collapse-indicator {
+.callout .list-collapse-indicator {
   margin-left: -35px;
   padding-right: 3px;
 }
 
 /* Normal text appearance for non-foldable callouts without content */
-.callout:not([data-callout|="chatgpt"]):not(.is-collapsible)
+.callout:not(.is-collapsible)
   .callout-title:not(:has(+ .callout-content))
   .callout-title-inner {
   color: var(--text-normal);
