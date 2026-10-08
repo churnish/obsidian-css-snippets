@@ -1,0 +1,138 @@
+/* Sleek callouts: Tinted title bar, thin colored border, divider above content and fold chevron right after title text */
+
+/* Source: https://github.com/churnish/obsidian-css-snippets */
+
+/* Extracted from AnuPpuccin theme: https://github.com/AnubisNekhet/AnuPpuccin | GNU General Public License v3.0 */
+
+/* Tints mix in oklch to match Obsidian's own callout colors; --callout-color now holds full CSS color, not RGB triplet */
+
+.callout:not(.is-collapsible) .callout-title {
+  background-color: color-mix(in oklch, var(--callout-color) 10%, transparent);
+  cursor: pointer;
+}
+
+/* Normal text appearance for non-foldable callouts without content; title last among title and content siblings means no content, and of-filter ignores other children such as action buttons */
+.callout:not(.is-collapsible)
+  .callout-title:nth-last-child(1 of .callout-title, .callout-content)
+  .callout-title-inner {
+  font-weight: normal;
+  color: var(--text-normal);
+}
+
+/* Transparent body; upstream tinted it with Catppuccin mantle, which default theme does not define */
+.callout:not(.is-collapsible) {
+  padding: 0px;
+  border-color: color-mix(in oklch, var(--callout-color) 40%, transparent);
+  border-width: 1px;
+  border-radius: var(--callout-radius);
+  background-color: transparent;
+}
+
+.callout .callout-content {
+  padding: var(--callout-title-padding) var(--callout-title-padding)
+    var(--callout-title-padding) calc(var(--callout-title-padding) * 1.5);
+  border-top: 1px solid
+    color-mix(in oklch, var(--callout-color) 40%, transparent);
+}
+
+.callout .callout-fold {
+  padding-right: 0px;
+}
+
+.callout {
+  --callout-title-padding: var(--size-4-2);
+}
+
+/* Title padding kept out of tint rules, whose higher specificity would override chevron layout's inline sides */
+.callout > .callout-title {
+  padding: var(--callout-title-padding);
+}
+
+/* Fold chevron right after title text, even when title wraps; flex title text spans full width once wrapped, pushing chevron to far edge */
+/* Inline title text lets anchor positioning read width of its longest line; icon and chevron leave flow, title padding reserves their room */
+/* --callout-title-reserve-end: Extra end room other snippets reserve, e.g., for Callout Copy Buttons */
+@supports (anchor-name: --callout-title-text) {
+  /* Two classes only, so Multi-column and Prompt snippets still hide titles of their callouts */
+  .callout > .callout-title {
+    display: block;
+    position: relative;
+    padding-inline-start: calc(
+      var(--callout-title-padding) + var(--icon-size) + var(--size-4-1)
+    );
+    padding-inline-end: calc(
+      var(--callout-title-padding) + var(--callout-title-reserve-end, 0px)
+    );
+  }
+
+  .callout.is-collapsible > .callout-title {
+    padding-inline-end: calc(
+      var(--callout-title-padding) + var(--size-4-1) + var(--icon-size) +
+        var(--callout-title-reserve-end, 0px)
+    );
+  }
+
+  .callout > .callout-title > .callout-icon {
+    position: absolute;
+    inset-block-start: var(--callout-title-padding);
+    inset-inline-start: var(--callout-title-padding);
+  }
+
+  .callout > .callout-title > .callout-title-inner {
+    display: inline;
+    anchor-name: --callout-title-text;
+  }
+
+  /* Shared anchor name needs no scoping; title is chevron's containing block, so only own title text qualifies as anchor */
+  .callout > .callout-title > .callout-fold {
+    position: absolute;
+    inset-block-start: var(--callout-title-padding);
+    inset-inline-start: calc(
+      anchor(--callout-title-text end) + var(--size-4-1)
+    );
+  }
+}
+
+.callout.is-collapsible {
+  border-color: color-mix(in oklch, var(--callout-color) 40%, transparent);
+  border-width: 1px;
+  border-radius: var(--callout-radius);
+  background-color: transparent;
+  --bold-weight: bolder;
+  padding: 0;
+}
+
+.callout.is-collapsible.is-collapsed .callout-title {
+  background-color: color-mix(in oklch, var(--callout-color) 10%, transparent);
+  cursor: pointer;
+}
+
+.callout.is-collapsible.is-collapsed .callout-content {
+  display: none;
+}
+
+.callout.is-collapsible:not(.is-collapsed) .callout-title {
+  background-color: color-mix(in oklch, var(--callout-color) 10%, transparent);
+  border-color: color-mix(in oklch, var(--callout-color) 40%, transparent);
+  cursor: pointer;
+}
+
+.callout.is-collapsible:not(.is-collapsed) .callout-content:not(:empty) {
+  padding: var(--callout-title-padding) var(--callout-title-padding)
+    var(--callout-title-padding) calc(var(--callout-title-padding) * 1.5);
+  border-top: 1px solid
+    color-mix(in oklch, var(--callout-color) 40%, transparent);
+}
+
+.callout .list-collapse-indicator {
+  margin-left: -35px;
+  padding-right: 3px;
+}
+
+/* Reduce margin above first line and below last line */
+.callout-content > :first-child {
+  margin-top: 0;
+}
+
+.callout-content > :last-child {
+  margin-bottom: 0;
+}

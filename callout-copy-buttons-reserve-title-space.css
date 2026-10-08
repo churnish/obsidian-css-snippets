@@ -1,0 +1,19 @@
+/* Callout Copy Buttons: Keep long callout titles and fold chevron clear of hover copy button */
+
+/* Source: https://github.com/churnish/obsidian-css-snippets */
+
+/* Plugin positions buttons absolutely over title's end, so title layout never makes room for them */
+/* Width fits one button (icon plus plugin's side padding), matching plain-text-only copy setting; widen if more buttons enabled */
+
+/* Button plus gap; read by callout styles that lay titles out without flex, e.g., Sleek callouts snippet */
+.callout {
+  --callout-title-reserve-end: calc(
+    var(--icon-size) + 2 * var(--size-2-3) + var(--size-4-1)
+  );
+}
+
+/* Flex spacer for Obsidian's default flex title; flex gap supplies separation; inert in non-flex titles */
+.callout-title::after {
+  content: "";
+  flex: 0 0 calc(var(--icon-size) + 2 * var(--size-2-3));
+}
