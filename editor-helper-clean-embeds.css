@@ -1,0 +1,15 @@
+/* Helper: Blend note embeds into surrounding text via embed-clean cssclass or clean alt tag */
+
+/* Source: https://github.com/churnish/obsidian-css-snippets */
+
+/* Extracted from Obsidian Forum: https://forum.obsidian.md/t/removing-embed-border-not-working-on-mobile-only/62263 */
+
+/* Drops accent border, indent and shadow; image embeds keep own styling */
+.embed-clean .internal-embed > .markdown-embed,
+.embed-clean .internal-embed.is-loaded:not(.image-embed),
+.internal-embed[alt*="clean"] > .markdown-embed,
+.internal-embed[alt*="clean"].is-loaded:not(.image-embed) {
+  --embed-padding: 0;
+  border: none;
+  box-shadow: none;
+}

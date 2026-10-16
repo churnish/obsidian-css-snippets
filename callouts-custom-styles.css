@@ -252,3 +252,35 @@
   --callout-color: var(--color-yellow);
   --callout-icon: thumbs-down;
 }
+
+/* Clean and bare */
+
+/* Neutral callouts: text color in place of accent for title, border and divider; no icon */
+.callout:is([data-callout="clean"], [data-callout="bare"]) {
+  --callout-color: var(--text-normal);
+}
+
+/* Title bar: plain secondary background for clean, none for bare; set on title, not callout, so nested callouts keep their own */
+.callout[data-callout="clean"] > .callout-title {
+  --callout-title-background: var(--background-secondary-alt);
+}
+
+.callout[data-callout="bare"] > .callout-title {
+  --callout-title-background: transparent;
+}
+
+/* Bare border and divider: theme border color instead of faded text color */
+.callout[data-callout="bare"] {
+  --callout-border-color: var(--background-modifier-border);
+}
+
+/* Set on title, not callout, so nested callouts keep their icon room */
+.callout:is([data-callout="clean"], [data-callout="bare"]) > .callout-title {
+  --callout-title-icon-space: 0px;
+}
+
+.callout:is([data-callout="clean"], [data-callout="bare"])
+  > .callout-title
+  > .callout-icon {
+  display: none;
+}

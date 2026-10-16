@@ -1,0 +1,33 @@
+/* Callout Copy Buttons: Keep hover copy button clear of long titles, fold chevron and embed Open link icon */
+
+/* Source: https://github.com/churnish/obsidian-css-snippets */
+
+/* Plugin positions buttons absolutely over title's end, so title layout never makes room for them */
+/* Width fits one button (icon plus plugin's side padding), matching plain-text-only copy setting; widen if more buttons enabled */
+
+/* Set on every callout so nested callouts reset to plugin's 6px instead of inheriting embed offset */
+/* --callout-title-reserve-end: Button plus gap, plus any extra inset; read by callout styles that lay titles out without flex, e.g., Sleek callouts snippet */
+.callout {
+  --callout-action-buttons-inset: 6px;
+  --callout-title-reserve-end: calc(
+    var(--callout-action-buttons-inset) - 6px + var(--icon-size) + 2 *
+      var(--size-2-3) + var(--size-4-1)
+  );
+}
+
+.callout > .callout-action-buttons {
+  inset-inline-end: var(--callout-action-buttons-inset);
+}
+
+/* Embed's Open link icon sits 4px from same top corner as embed's first callout; move buttons past icon plus gap */
+.markdown-embed .markdown-preview-sizer > .mod-header + div > .callout {
+  --callout-action-buttons-inset: calc(
+    4px + var(--icon-s) + 2 * var(--size-2-2) + var(--size-4-1)
+  );
+}
+
+/* Flex spacer for Obsidian's default flex title; flex gap supplies separation; inert in non-flex titles */
+.callout-title::after {
+  content: "";
+  flex: 0 0 calc(var(--callout-title-reserve-end) - var(--size-4-1));
+}

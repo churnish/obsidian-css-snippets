@@ -1,0 +1,30 @@
+/* Status bar: Hide selected plugin elements, hide bar itself when empty, match spacing between items to 8px gap between word count and character count */
+
+/* Source: https://github.com/churnish/obsidian-css-snippets */
+
+/* Zero-backlink count, Excalidraw word count, idle Plugin Update Tracker item and empty bar state come from companion Templater startup script (see startup-status-bar-item-visibility.md) */
+
+.status-bar-item.plugin-properties,
+.status-bar-item.plugin-pane-relief,
+.status-bar-item.plugin-github-issues,
+.status-bar-item.plugin-obsidian-plugin-update-tracker.update-tracker-idle,
+.status-bar-item .plugin-update-tracker-icon--error,
+.status-bar-item .plugin-update-tracker-icon--loading,
+.status-bar-item .plugin-update-tracker-icon--no-updates-available {
+  display: none;
+}
+
+/* Obsidian hides empty items via .status-bar-item:empty but never collapses bar, leaving padding nub in corner */
+.status-bar.status-bar-empty {
+  display: none;
+}
+
+/* Visible gap between item texts = 4px padding + 4px padding; item margin and bar gap add more, so both reset */
+.status-bar {
+  gap: 0;
+}
+
+/* Specificity above Commander spacing rule `.status-bar-item:not(:last-child)`, which still applies to all status bar items, and above `.cmdr-custom-spacing` variant */
+.status-bar .status-bar-item:not(:last-child) {
+  margin-inline-end: 0;
+}

@@ -8,6 +8,8 @@
 
 /* Modified: Applies globally to all Reading view notes; no-img-grid cssclass opts note out, and content inside list cards always opts out so cards keep own image layout, wrapped in :where() to keep original specificity */
 
+/* Deliberate omission: Upstream gridded every paragraph in a block containing an image, splitting text paragraphs with one image into columns; grids now need 2+ images */
+
 body {
   --image-grid-fit: cover;
   --image-grid-background: transparent;
@@ -48,17 +50,15 @@ body {
 .markdown-preview-view:not(.no-img-grid)
   .markdown-preview-section
   > div:has(img)
-  p:empty:where(:not(.list-cards.markdown-preview-view div > ul *)),
+  p:empty:where(:not(.list-cards.markdown-preview-view div > ul *)) {
+  display: none;
+}
+/* Image embeds render as blocks here, so line break right after one would leave empty line; also drops breaks between grid images, which would otherwise take grid cells */
 .markdown-preview-view:not(.no-img-grid)
-  .markdown-preview-section
-  > div
-  img
-  ~ br:where(:not(.list-cards.markdown-preview-view div > ul *)),
-.markdown-preview-view:not(.no-img-grid)
-  .markdown-preview-section
-  > div
-  .image-embed
-  ~ br:where(:not(.list-cards.markdown-preview-view div > ul *)) {
+  .image-embed.is-loaded:where(
+    :not(.list-cards.markdown-preview-view div > ul *)
+  )
+  + br {
   display: none;
 }
 .markdown-preview-view:not(.no-img-grid)
@@ -168,22 +168,4 @@ body {
   img {
   object-fit: var(--image-grid-fit);
   align-self: center;
-}
-.markdown-preview-view:not(.no-img-grid)
-  .markdown-preview-section
-  > div:has(img)
-  > p {
-  display: grid;
-  margin-block-start: var(--img-grid-gap);
-  margin-block-end: var(--img-grid-gap);
-  grid-column-gap: var(--img-grid-gap);
-  grid-row-gap: 0;
-  grid-template-columns: repeat(auto-fit, minmax(0, 1fr));
-}
-.markdown-preview-view:not(.no-img-grid)
-  .markdown-preview-section
-  > div:has(img)
-  > p
-  > br {
-  display: none;
 }
