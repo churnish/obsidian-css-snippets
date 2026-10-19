@@ -5,8 +5,11 @@
 .canvas-node-content .markdown-preview-view {
   --gradient-size: 60px;
 
-  animation: scroll-mask linear;
-  animation-timeline: scroll(self);
+  /* Keep Obsidian's node-inserted animation in the list: its animationstart is what makes a card that mounts after load (e.g., on zoom-in) render its text. */
+  animation:
+    scroll-mask linear,
+    node-inserted 0.01s;
+  animation-timeline: scroll(self), auto;
 }
 
 @keyframes scroll-mask {
