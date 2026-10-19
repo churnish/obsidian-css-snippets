@@ -1,0 +1,8 @@
+/* Use border color for embed left edge instead of accent color */
+
+/* Source: https://github.com/churnish/obsidian-css-snippets */
+
+/* Core sets thickness and color in one variable, so thickness is restated here */
+body {
+  --embed-border-start: 2px solid var(--background-modifier-border);
+}

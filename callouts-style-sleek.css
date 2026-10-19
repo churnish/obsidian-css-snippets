@@ -17,6 +17,12 @@
   cursor: pointer;
 }
 
+/* Callout Copy Buttons plugin overlays title end, even while hidden; pointer cursor like title, so cursor does not flip to arrow over buttons */
+.callout > .callout-action-buttons,
+.callout > .callout-action-buttons .callout-copy-button {
+  cursor: pointer;
+}
+
 /* Normal text appearance for non-foldable callouts without content; title last among title and content siblings means no content, and of-filter ignores other children such as action buttons */
 .callout:not(.is-collapsible)
   .callout-title:nth-last-child(1 of .callout-title, .callout-content)

@@ -1,0 +1,14 @@
+/* Hide file names in note and Canvas embeds unless alt text is exactly show-name */
+
+/* Source: https://github.com/churnish/obsidian-css-snippets */
+
+/* File embeds excluded: name is their only content */
+.internal-embed:not(
+    [alt="show-name"],
+    [alt^="show-name|"],
+    [alt$="|show-name"],
+    [alt*="|show-name|"]
+  ):not(.file-embed)
+  > .embed-title {
+  display: none;
+}

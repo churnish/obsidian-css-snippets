@@ -935,7 +935,10 @@ body {
 /* -- Special Adjustment for Themes -- */
 
 /* Sanctum */
-.markdown-rendered .tag-mcllist-card ul img[alt*="right"] {
+.markdown-rendered
+  .tag-mcllist-card
+  ul
+  img:is([alt="right"], [alt^="right|"], [alt$="|right"], [alt*="|right|"]) {
   margin: 0;
 }
 

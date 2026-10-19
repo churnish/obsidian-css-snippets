@@ -2,12 +2,48 @@
 
 /* Source: https://github.com/churnish/obsidian-css-snippets */
 
-.internal-embed[alt*="hide-h1"].markdown-embed h1,
-.internal-embed[alt*="hide-h2"].markdown-embed h2,
-.internal-embed[alt*="hide-h3"].markdown-embed h3,
-.internal-embed[alt*="hide-h4"].markdown-embed h4,
-.internal-embed[alt*="hide-h5"].markdown-embed h5,
-.internal-embed[alt*="hide-h6"].markdown-embed h6,
+.internal-embed:is(
+    [alt="hide-h1"],
+    [alt^="hide-h1|"],
+    [alt$="|hide-h1"],
+    [alt*="|hide-h1|"]
+  ).markdown-embed
+  h1,
+.internal-embed:is(
+    [alt="hide-h2"],
+    [alt^="hide-h2|"],
+    [alt$="|hide-h2"],
+    [alt*="|hide-h2|"]
+  ).markdown-embed
+  h2,
+.internal-embed:is(
+    [alt="hide-h3"],
+    [alt^="hide-h3|"],
+    [alt$="|hide-h3"],
+    [alt*="|hide-h3|"]
+  ).markdown-embed
+  h3,
+.internal-embed:is(
+    [alt="hide-h4"],
+    [alt^="hide-h4|"],
+    [alt$="|hide-h4"],
+    [alt*="|hide-h4|"]
+  ).markdown-embed
+  h4,
+.internal-embed:is(
+    [alt="hide-h5"],
+    [alt^="hide-h5|"],
+    [alt$="|hide-h5"],
+    [alt*="|hide-h5|"]
+  ).markdown-embed
+  h5,
+.internal-embed:is(
+    [alt="hide-h6"],
+    [alt^="hide-h6|"],
+    [alt$="|hide-h6"],
+    [alt*="|hide-h6|"]
+  ).markdown-embed
+  h6,
 .no-h1 .internal-embed .markdown-rendered h1,
 .no-h2 .internal-embed .markdown-rendered h2,
 .no-h3 .internal-embed .markdown-rendered h3,

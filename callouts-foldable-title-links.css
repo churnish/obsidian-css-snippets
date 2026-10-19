@@ -1,0 +1,18 @@
+/* Links in foldable callout titles: Same color and weight as title text, underlined, slightly brighter on hover */
+
+/* Source: https://github.com/churnish/obsidian-css-snippets */
+
+/* Native link variables set on title, not link rules, so resolved, unresolved and external links keep native behavior wherever links render */
+/* currentcolor in a link color resolves to title text color, which links inherit */
+/* Native --link-weight resolves once on body, so links would otherwise ignore bold title weight */
+.callout.is-collapsible > .callout-title {
+  --link-color: currentcolor;
+  --link-color-hover: color-mix(in oklch, currentcolor, white 15%);
+  --link-decoration: underline;
+  --link-decoration-hover: underline;
+  --link-external-color: currentcolor;
+  --link-external-color-hover: color-mix(in oklch, currentcolor, white 15%);
+  --link-external-decoration: underline;
+  --link-external-decoration-hover: underline;
+  --link-weight: var(--callout-title-weight);
+}

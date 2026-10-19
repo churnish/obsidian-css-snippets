@@ -1,5 +1,14 @@
 /* Bases: Hide toolbar */
 
-:is(.bases-no-toolbar, .bases-embed[alt~="no-toolbar"]) .bases-header {
+:is(
+    .bases-no-toolbar,
+    .bases-embed:is(
+      [alt="no-toolbar"],
+      [alt^="no-toolbar|"],
+      [alt$="|no-toolbar"],
+      [alt*="|no-toolbar|"]
+    )
+  )
+  .bases-header {
   display: none;
 }
