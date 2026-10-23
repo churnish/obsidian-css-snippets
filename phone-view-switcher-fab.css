@@ -110,10 +110,11 @@ body.is-phone.auto-full-screen.is-hidden-nav
   top: calc(var(--hidden-nav-offset) * -1);
 }
 
+/* Key on visible main-area leaf, not active one: touching open sidebar activates sidebar leaf, which would flip navbar to native centered layout mid-slide. Obsidian hides background tabs with inline display: none. */
 body.is-phone.is-floating-nav:has(
     .mod-root
-      .workspace-leaf.mod-active
-      .workspace-leaf-content[data-type="markdown"]
+      .workspace-leaf:not([style*="display: none"])
+      > .workspace-leaf-content[data-type="markdown"]
   )
   .mobile-navbar {
   width: auto;

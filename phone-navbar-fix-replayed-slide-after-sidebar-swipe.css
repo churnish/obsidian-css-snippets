@@ -1,0 +1,17 @@
+/* Stop phone navbar from sliding again after swipe closes sidebar */
+
+/* Source: https://github.com/churnish/obsidian-css-snippets */
+
+/* Sliding sidebar setting moves navbar with drawer by writing transform from script, so native transform transition sometimes replays last swipe offset after script animation ends. Opacity and margin-bottom timings copy native rule. */
+body.is-phone .mobile-navbar {
+  transition:
+    opacity 0.2s ease-in-out,
+    margin-bottom 0.25s ease-in-out,
+    translate 0.3s ease-out;
+}
+
+/* Hide-on-scroll slide moves to translate, which no script writes; distance matches native hidden-nav transform. */
+body.is-phone.is-hidden-nav .mobile-navbar {
+  transform: none;
+  translate: 0 calc(var(--navbar-height) + var(--navbar-bottom-offset));
+}
