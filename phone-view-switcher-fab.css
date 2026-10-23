@@ -117,6 +117,8 @@ body.is-phone.is-floating-nav:has(
   )
   .mobile-navbar {
   width: auto;
+  /* Lift native 316px floating navbar cap: on phones wider than about 396px, cap stops navbar short of button and widens gap. */
+  max-width: none;
   margin-left: var(--size-4-3);
   margin-right: calc(8px + 48px + var(--size-4-3));
 }
