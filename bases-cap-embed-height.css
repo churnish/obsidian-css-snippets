@@ -1,19 +1,8 @@
-/* Cap Bases embed height, fade top/bottom edges when scrollable.
+/* Cap Bases embed height, fade top/bottom edges when scrollable */
 
-   Excludes the view types that must not be capped: Dynamic Views' Grid and
-   Masonry and Maps ship their own embed height control, so capping them here
-   would fight their own setting and double their own fade; Kanban scrolls its
-   columns internally, so an outer cap and a horizontal fade fight the board.
-
-   Fade opacity is driven by --bases-fade-top/--bases-fade-bottom, written per
-   scroll event by the Templater startup script (see
-   startup-bases-embed-scroll-fade.md), NOT by CSS scroll-driven animations.
-   animation-timeline/scroll-timeline on .bases-view — or on any ancestor of a
-   position: absolute card — breaks card rendering outright on Chromium AND
-   WebKit when present from initial page load. Hosting the timeline elsewhere
-   keeps the cards, but the positioned pseudo-elements then never paint on
-   WebKit/iOS despite computing correct opacity, across three separate CSS-only
-   redesigns. A plain JS scroll listener sidesteps both failure modes. */
+/* Excludes view types that must not be capped: Dynamic Views Grid and Masonry and Maps ship their own embed height control, so capping them here would fight their setting and double their fade; Kanban scrolls its columns internally, so outer cap and horizontal fade fight board */
+/* Fade opacity driven by --bases-fade-top/--bases-fade-bottom, written per scroll event by Templater startup script (see startup-bases-embed-scroll-fade.md), NOT by CSS scroll-driven animations */
+/* animation-timeline/scroll-timeline on .bases-view, or on any ancestor of position: absolute card, breaks card rendering outright on Chromium AND WebKit when present from initial page load. Hosting timeline elsewhere keeps cards, but positioned pseudo-elements then never paint on WebKit/iOS despite computing correct opacity, across three separate CSS-only redesigns. Plain JS scroll listener sidesteps both failure modes */
 
 .bases-embed
   > .bases-view:not(
@@ -25,19 +14,16 @@
   max-height: 60vh;
   overflow-y: auto;
 
-  /* Re-point core's own variables rather than overriding padding-block and
-     border-block with !important. Sticky top/bottom resolve against the PADDING
-     edge, so core's padding would leave a strip of content visible past the
-     fade, and its hairline border (0.33px at iOS Retina scale) sits outside that
-     edge again — but a blunt padding/border override also strips an embedded
-     Cards view's padding and deletes an embedded Table's own borders, which
-     these variables leave intact everywhere the fade is not drawn. */
+  /* Re-point core variables rather than overriding padding-block and border-block with !important: sticky top/bottom resolve against PADDING edge, so core padding would leave strip of content visible past fade, and its hairline border (0.33px at iOS Retina scale) sits outside that edge again; blunt padding/border override also strips embedded Cards view padding and deletes embedded Table borders, which these variables leave intact everywhere fade is not drawn */
   --bases-embed-padding: 0 1px;
   --bases-embed-border-width: 0;
 
-  /* Phone keeps a horizontal inset — a full-bleed embed reads as broken there */
-  body.is-phone & {
-    --bases-embed-padding: 0 var(--size-4-2);
+  /* Phone gate: See AGENTS.md Device gates */
+  @media (any-pointer: coarse) and (not ((min-width: 600px) and (min-height: 600px))) {
+    /* Phone keeps horizontal inset: full-bleed embed reads as broken there */
+    body.is-phone & {
+      --bases-embed-padding: 0 var(--size-4-2);
+    }
   }
 
   &::before,
@@ -45,20 +31,16 @@
     content: "";
     display: block;
     position: sticky;
-    /* Above resting cards (z-index 1), below a stuck group heading (20/24),
-       which is opaque chrome and should occlude the fade. */
+    /* Above resting cards (z-index 1), below stuck group heading (20/24), which as opaque chrome should occlude fade */
     z-index: 2;
     height: 28px;
-    /* Without this the strips swallow clicks on the rows beneath */
+    /* Without this, strips swallow clicks on rows beneath */
     pointer-events: none;
-    /* No transition: the script writes a new value every scroll event, so one
-       would only lag behind the actual scroll position. */
+    /* No transition: script writes new value every scroll event, so one would only lag behind actual scroll position */
   }
 
   &::before {
-    /* A plain zero, never a negative offset: --bases-embed-padding can resolve
-       as a two-value shorthand, which makes calc(-1 * var(...)) invalid and
-       silently drops the sticky offset, so the strip scrolls with the content. */
+    /* Plain zero, never negative offset: --bases-embed-padding can resolve as two-value shorthand, which makes calc(-1 * var(...)) invalid and silently drops sticky offset, so strip scrolls with content */
     top: 0;
     margin-bottom: -28px;
     opacity: var(--bases-fade-top, 0);
@@ -69,12 +51,8 @@
     );
   }
 
-  /* Guarded on :not(.is-being-dragged-over) because app.css paints Obsidian's
-     own drop tint on .bases-view.is-being-dragged-over::after, and an element
-     has only one ::after — without the guard this gradient outranks the tint and
-     the embed silently stops showing any drop affordance. The bottom fade is
-     therefore absent for the length of a drag, which a snippet cannot avoid:
-     reclaiming it would need a real element appended to the scroller. */
+  /* Guarded on :not(.is-being-dragged-over) because app.css paints Obsidian own drop tint on .bases-view.is-being-dragged-over::after, and element has only one ::after: without guard this gradient outranks tint and embed silently stops showing any drop affordance */
+  /* Bottom fade therefore absent for length of drag, which snippet cannot avoid: reclaiming it would need real element appended to scroller */
   &:not(.is-being-dragged-over)::after {
     bottom: 0;
     margin-top: -28px;

@@ -1,22 +1,11 @@
-/* Canvas: Hide attachment file names on cards, reveal on hover */
+/* Canvas: Hide attachment file names on cards, reveal on selection */
 
 /* Source: https://github.com/churnish/obsidian-css-snippets */
 
-/* Shows label when hovering over it */
-.canvas-node:not(:has(.markdown-embed, .canvas-embed)) .canvas-node-label {
+/* Selection instead of hover, so touch reaches name too: tapping card selects it. Obsidian marks lone selected card .is-focused and every card of multi-selection .is-selected */
+.canvas-node:not(.is-focused, .is-selected):not(
+    :has(.markdown-embed, .canvas-embed)
+  )
+  .canvas-node-label {
   opacity: 0;
 }
-.canvas-node:not(:has(.markdown-embed, .canvas-embed))
-  .canvas-node-label:hover {
-  opacity: 1;
-}
-
-/* Show label when hovering over card
-.canvas-node:not(:has(.markdown-embed, .canvas-embed)) .canvas-node-label {
- display: none;
-}
-.canvas-node:not(:has(.markdown-embed, .canvas-embed)):hover .canvas-node-label {
- display: block;
- opacity: 1;
-}
-*/

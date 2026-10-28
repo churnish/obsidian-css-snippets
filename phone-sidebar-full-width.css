@@ -1,5 +1,8 @@
 /* Full-width sidebars on phone */
 
-body.is-phone .workspace-drawer {
-  width: 100%;
+/* Phone gate: See AGENTS.md Device gates */
+@media (any-pointer: coarse) and (not ((min-width: 600px) and (min-height: 600px))) {
+  body.is-phone .workspace-drawer {
+    width: 100%;
+  }
 }

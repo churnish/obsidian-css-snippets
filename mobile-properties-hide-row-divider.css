@@ -2,6 +2,9 @@
 
 /* Source: https://github.com/churnish/obsidian-css-snippets */
 
-body.is-mobile .metadata-container {
-  --metadata-divider-width: 0;
+/* Mobile gate: See AGENTS.md Device gates */
+@media (any-pointer: coarse) {
+  body.is-mobile .metadata-container {
+    --metadata-divider-width: 0;
+  }
 }

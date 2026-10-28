@@ -75,8 +75,11 @@
   gap: 1em;
   background-color: transparent !important;
 
-  &:is(.is-phone .callout) {
-    flex-direction: column;
+  /* Phone gate: See AGENTS.md Device gates */
+  @media (any-pointer: coarse) and (not ((min-width: 600px) and (min-height: 600px))) {
+    &:is(.is-phone .callout) {
+      flex-direction: column;
+    }
   }
 
   .callout-icon {

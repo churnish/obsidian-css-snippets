@@ -844,10 +844,13 @@ body {
 :is(.tag-mcllist-card, .tag-mcllist-card .callout-content) > ul {
   padding-left: 0;
 }
-:is(.is-mobile .markdown-preview-section)
-  .tag-mcllist-card
-  :is(ol:not(ol ol ol), ul:not(ul ul ul)) {
-  padding-left: 0;
+/* Mobile gate: See AGENTS.md Device gates */
+@media (any-pointer: coarse) {
+  :is(.is-mobile .markdown-preview-section)
+    .tag-mcllist-card
+    :is(ol:not(ol ol ol), ul:not(ul ul ul)) {
+    padding-left: 0;
+  }
 }
 /* reposition the collapse indicator and hover behaviour */
 :is(.tag-mcllist-card, .tag-mcllist-card .callout-content) > ul > li {

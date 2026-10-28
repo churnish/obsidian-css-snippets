@@ -108,6 +108,9 @@
   }
 }
 
-.is-mobile .empty-state-action-list > .qsp-empty-state-action-launch {
-  padding: var(--size-4-3) var(--size-4-4);
+/* Mobile gate: See AGENTS.md Device gates */
+@media (any-pointer: coarse) {
+  .is-mobile .empty-state-action-list > .qsp-empty-state-action-launch {
+    padding: var(--size-4-3) var(--size-4-4);
+  }
 }

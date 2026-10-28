@@ -2,6 +2,9 @@
 
 /* Source: https://github.com/churnish/obsidian-css-snippets */
 
-.is-tablet {
-  --font-text-size: 16px !important;
+/* Tablet gate: See AGENTS.md Device gates */
+@media (any-pointer: coarse) and (min-device-width: 600px) and (min-device-height: 600px) {
+  .is-tablet {
+    --font-text-size: 16px !important;
+  }
 }

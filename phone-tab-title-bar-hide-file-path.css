@@ -1,5 +1,8 @@
 /* Hide breadcrumb trail in tab title bar */
 
-body.is-phone .view-header-title-parent {
-  display: none;
+/* Phone gate: See AGENTS.md Device gates */
+@media (any-pointer: coarse) and (not ((min-width: 600px) and (min-height: 600px))) {
+  body.is-phone .view-header-title-parent {
+    display: none;
+  }
 }

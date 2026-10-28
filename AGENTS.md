@@ -12,8 +12,23 @@
 - **Avoid `:has()`**: Use ONLY when no `:has()`-free CSS renders the same, and ONLY after an A/B on Android shows no performance dip — desktop hides the cost.
 	- **A/B**: In one run, swap the snippet's `<style>` text between versions and time re-appending the elements it targets plus a forced style recalc. Compare only within one run; absolute times drift between runs.
 	- **Hot shape**: A catch-all child behind a `:has()` ancestor (`> *`, `> :not(…)`) cost about 10 ms per Quick switcher redraw on Android, against 0.2 ms with the children named. Name the children first.
+	- **Attribute tests**: NEVER test `style` or `class` substrings inside `:has()`. Measured cost on desktop: 13 ms per inline-style write and 16 ms per class change anywhere.
 	- **On a dip no rewrite removes**: Propose a Templater startup script that stamps a class CSS can select on (see **CSS limits**). This is the ONLY case where CSS may move to JS.
 - **Avoid `!important`**: Override by raising selector specificity or by setting the CSS variable the target rule reads. Use `!important` ONLY against inline styles or another `!important` declaration.
+
+## Device gates
+
+- **Gates**: Use these `@media` queries verbatim, each with a one-line `/* <Name> gate: See AGENTS.md Device gates */` comment directly above it. Obsidian sets `is-tablet` from `matchMedia("(min-width: 600px) and (min-height: 600px)")` (window size) and freezes it while the soft keyboard is visible.
+	- **Phone**: `(any-pointer: coarse) and (not ((min-width: 600px) and (min-height: 600px)))`. The exact complement of Obsidian's window-size test, so a narrow iPad Split View, which Obsidian classes as a phone, matches. A phone's window never reaches 600 px on both sides, so no screen-size clause is needed.
+	- **Tablet**: `(any-pointer: coarse) and (min-device-width: 600px) and (min-device-height: 600px)`. Uses screen size, so it stays on while the keyboard shrinks the window.
+	- **Mobile**: `(any-pointer: coarse)`.
+	- **Desktop**: `(pointer: fine)`. Uses the primary pointer, so touchscreen laptops keep their desktop snippets.
+- **Wrap**: Wrap every rule whose selector tests `.is-phone`, `.is-tablet`, `.is-mobile` or `:not(.is-mobile)` in its gate, keeping the inner body class for Obsidian's exact test. A non-matching `@media` drops its rules from the style engine; a body-class prefix alone still costs every style change.
+- **File names**: A file named with a device token gets that gate on all its rules.
+- **Combined gates**: For rules that target two device classes, join both gates with a comma in one `@media`, name both in its comment (`/* Desktop and Tablet gates: … */`), and leave the device token out of the file name.
+- **Hover**: Hide-until-hover rules take the Desktop gate, or the Desktop and Tablet gates when a tap should reveal them on iPad: Obsidian's iPad app applies `:hover` on tap. Safari in the iOS Simulator does not, so confirm a tap reveal on the device. On phones hover only supplements touch, so revealed content stays visible there.
+- **Desktop testing**: Desktop checks of phone rules need CDP touch emulation (`emulate` viewport `…,mobile,touch`), because `app.emulateMobile` alone leaves the pointer fine.
+- **Known gap**: On an iPad, widening a narrow Split View past 600 px while the keyboard is up drops phone rules until Obsidian next re-checks its phone class.
 
 ## File name
 

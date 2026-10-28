@@ -1,0 +1,15 @@
+/* Ribbon: Hide icons without ZWSP in aria-label (non-Commander icons) on desktop and tablet */
+
+/* Source: https://github.com/churnish/obsidian-css-snippets */
+
+/* Desktop and Tablet gates: See AGENTS.md Device gates; phones hide drawer Ribbon natively and filter their Ribbon menu through separate Templater startup script */
+@media (pointer: fine),
+  (any-pointer: coarse) and (min-device-width: 600px) and (min-device-height: 600px) {
+  .side-dock-ribbon-action {
+    display: none !important;
+  }
+
+  .side-dock-ribbon-action[aria-label*="​"] {
+    display: flex !important;
+  }
+}
