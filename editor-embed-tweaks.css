@@ -1,0 +1,22 @@
+/* Tidy note embed bottoms: hide footnotes list and trailing horizontal rule, drop list bottom margin */
+
+/* Source: https://github.com/churnish/obsidian-css-snippets */
+
+.internal-embed.markdown-embed section.footnotes {
+  display: none;
+}
+
+/* Footnote definitions render as unclassed empty blocks and footnotes list as .el-section, so rule counts as last when no other classed block follows */
+.internal-embed.markdown-embed
+  .markdown-preview-sizer
+  > .el-hr:nth-last-child(1 of [class]:not(.el-section)) {
+  display: none;
+}
+
+/* Obsidian resets bottom margin only on last block; hidden rule or footnotes take that slot and leave list margin as gap. Next block keeps own top margin, so spacing between blocks holds */
+.internal-embed.markdown-embed
+  .markdown-preview-sizer
+  > :is(.el-ul, .el-ol)
+  > :is(ul, ol) {
+  margin-block-end: 0;
+}
