@@ -1,0 +1,7 @@
+/* Hide footnotes section in note embeds */
+
+/* Source: https://github.com/churnish/obsidian-css-snippets */
+
+.internal-embed.markdown-embed section.footnotes {
+  display: none;
+}
