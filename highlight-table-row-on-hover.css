@@ -1,0 +1,18 @@
+/* Highlight table rows on hover in Markdown, Bases and Dataview tables, including Markdown and Dataview header rows */
+
+/* Source: https://github.com/churnish/obsidian-css-snippets */
+
+/* Extracted from Minimal theme: https://github.com/kepano/obsidian-minimal | MIT License, Copyright (c) 2020-2024 Steph Ango (@kepano) */
+
+/* Bases and Dataview follow without own rules: core derives Bases row hover from --table-row-background-hover, and Dataview styles.css reads it directly */
+/* Omits Minimal 8px edge-cell padding: Minimal zeroes outer cell padding by default and restores it for this feature, whereas default theme pads every cell already */
+/* Omits Minimal recolor of Dataview task item hover: not table rows */
+
+/* Minimal paints hover with its private --hl1 token, which it also assigns to --text-selection, so --text-selection reproduces same color without Minimal */
+/* Resolved on body so Live Preview clearing --text-selection on table widget with selected cells cannot blank hover */
+/* Header row: addition, not in Minimal; core thead hover rule serves Markdown and Dataview tables alike, while Bases headers use own variable */
+body {
+  --table-row-background-hover: var(--text-selection);
+  --table-row-alt-background-hover: var(--text-selection);
+  --table-header-background-hover: var(--text-selection);
+}

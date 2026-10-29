@@ -28,3 +28,8 @@
 .status-bar .status-bar-item:not(:last-child) {
   margin-inline-end: 0;
 }
+
+/* Vertical Tabs session and group labels carry own 4px padding for hover background, so item padding on top would widen gap to 12px */
+.status-bar .status-bar-item.plugin-vertical-tabs {
+  padding-inline: 0;
+}
