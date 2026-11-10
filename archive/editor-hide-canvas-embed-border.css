@@ -1,0 +1,9 @@
+/* Hide left embed border and indent on embedded Canvas wrapper notes */
+
+/* Source: https://github.com/churnish/obsidian-css-snippets */
+
+/* Wrapper note names end in one-dot leader (U+2024) plus canvas; matching on name avoids :has() test for nested Canvas embed */
+.internal-embed.markdown-embed[src$="\2024 canvas"] {
+  --embed-border-start: none;
+  --embed-padding: 0;
+}
