@@ -4,13 +4,17 @@
 
 /* Extracted from Obsidian Forum: https://forum.obsidian.md/t/adding-caption-to-images/16431/46 */
 
+body {
+  --image-caption-gap: 16px;
+}
+
 /* Core caption styling */
 .image-captions-figure {
   padding: 0;
   background-color: var(--bg-color) !important;
   display: flex !important;
   flex-direction: column !important;
-  gap: 16px !important;
+  gap: var(--image-caption-gap) !important;
   /* Shrink figure to image width so caption tracks specified image size */
   width: fit-content !important;
   margin-inline: 0 auto !important;
@@ -57,6 +61,22 @@
   img {
   height: auto !important;
   object-fit: var(--image-grid-fit) !important;
+}
+
+/* A captioned image makes its grid row taller, and the image-grid snippet centers uncaptioned row partners vertically, so they would sit lower than the captioned image; pin them to the row's top so image edges line up and caption hangs below its own image */
+.markdown-preview-view:not(.no-img-grid)
+  .markdown-preview-section
+  p:has(> .image-embed ~ .image-embed):has(.image-captions-figure)
+  > .internal-embed
+  > img {
+  align-self: start;
+}
+
+/* Image-grid snippet shrinks margins of image rows to its grid gap, which would leave a caption closer to the image below than to its own image; caption gap wins the margin collapse with the next block. !important because image-grid's adjacency selectors outrank any plain selector here */
+.markdown-preview-view:not(.no-img-grid)
+  .markdown-preview-section
+  p:has(.image-captions-figure) {
+  margin-block-end: var(--image-caption-gap) !important;
 }
 
 /* Live Preview fix */

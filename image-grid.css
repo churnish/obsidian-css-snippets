@@ -13,14 +13,9 @@
 body {
   --image-grid-fit: cover;
   --image-grid-background: transparent;
-  --img-grid-gap: 0.5rem;
+  --img-grid-gap: 2px;
 }
 
-@media (max-width: 400pt) {
-  body {
-    --img-grid-gap: 0.25rem;
-  }
-}
 .img-grid-ratio {
   --image-grid-fit: contain;
 }

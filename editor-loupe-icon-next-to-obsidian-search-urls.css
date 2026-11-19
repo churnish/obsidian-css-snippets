@@ -1,13 +1,30 @@
-/* Add loupe (magnifying glass) icon next to obsidian://search links */
+/* Add loupe (magnifying glass) icon next to obsidian://search links, except links searching for single tag */
 
 /* Source: https://github.com/churnish/obsidian-css-snippets */
 
-/* Extracted from Minimal theme: https://github.com/kepano/obsidian-minimal | MIT License, Copyright (c) 2020-2024 Steph Ango (@kepano) */
+/* Adapted from Minimal theme: https://github.com/kepano/obsidian-minimal | MIT License, Copyright (c) 2020-2024 Steph Ango (@kepano) */
 
-.theme-dark a[href*="obsidian://search"] {
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' width='17' height='17' class='search'%3E%3Cpath fill='white' stroke='white' stroke-width='2' d='M42,6C23.2,6,8,21.2,8,40s15.2,34,34,34c7.4,0,14.3-2.4,19.9-6.4l26.3,26.3l5.6-5.6l-26-26.1c5.1-6,8.2-13.7,8.2-22.1 C76,21.2,60.8,6,42,6z M42,10c16.6,0,30,13.4,30,30S58.6,70,42,70S12,56.6,12,40S25.4,10,42,10z'%3E%3C/path%3E%3C/svg%3E");
+/* Modified: Single-tag searches skipped */
+
+/* Reading view only: Live Preview renders link without its address, so CSS cannot tell search links apart there */
+
+/* Single-tag search: query starts with tag: and link holds no space (%20) or plus; plus ends tag name in Obsidian, so query with either holds more than tag */
+/* Known gap: vault name with space in link also reads as non-tag query and keeps loupe */
+
+body {
+  --snip-search-link-loupe: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' width='17' height='17' class='search'%3E%3Cpath fill='black' stroke='black' stroke-width='2' d='M42,6C23.2,6,8,21.2,8,40s15.2,34,34,34c7.4,0,14.3-2.4,19.9-6.4l26.3,26.3l5.6-5.6l-26-26.1c5.1-6,8.2-13.7,8.2-22.1 C76,21.2,60.8,6,42,6z M42,10c16.6,0,30,13.4,30,30S58.6,70,42,70S12,56.6,12,40S25.4,10,42,10z'%3E%3C/path%3E%3C/svg%3E");
 }
 
-a[href*="obsidian://search"] {
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' width='17' height='17' class='search'%3E%3Cpath fill='black' stroke='black' stroke-width='2' d='M42,6C23.2,6,8,21.2,8,40s15.2,34,34,34c7.4,0,14.3-2.4,19.9-6.4l26.3,26.3l5.6-5.6l-26-26.1c5.1-6,8.2-13.7,8.2-22.1 C76,21.2,60.8,6,42,6z M42,10c16.6,0,30,13.4,30,30S58.6,70,42,70S12,56.6,12,40S25.4,10,42,10z'%3E%3C/path%3E%3C/svg%3E");
+.theme-dark {
+  --snip-search-link-loupe: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' width='17' height='17' class='search'%3E%3Cpath fill='white' stroke='white' stroke-width='2' d='M42,6C23.2,6,8,21.2,8,40s15.2,34,34,34c7.4,0,14.3-2.4,19.9-6.4l26.3,26.3l5.6-5.6l-26-26.1c5.1-6,8.2-13.7,8.2-22.1 C76,21.2,60.8,6,42,6z M42,10c16.6,0,30,13.4,30,30S58.6,70,42,70S12,56.6,12,40S25.4,10,42,10z'%3E%3C/path%3E%3C/svg%3E");
+}
+
+/* Case-insensitive match also catches lowercase %3a */
+a[href*="obsidian://search"]:not(
+    :is([href*="query=tag:" i], [href*="query=tag%3A" i]):not(
+      [href*="%20"],
+      [href*="+"]
+    )
+  ) {
+  background-image: var(--snip-search-link-loupe);
 }
