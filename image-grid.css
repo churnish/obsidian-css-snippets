@@ -61,6 +61,29 @@ body {
   + br {
   display: none;
 }
+/* External images (![](https://…)) render as bare img with no image-embed wrapper, so rule above misses breaks between them and each break takes its own grid cell, shrinking a pair to thirds; scoped to grid containers, where a break can never act as a line break */
+.markdown-preview-view:not(.no-img-grid)
+  .markdown-preview-section
+  div:has(> img ~ img):where(:not(.list-cards.markdown-preview-view div > ul *))
+  > br,
+.markdown-preview-view:not(.no-img-grid)
+  .markdown-preview-section
+  p:has(> .image-embed ~ img):where(
+    :not(.list-cards.markdown-preview-view div > ul *)
+  )
+  > br,
+.markdown-preview-view:not(.no-img-grid)
+  .markdown-preview-section
+  p:has(> img ~ .image-embed):where(
+    :not(.list-cards.markdown-preview-view div > ul *)
+  )
+  > br,
+.markdown-preview-view:not(.no-img-grid)
+  .markdown-preview-section
+  p:has(> img ~ img):where(:not(.list-cards.markdown-preview-view div > ul *))
+  > br {
+  display: none;
+}
 .markdown-preview-view:not(.no-img-grid)
   .markdown-preview-section
   div:has(> .image-embed ~ .image-embed):where(
@@ -168,4 +191,22 @@ body {
   img {
   object-fit: var(--image-grid-fit);
   align-self: center;
+}
+/* Lone image next to a grid sits in an ordinary paragraph whose larger default margin wins the margin collapse, so gap between it and grid would exceed gap between grid rows; gives lone image grid gap on side facing grid. Reading view wraps each block in .el-p, so adjacency is tested on wrappers */
+.markdown-preview-view:not(.no-img-grid)
+  .markdown-preview-section
+  .el-p:has(> p > :is(img, .image-embed) ~ :is(img, .image-embed))
+  + .el-p
+  > p:has(> :is(img, .image-embed):only-child):where(
+    :not(.list-cards.markdown-preview-view div > ul *)
+  ) {
+  margin-block-start: var(--img-grid-gap);
+}
+.markdown-preview-view:not(.no-img-grid)
+  .markdown-preview-section
+  .el-p:has(+ .el-p > p > :is(img, .image-embed) ~ :is(img, .image-embed))
+  > p:has(> :is(img, .image-embed):only-child):where(
+    :not(.list-cards.markdown-preview-view div > ul *)
+  ) {
+  margin-block-end: var(--img-grid-gap);
 }
