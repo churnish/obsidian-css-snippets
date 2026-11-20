@@ -16,7 +16,7 @@ body {
   --img-grid-gap: 2px;
 }
 
-.img-grid-ratio {
+.img-grid-contain {
   --image-grid-fit: contain;
 }
 
