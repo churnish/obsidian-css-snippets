@@ -37,6 +37,11 @@ body {
   display: none;
 }
 
+/* `img` is placeholder alt text that carries a width (`![img|392](url)`), since Local Images Plus reads no width from empty alt text; Image Captions copies caption text into data-caption-text */
+.image-captions-caption[data-caption-text="img"] {
+  display: none;
+}
+
 /* Grid layout adjustments */
 .img-grid .image-embed.is-loaded {
   display: flex !important;
