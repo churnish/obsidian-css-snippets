@@ -1,4 +1,4 @@
-/* Dataview: Turn tables into card grids with cards cssclass and bullet lists into cards with list-cards cssclass */
+/* Dataview: Turn tables into card grids with cards cssclass */
 
 /* Source: https://github.com/churnish/obsidian-css-snippets */
 
@@ -7,6 +7,8 @@
 /* Omitted from Minimal: table-100, table-max and table-wide width helpers with every .table-100 rule, and rules keyed on Minimal Theme Settings body classes .trim-cols and .links-int-on */
 
 /* Minimal-only variables have no consumer in core: --table-width dropped because Dataview already sets 100% table width, --table-cell-padding and --table-edge-cell-padding-first/last expressed as direct cell padding, --font-adaptive-small dropped because sort icon pseudo-elements carry no text */
+
+/* Bullet-list cards (list-cards cssclass) live in editor-helper-list-cards snippet */
 
 body {
   --cards-min-width: 180px;
@@ -242,131 +244,39 @@ body {
 }
 
 /* ----------------------------------------- */
-/* Bullet lists, Reading view only */
-/* ----------------------------------------- */
-
-.list-cards.markdown-preview-view .list-bullet,
-.list-cards.markdown-preview-view .list-collapse-indicator,
-.list-cards.markdown-preview-view.markdown-rendered.show-indentation-guide
-  li
-  > ul::before {
-  display: none;
-}
-
-.list-cards.markdown-preview-view div > ul {
-  display: grid;
-  gap: 0.75rem;
-  grid-template-columns: var(--cards-columns);
-  padding: 0;
-  line-height: var(--line-height-tight);
-}
-
-.list-cards.markdown-preview-view div > ul .contains-task-list {
-  padding-inline-start: calc(var(--cards-padding) * 1.5);
-}
-
-.list-cards.markdown-preview-view
-  div
-  > ul
-  > li.task-list-item
-  > .task-list-item-checkbox {
-  margin-inline-start: 3px;
-}
-
-.list-cards.markdown-preview-view div > ul > li {
-  background-color: var(--cards-background);
-  padding: calc(var(--cards-padding) / 2);
-  border-radius: var(--radius-s);
-  border: var(--cards-border-width) solid var(--background-modifier-border);
-  overflow: hidden;
-  margin-inline-start: 0;
-}
-
-.list-cards.markdown-preview-view div > ul .image-embed {
-  padding: 0;
-  display: block;
-  background-color: var(--background-secondary);
-  border-radius: var(--image-radius);
-}
-
-.list-cards.markdown-preview-view div > ul .image-embed img {
-  aspect-ratio: var(--cards-aspect-ratio);
-  object-fit: var(--cards-image-fit);
-  max-height: var(--cards-image-height);
-  background-color: var(--background-secondary);
-  vertical-align: bottom;
-}
-
-.list-cards.markdown-preview-view div > ul > li > a {
-  --link-decoration: none;
-  --link-external-decoration: none;
-  font-weight: var(--bold-weight);
-}
-
-.list-cards.markdown-preview-view div ul > li:hover {
-  border-color: var(--background-modifier-border-hover);
-}
-
-.list-cards.markdown-preview-view div ul ul {
-  display: block;
-  width: 100%;
-  color: var(--text-muted);
-  font-size: var(--font-smallest);
-  margin: calc(var(--cards-padding) / -4) 0;
-  padding: calc(var(--cards-padding) / 2) 0;
-}
-
-.list-cards.markdown-preview-view div ul ul ul {
-  padding-bottom: calc(var(--cards-padding) / 4);
-}
-
-.list-cards.markdown-preview-view div ul ul > li {
-  display: block;
-  margin-inline-start: 0;
-}
-
-/* ----------------------------------------- */
 /* Helper classes */
 /* ----------------------------------------- */
 
-.cards.cards-16-9,
-.list-cards.cards-16-9 {
+.cards.cards-16-9 {
   --cards-aspect-ratio: 16/9;
 }
 
-.cards.cards-1-1,
-.list-cards.cards-1-1 {
+.cards.cards-1-1 {
   --cards-aspect-ratio: 1/1;
 }
 
-.cards.cards-2-1,
-.list-cards.cards-2-1 {
+.cards.cards-2-1 {
   --cards-aspect-ratio: 2/1;
 }
 
-.cards.cards-2-3,
-.list-cards.cards-2-3 {
+.cards.cards-2-3 {
   --cards-aspect-ratio: 2/3;
 }
 
-.cards.cards-cols-1,
-.list-cards.cards-cols-1 {
+.cards.cards-cols-1 {
   --cards-columns: repeat(1, minmax(0, 1fr));
 }
 
-.cards.cards-cols-2,
-.list-cards.cards-cols-2 {
+.cards.cards-cols-2 {
   --cards-columns: repeat(2, minmax(0, 1fr));
 }
 
-.cards.cards-cover,
-.list-cards.cards-cover {
+.cards.cards-cover {
   --cards-image-fit: cover;
 }
 
-/* Outranks generic card cell padding without !important */
-.cards.cards-cover tbody > tr > td:first-child,
-.list-cards.cards-cover tbody > tr > td:first-child {
+/* Outranks generic card cell padding without !important; table.dataview keeps plain Markdown tables in same note intact, which Minimal bare tbody also caught */
+.cards.cards-cover table.dataview tbody > tr > td:first-child {
   padding: 0;
   background-color: var(--background-secondary);
   display: block;
@@ -374,13 +284,11 @@ body {
   width: 100%;
 }
 
-.cards.cards-cover tbody > tr > td:first-child img,
-.list-cards.cards-cover tbody > tr > td:first-child img {
+.cards.cards-cover table.dataview tbody > tr > td:first-child img {
   border-radius: 0;
 }
 
-.cards.cards-align-bottom table.dataview tbody > tr > td:last-child,
-.list-cards.cards-align-bottom table.dataview tbody > tr > td:last-child {
+.cards.cards-align-bottom table.dataview tbody > tr > td:last-child {
   margin-top: auto;
 }
 

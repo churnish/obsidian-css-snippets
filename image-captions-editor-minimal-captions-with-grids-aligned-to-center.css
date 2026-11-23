@@ -49,38 +49,213 @@ body {
   height: auto !important;
 }
 
-.img-grid .markdown-preview-section div:has(> .image-embed ~ .image-embed) {
-  display: grid !important;
-  grid-auto-rows: auto !important;
-}
-
+/* Embed with another image beside it, embed or external, sits in grid; image-grid snippet makes container grid, so container needs no rule here */
 .img-grid
   .markdown-preview-section
-  div:has(> .image-embed ~ .image-embed)
-  .image-embed
-  img,
-.img-grid
-  .markdown-preview-section
-  p:has(> .image-embed ~ .image-embed)
-  .image-embed
+  :is(p, div)
+  > .image-embed:is(
+    :nth-child(n + 2 of img, .image-embed),
+    :nth-last-child(n + 2 of img, .image-embed)
+  )
   img {
   height: auto !important;
   object-fit: var(--image-grid-fit) !important;
 }
 
-/* A captioned image makes its grid row taller, and the image-grid snippet centers uncaptioned row partners vertically, so they would sit lower than the captioned image; pin them to the row's top so image edges line up and caption hangs below its own image */
-.markdown-preview-view:not(.no-img-grid)
+/* Cropped grids: a row with a real caption gets two grid rows, images then captions; each embed spans both as a subgrid, and its figure steps aside so image and caption land in them directly. Images share the first row, so the image-grid snippet's stretch crops them to one height as in uncaptioned rows, and each caption hangs below its own image. Contained grids (img-grid-contain) skip this: their images keep their own heights, so a shared caption row would leave a gap under shorter images. Image Captions plugin appends caption figure directly inside embed */
+.markdown-preview-view:not(.no-img-grid, .img-grid-contain)
   .markdown-preview-section
-  p:has(> .image-embed ~ .image-embed):has(.image-captions-figure)
-  > .internal-embed
-  > img {
-  align-self: start;
+  p:has(
+    > .internal-embed
+      > .image-captions-figure
+      > .image-captions-caption:not([data-caption-text="img"])
+  ) {
+  row-gap: var(--image-caption-gap);
+}
+
+/* !important beats image-grid's flex embed and core figure flex above, both of which would keep image and caption in one cell */
+.markdown-preview-view:not(.no-img-grid, .img-grid-contain)
+  .markdown-preview-section
+  p:has(
+    > .internal-embed
+      > .image-captions-figure
+      > .image-captions-caption:not([data-caption-text="img"])
+  )
+  > .image-embed:is(
+    :nth-child(n + 2 of img, .image-embed),
+    :nth-last-child(n + 2 of img, .image-embed)
+  ) {
+  display: grid !important;
+  grid-row: span 2;
+  grid-template-rows: subgrid;
+}
+
+/* Gridded figures step aside so their image reaches the grid's stretch, which a figure holding it at natural height would block; in a contained grid, only figures whose caption is the hidden placeholder, since a real caption there stays in its figure right under its image */
+.markdown-preview-view:not(.no-img-grid, .img-grid-contain)
+  .markdown-preview-section
+  :is(p, div)
+  > .image-embed:is(
+    :nth-child(n + 2 of img, .image-embed),
+    :nth-last-child(n + 2 of img, .image-embed)
+  )
+  > .image-captions-figure,
+.markdown-preview-view.img-grid-contain:not(.no-img-grid)
+  .markdown-preview-section
+  :is(p, div)
+  > .image-embed:is(
+    :nth-child(n + 2 of img, .image-embed),
+    :nth-last-child(n + 2 of img, .image-embed)
+  )
+  > .image-captions-figure:has(
+    > .image-captions-caption[data-caption-text="img"]
+  ) {
+  display: contents !important;
+}
+
+/* Contained grid with a real caption: the row becomes a flex line whose cells share one baseline, and each cell's baseline is the middle of its image. A baseline-aligned line is as tall as the largest part above the baseline plus the largest part below it, so the tallest image's top is the row's top, shorter images center on it, and a caption reaching below the tallest image extends the row by only that excess. Flex, not grid: WebKit's grid reads a cell's baseline while the image is still at natural width, before the column is sized, and pushes the whole row down by the difference. Limited to paragraphs the image-grid snippet gridded (two or more embeds, outside list cards) whose only element children are embeds and line breaks */
+.markdown-preview-view.img-grid-contain:not(.no-img-grid)
+  .markdown-preview-section
+  p:has(
+    > .internal-embed
+      > .image-captions-figure
+      > .image-captions-caption:not([data-caption-text="img"])
+  ):has(> .image-embed ~ .image-embed):not(
+    :has(> :not(.image-embed, br))
+  ):where(:not(.list-cards.markdown-preview-view div > ul *)) {
+  display: flex;
+}
+
+/* Equal columns capped at the image's own width, as the grid's repeat(auto-fit, minmax(0, max-content)) gives: small images sit together at the left instead of each in a wide cell, and a capped cell's unused share goes to the others. Captions add nothing to the cap, since their own width is 0. Column gap carries over, since image-grid's grid-column-gap is an alias of column-gap */
+.markdown-preview-view.img-grid-contain:not(.no-img-grid)
+  .markdown-preview-section
+  p:has(
+    > .internal-embed
+      > .image-captions-figure
+      > .image-captions-caption:not([data-caption-text="img"])
+  ):has(> .image-embed ~ .image-embed):not(
+    :has(> :not(.image-embed, br))
+  ):where(:not(.list-cards.markdown-preview-view div > ul *))
+  > * {
+  flex: 1 1 0;
+  min-width: 0;
+  max-width: max-content;
+}
+
+/* Block, not image-grid's flex: a block cell takes its baseline from its first line, which holds the image, while a flex cell would take it from the image's bottom edge. !important beats the .img-grid embed rule above */
+.markdown-preview-view.img-grid-contain:not(.no-img-grid)
+  .markdown-preview-section
+  p:has(
+    > .internal-embed
+      > .image-captions-figure
+      > .image-captions-caption:not([data-caption-text="img"])
+  ):has(> .image-embed ~ .image-embed):not(
+    :has(> :not(.image-embed, br))
+  ):where(:not(.list-cards.markdown-preview-view div > ul *))
+  > .image-embed:is(
+    :nth-child(n + 2 of img, .image-embed),
+    :nth-last-child(n + 2 of img, .image-embed)
+  ) {
+  display: block !important;
+  align-self: baseline;
+}
+
+/* Inline image with its middle on the line's baseline (offset by half the x-height, equal in every cell, so it cancels out); display guards against a theme making images blocks, which would leave the cell without a line */
+.markdown-preview-view.img-grid-contain:not(.no-img-grid)
+  .markdown-preview-section
+  p:has(
+    > .internal-embed
+      > .image-captions-figure
+      > .image-captions-caption:not([data-caption-text="img"])
+  ):has(> .image-embed ~ .image-embed):not(
+    :has(> :not(.image-embed, br))
+  ):where(:not(.list-cards.markdown-preview-view div > ul *))
+  > .image-embed:is(
+    :nth-child(n + 2 of img, .image-embed),
+    :nth-last-child(n + 2 of img, .image-embed)
+  )
+  img {
+  display: inline;
+  vertical-align: middle;
+}
+
+/* Real-caption figure: block instead of flex column, so the image stays on the cell's first line and the caption follows as a block */
+.markdown-preview-view.img-grid-contain:not(.no-img-grid)
+  .markdown-preview-section
+  p:has(
+    > .internal-embed
+      > .image-captions-figure
+      > .image-captions-caption:not([data-caption-text="img"])
+  ):has(> .image-embed ~ .image-embed):not(
+    :has(> :not(.image-embed, br))
+  ):where(:not(.list-cards.markdown-preview-view div > ul *))
+  > .image-embed:is(
+    :nth-child(n + 2 of img, .image-embed),
+    :nth-last-child(n + 2 of img, .image-embed)
+  )
+  > .image-captions-figure:has(
+    > .image-captions-caption:not([data-caption-text="img"])
+  ) {
+  display: block !important;
+}
+
+/* Block overrides the plugin's table-caption, which would build a table inside a block figure; margin replaces the flex gap a block figure no longer has */
+.markdown-preview-view.img-grid-contain:not(.no-img-grid)
+  .markdown-preview-section
+  p:has(
+    > .internal-embed
+      > .image-captions-figure
+      > .image-captions-caption:not([data-caption-text="img"])
+  ):has(> .image-embed ~ .image-embed):not(
+    :has(> :not(.image-embed, br))
+  ):where(:not(.list-cards.markdown-preview-view div > ul *))
+  > .image-embed:is(
+    :nth-child(n + 2 of img, .image-embed),
+    :nth-last-child(n + 2 of img, .image-embed)
+  )
+  > .image-captions-figure
+  > .image-captions-caption:not([data-caption-text="img"]) {
+  display: block !important;
+  margin-block-start: var(--image-caption-gap) !important;
+}
+
+/* Contained grid with a real caption that also holds anything but embeds, such as an external image: a bare img has no wrapper to carry a baseline, so the flex row above cannot center it. Each cell centers its image together with its caption as one block instead, which adds no empty space but leaves a captioned short image off the tallest image's middle by half its caption block. Stretched images would center their picture across a captioned cell's caption too, so images keep their own height and the cell centers them */
+.markdown-preview-view.img-grid-contain:not(.no-img-grid)
+  .markdown-preview-section
+  p:has(
+    > .internal-embed
+      > .image-captions-figure
+      > .image-captions-caption:not([data-caption-text="img"])
+  ):has(> :not(.image-embed, br))
+  > .image-embed:is(
+    :nth-child(n + 2 of img, .image-embed),
+    :nth-last-child(n + 2 of img, .image-embed)
+  ) {
+  align-items: center !important;
+}
+
+.markdown-preview-view.img-grid-contain:not(.no-img-grid)
+  .markdown-preview-section
+  p:has(
+    > .internal-embed
+      > .image-captions-figure
+      > .image-captions-caption:not([data-caption-text="img"])
+  ):has(> :not(.image-embed, br))
+  > .image-embed:is(
+    :nth-child(n + 2 of img, .image-embed),
+    :nth-last-child(n + 2 of img, .image-embed)
+  )
+  img {
+  align-self: center;
 }
 
 /* Image-grid snippet shrinks margins of image rows to its grid gap, which would leave a caption closer to the image below than to its own image; caption gap wins the margin collapse with the next block. !important because image-grid's adjacency selectors outrank any plain selector here */
 .markdown-preview-view:not(.no-img-grid)
   .markdown-preview-section
-  p:has(.image-captions-figure) {
+  p:has(
+    > .internal-embed
+      > .image-captions-figure
+      > .image-captions-caption:not([data-caption-text="img"])
+  ) {
   margin-block-end: var(--image-caption-gap) !important;
 }
 

@@ -4,11 +4,9 @@
 
 /* Adapted from Minimal theme: https://github.com/kepano/obsidian-minimal | MIT License, Copyright (c) 2020-2024 Steph Ango (@kepano) */
 
-/* Revamped for Obsidian 1.1.9+ using :has() */
+/* Scope: All Reading view notes; no-img-grid cssclass opts note out, and content inside list cards never gridded so cards keep own image layout; :where() wrappers keep that exclusion from adding specificity */
 
-/* Modified: Applies globally to all Reading view notes; no-img-grid cssclass opts note out, and content inside list cards always opts out so cards keep own image layout, wrapped in :where() to keep original specificity */
-
-/* Deliberate omission: Upstream gridded every paragraph in a block containing an image, splitting text paragraphs with one image into columns; grids now need 2+ images */
+/* :has() limited to rules whose target depends on content it cannot see otherwise: grid container, empty paragraphs in image blocks, lone image next to grid; rules on images themselves count image-like siblings (img, image embed) with :nth-child(of) instead */
 
 body {
   --image-grid-fit: cover;
@@ -56,57 +54,23 @@ body {
   + br {
   display: none;
 }
-/* External images (![](https://…)) render as bare img with no image-embed wrapper, so rule above misses breaks between them and each break takes its own grid cell, shrinking a pair to thirds; scoped to grid containers, where a break can never act as a line break */
+/* External images (![](https://…)) render as bare img with no image-embed wrapper, so rule above misses breaks after them and each break takes its own grid cell, shrinking pair to thirds; break after img with no image-like sibling stays line break */
 .markdown-preview-view:not(.no-img-grid)
   .markdown-preview-section
-  div:has(> img ~ img):where(:not(.list-cards.markdown-preview-view div > ul *))
-  > br,
-.markdown-preview-view:not(.no-img-grid)
-  .markdown-preview-section
-  p:has(> .image-embed ~ img):where(
-    :not(.list-cards.markdown-preview-view div > ul *)
+  :is(p, div):where(:not(.list-cards.markdown-preview-view div > ul *))
+  > img:is(
+    :nth-child(n + 2 of img, .image-embed),
+    :nth-last-child(n + 2 of img, .image-embed)
   )
-  > br,
-.markdown-preview-view:not(.no-img-grid)
-  .markdown-preview-section
-  p:has(> img ~ .image-embed):where(
-    :not(.list-cards.markdown-preview-view div > ul *)
-  )
-  > br,
-.markdown-preview-view:not(.no-img-grid)
-  .markdown-preview-section
-  p:has(> img ~ img):where(:not(.list-cards.markdown-preview-view div > ul *))
-  > br {
+  + br {
   display: none;
 }
+/* Container keeps :has(): grid gap replacing paragraph margins and row of equal-height cells both belong to container, and styles on images cannot reach either; 2+ image-like children in any mix make grid */
 .markdown-preview-view:not(.no-img-grid)
   .markdown-preview-section
-  div:has(> .image-embed ~ .image-embed):where(
+  :is(p, div):has(> :is(img, .image-embed) ~ :is(img, .image-embed)):where(
     :not(.list-cards.markdown-preview-view div > ul *)
-  ),
-.markdown-preview-view:not(.no-img-grid)
-  .markdown-preview-section
-  p:has(> .image-embed ~ .image-embed):where(
-    :not(.list-cards.markdown-preview-view div > ul *)
-  ),
-.markdown-preview-view:not(.no-img-grid)
-  .markdown-preview-section
-  div:has(> img ~ img):where(
-    :not(.list-cards.markdown-preview-view div > ul *)
-  ),
-.markdown-preview-view:not(.no-img-grid)
-  .markdown-preview-section
-  p:has(> .image-embed ~ img):where(
-    :not(.list-cards.markdown-preview-view div > ul *)
-  ),
-.markdown-preview-view:not(.no-img-grid)
-  .markdown-preview-section
-  p:has(> img ~ .image-embed):where(
-    :not(.list-cards.markdown-preview-view div > ul *)
-  ),
-.markdown-preview-view:not(.no-img-grid)
-  .markdown-preview-section
-  p:has(> img ~ img):where(:not(.list-cards.markdown-preview-view div > ul *)) {
+  ) {
   display: grid;
   margin-block-start: var(--img-grid-gap);
   margin-block-end: var(--img-grid-gap);
@@ -115,78 +79,28 @@ body {
   /* Columns share the row equally but stop at their image's own width, so images narrower than their share (Telegram's 320 px video stills) sit together at the left edge instead of each centering in a wide column; a narrow image beside a wide one gives its unused share to the wide one */
   grid-template-columns: repeat(auto-fit, minmax(0, max-content));
 }
-/* Img children counted among image-like siblings (img, image embed) instead of :has() on container. Paragraph gates take any 2+ image-likes; div gates take 2+ of one kind, so div form needs 2+ img, or lone img beside 2+ embeds (3+ image-likes) */
+/* Image-like with another image-like sibling before or after it sits in grid container above */
 .markdown-preview-view:not(.no-img-grid)
   .markdown-preview-section
-  p:where(:not(.list-cards.markdown-preview-view div > ul *))
-  > img:not(
-    :nth-child(1 of img, .image-embed):nth-last-child(1 of img, .image-embed)
-  ),
-.markdown-preview-view:not(.no-img-grid)
-  .markdown-preview-section
-  div:where(:not(.list-cards.markdown-preview-view div > ul *))
+  :is(p, div):where(:not(.list-cards.markdown-preview-view div > ul *))
   > img:is(
-    :not(:only-of-type),
-    :not(
-        :nth-child(1 of img, .image-embed):nth-last-child(
-          1 of img,
-          .image-embed
-        )
-      ):not(
-        :nth-child(1 of img, .image-embed):nth-last-child(
-          2 of img,
-          .image-embed
-        )
-      ):not(
-        :nth-child(2 of img, .image-embed):nth-last-child(
-          1 of img,
-          .image-embed
-        )
-      )
+    :nth-child(n + 2 of img, .image-embed),
+    :nth-last-child(n + 2 of img, .image-embed)
   ) {
   object-fit: var(--image-grid-fit);
   align-self: stretch;
 }
+/* Stretch, not upstream's center: a centered img keeps its own aspect height, so fit never crops it and a shorter partner floats mid-row. Specificity matches embed rule this replaced, so image-captions snippet's top alignment for captioned rows still wins */
 .markdown-preview-view:not(.no-img-grid)
   .markdown-preview-section
-  div:has(> .image-embed ~ .image-embed):where(
-    :not(.list-cards.markdown-preview-view div > ul *)
+  :is(p, div):where(:not(.list-cards.markdown-preview-view div > ul *))
+  > .image-embed:is(
+    :nth-child(n + 2 of img, .image-embed),
+    :nth-last-child(n + 2 of img, .image-embed)
   )
-  > .internal-embed
-  img,
-.markdown-preview-view:not(.no-img-grid)
-  .markdown-preview-section
-  p:has(> .image-embed ~ .image-embed):where(
-    :not(.list-cards.markdown-preview-view div > ul *)
-  )
-  > .internal-embed
-  img,
-.markdown-preview-view:not(.no-img-grid)
-  .markdown-preview-section
-  div:has(> img ~ img):where(:not(.list-cards.markdown-preview-view div > ul *))
-  > .internal-embed
-  img,
-.markdown-preview-view:not(.no-img-grid)
-  .markdown-preview-section
-  p:has(> .image-embed ~ img):where(
-    :not(.list-cards.markdown-preview-view div > ul *)
-  )
-  > .internal-embed
-  img,
-.markdown-preview-view:not(.no-img-grid)
-  .markdown-preview-section
-  p:has(> img ~ .image-embed):where(
-    :not(.list-cards.markdown-preview-view div > ul *)
-  )
-  > .internal-embed
-  img,
-.markdown-preview-view:not(.no-img-grid)
-  .markdown-preview-section
-  p:has(> img ~ img):where(:not(.list-cards.markdown-preview-view div > ul *))
-  > .internal-embed
   img {
   object-fit: var(--image-grid-fit);
-  align-self: center;
+  align-self: stretch;
 }
 /* Lone image next to a grid sits in an ordinary paragraph whose larger default margin wins the margin collapse, so gap between it and grid would exceed gap between grid rows; gives lone image grid gap on side facing grid. Reading view wraps each block in .el-p, so adjacency is tested on wrappers */
 .markdown-preview-view:not(.no-img-grid)

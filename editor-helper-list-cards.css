@@ -1,0 +1,168 @@
+/* Turn bullet lists into cards in Reading view with list-cards cssclass */
+
+/* Source: https://github.com/churnish/obsidian-css-snippets */
+
+/* Extracted from Minimal theme: https://github.com/kepano/obsidian-minimal | MIT License, Copyright (c) 2020-2024 Steph Ango (@kepano) */
+
+/* Omitted from Minimal: cards-cover and cards-align-bottom table cell rules Minimal nests under both cards and list-cards, since list cards style no tables; Dataview table cards live in dataview-helper-cards snippet */
+
+/* Same --cards-* defaults as dataview-helper-cards snippet, so each snippet works alone */
+body {
+  --cards-min-width: 180px;
+  --cards-max-width: 1fr;
+  --cards-mobile-width: 120px;
+  --cards-image-height: 400px;
+  --cards-padding: 1.2em;
+  --cards-image-fit: contain;
+  --cards-background: transparent;
+  --cards-border-width: 1px;
+  --cards-aspect-ratio: auto;
+  --cards-columns: repeat(
+    auto-fit,
+    minmax(var(--cards-min-width), var(--cards-max-width))
+  );
+}
+
+@media (max-width: 400pt) {
+  body {
+    --cards-min-width: var(--cards-mobile-width);
+  }
+}
+
+.list-cards.markdown-preview-view .list-bullet,
+.list-cards.markdown-preview-view .list-collapse-indicator,
+.list-cards.markdown-preview-view.markdown-rendered.show-indentation-guide
+  li
+  > ul::before {
+  display: none;
+}
+
+.list-cards.markdown-preview-view div > ul {
+  display: grid;
+  gap: 0.75rem;
+  grid-template-columns: var(--cards-columns);
+  padding: 0;
+  line-height: var(--line-height-tight);
+}
+
+.list-cards.markdown-preview-view div > ul .contains-task-list {
+  padding-inline-start: calc(var(--cards-padding) * 1.5);
+}
+
+.list-cards.markdown-preview-view
+  div
+  > ul
+  > li.task-list-item
+  > .task-list-item-checkbox {
+  margin-inline-start: 3px;
+}
+
+.list-cards.markdown-preview-view div > ul > li {
+  background-color: var(--cards-background);
+  padding: calc(var(--cards-padding) / 2);
+  border-radius: var(--radius-s);
+  border: var(--cards-border-width) solid var(--background-modifier-border);
+  overflow: hidden;
+  margin-inline-start: 0;
+}
+
+.list-cards.markdown-preview-view div > ul .image-embed {
+  padding: 0;
+  display: block;
+  background-color: var(--background-secondary);
+  border-radius: var(--image-radius);
+}
+
+.list-cards.markdown-preview-view div > ul .image-embed img {
+  aspect-ratio: var(--cards-aspect-ratio);
+  object-fit: var(--cards-image-fit);
+  max-height: var(--cards-image-height);
+  background-color: var(--background-secondary);
+  vertical-align: bottom;
+}
+
+.list-cards.markdown-preview-view div > ul > li > a {
+  --link-decoration: none;
+  --link-external-decoration: none;
+  font-weight: var(--bold-weight);
+}
+
+.list-cards.markdown-preview-view div ul > li:hover {
+  border-color: var(--background-modifier-border-hover);
+}
+
+.list-cards.markdown-preview-view div ul ul {
+  display: block;
+  width: 100%;
+  color: var(--text-muted);
+  font-size: var(--font-smallest);
+  margin: calc(var(--cards-padding) / -4) 0;
+  padding: calc(var(--cards-padding) / 2) 0;
+}
+
+.list-cards.markdown-preview-view div ul ul ul {
+  padding-bottom: calc(var(--cards-padding) / 4);
+}
+
+.list-cards.markdown-preview-view div ul ul > li {
+  display: block;
+  margin-inline-start: 0;
+}
+
+/* ----------------------------------------- */
+/* Helper classes */
+/* ----------------------------------------- */
+
+.list-cards.cards-16-9 {
+  --cards-aspect-ratio: 16/9;
+}
+
+.list-cards.cards-1-1 {
+  --cards-aspect-ratio: 1/1;
+}
+
+.list-cards.cards-2-1 {
+  --cards-aspect-ratio: 2/1;
+}
+
+.list-cards.cards-2-3 {
+  --cards-aspect-ratio: 2/3;
+}
+
+.list-cards.cards-cols-1 {
+  --cards-columns: repeat(1, minmax(0, 1fr));
+}
+
+.list-cards.cards-cols-2 {
+  --cards-columns: repeat(2, minmax(0, 1fr));
+}
+
+.list-cards.cards-cover {
+  --cards-image-fit: cover;
+}
+
+@media (min-width: 400pt) {
+  .cards-cols-3 {
+    --cards-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .cards-cols-4 {
+    --cards-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  .cards-cols-5 {
+    --cards-columns: repeat(5, minmax(0, 1fr));
+  }
+
+  .cards-cols-6 {
+    --cards-columns: repeat(6, minmax(0, 1fr));
+  }
+
+  .cards-cols-7 {
+    --cards-columns: repeat(7, minmax(0, 1fr));
+  }
+
+  .cards-cols-8 {
+    --cards-columns: repeat(8, minmax(0, 1fr));
+  }
+}

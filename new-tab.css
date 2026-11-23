@@ -25,9 +25,10 @@
 }
 
 /* Keep actions native renders after Go to file (Open web viewer) after replacement too */
+/* Excalidraw's New drawing is excluded: it keeps default order, so it lands right after New canvas, ahead of Go to file */
 .empty-state-action-list
   > .empty-state-action:has(.lucide-search)
-  ~ .empty-state-action {
+  ~ .empty-state-action:not(.excalidraw-new-drawing) {
   order: 2;
 }
 
@@ -94,15 +95,21 @@
     justify-self: auto;
   }
 
-  /* Visible count odd when DOM count even (Go to file hidden): recenter Quick Switcher++ button if Go to file ends DOM, else action after Go to file (Open web viewer). Nested :has() invalid, so first selector matches search icon by descendant chain */
+  /* Visible count odd when DOM count even (Go to file hidden): recenter Quick Switcher++ button if Go to file or Excalidraw's New drawing ends DOM (New drawing sits ahead of it visually), else action after Go to file (Open web viewer). Nested :has() invalid, so first selector matches search icon by descendant chain */
   .empty-state-action-list:has(
       > .empty-state-action:last-child:nth-child(even) .lucide-search
     )
     > .qsp-empty-state-action-launch,
   .empty-state-action-list
+    > .qsp-empty-state-action-launch:has(
+      ~ .excalidraw-new-drawing:last-child:nth-child(even)
+    ),
+  .empty-state-action-list
     > .qsp-empty-state-action-launch
     ~ .empty-state-action:has(.lucide-search)
-    ~ .empty-state-action:last-child:nth-child(even) {
+    ~ .empty-state-action:last-child:nth-child(even):not(
+      .excalidraw-new-drawing
+    ) {
     grid-column: 1 / -1;
     justify-self: center;
   }
@@ -113,4 +120,14 @@
   .is-mobile .empty-state-action-list > .qsp-empty-state-action-launch {
     padding: var(--size-4-3) var(--size-4-4);
   }
+}
+
+/* Excalidraw: Sentence-case 'New Drawing' label to match native actions */
+/* Excalidraw hardcodes title case in label text, so lowercase it all and re-capitalize first letter */
+.empty-state-action.excalidraw-new-drawing .text-button-label {
+  text-transform: lowercase;
+}
+
+.empty-state-action.excalidraw-new-drawing .text-button-label::first-letter {
+  text-transform: uppercase;
 }

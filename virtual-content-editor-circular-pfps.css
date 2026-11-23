@@ -1,11 +1,40 @@
-/* Virtual Content: Crops profile pictures into fixed-size circles in Virtual Content containers */
+/* Dynamic Views helper: 100px circular profile picture card without hover zoom via circular-pfp view class */
 
 /* Source: https://github.com/churnish/obsidian-css-snippets */
 
-.pfp-container .image-embed .image-captions-figure img,
-.pfp-container img {
-  border-radius: 50% !important;
-  width: 96px !important;
-  height: 96px !important;
-  object-fit: cover !important;
+/* Add circular-pfp to the view's CSS classes setting, and set Border thickness to 0 for no card border. Class lands on .bases-view, ancestor of .dynamic-views, so variables set on it reach cards by inheritance. Grid renders one card, so a single fixed 100px column replaces the stretched columns */
+
+.circular-pfp {
+  --dynamic-views-card-border-radius: 50%;
+}
+
+/* Remove 150px minimum height, which would leave empty space below a 100px card */
+.circular-pfp .dynamic-views {
+  min-height: 0;
+}
+
+.circular-pfp .dynamic-views .dynamic-views-grid {
+  grid-template-columns: 100px;
+}
+
+/* Phones run base embeds edge to edge: Obsidian widens the embed by both page margins and shifts it left by one, which would pull the circle left of the text. Variables are read on .bases-embed, the view's parent, so :has() is the only way to reach it from the view class */
+.is-phone .bases-embed:has(> .circular-pfp) {
+  --bases-embed-width: 100%;
+  --bases-embed-transform: none;
+}
+
+/* Dynamic Views pads its embedded views (1px desktop, 8px phone), which would push the circle right of the text; body outranks its .is-phone .bases-view:is([data-view-type]) rule on specificity */
+body .bases-embed > .bases-view.circular-pfp {
+  --bases-embed-padding: 0;
+}
+
+/* Hover zoom has no variable: selector repeats Dynamic Views cover zoom rule plus class, winning on specificity without !important */
+body:not(.dynamic-views-disable-image-zoom):not(.is-mobile)
+  .circular-pfp
+  .dynamic-views
+  .card.image-format-cover.interact-hover
+  .card-cover:not(.card-cover-slideshow):not(.multi-image)
+  .dynamic-views-image-embed
+  img {
+  transform: none;
 }
