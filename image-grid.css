@@ -57,7 +57,9 @@ body {
 /* External images (![](https://…)) render as bare img with no image-embed wrapper, so rule above misses breaks after them and each break takes its own grid cell, shrinking pair to thirds; break after img with no image-like sibling stays line break */
 .markdown-preview-view:not(.no-img-grid)
   .markdown-preview-section
-  :is(p, div):where(:not(.list-cards.markdown-preview-view div > ul *))
+  :is(p, div):not(:has(> :not(img, .image-embed, br))):where(
+    :not(.list-cards.markdown-preview-view div > ul *)
+  )
   > img:is(
     :nth-child(n + 2 of img, .image-embed),
     :nth-last-child(n + 2 of img, .image-embed)
@@ -68,9 +70,12 @@ body {
 /* Container keeps :has(): grid gap replacing paragraph margins and row of equal-height cells both belong to container, and styles on images cannot reach either; 2+ image-like children in any mix make grid */
 .markdown-preview-view:not(.no-img-grid)
   .markdown-preview-section
-  :is(p, div):has(> :is(img, .image-embed) ~ :is(img, .image-embed)):where(
-    :not(.list-cards.markdown-preview-view div > ul *)
-  ) {
+  :is(p, div):has(
+    > :is(img, .image-embed):last-child:nth-child(
+        n + 2 of img,
+        .image-embed
+      ):not(:not(img, .image-embed, br) ~ *)
+  ):where(:not(.list-cards.markdown-preview-view div > ul *)) {
   display: grid;
   margin-block-start: var(--img-grid-gap);
   margin-block-end: var(--img-grid-gap);
@@ -82,7 +87,9 @@ body {
 /* Image-like with another image-like sibling before or after it sits in grid container above */
 .markdown-preview-view:not(.no-img-grid)
   .markdown-preview-section
-  :is(p, div):where(:not(.list-cards.markdown-preview-view div > ul *))
+  :is(p, div):not(:has(> :not(img, .image-embed, br))):where(
+    :not(.list-cards.markdown-preview-view div > ul *)
+  )
   > img:is(
     :nth-child(n + 2 of img, .image-embed),
     :nth-last-child(n + 2 of img, .image-embed)
@@ -93,7 +100,9 @@ body {
 /* Stretch, not upstream's center: a centered img keeps its own aspect height, so fit never crops it and a shorter partner floats mid-row. Specificity matches embed rule this replaced, so image-captions snippet's top alignment for captioned rows still wins */
 .markdown-preview-view:not(.no-img-grid)
   .markdown-preview-section
-  :is(p, div):where(:not(.list-cards.markdown-preview-view div > ul *))
+  :is(p, div):not(:has(> :not(img, .image-embed, br))):where(
+    :not(.list-cards.markdown-preview-view div > ul *)
+  )
   > .image-embed:is(
     :nth-child(n + 2 of img, .image-embed),
     :nth-last-child(n + 2 of img, .image-embed)
@@ -105,7 +114,13 @@ body {
 /* Lone image next to a grid sits in an ordinary paragraph whose larger default margin wins the margin collapse, so gap between it and grid would exceed gap between grid rows; gives lone image grid gap on side facing grid. Reading view wraps each block in .el-p, so adjacency is tested on wrappers */
 .markdown-preview-view:not(.no-img-grid)
   .markdown-preview-section
-  .el-p:has(> p > :is(img, .image-embed) ~ :is(img, .image-embed))
+  .el-p:has(
+    > p
+      > :is(img, .image-embed):last-child:nth-child(
+        n + 2 of img,
+        .image-embed
+      ):not(:not(img, .image-embed, br) ~ *)
+  )
   + .el-p
   > p:has(> :is(img, .image-embed):only-child):where(
     :not(.list-cards.markdown-preview-view div > ul *)
@@ -114,7 +129,14 @@ body {
 }
 .markdown-preview-view:not(.no-img-grid)
   .markdown-preview-section
-  .el-p:has(+ .el-p > p > :is(img, .image-embed) ~ :is(img, .image-embed))
+  .el-p:has(
+    + .el-p
+      > p
+      > :is(img, .image-embed):last-child:nth-child(
+        n + 2 of img,
+        .image-embed
+      ):not(:not(img, .image-embed, br) ~ *)
+  )
   > p:has(> :is(img, .image-embed):only-child):where(
     :not(.list-cards.markdown-preview-view div > ul *)
   ) {
@@ -125,26 +147,49 @@ body {
 .markdown-preview-view:not(.no-img-grid)
   .markdown-preview-section
   > .el-p:is(
-    :has(> p > :is(img, .image-embed) ~ :is(img, .image-embed)):has(
+    :has(
+      > p
+        > :is(img, .image-embed):last-child:nth-child(
+          n + 2 of img,
+          .image-embed
+        ):not(:not(img, .image-embed, br) ~ *)
+    ):has(
       + .el-p
         > p
-        > :is(img, .image-embed):is(
+        > :is(img, .image-embed):last-child:is(
           :only-child,
           :nth-child(n + 2 of img, .image-embed)
-        )
+        ):not(:not(img, .image-embed, br) ~ *)
     ),
     .el-p:has(
         > p
-          > :is(img, .image-embed):is(
+          > :is(img, .image-embed):last-child:is(
             :only-child,
             :nth-child(n + 2 of img, .image-embed)
-          )
+          ):not(:not(img, .image-embed, br) ~ *)
       )
-      + :has(> p > :is(img, .image-embed) ~ :is(img, .image-embed)),
+      + :has(
+        > p
+          > :is(img, .image-embed):last-child:nth-child(
+            n + 2 of img,
+            .image-embed
+          ):not(:not(img, .image-embed, br) ~ *)
+      ),
     :has(> p > :is(img, .image-embed):only-child):has(
-      + .el-p > p > :is(img, .image-embed) ~ :is(img, .image-embed)
+      + .el-p
+        > p
+        > :is(img, .image-embed):last-child:nth-child(
+          n + 2 of img,
+          .image-embed
+        ):not(:not(img, .image-embed, br) ~ *)
     ),
-    .el-p:has(> p > :is(img, .image-embed) ~ :is(img, .image-embed))
+    .el-p:has(
+        > p
+          > :is(img, .image-embed):last-child:nth-child(
+            n + 2 of img,
+            .image-embed
+          ):not(:not(img, .image-embed, br) ~ *)
+      )
       + :has(> p > :is(img, .image-embed):only-child)
   ) {
   display: table-row;
@@ -154,26 +199,49 @@ body {
 .markdown-preview-view:not(.no-img-grid)
   .markdown-preview-section
   > .el-p:is(
-    :has(> p > :is(img, .image-embed) ~ :is(img, .image-embed)):has(
+    :has(
+      > p
+        > :is(img, .image-embed):last-child:nth-child(
+          n + 2 of img,
+          .image-embed
+        ):not(:not(img, .image-embed, br) ~ *)
+    ):has(
       + .el-p
         > p
-        > :is(img, .image-embed):is(
+        > :is(img, .image-embed):last-child:is(
           :only-child,
           :nth-child(n + 2 of img, .image-embed)
-        )
+        ):not(:not(img, .image-embed, br) ~ *)
     ),
     .el-p:has(
         > p
-          > :is(img, .image-embed):is(
+          > :is(img, .image-embed):last-child:is(
             :only-child,
             :nth-child(n + 2 of img, .image-embed)
-          )
+          ):not(:not(img, .image-embed, br) ~ *)
       )
-      + :has(> p > :is(img, .image-embed) ~ :is(img, .image-embed)),
+      + :has(
+        > p
+          > :is(img, .image-embed):last-child:nth-child(
+            n + 2 of img,
+            .image-embed
+          ):not(:not(img, .image-embed, br) ~ *)
+      ),
     :has(> p > :is(img, .image-embed):only-child):has(
-      + .el-p > p > :is(img, .image-embed) ~ :is(img, .image-embed)
+      + .el-p
+        > p
+        > :is(img, .image-embed):last-child:nth-child(
+          n + 2 of img,
+          .image-embed
+        ):not(:not(img, .image-embed, br) ~ *)
     ),
-    .el-p:has(> p > :is(img, .image-embed) ~ :is(img, .image-embed))
+    .el-p:has(
+        > p
+          > :is(img, .image-embed):last-child:nth-child(
+            n + 2 of img,
+            .image-embed
+          ):not(:not(img, .image-embed, br) ~ *)
+      )
       + :has(> p > :is(img, .image-embed):only-child)
   )
   > p {
@@ -181,28 +249,57 @@ body {
 }
 .markdown-preview-view:not(.no-img-grid)
   .markdown-preview-section
-  > .el-p:has(> p > :is(img, .image-embed) ~ :is(img, .image-embed))
+  > .el-p:has(
+    > p
+      > :is(img, .image-embed):last-child:nth-child(
+        n + 2 of img,
+        .image-embed
+      ):not(:not(img, .image-embed, br) ~ *)
+  )
   + .el-p:is(
-    :has(> p > :is(img, .image-embed) ~ :is(img, .image-embed)):has(
+    :has(
+      > p
+        > :is(img, .image-embed):last-child:nth-child(
+          n + 2 of img,
+          .image-embed
+        ):not(:not(img, .image-embed, br) ~ *)
+    ):has(
       + .el-p
         > p
-        > :is(img, .image-embed):is(
+        > :is(img, .image-embed):last-child:is(
           :only-child,
           :nth-child(n + 2 of img, .image-embed)
-        )
+        ):not(:not(img, .image-embed, br) ~ *)
     ),
     .el-p:has(
         > p
-          > :is(img, .image-embed):is(
+          > :is(img, .image-embed):last-child:is(
             :only-child,
             :nth-child(n + 2 of img, .image-embed)
-          )
+          ):not(:not(img, .image-embed, br) ~ *)
       )
-      + :has(> p > :is(img, .image-embed) ~ :is(img, .image-embed)),
+      + :has(
+        > p
+          > :is(img, .image-embed):last-child:nth-child(
+            n + 2 of img,
+            .image-embed
+          ):not(:not(img, .image-embed, br) ~ *)
+      ),
     :has(> p > :is(img, .image-embed):only-child):has(
-      + .el-p > p > :is(img, .image-embed) ~ :is(img, .image-embed)
+      + .el-p
+        > p
+        > :is(img, .image-embed):last-child:nth-child(
+          n + 2 of img,
+          .image-embed
+        ):not(:not(img, .image-embed, br) ~ *)
     ),
-    .el-p:has(> p > :is(img, .image-embed) ~ :is(img, .image-embed))
+    .el-p:has(
+        > p
+          > :is(img, .image-embed):last-child:nth-child(
+            n + 2 of img,
+            .image-embed
+          ):not(:not(img, .image-embed, br) ~ *)
+      )
       + :has(> p > :is(img, .image-embed):only-child)
   )
   > p,
@@ -210,54 +307,112 @@ body {
   .markdown-preview-section
   > .el-p:has(> p > :is(img, .image-embed):only-child)
   + .el-p:is(
-    :has(> p > :is(img, .image-embed) ~ :is(img, .image-embed)):has(
+    :has(
+      > p
+        > :is(img, .image-embed):last-child:nth-child(
+          n + 2 of img,
+          .image-embed
+        ):not(:not(img, .image-embed, br) ~ *)
+    ):has(
       + .el-p
         > p
-        > :is(img, .image-embed):is(
+        > :is(img, .image-embed):last-child:is(
           :only-child,
           :nth-child(n + 2 of img, .image-embed)
-        )
+        ):not(:not(img, .image-embed, br) ~ *)
     ),
     .el-p:has(
         > p
-          > :is(img, .image-embed):is(
+          > :is(img, .image-embed):last-child:is(
             :only-child,
             :nth-child(n + 2 of img, .image-embed)
-          )
+          ):not(:not(img, .image-embed, br) ~ *)
       )
-      + :has(> p > :is(img, .image-embed) ~ :is(img, .image-embed)),
+      + :has(
+        > p
+          > :is(img, .image-embed):last-child:nth-child(
+            n + 2 of img,
+            .image-embed
+          ):not(:not(img, .image-embed, br) ~ *)
+      ),
     :has(> p > :is(img, .image-embed):only-child):has(
-      + .el-p > p > :is(img, .image-embed) ~ :is(img, .image-embed)
+      + .el-p
+        > p
+        > :is(img, .image-embed):last-child:nth-child(
+          n + 2 of img,
+          .image-embed
+        ):not(:not(img, .image-embed, br) ~ *)
     ),
-    .el-p:has(> p > :is(img, .image-embed) ~ :is(img, .image-embed))
+    .el-p:has(
+        > p
+          > :is(img, .image-embed):last-child:nth-child(
+            n + 2 of img,
+            .image-embed
+          ):not(:not(img, .image-embed, br) ~ *)
+      )
       + :has(> p > :is(img, .image-embed):only-child)
-  ):has(> p > :is(img, .image-embed) ~ :is(img, .image-embed))
+  ):has(
+    > p
+      > :is(img, .image-embed):last-child:nth-child(
+        n + 2 of img,
+        .image-embed
+      ):not(:not(img, .image-embed, br) ~ *)
+  )
   > p,
 .markdown-preview-view:not(.no-img-grid)
   .markdown-preview-section
-  > .el-p:has(> p > :is(img, .image-embed) ~ :is(img, .image-embed))
+  > .el-p:has(
+    > p
+      > :is(img, .image-embed):last-child:nth-child(
+        n + 2 of img,
+        .image-embed
+      ):not(:not(img, .image-embed, br) ~ *)
+  )
   + .el-p:has(> p > :is(img, .image-embed):only-child)
   + .el-p:is(
-    :has(> p > :is(img, .image-embed) ~ :is(img, .image-embed)):has(
+    :has(
+      > p
+        > :is(img, .image-embed):last-child:nth-child(
+          n + 2 of img,
+          .image-embed
+        ):not(:not(img, .image-embed, br) ~ *)
+    ):has(
       + .el-p
         > p
-        > :is(img, .image-embed):is(
+        > :is(img, .image-embed):last-child:is(
           :only-child,
           :nth-child(n + 2 of img, .image-embed)
-        )
+        ):not(:not(img, .image-embed, br) ~ *)
     ),
     .el-p:has(
         > p
-          > :is(img, .image-embed):is(
+          > :is(img, .image-embed):last-child:is(
             :only-child,
             :nth-child(n + 2 of img, .image-embed)
-          )
+          ):not(:not(img, .image-embed, br) ~ *)
       )
-      + :has(> p > :is(img, .image-embed) ~ :is(img, .image-embed)),
+      + :has(
+        > p
+          > :is(img, .image-embed):last-child:nth-child(
+            n + 2 of img,
+            .image-embed
+          ):not(:not(img, .image-embed, br) ~ *)
+      ),
     :has(> p > :is(img, .image-embed):only-child):has(
-      + .el-p > p > :is(img, .image-embed) ~ :is(img, .image-embed)
+      + .el-p
+        > p
+        > :is(img, .image-embed):last-child:nth-child(
+          n + 2 of img,
+          .image-embed
+        ):not(:not(img, .image-embed, br) ~ *)
     ),
-    .el-p:has(> p > :is(img, .image-embed) ~ :is(img, .image-embed))
+    .el-p:has(
+        > p
+          > :is(img, .image-embed):last-child:nth-child(
+            n + 2 of img,
+            .image-embed
+          ):not(:not(img, .image-embed, br) ~ *)
+      )
       + :has(> p > :is(img, .image-embed):only-child)
   )
   > p {
@@ -268,26 +423,49 @@ body {
 .markdown-preview-view:not(.no-img-grid)
   .markdown-preview-section
   > .el-p:is(
-    :has(> p > :is(img, .image-embed) ~ :is(img, .image-embed)):has(
+    :has(
+      > p
+        > :is(img, .image-embed):last-child:nth-child(
+          n + 2 of img,
+          .image-embed
+        ):not(:not(img, .image-embed, br) ~ *)
+    ):has(
       + .el-p
         > p
-        > :is(img, .image-embed):is(
+        > :is(img, .image-embed):last-child:is(
           :only-child,
           :nth-child(n + 2 of img, .image-embed)
-        )
+        ):not(:not(img, .image-embed, br) ~ *)
     ),
     .el-p:has(
         > p
-          > :is(img, .image-embed):is(
+          > :is(img, .image-embed):last-child:is(
             :only-child,
             :nth-child(n + 2 of img, .image-embed)
-          )
+          ):not(:not(img, .image-embed, br) ~ *)
       )
-      + :has(> p > :is(img, .image-embed) ~ :is(img, .image-embed)),
+      + :has(
+        > p
+          > :is(img, .image-embed):last-child:nth-child(
+            n + 2 of img,
+            .image-embed
+          ):not(:not(img, .image-embed, br) ~ *)
+      ),
     :has(> p > :is(img, .image-embed):only-child):has(
-      + .el-p > p > :is(img, .image-embed) ~ :is(img, .image-embed)
+      + .el-p
+        > p
+        > :is(img, .image-embed):last-child:nth-child(
+          n + 2 of img,
+          .image-embed
+        ):not(:not(img, .image-embed, br) ~ *)
     ),
-    .el-p:has(> p > :is(img, .image-embed) ~ :is(img, .image-embed))
+    .el-p:has(
+        > p
+          > :is(img, .image-embed):last-child:nth-child(
+            n + 2 of img,
+            .image-embed
+          ):not(:not(img, .image-embed, br) ~ *)
+      )
       + :has(> p > :is(img, .image-embed):only-child)
   )
   + * {
@@ -297,19 +475,32 @@ body {
 /* Counterpart for the block before a grid: any block followed by the first row of a grid; :has() cannot nest, so membership is spelled out through two sibling steps */
 .markdown-preview-view:not(.no-img-grid)
   .markdown-preview-section
-  > :has(+ .el-p > p > :is(img, .image-embed) ~ :is(img, .image-embed)):has(
+  > :has(
+    + .el-p
+      > p
+      > :is(img, .image-embed):last-child:nth-child(
+        n + 2 of img,
+        .image-embed
+      ):not(:not(img, .image-embed, br) ~ *)
+  ):has(
     + .el-p
       + .el-p
       > p
-      > :is(img, .image-embed):is(
+      > :is(img, .image-embed):last-child:is(
         :only-child,
         :nth-child(n + 2 of img, .image-embed)
-      )
+      ):not(:not(img, .image-embed, br) ~ *)
   ),
 .markdown-preview-view:not(.no-img-grid)
   .markdown-preview-section
   > :has(+ .el-p > p > :is(img, .image-embed):only-child):has(
-    + .el-p + .el-p > p > :is(img, .image-embed) ~ :is(img, .image-embed)
+    + .el-p
+      + .el-p
+      > p
+      > :is(img, .image-embed):last-child:nth-child(
+        n + 2 of img,
+        .image-embed
+      ):not(:not(img, .image-embed, br) ~ *)
   ) {
   margin-block-end: var(--img-grid-gap);
 }
@@ -318,29 +509,57 @@ body {
 .markdown-preview-view:not(.no-img-grid)
   .markdown-preview-section
   > .el-p:is(
-    :has(> p > :is(img, .image-embed) ~ :is(img, .image-embed)):has(
+    :has(
+      > p
+        > :is(img, .image-embed):last-child:nth-child(
+          n + 2 of img,
+          .image-embed
+        ):not(:not(img, .image-embed, br) ~ *)
+    ):has(
       + .el-p
         > p
-        > :is(img, .image-embed):is(
+        > :is(img, .image-embed):last-child:is(
           :only-child,
           :nth-child(n + 2 of img, .image-embed)
-        )
+        ):not(:not(img, .image-embed, br) ~ *)
     ),
     .el-p:has(
         > p
-          > :is(img, .image-embed):is(
+          > :is(img, .image-embed):last-child:is(
             :only-child,
             :nth-child(n + 2 of img, .image-embed)
-          )
+          ):not(:not(img, .image-embed, br) ~ *)
       )
-      + :has(> p > :is(img, .image-embed) ~ :is(img, .image-embed)),
+      + :has(
+        > p
+          > :is(img, .image-embed):last-child:nth-child(
+            n + 2 of img,
+            .image-embed
+          ):not(:not(img, .image-embed, br) ~ *)
+      ),
     :has(> p > :is(img, .image-embed):only-child):has(
-      + .el-p > p > :is(img, .image-embed) ~ :is(img, .image-embed)
+      + .el-p
+        > p
+        > :is(img, .image-embed):last-child:nth-child(
+          n + 2 of img,
+          .image-embed
+        ):not(:not(img, .image-embed, br) ~ *)
     ),
-    .el-p:has(> p > :is(img, .image-embed) ~ :is(img, .image-embed))
+    .el-p:has(
+        > p
+          > :is(img, .image-embed):last-child:nth-child(
+            n + 2 of img,
+            .image-embed
+          ):not(:not(img, .image-embed, br) ~ *)
+      )
       + :has(> p > :is(img, .image-embed):only-child)
   )
-  > p:has(> :is(img, .image-embed) ~ :is(img, .image-embed)) {
+  > p:has(
+    > :is(img, .image-embed):last-child:nth-child(
+        n + 2 of img,
+        .image-embed
+      ):not(:not(img, .image-embed, br) ~ *)
+  ) {
   grid-template-columns: none;
   grid-auto-flow: column;
   grid-auto-columns: minmax(0, auto);
@@ -350,26 +569,49 @@ body {
 .markdown-preview-view:not(.no-img-grid)
   .markdown-preview-section
   > .el-p:is(
-    :has(> p > :is(img, .image-embed) ~ :is(img, .image-embed)):has(
+    :has(
+      > p
+        > :is(img, .image-embed):last-child:nth-child(
+          n + 2 of img,
+          .image-embed
+        ):not(:not(img, .image-embed, br) ~ *)
+    ):has(
       + .el-p
         > p
-        > :is(img, .image-embed):is(
+        > :is(img, .image-embed):last-child:is(
           :only-child,
           :nth-child(n + 2 of img, .image-embed)
-        )
+        ):not(:not(img, .image-embed, br) ~ *)
     ),
     .el-p:has(
         > p
-          > :is(img, .image-embed):is(
+          > :is(img, .image-embed):last-child:is(
             :only-child,
             :nth-child(n + 2 of img, .image-embed)
-          )
+          ):not(:not(img, .image-embed, br) ~ *)
       )
-      + :has(> p > :is(img, .image-embed) ~ :is(img, .image-embed)),
+      + :has(
+        > p
+          > :is(img, .image-embed):last-child:nth-child(
+            n + 2 of img,
+            .image-embed
+          ):not(:not(img, .image-embed, br) ~ *)
+      ),
     :has(> p > :is(img, .image-embed):only-child):has(
-      + .el-p > p > :is(img, .image-embed) ~ :is(img, .image-embed)
+      + .el-p
+        > p
+        > :is(img, .image-embed):last-child:nth-child(
+          n + 2 of img,
+          .image-embed
+        ):not(:not(img, .image-embed, br) ~ *)
     ),
-    .el-p:has(> p > :is(img, .image-embed) ~ :is(img, .image-embed))
+    .el-p:has(
+        > p
+          > :is(img, .image-embed):last-child:nth-child(
+            n + 2 of img,
+            .image-embed
+          ):not(:not(img, .image-embed, br) ~ *)
+      )
       + :has(> p > :is(img, .image-embed):only-child)
   )
   > p
@@ -382,26 +624,49 @@ body {
 .markdown-preview-view:not(.no-img-grid)
   .markdown-preview-section
   > .el-p:is(
-    :has(> p > :is(img, .image-embed) ~ :is(img, .image-embed)):has(
+    :has(
+      > p
+        > :is(img, .image-embed):last-child:nth-child(
+          n + 2 of img,
+          .image-embed
+        ):not(:not(img, .image-embed, br) ~ *)
+    ):has(
       + .el-p
         > p
-        > :is(img, .image-embed):is(
+        > :is(img, .image-embed):last-child:is(
           :only-child,
           :nth-child(n + 2 of img, .image-embed)
-        )
+        ):not(:not(img, .image-embed, br) ~ *)
     ),
     .el-p:has(
         > p
-          > :is(img, .image-embed):is(
+          > :is(img, .image-embed):last-child:is(
             :only-child,
             :nth-child(n + 2 of img, .image-embed)
-          )
+          ):not(:not(img, .image-embed, br) ~ *)
       )
-      + :has(> p > :is(img, .image-embed) ~ :is(img, .image-embed)),
+      + :has(
+        > p
+          > :is(img, .image-embed):last-child:nth-child(
+            n + 2 of img,
+            .image-embed
+          ):not(:not(img, .image-embed, br) ~ *)
+      ),
     :has(> p > :is(img, .image-embed):only-child):has(
-      + .el-p > p > :is(img, .image-embed) ~ :is(img, .image-embed)
+      + .el-p
+        > p
+        > :is(img, .image-embed):last-child:nth-child(
+          n + 2 of img,
+          .image-embed
+        ):not(:not(img, .image-embed, br) ~ *)
     ),
-    .el-p:has(> p > :is(img, .image-embed) ~ :is(img, .image-embed))
+    .el-p:has(
+        > p
+          > :is(img, .image-embed):last-child:nth-child(
+            n + 2 of img,
+            .image-embed
+          ):not(:not(img, .image-embed, br) ~ *)
+      )
       + :has(> p > :is(img, .image-embed):only-child)
   )
   > p
@@ -409,26 +674,49 @@ body {
 .markdown-preview-view:not(.no-img-grid)
   .markdown-preview-section
   > .el-p:is(
-    :has(> p > :is(img, .image-embed) ~ :is(img, .image-embed)):has(
+    :has(
+      > p
+        > :is(img, .image-embed):last-child:nth-child(
+          n + 2 of img,
+          .image-embed
+        ):not(:not(img, .image-embed, br) ~ *)
+    ):has(
       + .el-p
         > p
-        > :is(img, .image-embed):is(
+        > :is(img, .image-embed):last-child:is(
           :only-child,
           :nth-child(n + 2 of img, .image-embed)
-        )
+        ):not(:not(img, .image-embed, br) ~ *)
     ),
     .el-p:has(
         > p
-          > :is(img, .image-embed):is(
+          > :is(img, .image-embed):last-child:is(
             :only-child,
             :nth-child(n + 2 of img, .image-embed)
-          )
+          ):not(:not(img, .image-embed, br) ~ *)
       )
-      + :has(> p > :is(img, .image-embed) ~ :is(img, .image-embed)),
+      + :has(
+        > p
+          > :is(img, .image-embed):last-child:nth-child(
+            n + 2 of img,
+            .image-embed
+          ):not(:not(img, .image-embed, br) ~ *)
+      ),
     :has(> p > :is(img, .image-embed):only-child):has(
-      + .el-p > p > :is(img, .image-embed) ~ :is(img, .image-embed)
+      + .el-p
+        > p
+        > :is(img, .image-embed):last-child:nth-child(
+          n + 2 of img,
+          .image-embed
+        ):not(:not(img, .image-embed, br) ~ *)
     ),
-    .el-p:has(> p > :is(img, .image-embed) ~ :is(img, .image-embed))
+    .el-p:has(
+        > p
+          > :is(img, .image-embed):last-child:nth-child(
+            n + 2 of img,
+            .image-embed
+          ):not(:not(img, .image-embed, br) ~ *)
+      )
       + :has(> p > :is(img, .image-embed):only-child)
   )
   > p
@@ -442,22 +730,34 @@ body {
   .markdown-preview-view:not(.no-img-grid)
     .markdown-preview-section
     > .el-p:is(
-      :has(> p > :is(img, .image-embed) ~ :is(img, .image-embed)):has(
+      :has(
+        > p
+          > :is(img, .image-embed):last-child:nth-child(
+            n + 2 of img,
+            .image-embed
+          ):not(:not(img, .image-embed, br) ~ *)
+      ):has(
         + .el-p
           > p
-          > :is(img, .image-embed):is(
+          > :is(img, .image-embed):last-child:is(
             :only-child,
             :nth-child(n + 2 of img, .image-embed)
-          )
+          ):not(:not(img, .image-embed, br) ~ *)
       ),
       .el-p:has(
           > p
-            > :is(img, .image-embed):is(
+            > :is(img, .image-embed):last-child:is(
               :only-child,
               :nth-child(n + 2 of img, .image-embed)
-            )
+            ):not(:not(img, .image-embed, br) ~ *)
         )
-        + :has(> p > :is(img, .image-embed) ~ :is(img, .image-embed))
+        + :has(
+          > p
+            > :is(img, .image-embed):last-child:nth-child(
+              n + 2 of img,
+              .image-embed
+            ):not(:not(img, .image-embed, br) ~ *)
+        )
     )
     > p:not(
       :has(
@@ -470,22 +770,34 @@ body {
   .markdown-preview-view:not(.no-img-grid)
     .markdown-preview-section
     > .el-p:is(
-      :has(> p > :is(img, .image-embed) ~ :is(img, .image-embed)):has(
+      :has(
+        > p
+          > :is(img, .image-embed):last-child:nth-child(
+            n + 2 of img,
+            .image-embed
+          ):not(:not(img, .image-embed, br) ~ *)
+      ):has(
         + .el-p
           > p
-          > :is(img, .image-embed):is(
+          > :is(img, .image-embed):last-child:is(
             :only-child,
             :nth-child(n + 2 of img, .image-embed)
-          )
+          ):not(:not(img, .image-embed, br) ~ *)
       ),
       .el-p:has(
           > p
-            > :is(img, .image-embed):is(
+            > :is(img, .image-embed):last-child:is(
               :only-child,
               :nth-child(n + 2 of img, .image-embed)
-            )
+            ):not(:not(img, .image-embed, br) ~ *)
         )
-        + :has(> p > :is(img, .image-embed) ~ :is(img, .image-embed))
+        + :has(
+          > p
+            > :is(img, .image-embed):last-child:nth-child(
+              n + 2 of img,
+              .image-embed
+            ):not(:not(img, .image-embed, br) ~ *)
+        )
     )
     > p:not(
       :has(
