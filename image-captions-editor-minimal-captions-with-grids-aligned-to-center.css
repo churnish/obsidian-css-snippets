@@ -42,6 +42,11 @@ body {
   display: none;
 }
 
+/* HEIC Viewer sets each image's alt text to its file name, which Image Captions turns into a caption; a HEIC embed is a generic file embed with no other caption source, so any caption in one is that file name */
+.internal-embed.file-embed .image-captions-caption {
+  display: none;
+}
+
 /* Grid layout adjustments */
 .img-grid .image-embed.is-loaded {
   display: flex !important;
