@@ -120,3 +120,381 @@ body {
   ) {
   margin-block-end: var(--img-grid-gap);
 }
+
+/* Equal-width rows: every row of one grid (consecutive image paragraphs) is as wide as its widest row, while each image's own width still caps its column. Rows are separate paragraphs with no shared wrapper, so table-row display makes the browser wrap each unbroken run of them in one anonymous table (CSS 2.1 section 17.2.1), whose single column is as wide as its widest row and never wider than the note. Members: a grid row next to a grid row or a lone image, and a lone image next to a grid row; a lone image between text blocks, or a single grid row, matches none of these and keeps the layout above */
+.markdown-preview-view:not(.no-img-grid)
+  .markdown-preview-section
+  > .el-p:is(
+    :has(> p > :is(img, .image-embed) ~ :is(img, .image-embed)):has(
+      + .el-p
+        > p
+        > :is(img, .image-embed):is(
+          :only-child,
+          :nth-child(n + 2 of img, .image-embed)
+        )
+    ),
+    .el-p:has(
+        > p
+          > :is(img, .image-embed):is(
+            :only-child,
+            :nth-child(n + 2 of img, .image-embed)
+          )
+      )
+      + :has(> p > :is(img, .image-embed) ~ :is(img, .image-embed)),
+    :has(> p > :is(img, .image-embed):only-child):has(
+      + .el-p > p > :is(img, .image-embed) ~ :is(img, .image-embed)
+    ),
+    .el-p:has(> p > :is(img, .image-embed) ~ :is(img, .image-embed))
+      + :has(> p > :is(img, .image-embed):only-child)
+  ) {
+  display: table-row;
+}
+
+/* Margins inside a table cell cannot collapse with anything outside it, so paragraph margins would add up between rows and against neighbors; rows carry only the gap to the row above */
+.markdown-preview-view:not(.no-img-grid)
+  .markdown-preview-section
+  > .el-p:is(
+    :has(> p > :is(img, .image-embed) ~ :is(img, .image-embed)):has(
+      + .el-p
+        > p
+        > :is(img, .image-embed):is(
+          :only-child,
+          :nth-child(n + 2 of img, .image-embed)
+        )
+    ),
+    .el-p:has(
+        > p
+          > :is(img, .image-embed):is(
+            :only-child,
+            :nth-child(n + 2 of img, .image-embed)
+          )
+      )
+      + :has(> p > :is(img, .image-embed) ~ :is(img, .image-embed)),
+    :has(> p > :is(img, .image-embed):only-child):has(
+      + .el-p > p > :is(img, .image-embed) ~ :is(img, .image-embed)
+    ),
+    .el-p:has(> p > :is(img, .image-embed) ~ :is(img, .image-embed))
+      + :has(> p > :is(img, .image-embed):only-child)
+  )
+  > p {
+  margin-block: 0;
+}
+.markdown-preview-view:not(.no-img-grid)
+  .markdown-preview-section
+  > .el-p:has(> p > :is(img, .image-embed) ~ :is(img, .image-embed))
+  + .el-p:is(
+    :has(> p > :is(img, .image-embed) ~ :is(img, .image-embed)):has(
+      + .el-p
+        > p
+        > :is(img, .image-embed):is(
+          :only-child,
+          :nth-child(n + 2 of img, .image-embed)
+        )
+    ),
+    .el-p:has(
+        > p
+          > :is(img, .image-embed):is(
+            :only-child,
+            :nth-child(n + 2 of img, .image-embed)
+          )
+      )
+      + :has(> p > :is(img, .image-embed) ~ :is(img, .image-embed)),
+    :has(> p > :is(img, .image-embed):only-child):has(
+      + .el-p > p > :is(img, .image-embed) ~ :is(img, .image-embed)
+    ),
+    .el-p:has(> p > :is(img, .image-embed) ~ :is(img, .image-embed))
+      + :has(> p > :is(img, .image-embed):only-child)
+  )
+  > p,
+.markdown-preview-view:not(.no-img-grid)
+  .markdown-preview-section
+  > .el-p:has(> p > :is(img, .image-embed):only-child)
+  + .el-p:is(
+    :has(> p > :is(img, .image-embed) ~ :is(img, .image-embed)):has(
+      + .el-p
+        > p
+        > :is(img, .image-embed):is(
+          :only-child,
+          :nth-child(n + 2 of img, .image-embed)
+        )
+    ),
+    .el-p:has(
+        > p
+          > :is(img, .image-embed):is(
+            :only-child,
+            :nth-child(n + 2 of img, .image-embed)
+          )
+      )
+      + :has(> p > :is(img, .image-embed) ~ :is(img, .image-embed)),
+    :has(> p > :is(img, .image-embed):only-child):has(
+      + .el-p > p > :is(img, .image-embed) ~ :is(img, .image-embed)
+    ),
+    .el-p:has(> p > :is(img, .image-embed) ~ :is(img, .image-embed))
+      + :has(> p > :is(img, .image-embed):only-child)
+  ):has(> p > :is(img, .image-embed) ~ :is(img, .image-embed))
+  > p,
+.markdown-preview-view:not(.no-img-grid)
+  .markdown-preview-section
+  > .el-p:has(> p > :is(img, .image-embed) ~ :is(img, .image-embed))
+  + .el-p:has(> p > :is(img, .image-embed):only-child)
+  + .el-p:is(
+    :has(> p > :is(img, .image-embed) ~ :is(img, .image-embed)):has(
+      + .el-p
+        > p
+        > :is(img, .image-embed):is(
+          :only-child,
+          :nth-child(n + 2 of img, .image-embed)
+        )
+    ),
+    .el-p:has(
+        > p
+          > :is(img, .image-embed):is(
+            :only-child,
+            :nth-child(n + 2 of img, .image-embed)
+          )
+      )
+      + :has(> p > :is(img, .image-embed) ~ :is(img, .image-embed)),
+    :has(> p > :is(img, .image-embed):only-child):has(
+      + .el-p > p > :is(img, .image-embed) ~ :is(img, .image-embed)
+    ),
+    .el-p:has(> p > :is(img, .image-embed) ~ :is(img, .image-embed))
+      + :has(> p > :is(img, .image-embed):only-child)
+  )
+  > p {
+  margin-block-start: var(--img-grid-gap);
+}
+
+/* Grid gap the last row used to offer to the next block's margin collapse moves onto that block's wrapper, where it still collapses with the block's own margin; ignored when that block is itself a row */
+.markdown-preview-view:not(.no-img-grid)
+  .markdown-preview-section
+  > .el-p:is(
+    :has(> p > :is(img, .image-embed) ~ :is(img, .image-embed)):has(
+      + .el-p
+        > p
+        > :is(img, .image-embed):is(
+          :only-child,
+          :nth-child(n + 2 of img, .image-embed)
+        )
+    ),
+    .el-p:has(
+        > p
+          > :is(img, .image-embed):is(
+            :only-child,
+            :nth-child(n + 2 of img, .image-embed)
+          )
+      )
+      + :has(> p > :is(img, .image-embed) ~ :is(img, .image-embed)),
+    :has(> p > :is(img, .image-embed):only-child):has(
+      + .el-p > p > :is(img, .image-embed) ~ :is(img, .image-embed)
+    ),
+    .el-p:has(> p > :is(img, .image-embed) ~ :is(img, .image-embed))
+      + :has(> p > :is(img, .image-embed):only-child)
+  )
+  + * {
+  margin-block-start: var(--img-grid-gap);
+}
+
+/* Counterpart for the block before a grid: any block followed by the first row of a grid; :has() cannot nest, so membership is spelled out through two sibling steps */
+.markdown-preview-view:not(.no-img-grid)
+  .markdown-preview-section
+  > :has(+ .el-p > p > :is(img, .image-embed) ~ :is(img, .image-embed)):has(
+    + .el-p
+      + .el-p
+      > p
+      > :is(img, .image-embed):is(
+        :only-child,
+        :nth-child(n + 2 of img, .image-embed)
+      )
+  ),
+.markdown-preview-view:not(.no-img-grid)
+  .markdown-preview-section
+  > :has(+ .el-p > p > :is(img, .image-embed):only-child):has(
+    + .el-p + .el-p > p > :is(img, .image-embed) ~ :is(img, .image-embed)
+  ) {
+  margin-block-end: var(--img-grid-gap);
+}
+
+/* repeat(auto-fit, ...) repeats once while the row's width is still unknown, so a row would report one image's width to the table instead of the sum; one implicit column per image reports the sum. auto, not max-content, as track maximum: equal shares capped at each image's own width while the row is at or below its own width, but auto tracks also stretch when the table makes the row wider */
+.markdown-preview-view:not(.no-img-grid)
+  .markdown-preview-section
+  > .el-p:is(
+    :has(> p > :is(img, .image-embed) ~ :is(img, .image-embed)):has(
+      + .el-p
+        > p
+        > :is(img, .image-embed):is(
+          :only-child,
+          :nth-child(n + 2 of img, .image-embed)
+        )
+    ),
+    .el-p:has(
+        > p
+          > :is(img, .image-embed):is(
+            :only-child,
+            :nth-child(n + 2 of img, .image-embed)
+          )
+      )
+      + :has(> p > :is(img, .image-embed) ~ :is(img, .image-embed)),
+    :has(> p > :is(img, .image-embed):only-child):has(
+      + .el-p > p > :is(img, .image-embed) ~ :is(img, .image-embed)
+    ),
+    .el-p:has(> p > :is(img, .image-embed) ~ :is(img, .image-embed))
+      + :has(> p > :is(img, .image-embed):only-child)
+  )
+  > p:has(> :is(img, .image-embed) ~ :is(img, .image-embed)) {
+  grid-template-columns: none;
+  grid-auto-flow: column;
+  grid-auto-columns: minmax(0, auto);
+}
+
+/* An embed takes its cell's width: a plugin that sizes its embed to fit-content (HEIC Viewer), or Obsidian's centering of a generic file embed's content, would otherwise keep the image at its own width inside a wider column */
+.markdown-preview-view:not(.no-img-grid)
+  .markdown-preview-section
+  > .el-p:is(
+    :has(> p > :is(img, .image-embed) ~ :is(img, .image-embed)):has(
+      + .el-p
+        > p
+        > :is(img, .image-embed):is(
+          :only-child,
+          :nth-child(n + 2 of img, .image-embed)
+        )
+    ),
+    .el-p:has(
+        > p
+          > :is(img, .image-embed):is(
+            :only-child,
+            :nth-child(n + 2 of img, .image-embed)
+          )
+      )
+      + :has(> p > :is(img, .image-embed) ~ :is(img, .image-embed)),
+    :has(> p > :is(img, .image-embed):only-child):has(
+      + .el-p > p > :is(img, .image-embed) ~ :is(img, .image-embed)
+    ),
+    .el-p:has(> p > :is(img, .image-embed) ~ :is(img, .image-embed))
+      + :has(> p > :is(img, .image-embed):only-child)
+  )
+  > p
+  > .image-embed {
+  width: auto;
+  justify-content: normal;
+}
+
+/* Image keeps its width attribute or inline width as its max-content size, which is what caps the row for the table, while a percentage minimum only applies once the cell has a width and makes the image fill a widened cell; width: 100% instead would replace the cap with the file's natural width */
+.markdown-preview-view:not(.no-img-grid)
+  .markdown-preview-section
+  > .el-p:is(
+    :has(> p > :is(img, .image-embed) ~ :is(img, .image-embed)):has(
+      + .el-p
+        > p
+        > :is(img, .image-embed):is(
+          :only-child,
+          :nth-child(n + 2 of img, .image-embed)
+        )
+    ),
+    .el-p:has(
+        > p
+          > :is(img, .image-embed):is(
+            :only-child,
+            :nth-child(n + 2 of img, .image-embed)
+          )
+      )
+      + :has(> p > :is(img, .image-embed) ~ :is(img, .image-embed)),
+    :has(> p > :is(img, .image-embed):only-child):has(
+      + .el-p > p > :is(img, .image-embed) ~ :is(img, .image-embed)
+    ),
+    .el-p:has(> p > :is(img, .image-embed) ~ :is(img, .image-embed))
+      + :has(> p > :is(img, .image-embed):only-child)
+  )
+  > p
+  > img,
+.markdown-preview-view:not(.no-img-grid)
+  .markdown-preview-section
+  > .el-p:is(
+    :has(> p > :is(img, .image-embed) ~ :is(img, .image-embed)):has(
+      + .el-p
+        > p
+        > :is(img, .image-embed):is(
+          :only-child,
+          :nth-child(n + 2 of img, .image-embed)
+        )
+    ),
+    .el-p:has(
+        > p
+          > :is(img, .image-embed):is(
+            :only-child,
+            :nth-child(n + 2 of img, .image-embed)
+          )
+      )
+      + :has(> p > :is(img, .image-embed) ~ :is(img, .image-embed)),
+    :has(> p > :is(img, .image-embed):only-child):has(
+      + .el-p > p > :is(img, .image-embed) ~ :is(img, .image-embed)
+    ),
+    .el-p:has(> p > :is(img, .image-embed) ~ :is(img, .image-embed))
+      + :has(> p > :is(img, .image-embed):only-child)
+  )
+  > p
+  > .image-embed
+  img {
+  min-width: 100%;
+}
+
+/* Proportional shares: auto tracks split a widened row's extra width equally; a flex row whose grow factors are the images' width attributes splits it in proportion instead. Only rows where every image has a width (CSS cannot read a file's natural width) and none has a real Image Captions caption (those need the grid's caption row). Such a row wider than the note also shrinks in proportion, instead of in equal shares capped at each width. @supports keeps engines without typed attr() on the grid above */
+@supports (flex-grow: attr(width type(<number>), 1)) {
+  .markdown-preview-view:not(.no-img-grid)
+    .markdown-preview-section
+    > .el-p:is(
+      :has(> p > :is(img, .image-embed) ~ :is(img, .image-embed)):has(
+        + .el-p
+          > p
+          > :is(img, .image-embed):is(
+            :only-child,
+            :nth-child(n + 2 of img, .image-embed)
+          )
+      ),
+      .el-p:has(
+          > p
+            > :is(img, .image-embed):is(
+              :only-child,
+              :nth-child(n + 2 of img, .image-embed)
+            )
+        )
+        + :has(> p > :is(img, .image-embed) ~ :is(img, .image-embed))
+    )
+    > p:not(
+      :has(
+        > :is(img, .image-embed):not([width]),
+        .image-captions-caption:not([data-caption-text="img"])
+      )
+    ) {
+    display: flex;
+  }
+  .markdown-preview-view:not(.no-img-grid)
+    .markdown-preview-section
+    > .el-p:is(
+      :has(> p > :is(img, .image-embed) ~ :is(img, .image-embed)):has(
+        + .el-p
+          > p
+          > :is(img, .image-embed):is(
+            :only-child,
+            :nth-child(n + 2 of img, .image-embed)
+          )
+      ),
+      .el-p:has(
+          > p
+            > :is(img, .image-embed):is(
+              :only-child,
+              :nth-child(n + 2 of img, .image-embed)
+            )
+        )
+        + :has(> p > :is(img, .image-embed) ~ :is(img, .image-embed))
+    )
+    > p:not(
+      :has(
+        > :is(img, .image-embed):not([width]),
+        .image-captions-caption:not([data-caption-text="img"])
+      )
+    )
+    > :is(img, .image-embed) {
+    flex: attr(width type(<number>), 1) 1 0px;
+    min-width: 0;
+  }
+}

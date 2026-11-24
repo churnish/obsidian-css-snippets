@@ -42,8 +42,12 @@ body {
   display: none;
 }
 
-/* HEIC Viewer sets each image's alt text to its file name, which Image Captions turns into a caption; a HEIC embed is a generic file embed with no other caption source, so any caption in one is that file name */
-.internal-embed.file-embed .image-captions-caption {
+/* HEIC Viewer sets each image's alt text to its file name, which Image Captions can turn into a caption; a real caption on a HEIC embed stays visible */
+.internal-embed.file-embed
+  .image-captions-caption:is(
+    [data-caption-text$=".heic" i],
+    [data-caption-text$=".heif" i]
+  ) {
   display: none;
 }
 
@@ -267,4 +271,98 @@ body {
 /* Live Preview fix */
 .markdown-source-view.mod-cm6.is-live-preview:not(.cm-focused) {
   padding-bottom: initial !important;
+}
+
+/* Equal-width grid rows (image-grid snippet): Image Captions shrinks a figure to its image, which would hold a lone captioned image at its own width inside a widened row */
+.markdown-preview-view:not(.no-img-grid)
+  .markdown-preview-section
+  > .el-p:is(
+    :has(> p > :is(img, .image-embed) ~ :is(img, .image-embed)):has(
+      + .el-p
+        > p
+        > :is(img, .image-embed):is(
+          :only-child,
+          :nth-child(n + 2 of img, .image-embed)
+        )
+    ),
+    .el-p:has(
+        > p
+          > :is(img, .image-embed):is(
+            :only-child,
+            :nth-child(n + 2 of img, .image-embed)
+          )
+      )
+      + :has(> p > :is(img, .image-embed) ~ :is(img, .image-embed)),
+    :has(> p > :is(img, .image-embed):only-child):has(
+      + .el-p > p > :is(img, .image-embed) ~ :is(img, .image-embed)
+    ),
+    .el-p:has(> p > :is(img, .image-embed) ~ :is(img, .image-embed))
+      + :has(> p > :is(img, .image-embed):only-child)
+  )
+  > p
+  > .image-embed:only-child
+  > .image-captions-figure {
+  width: 100% !important;
+}
+
+/* Equal-width grid rows, contained grids: a row with a real caption is a flex row whose cells stop at their own width, so it would stay narrow inside a wider grid; inside a multi-row grid its cells grow in proportion to their widths instead. !important beats the flex row's own cell rule, which outranks any selector here */
+@supports (flex-grow: attr(width type(<number>), 1)) {
+  .markdown-preview-view.img-grid-contain:not(.no-img-grid)
+    .markdown-preview-section
+    > .el-p:is(
+      :has(> p > :is(img, .image-embed) ~ :is(img, .image-embed)):has(
+        + .el-p
+          > p
+          > :is(img, .image-embed):is(
+            :only-child,
+            :nth-child(n + 2 of img, .image-embed)
+          )
+      ),
+      .el-p:has(
+          > p
+            > :is(img, .image-embed):is(
+              :only-child,
+              :nth-child(n + 2 of img, .image-embed)
+            )
+        )
+        + :has(> p > :is(img, .image-embed) ~ :is(img, .image-embed))
+    )
+    > p:has(
+      > .internal-embed
+        > .image-captions-figure
+        > .image-captions-caption:not([data-caption-text="img"])
+    ):not(:has(> :not(.image-embed, br), > .image-embed:not([width])))
+    > .image-embed {
+    flex-grow: attr(width type(<number>), 1) !important;
+    max-width: none !important;
+  }
+  .markdown-preview-view.img-grid-contain:not(.no-img-grid)
+    .markdown-preview-section
+    > .el-p:is(
+      :has(> p > :is(img, .image-embed) ~ :is(img, .image-embed)):has(
+        + .el-p
+          > p
+          > :is(img, .image-embed):is(
+            :only-child,
+            :nth-child(n + 2 of img, .image-embed)
+          )
+      ),
+      .el-p:has(
+          > p
+            > :is(img, .image-embed):is(
+              :only-child,
+              :nth-child(n + 2 of img, .image-embed)
+            )
+        )
+        + :has(> p > :is(img, .image-embed) ~ :is(img, .image-embed))
+    )
+    > p:has(
+      > .internal-embed
+        > .image-captions-figure
+        > .image-captions-caption:not([data-caption-text="img"])
+    ):not(:has(> :not(.image-embed, br), > .image-embed:not([width])))
+    > .image-embed
+    > .image-captions-figure {
+    width: 100% !important;
+  }
 }
