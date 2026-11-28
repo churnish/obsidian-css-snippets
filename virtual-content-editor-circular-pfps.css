@@ -33,7 +33,7 @@ body:not(.dynamic-views-disable-image-zoom):not(.is-mobile)
   .circular-pfp
   .dynamic-views
   .card.image-format-cover.interact-hover
-  .card-cover:not(.card-cover-slideshow):not(.multi-image)
+  .card-cover:not(.card-cover-slide):not(.multi-image)
   .dynamic-views-image-embed
   img {
   transform: none;
